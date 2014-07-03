@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>77AF2079-D7A8-4DE3-AD46-95C4141AF95D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>huizon</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>67447BC3-0171-4AD4-80FD-21357FADCAC8</key>
+		<string>http://112.124.22.252/svn/linkcube</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>src/iOS/huizon.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>67447BC3-0171-4AD4-80FD-21357FADCAC8</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>67447BC3-0171-4AD4-80FD-21357FADCAC8</key>
+		<string>http://112.124.22.252/svn/linkcube</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>http://112.124.22.252/svn/linkcube/src/iOS/huizon.xcodeproj</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>67447BC3-0171-4AD4-80FD-21357FADCAC8</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>67447BC3-0171-4AD4-80FD-21357FADCAC8</string>
+			<key>IDESourceControlWCCName</key>
+			<string>linkcube</string>
+		</dict>
+	</array>
+</dict>
+</plist>
