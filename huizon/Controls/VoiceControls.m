@@ -64,7 +64,7 @@
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:&setCategoryError];
         self.audioPlayer.delegate = self;
         self.audioPlayer.meteringEnabled = YES;
-        self.audioPlayer.numberOfLoops = -1;
+        self.audioPlayer.numberOfLoops = 1;
         //准备播放
         [self.audioPlayer prepareToPlay];
     }
@@ -94,7 +94,7 @@
     if (self.audioPlayer.numberOfChannels>0) {
         BlockCallWithOneArg(self.voiceHandler, @([self.audioPlayer averagePowerForChannel:0]))
         //Log the peak and average power
-        NSLog(@"%d %0.2f %0.2f", 0, [self.audioPlayer peakPowerForChannel:0],[self.audioPlayer averagePowerForChannel:0]);
+      //  DLog(@"%d %0.2f %0.2f", 0, [self.audioPlayer peakPowerForChannel:0],[self.audioPlayer averagePowerForChannel:0]);
 
     }
  

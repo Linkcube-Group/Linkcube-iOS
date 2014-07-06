@@ -64,6 +64,12 @@
     self.blueArray = [[NSMutableArray alloc] init];
     
   
+    [[LeDiscovery sharedInstance] setDiscoveryDelegate:self];
+    [[LeDiscovery sharedInstance] setPeripheralDelegate:self];
+    
+    blueConn = YES;
+    
+    [self startBluetoothScan];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startBluetoothScan) name:UIApplicationDidBecomeActiveNotification object:nil];
     
@@ -194,8 +200,6 @@
     if (indexPath.row==1) {
         ///conn bluetooth
         blueConn = YES;
-        [[LeDiscovery sharedInstance] setDiscoveryDelegate:self];
-        [[LeDiscovery sharedInstance] setPeripheralDelegate:self];
        
         [self startBluetoothScan];
     

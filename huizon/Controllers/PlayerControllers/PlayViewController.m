@@ -15,7 +15,7 @@
 #import "LeDiscovery.h"
 #import "TopControlView.h"
 
-@interface PlayViewController ()<AVAudioPlayerDelegate>
+@interface PlayViewController ()<AVAudioPlayerDelegate,LeDiscoveryDelegate, LeTemperatureAlarmProtocol>
 {
     AVAudioPlayer *_player;//播放器
     NSTimer *Timer;//计时器
@@ -86,8 +86,8 @@
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
         self.lbTimeMin.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
         self.slider.value = [[VoiceControls voiceSingleton] musicCurrentTime]/[[VoiceControls voiceSingleton] musicDuration];
-        self.imgAlbum.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
-        angle += 1;
+        self.imgFloat.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+        angle += 2;
         float degree = abs([acc floatValue]);
         int voiceDegree = abs(degree)+1;
         voiceDegree = 40-voiceDegree;
@@ -101,7 +101,7 @@
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
-        NSLog(@"cmd===%@",myComm);
+//        NSLog(@"cmd===%@",myComm);
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
             [theApp sendControlCode:myComm];
@@ -131,6 +131,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop:) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop:) name:CBCentralManagerOptionShowPowerAlertKey object:nil];
+    
+    [LeDiscovery sharedInstance];
+
+    
     // Do any additional setup after loading the view from its nib.
     
 }
@@ -176,12 +180,12 @@
     self.slider.value = 0;
     self.lbName.text = [self.musicInfo musicName];
     self.lbAuthor.text = [self.musicInfo author];
-    self.imgAlbum.image = [self musicImageInfo:self.musicInfo.musicPath];
+    self.imgFloat.image = [self musicImageInfo:self.musicInfo.musicPath];
     self.lbTimeMin.text = @"00:00";
     int duration = [[VoiceControls voiceSingleton] musicDuration];
     self.lbTimeMax.text = _S(@"%02d:%02d",duration/60,duration%60);
-    self.imgAlbum.layer.cornerRadius = 106;
-    self.imgAlbum.layer.masksToBounds = YES;
+    self.imgFloat.layer.cornerRadius = 76;
+    self.imgFloat.layer.masksToBounds = YES;
 }
 
 - (IBAction)playAction:(id)sender
@@ -313,7 +317,7 @@
 {
     int currentTime =(self.slider.value)*[[VoiceControls voiceSingleton] musicDuration];
     [[VoiceControls voiceSingleton] setPlayTime:currentTime];
-    self.lbTimeMax.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
+    self.lbTimeMin.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
     
 }
 
@@ -340,7 +344,7 @@
 
 - (UIImage *)musicImageInfo:(NSString *)path
 {
-    UIImage *img = IMG(@"mode-music.png");
+    UIImage *img = IMG(@"mode-music-front.png");
     
     NSURL *fileUrl=[NSURL fileURLWithPath:path];
     AVURLAsset *mp3Asset=[AVURLAsset URLAssetWithURL:fileUrl options:nil];
@@ -436,6 +440,7 @@
     
     return pathArray;
 }
+
 
 
 @end

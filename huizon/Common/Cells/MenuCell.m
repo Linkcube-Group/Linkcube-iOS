@@ -19,6 +19,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *lbLine;
 @property (strong,nonatomic) IBOutlet UIImageView *imgIcon;
 
+@property (strong,nonatomic) IBOutlet UIImageView *imgRefresh;
 @end
 
 @implementation MenuCell
@@ -37,6 +38,12 @@
 - (void)setBlueStatu:(BOOL)flag
 {
     self.lbBlueStatus.text = flag?@"已连接":@"未连接";
+    if (flag) {
+        [self.layer removeAllAnimations];
+    }
+    else{
+        [self animationRefresh];
+    }
 }
 - (void)setMenuImage:(NSString *)imgName Name:(NSString *)name
 {
@@ -52,6 +59,32 @@
 - (void)setLineName:(NSString *)name
 {
     self.lbLine.text = name;
+}
+
+
+- (void)startAnimation
+{
+}
+
+- (void)stopAnimation
+{
+ 
+}
+
+
+- (void)animationRefresh
+{
+    if (self.imgRefresh) {
+        CABasicAnimation* animation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+        animation.fromValue = [NSNumber numberWithFloat:0.0f];
+        animation.toValue = [NSNumber numberWithFloat:2 * M_PI];
+        animation.duration = 1.0f;
+        animation.repeatCount = HUGE_VALF;
+        [self.imgRefresh.layer addAnimation:animation forKey:nil];
+        
+    
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
