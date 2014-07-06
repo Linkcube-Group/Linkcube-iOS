@@ -37,7 +37,7 @@
 
 @property (nonatomic,strong) JASidePanelController *sidePanelController;
 
-///0-未连接，1-mars，2-varnars
+///-1 蓝牙没有打开；0-未连接，1-mars，2-varnars
 @property (nonatomic) int blueConnType;
 ///当确定与好友开始游戏后，置为YES，断开游戏后为NO
 @property (nonatomic) BOOL   isPlayWithFriend;

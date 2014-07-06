@@ -433,6 +433,9 @@
 		07EAA13D1928B47A00794ABC /* JASidePanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EAA13A1928B47A00794ABC /* JASidePanelController.m */; };
 		07EAA13E1928B47A00794ABC /* UIViewController+JASidePanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EAA13C1928B47A00794ABC /* UIViewController+JASidePanel.m */; };
 		07EAA1401928BD0000794ABC /* icon_menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 07EAA13F1928BD0000794ABC /* icon_menu.png */; };
+		07FCA3B41968F7BE002682DE /* incativy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FCA3B31968F7BE002682DE /* incativy.png */; };
+		07FCA3B8196942DF002682DE /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FCA3B6196942DF002682DE /* InputViewController.m */; };
+		07FCA3B9196942DF002682DE /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07FCA3B7196942DF002682DE /* InputViewController.xib */; };
 		BB220ECC19559B16000C08CB /* RightCellRequest.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ECB19559B16000C08CB /* RightCellRequest.xib */; };
 		BB220ED219566DB8000C08CB /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB220ED019566DB8000C08CB /* AddFriendViewController.m */; };
 		BB220ED319566DB8000C08CB /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED119566DB8000C08CB /* AddFriendViewController.xib */; };
@@ -1169,6 +1172,10 @@
 		07EAA13B1928B47A00794ABC /* UIViewController+JASidePanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+JASidePanel.h"; sourceTree = "<group>"; };
 		07EAA13C1928B47A00794ABC /* UIViewController+JASidePanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+JASidePanel.m"; sourceTree = "<group>"; };
 		07EAA13F1928BD0000794ABC /* icon_menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_menu.png; sourceTree = "<group>"; };
+		07FCA3B31968F7BE002682DE /* incativy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = incativy.png; sourceTree = "<group>"; };
+		07FCA3B5196942DF002682DE /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
+		07FCA3B6196942DF002682DE /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
+		07FCA3B7196942DF002682DE /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
 		BB220ECB19559B16000C08CB /* RightCellRequest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightCellRequest.xib; sourceTree = "<group>"; };
 		BB220ECF19566DB8000C08CB /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		BB220ED019566DB8000C08CB /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
@@ -2458,6 +2465,9 @@
 				073AE93818CF383B00795941 /* IntroductViewController.h */,
 				073AE93918CF383B00795941 /* IntroductViewController.m */,
 				073AE93A18CF383B00795941 /* IntroductViewController.xib */,
+				07FCA3B5196942DF002682DE /* InputViewController.h */,
+				07FCA3B6196942DF002682DE /* InputViewController.m */,
+				07FCA3B7196942DF002682DE /* InputViewController.xib */,
 			);
 			path = SettingControllers;
 			sourceTree = "<group>";
@@ -2801,6 +2811,7 @@
 		07E0304718BDD14D002C684B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				07FCA3B31968F7BE002682DE /* incativy.png */,
 				0394ECC2194FDDCF00B16F52 /* close_btn@2x.png */,
 				0394ECBC194FDC2800B16F52 /* about_bg_2@2x.png */,
 				0394ECBD194FDC2800B16F52 /* about_bg@2x.png */,
@@ -3022,6 +3033,7 @@
 				073AA8D719440701008EDD06 /* set_shake@2x.png in Resources */,
 				073AA8D619440701008EDD06 /* set_setting_s@2x.png in Resources */,
 				07B6E70818D5538F00C17693 /* nav_btn_bg.png in Resources */,
+				07FCA3B41968F7BE002682DE /* incativy.png in Resources */,
 				BBF8DEE618DCA462005E2B8E /* typingMine.png in Resources */,
 				073AA8D219440701008EDD06 /* set_gesture_s@2x.png in Resources */,
 				BBF8DEE518DCA462005E2B8E /* missingAvatar@2x.png in Resources */,
@@ -3100,6 +3112,7 @@
 				07EAA12719288BAF00794ABC /* UploadMusicController.xib in Resources */,
 				07A1BFA518D00D50008031CF /* music_3.png in Resources */,
 				0745C89018C5611800976FD2 /* scan_button_ing.png in Resources */,
+				07FCA3B9196942DF002682DE /* InputViewController.xib in Resources */,
 				07B6E6CB18D5510800C17693 /* setting_logout.png in Resources */,
 				BBB814A319454DC90052D71A /* portrait-male-small.png in Resources */,
 				073AA8DE19440FDD008EDD06 /* red_button@2x.png in Resources */,
@@ -3407,6 +3420,7 @@
 				073554FC18C412E2005B319B /* XMPPIQ.m in Sources */,
 				0735554718C412E2005B319B /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				0735555F18C412E2005B319B /* XMPPIDTracker.m in Sources */,
+				07FCA3B8196942DF002682DE /* InputViewController.m in Sources */,
 				072A150618C34ABA00A3758E /* ShakeControls.m in Sources */,
 				070996DD182B8BFB0064D7D3 /* DDLog.m in Sources */,
 				073554F118C412E2005B319B /* XMPPAnonymousAuthentication.m in Sources */,

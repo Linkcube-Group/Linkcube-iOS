@@ -84,6 +84,7 @@
     panel.leftFixedWidth = 270;
     self.sidePanelController = panel;
     
+    
     self.window.rootViewController = panel;
     
     [self.window makeKeyAndVisible];

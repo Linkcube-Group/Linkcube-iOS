@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShakeViewController">
             <connections>
-                <outlet property="imgShake" destination="zyM-c5-FK6" id="nVR-0Q-5Xy"/>
+                <outlet property="imgShake" destination="jXZ-yR-1Na" id="9Pd-Pn-ncg"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -23,16 +23,22 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mode_shake.png" id="zyM-c5-FK6">
+                <button autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="tailTruncation" id="jXZ-yR-1Na">
                     <rect key="frame" x="80" y="159" width="160" height="160"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
+                    <state key="normal" image="game_shake.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="shakeAction:" destination="-1" eventType="touchUpInside" id="CKf-MY-MUb"/>
+                    </connections>
+                </button>
             </subviews>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
     <resources>
-        <image name="mode_shake.png" width="160" height="160"/>
+        <image name="game_shake.png" width="120" height="120"/>
     </resources>
 </document>

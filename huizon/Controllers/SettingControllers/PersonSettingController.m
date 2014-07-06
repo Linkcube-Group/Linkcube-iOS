@@ -11,6 +11,7 @@
 #import "ChangePwdController.h"
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardTempModule.h"
+#import "InputViewController.h"
 
 @interface PersonSettingController ()<UITableViewDataSource,UITableViewDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -89,7 +90,7 @@
     //self.navigationItem.rightBarButtonItem=[[Theam currentTheam] navigationBarRightButtonItemWithImage:Nil Title:@"修改密码" Target:self Selector:@selector(btnChangeTap:)];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_DisModal:)];
     
-
+    
 }
 
 - (void)backAction:(id)sender
@@ -155,16 +156,16 @@
             [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.birthday Other:NO];
             break;
         case 4:
-            [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.personstate Other:YES];
+            [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.personstate Other:NO];
             break;
             /*
-        case 5:
-            [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.mailer Other:NO];
-            break;
-        case 6:
-            [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.email Other:NO];
-            break;
-            */
+             case 5:
+             [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.mailer Other:NO];
+             break;
+             case 6:
+             [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.email Other:NO];
+             break;
+             */
         default:
             break;
     }
@@ -178,6 +179,8 @@
     dispatch_block_t reload=^{
 		[self.tableviewSetting reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
 	};
+    
+    IMP_BLOCK_SELF(PersonSettingController)
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.row) {
@@ -200,7 +203,18 @@
             break;
         case 1:  //nickname
         {
+            InputViewController *ivc =  [[InputViewController alloc] init];
+            ivc.modifyStr = theApp.xmppvCardUser.nickname;
+            ivc.numberOfword = 10;
             
+            ivc.saveHandler = ^(id sender){
+                NSString *str = (NSString *)sender;
+                [block_self.tableviewSetting reloadData];
+                theApp.xmppvCardUser.nickname = str;
+                [theApp updateUserCardTemp:theApp.xmppvCardUser];
+                
+            };
+            [self.navigationController pushViewController:ivc animated:YES];
         }
             break;
         case 2:  ///sex
@@ -229,6 +243,19 @@
             [self showPicker];
         }
             break;
+        case 4:{
+            InputViewController *ivc =  [[InputViewController alloc] init];
+            ivc.modifyStr = theApp.xmppvCardUser.personstate;
+            ivc.numberOfword = 140;
+            ivc.saveHandler = ^(id sender){
+                NSString *str = (NSString *)sender;
+                theApp.xmppvCardUser.personstate = str;
+                [theApp updateUserCardTemp:theApp.xmppvCardUser];
+                [block_self.tableviewSetting reloadData];
+            };
+            [self.navigationController pushViewController:ivc animated:YES];
+            break;
+        }
         default:
             break;
     }

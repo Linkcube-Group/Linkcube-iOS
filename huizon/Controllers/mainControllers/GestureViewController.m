@@ -14,7 +14,7 @@
 @interface GestureViewController ()
 {
     int currentState;
-    PCSEQVisualizer* eq;
+
     TopControlView  *topView;
 }
 
@@ -55,22 +55,10 @@
     self.navigationController.navigationBar.hidden = YES;
     
     topView = [[TopControlView alloc] initWithFrame:CGRectMake(0, 27, 320, 44) nibNameOrNil:nil];
-    
+    topView.baseController = self;
     [self.view addSubview:topView];
     
-    
-    
-    eq = [[PCSEQVisualizer alloc]initWithNumberOfBars:15];
-    
-    //position eq in the middle of the view
-    CGRect frame = eq.frame;
-    frame.origin.x = (self.view.frame.size.width - eq.frame.size.width)/2;
-    frame.origin.y = theApp.window.frame.size.height-55-frame.size.height;
-    eq.frame = frame;
-    
-    [self.view addSubview:eq];
-    
-    [eq start];
+
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
@@ -125,13 +113,10 @@
 
 
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [eq stop];
-}
 
 - (void)dealloc
 {
+    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

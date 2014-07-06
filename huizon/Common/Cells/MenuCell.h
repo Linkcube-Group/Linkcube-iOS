@@ -11,7 +11,7 @@
 @interface MenuCell : UITableViewCell
 
 
-- (void)setBlueStatu:(BOOL)flag;
+- (void)setBlueStatu:(int)flag;
 - (void)setMenuImage:(NSString *)img Name:(NSString *)name;
 - (void)setBLueConn:(NSString *)name Status:(BOOL)flag;
 - (void)setLineName:(NSString *)name;

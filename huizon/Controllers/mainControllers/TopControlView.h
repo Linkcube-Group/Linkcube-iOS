@@ -10,5 +10,9 @@
 
 @interface TopControlView : UIView
 
+@property (strong,nonatomic) UIViewController   *baseController;
+
 - (void)refreshTitleName;
+
+
 @end

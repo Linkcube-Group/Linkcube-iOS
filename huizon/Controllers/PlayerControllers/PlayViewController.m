@@ -57,6 +57,7 @@
 
 - (void)dealloc
 {
+    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     [[VoiceControls voiceSingleton] stopMusic];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -68,6 +69,7 @@
     self.navigationController.navigationBar.hidden = YES;
     
     topView = [[TopControlView alloc] initWithFrame:CGRectMake(0, 27, 320, 44) nibNameOrNil:nil];
+    topView.baseController = self;
     
     [self.view addSubview:topView];
     
@@ -130,7 +132,7 @@
     [self setViewInfo:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop:) name:kNotificationTop object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop:) name:CBCentralManagerOptionShowPowerAlertKey object:nil];
+ 
     
     [LeDiscovery sharedInstance];
 
@@ -195,6 +197,7 @@
         isPlay = YES;
     }
     else{
+        [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
         [[VoiceControls voiceSingleton] pauseMusic];
         isPlay = NO;
     }

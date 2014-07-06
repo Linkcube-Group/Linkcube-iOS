@@ -11,6 +11,8 @@
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardTempModule.h"
 
+#import "UserViewController.h"
+
 @interface TopControlView()
 @property (strong,nonatomic) IBOutlet UIButton *btnMenu;
 @property (strong,nonatomic) IBOutlet UIButton *btnHead;
@@ -67,7 +69,14 @@
 
 - (IBAction)userAction:(id)sender
 {
-    [theApp.sidePanelController showRightPanelAnimated:YES];
+    if ([theApp isXmppAuthenticated]==NO) {
+        UserViewController *uvc = [[UserViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:uvc];
+        [self.baseController presentViewController:nav animated:YES completion:nil];
+    }
+    else{
+        [theApp.sidePanelController showRightPanelAnimated:YES];
+    }
 }
 
 /*

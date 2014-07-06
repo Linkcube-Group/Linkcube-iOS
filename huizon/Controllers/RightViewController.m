@@ -207,11 +207,6 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
         
-        //cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        //NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-        //cell = [topLevelObjects objectAtIndex:0];
-        //cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //cell.accessoryType = UITableViewCellAccessoryNone;
     }
     if (indexPath.row==0)
     {

@@ -299,6 +299,8 @@
 	}
 
 	[discoveryDelegate discoveryDidRefresh];
+    theApp.blueConnType = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTop object:nil userInfo:nil];
 }
 
 

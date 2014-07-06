@@ -72,10 +72,14 @@
     [self startBluetoothScan];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startBluetoothScan) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:kNotificationTop object:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)refreshView:(id)sender
+{
+    [self.tbMenu reloadData];
+}
 
 
 #pragma mark -
@@ -143,7 +147,7 @@
 //        cellIdentifier = cellIdentifier5;///setting top bg
     }
     else if (indexPath.row==1){
-        [cell setBlueStatu:(theApp.blueConnType!=0?YES:NO)];
+        [cell setBlueStatu:theApp.blueConnType];
     }
     else if (indexPath.row==bcount+2){
         [cell setLineName:@"控制"];
@@ -247,6 +251,9 @@
     else if (indexPath.row==bcount+7){
         SettingViewController *tvc = [[SettingViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:tvc];
+        
+        [self presentViewController:nav animated:YES completion:nil];
+        return;
     }
     
     if (nav) {
@@ -261,16 +268,15 @@
 #pragma mark BlueSetting
 - (void)startBluetoothScan
 {
+    theApp.blueConnType = 0;
     if ([[LeDiscovery sharedInstance] bluetoothState]!=CBCentralManagerStatePoweredOn) {
         [self discoveryStatePoweredOff];
-        theApp.blueConnType = 0;
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTop object:nil userInfo:nil];
         [self.tbMenu reloadData];
         return;
     }
     if (blueConn) {
-        
-         [[LeDiscovery sharedInstance] startScanningForUUIDString:kDeviceServiceUUIDString];
+        [[LeDiscovery sharedInstance] startScanningForUUIDString:kDeviceServiceUUIDString];
     }
    
 }
@@ -349,6 +355,7 @@
 
 - (void) discoveryStatePoweredOff
 {
+    theApp.blueConnType = -1;
     NSString *title     = @"无法连接";
     NSString *message   = @"请在设置->蓝牙中允许蓝牙服务，才能连接到您的玩具";
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];

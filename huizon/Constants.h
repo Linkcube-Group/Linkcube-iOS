@@ -59,4 +59,7 @@ static NSString * const kSettingUmeng = @"5319cc6956240b080f02958c";
 
 ///刷新顶部状态
 static NSString * const kNotificationTop = @"kNotificationTop";
+
+///蓝牙断开
+static NSString * const kNotificationDisConnect = @"kNotificationDisConnect";
 #endif

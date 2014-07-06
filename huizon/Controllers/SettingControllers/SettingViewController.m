@@ -15,6 +15,8 @@
 
 @interface SettingViewController ()
 {
+
+    
     IBOutlet UIButton   *btnLogin;
 }
 
@@ -39,6 +41,7 @@
 {
     [super viewDidLoad];
     
+    
     //    self.testLabel.backgroundColor = [UIColor redColor];
     
     // Do any additional setup after loading the view from its nib.
@@ -46,10 +49,12 @@
 
 
 
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     if ([theApp isXmppAuthenticated]) {
         [btnLogin setBackgroundImage:IMG(@"red_button") forState:UIControlStateNormal];
         [btnLogin setBackgroundImage:IMG(@"red_button_s") forState:UIControlStateHighlighted];
@@ -62,13 +67,10 @@
     }
     
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"设置"];
+    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_DisModal:)];
 //    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(backAction:)];
 }
 
-- (void)backAction:(id)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -148,4 +150,7 @@
         [self presentViewController:nav animated:YES completion:nil];
     }
 }
+
+
+
 @end
