@@ -203,7 +203,7 @@
 	
 	//iOS7下面导航按钮会默认有10px间距
 	UIEdgeInsets insets=UIEdgeInsetsMake((btnsize.height-imagesize.height)/2, btnsize.width-imagesize.width, (btnsize.height-imagesize.height)/2, 0);
-	[btn setImageEdgeInsets:insets];
+//	[btn setImageEdgeInsets:insets];
 	btn.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
 	UIBarButtonItem *item=[[UIBarButtonItem alloc] initWithCustomView:btn];
 	

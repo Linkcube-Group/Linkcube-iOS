@@ -23,4 +23,5 @@
 //Stops NSTimer by invalidating and stops the animation
 -(void)stop;
 
+- (BOOL)isStart;
 @end

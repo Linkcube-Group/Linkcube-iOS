@@ -20,6 +20,7 @@
 
 #define BLUE_NAME1 @"Mars"
 #define BLUE_NAME2 @"Venus"
+#define BLUE_LINK  @"linkcube"
 
 #pragma mark -
 #pragma mark Init
@@ -245,6 +246,9 @@
         theApp.blueConnType = 1;
     }
     else if ([peripheral.name isEqualToString:BLUE_NAME2]) {
+        theApp.blueConnType = 2;
+    }
+    else if ([peripheral.name isEqualToString:BLUE_LINK]){
         theApp.blueConnType = 2;
     }
     else{

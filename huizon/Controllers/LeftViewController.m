@@ -12,6 +12,7 @@
 #import "PlayViewController.h"
 #import "ShakeViewController.h"
 #import "GestureViewController.h"
+#import "VoiceViewController.h"
 
 #import "SettingViewController.h"
 
@@ -33,7 +34,7 @@
 @property (strong,nonatomic) NSMutableArray    *blueArray;
 @end
 
-#define MENU_LIST @[@"",@"蓝牙连接",@"控制",@"音乐控制",@"摇摇控制",@"经典七式",@"其它",@"设置"]
+#define MENU_LIST @[@"",@"蓝牙连接",@"控制",@"音乐控制",@"摇摇控制",@"声音控制",@"经典七式",@"其它",@"设置"]
 
 
 
@@ -100,10 +101,10 @@
         return 120;
     }
     else if (indexPath.row==1){
-        return 30;
+        return 38;
     }
-    else if (indexPath.row==bcount+2 || indexPath.row==bcount+6){
-        return 16;
+    else if (indexPath.row==bcount+2 || indexPath.row==bcount+7){
+        return 20;
     }
     else if (indexPath.row>bcount+2){
         return 49;
@@ -126,7 +127,7 @@
     else if (indexPath.row==1){
         cellIdentifier = cellIdentifier2;
     }
-    else if (indexPath.row==bcount+2 || indexPath.row==bcount+6){
+    else if (indexPath.row==bcount+2 || indexPath.row==bcount+7){
         cellIdentifier = cellIdentifier4;
     }
     else if (indexPath.row>bcount+2){
@@ -152,7 +153,7 @@
     else if (indexPath.row==bcount+2){
         [cell setLineName:@"控制"];
     }
-    else if (indexPath.row==bcount+6){
+    else if (indexPath.row==bcount+7){
         [cell setLineName:@"其它"];
     }
     else if (indexPath.row>bcount+2){
@@ -163,9 +164,12 @@
             [cell setMenuImage:@"set_shake" Name:@"摇摇控制"];
         }
         else if (indexPath.row==bcount+5){
+            [cell setMenuImage:@"set_voice" Name:@"声音控制"];
+        }
+        else if (indexPath.row==bcount+6){
             [cell setMenuImage:@"set_gesture" Name:@"经典七式"];
         }
-        else if (indexPath.row==bcount+7){
+        else if (indexPath.row==bcount+8){
             [cell setMenuImage:@"set_setting" Name:@"设置"];
         }
     }
@@ -245,10 +249,14 @@
         nav = [[UINavigationController alloc] initWithRootViewController:svc];
     }
     else if (indexPath.row==bcount+5){
+        VoiceViewController *vvc = [[VoiceViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:vvc];
+    }
+    else if (indexPath.row==bcount+6){
         GestureViewController *gvc = [[GestureViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:gvc];
     }
-    else if (indexPath.row==bcount+7){
+    else if (indexPath.row==bcount+8){
         SettingViewController *tvc = [[SettingViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:tvc];
         

@@ -53,12 +53,11 @@
             
             // 所有操作进行同步
             @synchronized(motionManager) {
+                 
                 
                 float acc = ABS(motionManager.accelerometerData.acceleration.y);
-                //DLog(@"x=%f;y=%f;z=%f",motionManager.accelerometerData.acceleration.x,motionManager.accelerometerData.acceleration.y,motionManager.accelerometerData.acceleration.z);
-                //int order = acc*10;
-//                order %= 40;
-               // NSString *cmd = [kBluetoothSpeeds objectAtIndex:order];
+                 acc += ABS(motionManager.accelerometerData.acceleration.x);
+                
                 BlockCallWithOneArg(self.shakeHandler, @(acc))
                 //_isShake = [self isShake:_motionManager.accelerometerData];
                 
