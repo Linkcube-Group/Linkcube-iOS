@@ -271,6 +271,17 @@
 		073AE93C18CF383B00795941 /* IntroductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 073AE93A18CF383B00795941 /* IntroductViewController.xib */; };
 		073B328818C89C12009FE1DA /* MediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073B328618C89C12009FE1DA /* MediaViewController.m */; };
 		073B328918C89C12009FE1DA /* MediaViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 073B328718C89C12009FE1DA /* MediaViewController.xib */; };
+		074066CC19724782008DEE79 /* needle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066CA19724782008DEE79 /* needle@2x.png */; };
+		074066CD19724782008DEE79 /* mode-music.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066CB19724782008DEE79 /* mode-music.png */; };
+		074066D0197257C4008DEE79 /* set_voice_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066CE197257C4008DEE79 /* set_voice_s@2x.png */; };
+		074066D1197257C4008DEE79 /* set_voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066CF197257C4008DEE79 /* set_voice@2x.png */; };
+		074066D519725835008DEE79 /* VoiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 074066D319725835008DEE79 /* VoiceViewController.m */; };
+		074066D619725835008DEE79 /* VoiceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 074066D419725835008DEE79 /* VoiceViewController.xib */; };
+		074066DA19725A84008DEE79 /* mode-voice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066D719725A84008DEE79 /* mode-voice@2x.png */; };
+		074066DB19725A84008DEE79 /* mode-voice_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066D819725A84008DEE79 /* mode-voice_s@2x.png */; };
+		074066DC19725A84008DEE79 /* mode_shake_s@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066D919725A84008DEE79 /* mode_shake_s@2x.png */; };
+		074066DF1972642D008DEE79 /* SoundControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 074066DE1972642D008DEE79 /* SoundControls.m */; };
+		074066E1197273B1008DEE79 /* left_top_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 074066E0197273B1008DEE79 /* left_top_bg@2x.png */; };
 		074401BC182E395300273680 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074401BB182E395300273680 /* SystemConfiguration.framework */; };
 		074401BE182E396200273680 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 074401BD182E396200273680 /* Security.framework */; };
 		074401C2182E3D3400273680 /* test.m in Sources */ = {isa = PBXBuildFile; fileRef = 074401C1182E3D3400273680 /* test.m */; };
@@ -960,6 +971,19 @@
 		073B328518C89C12009FE1DA /* MediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaViewController.h; sourceTree = "<group>"; };
 		073B328618C89C12009FE1DA /* MediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaViewController.m; sourceTree = "<group>"; };
 		073B328718C89C12009FE1DA /* MediaViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaViewController.xib; sourceTree = "<group>"; };
+		074066CA19724782008DEE79 /* needle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "needle@2x.png"; sourceTree = "<group>"; };
+		074066CB19724782008DEE79 /* mode-music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mode-music.png"; sourceTree = "<group>"; };
+		074066CE197257C4008DEE79 /* set_voice_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set_voice_s@2x.png"; sourceTree = "<group>"; };
+		074066CF197257C4008DEE79 /* set_voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "set_voice@2x.png"; sourceTree = "<group>"; };
+		074066D219725835008DEE79 /* VoiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceViewController.h; sourceTree = "<group>"; };
+		074066D319725835008DEE79 /* VoiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceViewController.m; sourceTree = "<group>"; };
+		074066D419725835008DEE79 /* VoiceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VoiceViewController.xib; sourceTree = "<group>"; };
+		074066D719725A84008DEE79 /* mode-voice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mode-voice@2x.png"; sourceTree = "<group>"; };
+		074066D819725A84008DEE79 /* mode-voice_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mode-voice_s@2x.png"; sourceTree = "<group>"; };
+		074066D919725A84008DEE79 /* mode_shake_s@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mode_shake_s@2x.png"; sourceTree = "<group>"; };
+		074066DD1972642D008DEE79 /* SoundControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundControls.h; sourceTree = "<group>"; };
+		074066DE1972642D008DEE79 /* SoundControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundControls.m; sourceTree = "<group>"; };
+		074066E0197273B1008DEE79 /* left_top_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_top_bg@2x.png"; sourceTree = "<group>"; };
 		074401BB182E395300273680 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		074401BD182E396200273680 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		074401C0182E3D3400273680 /* test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
@@ -1564,6 +1588,8 @@
 				073B328518C89C12009FE1DA /* MediaViewController.h */,
 				073B328618C89C12009FE1DA /* MediaViewController.m */,
 				073B328718C89C12009FE1DA /* MediaViewController.xib */,
+				074066DD1972642D008DEE79 /* SoundControls.h */,
+				074066DE1972642D008DEE79 /* SoundControls.m */,
 			);
 			name = Controls;
 			path = huizon/Controls;
@@ -2416,6 +2442,8 @@
 		073AA8C619440701008EDD06 /* left_set */ = {
 			isa = PBXGroup;
 			children = (
+				074066CE197257C4008DEE79 /* set_voice_s@2x.png */,
+				074066CF197257C4008DEE79 /* set_voice@2x.png */,
 				073AA8DF1944115E008EDD06 /* blue_button_s@2x.png */,
 				073AA8E01944115E008EDD06 /* blue_button@2x.png */,
 				073AA8D919440FDD008EDD06 /* icon_arrow@2x.png */,
@@ -2507,6 +2535,8 @@
 		074A29F7194458F0007CB3DA /* plays */ = {
 			isa = PBXGroup;
 			children = (
+				074066CA19724782008DEE79 /* needle@2x.png */,
+				074066CB19724782008DEE79 /* mode-music.png */,
 				0394ECC0194FDC2E00B16F52 /* mode-music-front@2x.png */,
 				074A2A1E194463D1007CB3DA /* mode-music@2x.png */,
 				074A29F8194458F0007CB3DA /* button-backward-disabled@2x.png */,
@@ -2792,6 +2822,9 @@
 				07EAA131192893F300794ABC /* GestureViewController.h */,
 				07EAA132192893F300794ABC /* GestureViewController.m */,
 				07EAA133192893F300794ABC /* GestureViewController.xib */,
+				074066D219725835008DEE79 /* VoiceViewController.h */,
+				074066D319725835008DEE79 /* VoiceViewController.m */,
+				074066D419725835008DEE79 /* VoiceViewController.xib */,
 				073AA8E619442336008EDD06 /* TopControlView.h */,
 				073AA8E719442336008EDD06 /* TopControlView.m */,
 				073AA8E91944234C008EDD06 /* TopControlView.xib */,
@@ -2811,6 +2844,10 @@
 		07E0304718BDD14D002C684B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				074066E0197273B1008DEE79 /* left_top_bg@2x.png */,
+				074066D719725A84008DEE79 /* mode-voice@2x.png */,
+				074066D819725A84008DEE79 /* mode-voice_s@2x.png */,
+				074066D919725A84008DEE79 /* mode_shake_s@2x.png */,
 				07FCA3B31968F7BE002682DE /* incativy.png */,
 				0394ECC2194FDDCF00B16F52 /* close_btn@2x.png */,
 				0394ECBC194FDC2800B16F52 /* about_bg_2@2x.png */,
@@ -3037,9 +3074,11 @@
 				BBF8DEE618DCA462005E2B8E /* typingMine.png in Resources */,
 				073AA8D219440701008EDD06 /* set_gesture_s@2x.png in Resources */,
 				BBF8DEE518DCA462005E2B8E /* missingAvatar@2x.png in Resources */,
+				074066D0197257C4008DEE79 /* set_voice_s@2x.png in Resources */,
 				072A150318C3487600A3758E /* ChatViewController.xib in Resources */,
 				BBB814A119454DC90052D71A /* portrait-female-small.png in Resources */,
 				074A2A19194458F0007CB3DA /* button-random@2x.png in Resources */,
+				074066DA19725A84008DEE79 /* mode-voice@2x.png in Resources */,
 				0762C2C718C2197D00ABD7A0 /* shake_1.png in Resources */,
 				BB220ED319566DB8000C08CB /* AddFriendViewController.xib in Resources */,
 				0745C88C18C5611800976FD2 /* blue_close.png in Resources */,
@@ -3097,6 +3136,7 @@
 				07C5CDFC19278B600070B958 /* LeftViewController.xib in Resources */,
 				0762C2CA18C2197D00ABD7A0 /* shake_4.png in Resources */,
 				07B6E72318D560EF00C17693 /* icon_back_default@2x.png in Resources */,
+				074066DB19725A84008DEE79 /* mode-voice_s@2x.png in Resources */,
 				073AA8D519440701008EDD06 /* set_setting@2x.png in Resources */,
 				07B6E70118D5538F00C17693 /* messages_right_bubble@2x.png in Resources */,
 				073AA8D019440701008EDD06 /* blue_refresh@2x.png in Resources */,
@@ -3109,6 +3149,7 @@
 				0745C88F18C5611800976FD2 /* scan_button.png in Resources */,
 				073AE93C18CF383B00795941 /* IntroductViewController.xib in Resources */,
 				07A1BFA318D00D50008031CF /* music_1.png in Resources */,
+				074066E1197273B1008DEE79 /* left_top_bg@2x.png in Resources */,
 				07EAA12719288BAF00794ABC /* UploadMusicController.xib in Resources */,
 				07A1BFA518D00D50008031CF /* music_3.png in Resources */,
 				0745C89018C5611800976FD2 /* scan_button_ing.png in Resources */,
@@ -3122,6 +3163,7 @@
 				BBB8F347194E9B430020B0A1 /* game-shake.png in Resources */,
 				07B6E6C818D5510800C17693 /* setting_login_s.png in Resources */,
 				0394ECBE194FDC2800B16F52 /* about_bg_2@2x.png in Resources */,
+				074066D1197257C4008DEE79 /* set_voice@2x.png in Resources */,
 				BB220EDB19567501000C08CB /* navigation-background.png in Resources */,
 				0745C89118C5611800976FD2 /* scan_button_n.png in Resources */,
 				BBB8F345194E946C0020B0A1 /* icon-shake.png in Resources */,
@@ -3179,6 +3221,7 @@
 				BBF8DEE218DCA462005E2B8E /* bubbleSomeone.png in Resources */,
 				074A2A1B194458F0007CB3DA /* button-repeat-one-disabled@2x.png in Resources */,
 				07B6E70C18D5538F00C17693 /* send_selected@2x.png in Resources */,
+				074066CD19724782008DEE79 /* mode-music.png in Resources */,
 				07B6E71518D5538F00C17693 /* umFeedback.bundle in Resources */,
 				07B6E70518D5538F00C17693 /* messages_toolbar_background@2x.png in Resources */,
 				0701AB78194D5FFD00C0DA9F /* icon-password@2x.png in Resources */,
@@ -3190,11 +3233,13 @@
 				073AA8F5194424A5008EDD06 /* nav_head_s@2x.png in Resources */,
 				07B6E72118D560EF00C17693 /* bg_title_2@2x.png in Resources */,
 				074A2A10194458F0007CB3DA /* button-forward@2x.png in Resources */,
+				074066DC19725A84008DEE79 /* mode_shake_s@2x.png in Resources */,
 				0762C2C118C2197D00ABD7A0 /* posture_3@2x.png in Resources */,
 				074D117D1931E2920030583C /* MenuCell.xib in Resources */,
 				072F97D618C0BD2A00BEB4C4 /* dot.png in Resources */,
 				BB220ED919567501000C08CB /* input-box.png in Resources */,
 				07E38E4D193B152B00745C02 /* 1.mp3 in Resources */,
+				074066D619725835008DEE79 /* VoiceViewController.xib in Resources */,
 				0701AB79194D5FFD00C0DA9F /* white_box@2x.png in Resources */,
 				0701AB7F194D8FA000C0DA9F /* UserEditController.xib in Resources */,
 				0701AB77194D5FFD00C0DA9F /* icon-email@2x.png in Resources */,
@@ -3238,6 +3283,7 @@
 				07EAA135192893F300794ABC /* GestureViewController.xib in Resources */,
 				0701AB88194D90D100C0DA9F /* female-large@2x.png in Resources */,
 				07B6E6FE18D5538F00C17693 /* item_ok@2x.png in Resources */,
+				074066CC19724782008DEE79 /* needle@2x.png in Resources */,
 				073AE92718CF374D00795941 /* FindPwdController.xib in Resources */,
 				07B6E70B18D5538F00C17693 /* send@2x.png in Resources */,
 				073AA8F4194424A5008EDD06 /* nav_head@2x.png in Resources */,
@@ -3328,6 +3374,7 @@
 				078CD1C0182CCAE100EBF477 /* protocolHelper.m in Sources */,
 				070996D5182B8BFB0064D7D3 /* ModelBase.m in Sources */,
 				072D5B6F18AB56600083626A /* DesignControls.m in Sources */,
+				074066D519725835008DEE79 /* VoiceViewController.m in Sources */,
 				071C546818BE0D00005B784E /* LeDiscovery.m in Sources */,
 				0735553A18C412E2005B319B /* NSDate+XMPPDateTimeProfiles.m in Sources */,
 				BBF8DEEA18DCA462005E2B8E /* NSBubbleData.m in Sources */,
@@ -3431,6 +3478,7 @@
 				0735555A18C412E2005B319B /* XMPPMessage+XEP_0333.m in Sources */,
 				07EAA12F192893E200794ABC /* ShakeViewController.m in Sources */,
 				070996EE182B8BFB0064D7D3 /* RegexKitLite.m in Sources */,
+				074066DF1972642D008DEE79 /* SoundControls.m in Sources */,
 				07C5CDFB19278B600070B958 /* LeftViewController.m in Sources */,
 				0735553C18C412E2005B319B /* XMPPMessage+XEP_0085.m in Sources */,
 				0735554218C412E2005B319B /* XMPPCapsCoreDataStorageObject.m in Sources */,

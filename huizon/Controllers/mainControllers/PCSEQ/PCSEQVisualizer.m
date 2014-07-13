@@ -56,7 +56,13 @@
     
 }
 
-
+- (BOOL)isStart
+{
+    if (timer && [timer isValid]) {
+        return YES;
+    }
+    return NO;
+}
 -(void)stop{
     
     [timer invalidate];

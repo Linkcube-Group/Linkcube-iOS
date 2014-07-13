@@ -13,6 +13,7 @@
                 <outlet property="btnType" destination="Kg2-gE-mgR" id="rTa-MT-DUb"/>
                 <outlet property="imgAlbum" destination="2cm-aP-4Dm" id="vGK-FZ-rcA"/>
                 <outlet property="imgFloat" destination="XSG-gd-f1c" id="6IT-Uk-e3M"/>
+                <outlet property="imgNeedler" destination="Zrv-s1-4os" id="qRV-2O-3I2"/>
                 <outlet property="lbAuthor" destination="1xw-bg-pz4" id="grm-61-VdK"/>
                 <outlet property="lbName" destination="2Bw-JH-Mcm" id="v5j-1T-i46"/>
                 <outlet property="lbTimeMax" destination="skG-w6-1Lv" id="d0f-cq-eFN"/>
@@ -125,11 +126,15 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mode-music.png" id="2cm-aP-4Dm">
-                    <rect key="frame" x="55" y="155" width="213" height="213"/>
+                    <rect key="frame" x="51" y="155" width="213" height="213"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="XSG-gd-f1c">
                     <rect key="frame" x="86" y="186" width="151" height="151"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="needle.png" id="Zrv-s1-4os">
+                    <rect key="frame" x="225" y="155" width="86" height="116"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -148,6 +153,7 @@
         <image name="button-menu.png" width="30" height="30"/>
         <image name="button-play.png" width="40" height="40"/>
         <image name="button-repeat.png" width="30" height="30"/>
-        <image name="mode-music.png" width="216" height="216"/>
+        <image name="mode-music.png" width="432" height="432"/>
+        <image name="needle.png" width="88" height="116"/>
     </resources>
 </document>

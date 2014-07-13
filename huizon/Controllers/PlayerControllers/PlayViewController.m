@@ -41,6 +41,7 @@
 @property (strong,nonatomic) IBOutlet UIButton *btnPriview;
 @property (strong,nonatomic) IBOutlet UIButton *btnNext;
 @property (strong,nonatomic) IBOutlet UIButton *btnPlay;
+@property (strong,nonatomic) IBOutlet UIImageView *imgNeedler;
 
 @end
 
@@ -75,6 +76,7 @@
     
     self.imgAlbum.center = CGPointMake(160, theApp.window.frame.size.height/2);
     self.imgFloat.center = CGPointMake(160, theApp.window.frame.size.height/2);
+    self.imgNeedler.originY = theApp.window.frame.size.height/2-116;
     
     playMusicType = PlayTypeCircle;
     isPlay = NO;
@@ -186,8 +188,8 @@
     self.lbTimeMin.text = @"00:00";
     int duration = [[VoiceControls voiceSingleton] musicDuration];
     self.lbTimeMax.text = _S(@"%02d:%02d",duration/60,duration%60);
-    self.imgFloat.layer.cornerRadius = 76;
-    self.imgFloat.layer.masksToBounds = YES;
+   // self.imgFloat.layer.cornerRadius = 76;
+   // self.imgFloat.layer.masksToBounds = YES;
 }
 
 - (IBAction)playAction:(id)sender
@@ -357,6 +359,7 @@
             NSLog(@"commonKey:%@",metadataItem.commonKey);
             if ([metadataItem.commonKey isEqualToString:@"artwork"]) {
                 img =[UIImage imageWithData:[(NSDictionary*)metadataItem.value objectForKey:@"data"]];
+                img = [img roundedRectWith:120];
             }
         }
     }

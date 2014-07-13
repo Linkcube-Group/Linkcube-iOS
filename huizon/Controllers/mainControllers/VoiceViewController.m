@@ -1,20 +1,21 @@
 //
-//  ShakeViewController.m
+//  VoiceViewController.m
 //  huizon
 //
-//  Created by yang Eric on 5/18/14.
+//  Created by yang Eric on 7/13/14.
 //  Copyright (c) 2014 zhaopin. All rights reserved.
 //
 
-#import "ShakeViewController.h"
+#import "VoiceViewController.h"
 #import "LeDiscovery.h"
 
-#import "ShakeControls.h"
+#import "SoundControls.h"
 
 #import "PCSEQVisualizer.h"
 #import "TopControlView.h"
 
-@interface ShakeViewController ()
+
+@interface VoiceViewController ()
 {
     TopControlView  *topView;
     PCSEQVisualizer* eq;
@@ -22,10 +23,10 @@
     int stopCount;
     BOOL    isOpen;
 }
-@property (strong,nonatomic) IBOutlet UIButton *imgShake;
+@property (strong,nonatomic) IBOutlet UIButton *imgVoice;
 @end
 
-@implementation ShakeViewController
+@implementation VoiceViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -42,7 +43,7 @@
     isOpen = NO;
     [eq stop];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[ShakeControls shakeSingleton] stopShakeAction];
+    [[SoundControls soundSingleton] stopSoundListener];
 }
 
 - (void)viewDidLoad
@@ -52,13 +53,13 @@
     isOpen = NO;
     
     if (iPhone5) {
-        [self.view.layer setContents:(id)[IMG(@"play_bg_2.png") CGImage]]; 
+        [self.view.layer setContents:(id)[IMG(@"play_bg_2.png") CGImage]];
     }
     else{
         [self.view.layer setContents:(id)[IMG(@"play_bg.png") CGImage]];
     }
     
-    self.imgShake.center = CGPointMake(160, theApp.window.frame.size.height/2);
+    self.imgVoice.center = CGPointMake(160, theApp.window.frame.size.height/2);
     
     self.navigationController.navigationBar.hidden = YES;
     
@@ -68,20 +69,26 @@
     
     [self.view addSubview:topView];
     [topView refreshTitleName];
-    [[ShakeControls shakeSingleton] startShakeAction];
-    [ShakeControls shakeSingleton].shakeHandler = ^(id acc){
-        float degree = abs([acc intValue]);
-//        degree *= shakeLevel;
-        int shakeDegree = degree*10;
-        shakeDegree = shakeDegree>39?39:shakeDegree;
-        NSString * myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
+    [[SoundControls soundSingleton] startSoundListener];
+    [SoundControls soundSingleton].soundHandler = ^(id acc){
+        float degree = abs([acc floatValue]);
+        
+
+        int voiceDegree = abs(degree)+1;
+        voiceDegree = 40-voiceDegree;
+     
+        
+        voiceDegree = voiceDegree<0?0:voiceDegree;
+
+                DLog(@"---|%d",voiceDegree);
+        NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
             if (isOpen) {
                 [theApp sendControlCode:myComm];
-                if (degree<1) {
+                if (voiceDegree<1) {
                     stopCount++;
-                    if (stopCount>50 && [eq isStart]) {
+                    if (stopCount>30 && [eq isStart]) {
                         [eq stop];
                     }
                 }
@@ -97,9 +104,9 @@
         else{
             if (isOpen) {
                 [[LeDiscovery sharedInstance] sendCommand:myComm];
-                if (degree<1) {
+                if (voiceDegree<1) {
                     stopCount++;
-                    if (stopCount>50 && [eq isStart]) {
+                    if (stopCount>30 && [eq isStart]) {
                         [eq stop];
                     }
                 }
@@ -112,7 +119,7 @@
             }
             
         }
-    
+        
     };
     
     
@@ -140,7 +147,7 @@
     isOpen = !isOpen;
     if (isOpen) {
         [eq start];
-        [self.imgShake setImage:IMG(@"mode_shake_s.png") forState:UIControlStateNormal];
+        [self.imgVoice setImage:IMG(@"mode-voice_s.png") forState:UIControlStateNormal];
     }
     else{
         [eq stop];
@@ -151,7 +158,7 @@
             [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
         }
         
-        [self.imgShake setImage:IMG(@"mode_shake.png") forState:UIControlStateNormal];
+        [self.imgVoice setImage:IMG(@"mode-voice.png") forState:UIControlStateNormal];
     }
 }
 
@@ -161,7 +168,7 @@
     isOpen = NO;
     [self shakeAction:nil];
     [self refreshTop];
-  
+    
 }
 
 - (void)refreshTop
@@ -176,7 +183,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 @end

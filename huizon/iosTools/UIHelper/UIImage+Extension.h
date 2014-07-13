@@ -15,6 +15,14 @@
 #define IMG_ST(name,x,y) [IMG(name) stretchableImageWithLeftCapWidth:x topCapHeight:y]
 
 
+typedef enum {
+    UIImageRoundedCornerTopLeft = 1,
+    UIImageRoundedCornerTopRight = 1 << 1,
+    UIImageRoundedCornerBottomRight = 1 << 2,
+    UIImageRoundedCornerBottomLeft = 1 << 3
+} UIImageRoundedCorner;
+    
+    
 @interface UIImage (Extension)
 
 //调整大小后的图像
@@ -28,4 +36,6 @@
 +(UIImage *)scaleToSize:(UIImage *)img size:(CGSize)size;
 
 -(UIImage *)scaleToSize:(CGSize)size;
+
+- (UIImage *)roundedRectWith:(float)radius;
 @end
