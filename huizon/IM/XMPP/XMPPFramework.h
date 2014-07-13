@@ -40,5 +40,7 @@
 #import "XMPPCapabilities.h"
 #import "XMPPCapabilitiesCoreDataStorage.h"
 
+#import "XMPPSearchModule.h"
+
 #import "XMPPMUC.h"
 #import "XMPPRoomCoreDataStorage.h"

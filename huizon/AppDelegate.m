@@ -19,6 +19,9 @@
 #import "RightViewController.h"
 #import "PlayViewController.h"
 
+
+
+
 #define tag_subcribe_alertView 100
 
 @implementation AppDelegate
@@ -35,6 +38,7 @@
 @synthesize sidePanelController;
 
 @synthesize xmppvCardUser;
+@synthesize xmppSearchModule;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -172,6 +176,13 @@
     [xmppvCardAvatarModule activate:xmppStream];
     [xmppvCardTempModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppvCardAvatarModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    xmppSearchModule = [[XMPPSearchModule alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+    xmppSearchModule.searchHost = @"search.server1";//kXMPPmyDomain;//kXMPPmyServer;
+    [xmppSearchModule activate:xmppStream];
+    
+    
+    
 
     
 }

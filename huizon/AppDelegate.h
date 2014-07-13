@@ -32,6 +32,7 @@
     XMPPvCardCoreDataStorage *xmppvCardStorage;
     XMPPvCardTempModule *xmppvCardTempModule;
     XMPPvCardAvatarModule *xmppvCardAvatarModule;
+    XMPPSearchModule *xmppSearchModule;
 }
 
 
@@ -52,7 +53,7 @@
 @property (nonatomic,strong) XMPPvCardTempModule *xmppvCardTempModule;
 @property (nonatomic,strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic,strong)  XMPPvCardTemp *xmppvCardUser;
-
+@property (nonatomic,strong)  XMPPSearchModule *xmppSearchModule;
 
 //---------------------------------------------------------------------
 //@property (nonatomic) BOOL isRegistration;
