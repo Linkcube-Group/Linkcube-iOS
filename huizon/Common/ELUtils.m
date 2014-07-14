@@ -35,7 +35,7 @@ void showCustomAlertMessage(NSString *message)
         [customAlartView removeFromSuperview];
         customAlartView = nil;
     }
-    customAlartView = [[CustomAlertView alloc] initWithFrame:CGRectMake(80, (460 - 120) / 2, 161, 78)] ;
+    customAlartView = [[CustomAlertView alloc] initWithFrame:CGRectMake(25, (460 - 146) / 2, 270, 146)] ;
     customAlartView.titleLabel.text = message;
     customAlartView.tag = 980153;
     
