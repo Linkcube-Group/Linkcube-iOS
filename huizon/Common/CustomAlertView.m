@@ -18,11 +18,11 @@
         self = [super initWithFrame:frame];
         self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"alert_bg.png"]];
 
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - 150) / 2, (self.frame.size.height - 40) / 2, 150, 40)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - 270) / 2, (self.frame.size.height - 80) / 2, 270, 80)];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.numberOfLines = 2;
-        _titleLabel.textColor = [UIColor whiteColor];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:14];
+        _titleLabel.textColor = [UIColor blackColor];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:17];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:_titleLabel];
     }
