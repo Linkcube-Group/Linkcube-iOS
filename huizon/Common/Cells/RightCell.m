@@ -13,6 +13,8 @@
 @property (strong,nonatomic) IBOutlet UIImageView *imgIconRight;
 @property (strong,nonatomic) IBOutlet UILabel *lbUserName;
 @property (strong,nonatomic) IBOutlet UILabel *lbFriendStatus;
+@property (strong,nonatomic) IBOutlet UIButton *btnAdd;
+@property (strong,nonatomic) NSString *friendName;
 @end
 
 @implementation RightCell
@@ -51,13 +53,33 @@
     self.imgIconRight.image = IMG(_S(@"%@.png",imgName));
 }
 
+
+- (void)setFriendName:(NSString *)friendName
+{
+    self.friendName=friendName;
+}
 - (void)setFriendStatus:(NSString *)status
 {
-    self.lbFriendStatus.text=status;
+    if([status isEqualToString:@"None"])
+    {
+        self.btnAdd.hidden=NO;
+        self.lbFriendStatus.hidden=YES;
+    }
+    else
+    {
+        self.btnAdd.hidden=YES;
+        self.lbFriendStatus.hidden=NO;
+        self.lbFriendStatus.text=status;
+    }
+    
 }
 
 
 
-
+- (IBAction)AddFriend:(id)sender
+{
+    
+   
+}
 
 @end

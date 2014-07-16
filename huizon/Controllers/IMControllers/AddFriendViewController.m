@@ -133,7 +133,7 @@
     //XMPPUserCoreDataStorageObject *object = [dataArray objectAtIndex:indexPath.row];
     NSDictionary *dic=[dataArray objectAtIndex:indexPath.row];
     [cell setMenuImage:@"portrait-female-small" Name:[dic keyForValue:@"nick"]];
-    [cell setFriendStatus:@"已添加"];
+    [cell setFriendStatus:@"None"];
     
     return cell;
 }
