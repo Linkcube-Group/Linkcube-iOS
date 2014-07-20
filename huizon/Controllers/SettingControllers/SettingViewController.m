@@ -15,7 +15,7 @@
 
 @interface SettingViewController ()
 {
-
+    
     
     IBOutlet UIButton   *btnLogin;
 }
@@ -54,7 +54,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
+    if (isIOS7) {
+        [[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2.png") forBarMetrics:UIBarMetricsDefault];
+    }else{
+        [[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title.png") forBarMetrics:UIBarMetricsDefault];
+    }
+    
     if ([theApp isXmppAuthenticated]) {
         [btnLogin setBackgroundImage:IMG(@"red_button") forState:UIControlStateNormal];
         [btnLogin setBackgroundImage:IMG(@"red_button_s") forState:UIControlStateHighlighted];
@@ -69,7 +75,7 @@
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"设置"];
     self.navigationItem.leftBarButtonItem = [[Theam currentTheam] navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:self Selector:@selector(btBack_DisModal:)];
     
-//    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(backAction:)];
+    //    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(backAction:)];
 }
 
 
