@@ -64,7 +64,7 @@
         self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:&setCategoryError];
         self.audioPlayer.delegate = self;
         self.audioPlayer.meteringEnabled = YES;
-        self.audioPlayer.numberOfLoops = 1;
+        self.audioPlayer.numberOfLoops = 0;
         //准备播放
         [self.audioPlayer prepareToPlay];
     }

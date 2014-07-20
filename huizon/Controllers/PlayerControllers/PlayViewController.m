@@ -58,6 +58,16 @@
 
 - (void)dealloc
 {
+   
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    isPlay = NO;
+    [self playButtonSetImage];
+
     [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     [[VoiceControls voiceSingleton] stopMusic];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -159,14 +169,6 @@
 }
 
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-    [[VoiceControls voiceSingleton] stopMusic];
-    isPlay = NO;
-    [self playButtonSetImage];
-}
-
 - (void)setViewInfo:(BOOL)state
 {
     if (self.musicArray.count>0) {
@@ -252,6 +254,10 @@
     IMP_BLOCK_SELF(PlayViewController)
     MusicListController *mvc = [[MusicListController alloc] init];
     mvc.musicHandler = ^(id sender){
+        NSArray  *ary = [[NSUserDefaults standardUserDefaults] objectForKey:kMusicLocalKey];
+        if (ary) {
+            self.musicArray = [[MusicList alloc] initWithArray:ary];
+        }
 //        block_self.musicInfo = (MusicItem *)sender;
         playIndex = [sender intValue];
         isPlay = NO;
@@ -359,6 +365,8 @@
             NSLog(@"commonKey:%@",metadataItem.commonKey);
             if ([metadataItem.commonKey isEqualToString:@"artwork"]) {
                 img =[UIImage imageWithData:[(NSDictionary*)metadataItem.value objectForKey:@"data"]];
+               
+                img = [UIImage scaleToSize:img size:CGSizeMake(240, 240)];
                 img = [img roundedRectWith:120];
             }
         }

@@ -447,6 +447,17 @@
 		07FCA3B41968F7BE002682DE /* incativy.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FCA3B31968F7BE002682DE /* incativy.png */; };
 		07FCA3B8196942DF002682DE /* InputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FCA3B6196942DF002682DE /* InputViewController.m */; };
 		07FCA3B9196942DF002682DE /* InputViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07FCA3B7196942DF002682DE /* InputViewController.xib */; };
+		07FEF650197B64D9003FF446 /* strength-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF647197B64D9003FF446 /* strength-0@2x.png */; };
+		07FEF651197B64D9003FF446 /* strength-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF648197B64D9003FF446 /* strength-1@2x.png */; };
+		07FEF652197B64D9003FF446 /* strength-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF649197B64D9003FF446 /* strength-2@2x.png */; };
+		07FEF653197B64D9003FF446 /* strength-3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64A197B64D9003FF446 /* strength-3@2x.png */; };
+		07FEF654197B64D9003FF446 /* strength-4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64B197B64D9003FF446 /* strength-4@2x.png */; };
+		07FEF655197B64D9003FF446 /* strength-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64C197B64D9003FF446 /* strength-5@2x.png */; };
+		07FEF656197B64D9003FF446 /* strength-6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64D197B64D9003FF446 /* strength-6@2x.png */; };
+		07FEF657197B64D9003FF446 /* strength-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64E197B64D9003FF446 /* strength-7@2x.png */; };
+		07FEF658197B64D9003FF446 /* strength-8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64F197B64D9003FF446 /* strength-8@2x.png */; };
+		07FEF65B197B6B73003FF446 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEF65A197B6B73003FF446 /* HeaderView.m */; };
+		07FEF65D197B6B8A003FF446 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF65C197B6B8A003FF446 /* HeaderView.xib */; };
 		BB220ECC19559B16000C08CB /* RightCellRequest.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ECB19559B16000C08CB /* RightCellRequest.xib */; };
 		BB220ED219566DB8000C08CB /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB220ED019566DB8000C08CB /* AddFriendViewController.m */; };
 		BB220ED319566DB8000C08CB /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED119566DB8000C08CB /* AddFriendViewController.xib */; };
@@ -1200,6 +1211,18 @@
 		07FCA3B5196942DF002682DE /* InputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputViewController.h; sourceTree = "<group>"; };
 		07FCA3B6196942DF002682DE /* InputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputViewController.m; sourceTree = "<group>"; };
 		07FCA3B7196942DF002682DE /* InputViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InputViewController.xib; sourceTree = "<group>"; };
+		07FEF647197B64D9003FF446 /* strength-0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-0@2x.png"; sourceTree = "<group>"; };
+		07FEF648197B64D9003FF446 /* strength-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-1@2x.png"; sourceTree = "<group>"; };
+		07FEF649197B64D9003FF446 /* strength-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-2@2x.png"; sourceTree = "<group>"; };
+		07FEF64A197B64D9003FF446 /* strength-3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-3@2x.png"; sourceTree = "<group>"; };
+		07FEF64B197B64D9003FF446 /* strength-4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-4@2x.png"; sourceTree = "<group>"; };
+		07FEF64C197B64D9003FF446 /* strength-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-5@2x.png"; sourceTree = "<group>"; };
+		07FEF64D197B64D9003FF446 /* strength-6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-6@2x.png"; sourceTree = "<group>"; };
+		07FEF64E197B64D9003FF446 /* strength-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-7@2x.png"; sourceTree = "<group>"; };
+		07FEF64F197B64D9003FF446 /* strength-8@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "strength-8@2x.png"; sourceTree = "<group>"; };
+		07FEF659197B6B73003FF446 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		07FEF65A197B6B73003FF446 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		07FEF65C197B6B8A003FF446 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		BB220ECB19559B16000C08CB /* RightCellRequest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightCellRequest.xib; sourceTree = "<group>"; };
 		BB220ECF19566DB8000C08CB /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		BB220ED019566DB8000C08CB /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
@@ -2581,6 +2604,9 @@
 				BBB814A519454E790052D71A /* RightCell.m */,
 				BBB814A719454F350052D71A /* RightCellUser.xib */,
 				BB220ECB19559B16000C08CB /* RightCellRequest.xib */,
+				07FEF659197B6B73003FF446 /* HeaderView.h */,
+				07FEF65A197B6B73003FF446 /* HeaderView.m */,
+				07FEF65C197B6B8A003FF446 /* HeaderView.xib */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -2844,6 +2870,7 @@
 		07E0304718BDD14D002C684B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				07FEF646197B64D9003FF446 /* sound */,
 				074066E0197273B1008DEE79 /* left_top_bg@2x.png */,
 				074066D719725A84008DEE79 /* mode-voice@2x.png */,
 				074066D819725A84008DEE79 /* mode-voice_s@2x.png */,
@@ -2916,6 +2943,22 @@
 				07EAA13C1928B47A00794ABC /* UIViewController+JASidePanel.m */,
 			);
 			path = ViewDeck;
+			sourceTree = "<group>";
+		};
+		07FEF646197B64D9003FF446 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				07FEF647197B64D9003FF446 /* strength-0@2x.png */,
+				07FEF648197B64D9003FF446 /* strength-1@2x.png */,
+				07FEF649197B64D9003FF446 /* strength-2@2x.png */,
+				07FEF64A197B64D9003FF446 /* strength-3@2x.png */,
+				07FEF64B197B64D9003FF446 /* strength-4@2x.png */,
+				07FEF64C197B64D9003FF446 /* strength-5@2x.png */,
+				07FEF64D197B64D9003FF446 /* strength-6@2x.png */,
+				07FEF64E197B64D9003FF446 /* strength-7@2x.png */,
+				07FEF64F197B64D9003FF446 /* strength-8@2x.png */,
+			);
+			path = sound;
 			sourceTree = "<group>";
 		};
 		BBB8149519454DC90052D71A /* right_info */ = {
@@ -3086,6 +3129,7 @@
 				0762C2BE18C2197D00ABD7A0 /* posture_0@2x.png in Resources */,
 				073B328918C89C12009FE1DA /* MediaViewController.xib in Resources */,
 				072F97DF18C0BD2A00BEB4C4 /* phone_shake_w.png in Resources */,
+				07FEF651197B64D9003FF446 /* strength-1@2x.png in Resources */,
 				074D11831931E2E80030583C /* MenuCellLine.xib in Resources */,
 				BBF8DF1D18DCACC8005E2B8E /* halloween.jpg in Resources */,
 				BBB8F341194E8C650020B0A1 /* button-connect.png in Resources */,
@@ -3120,6 +3164,7 @@
 				07E0304E18BDD14D002C684B /* tab_main.png in Resources */,
 				07B6E70618D5538F00C17693 /* nav_bar_bg@2x.png in Resources */,
 				0709965F182B8AB50064D7D3 /* Images.xcassets in Resources */,
+				07FEF653197B64D9003FF446 /* strength-3@2x.png in Resources */,
 				073AA8D419440701008EDD06 /* set_play_s@2x.png in Resources */,
 				0762C2C918C2197D00ABD7A0 /* shake_3.png in Resources */,
 				BBF8DEE418DCA462005E2B8E /* missingAvatar.png in Resources */,
@@ -3165,6 +3210,8 @@
 				0394ECBE194FDC2800B16F52 /* about_bg_2@2x.png in Resources */,
 				074066D1197257C4008DEE79 /* set_voice@2x.png in Resources */,
 				BB220EDB19567501000C08CB /* navigation-background.png in Resources */,
+				07FEF65D197B6B8A003FF446 /* HeaderView.xib in Resources */,
+				07FEF652197B64D9003FF446 /* strength-2@2x.png in Resources */,
 				0745C89118C5611800976FD2 /* scan_button_n.png in Resources */,
 				BBB8F345194E946C0020B0A1 /* icon-shake.png in Resources */,
 				073AE92D18CF37CA00795941 /* PersonSettingController.xib in Resources */,
@@ -3184,6 +3231,7 @@
 				072F97D318C0BD2A00BEB4C4 /* blue_reseted.png in Resources */,
 				BBB814A019454DC90052D71A /* portrait-female-large.png in Resources */,
 				0701AB8D194D90D100C0DA9F /* male-large@2x.png in Resources */,
+				07FEF655197B64D9003FF446 /* strength-5@2x.png in Resources */,
 				074A2A12194458F0007CB3DA /* button-pause-disabled@2x.png in Resources */,
 				BBB9145019531F9200AD8840 /* button-short-red.png in Resources */,
 				073AA8F2194424A5008EDD06 /* icon-mars@2x.png in Resources */,
@@ -3196,6 +3244,7 @@
 				07E0303718BDCC8A002C684B /* MainViewController.xib in Resources */,
 				BBF8DEE018DCA462005E2B8E /* bubbleMine.png in Resources */,
 				BB220ECC19559B16000C08CB /* RightCellRequest.xib in Resources */,
+				07FEF650197B64D9003FF446 /* strength-0@2x.png in Resources */,
 				074A2A0C194458F0007CB3DA /* button-backward-pressed@2x.png in Resources */,
 				BBB8149E19454DC90052D71A /* icon-message.png in Resources */,
 				0701AB87194D90D100C0DA9F /* female-large_s@2x.png in Resources */,
@@ -3221,6 +3270,7 @@
 				BBF8DEE218DCA462005E2B8E /* bubbleSomeone.png in Resources */,
 				074A2A1B194458F0007CB3DA /* button-repeat-one-disabled@2x.png in Resources */,
 				07B6E70C18D5538F00C17693 /* send_selected@2x.png in Resources */,
+				07FEF657197B64D9003FF446 /* strength-7@2x.png in Resources */,
 				074066CD19724782008DEE79 /* mode-music.png in Resources */,
 				07B6E71518D5538F00C17693 /* umFeedback.bundle in Resources */,
 				07B6E70518D5538F00C17693 /* messages_toolbar_background@2x.png in Resources */,
@@ -3246,6 +3296,7 @@
 				072D5B7D18AB67E60083626A /* BluetoothSetController.xib in Resources */,
 				07B6E72218D560EF00C17693 /* bg_title@2x.png in Resources */,
 				0762C2C618C2197D00ABD7A0 /* shake_0.png in Resources */,
+				07FEF654197B64D9003FF446 /* strength-4@2x.png in Resources */,
 				074A2A0E194458F0007CB3DA /* button-forward-disabled@2x.png in Resources */,
 				BBF8DF1C18DCACC8005E2B8E /* avatar1.png in Resources */,
 				073AA8E21944115E008EDD06 /* blue_button@2x.png in Resources */,
@@ -3253,6 +3304,7 @@
 				073AA8E5194420FE008EDD06 /* play_bg_2@2x.png in Resources */,
 				BBB8F344194E946C0020B0A1 /* icon-shake-highlight.png in Resources */,
 				07A1BFA418D00D50008031CF /* music_2.png in Resources */,
+				07FEF658197B64D9003FF446 /* strength-8@2x.png in Resources */,
 				0762C2C318C2197D00ABD7A0 /* posture_5@2x.png in Resources */,
 				074D117F1931E2BC0030583C /* MenuCellBlue.xib in Resources */,
 				BBB9144F19531F9200AD8840 /* button-short-red-pressed.png in Resources */,
@@ -3264,6 +3316,7 @@
 				07B6E6F918D5538F00C17693 /* blueArrow@2x.png in Resources */,
 				07B6E70D18D5538F00C17693 /* umeng_logo.png in Resources */,
 				073AA8D319440701008EDD06 /* set_play@2x.png in Resources */,
+				07FEF656197B64D9003FF446 /* strength-6@2x.png in Resources */,
 				0394ECC3194FDDCF00B16F52 /* close_btn@2x.png in Resources */,
 				BBB8F34A194EC7AD0020B0A1 /* dialog-box-lover.png in Resources */,
 				BB220EDA19567501000C08CB /* navigation-and-status.png in Resources */,
@@ -3464,6 +3517,7 @@
 				0735550E18C412E2005B319B /* XMPPRosterMemoryStorage.m in Sources */,
 				0735553818C412E2005B319B /* XMPPIQ+XEP_0066.m in Sources */,
 				070996F8182B8BFB0064D7D3 /* UILabel+Extension.m in Sources */,
+				07FEF65B197B6B73003FF446 /* HeaderView.m in Sources */,
 				073554FC18C412E2005B319B /* XMPPIQ.m in Sources */,
 				0735554718C412E2005B319B /* XMPPMessageArchiving_Message_CoreDataObject.m in Sources */,
 				0735555F18C412E2005B319B /* XMPPIDTracker.m in Sources */,

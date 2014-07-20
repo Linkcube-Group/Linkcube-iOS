@@ -38,6 +38,13 @@
 
 - (void)dealloc
 {
+    DLog(@"dealoc ==== shakviewcontroller");
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+        [super viewDidDisappear:animated];
     [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     isOpen = NO;
     [eq stop];
@@ -69,12 +76,14 @@
     [self.view addSubview:topView];
     [topView refreshTitleName];
     [[ShakeControls shakeSingleton] startShakeAction];
+
     [ShakeControls shakeSingleton].shakeHandler = ^(id acc){
         float degree = abs([acc intValue]);
 //        degree *= shakeLevel;
         int shakeDegree = degree*10;
         shakeDegree = shakeDegree>39?39:shakeDegree;
-        NSString * myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
+        DLog(@"shake degree===%d",shakeDegree);
+        NSString *myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
             if (isOpen) {
