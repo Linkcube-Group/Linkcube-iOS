@@ -13,8 +13,6 @@
 		032E3852192EF58D00363B90 /* FtpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3843192EF58D00363B90 /* FtpConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E3853192EF58D00363B90 /* FtpDataConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3845192EF58D00363B90 /* FtpDataConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E3854192EF58D00363B90 /* FtpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3848192EF58D00363B90 /* FtpServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		032E3855192EF58D00363B90 /* iphoneLibTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E384A192EF58D00363B90 /* iphoneLibTestAppDelegate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		032E3856192EF58D00363B90 /* iphoneLibTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E384C192EF58D00363B90 /* iphoneLibTestViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E3857192EF58D00363B90 /* list.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E384E192EF58D00363B90 /* list.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E3858192EF58D00363B90 /* NetworkController.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3850192EF58D00363B90 /* NetworkController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E385A192F00B400363B90 /* ftp_commands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 032E3859192F00B400363B90 /* ftp_commands.plist */; };
@@ -528,10 +526,6 @@
 		032E3846192EF58D00363B90 /* FtpDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FtpDefines.h; sourceTree = "<group>"; };
 		032E3847192EF58D00363B90 /* FtpServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FtpServer.h; sourceTree = "<group>"; };
 		032E3848192EF58D00363B90 /* FtpServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FtpServer.m; sourceTree = "<group>"; };
-		032E3849192EF58D00363B90 /* iphoneLibTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iphoneLibTestAppDelegate.h; sourceTree = "<group>"; };
-		032E384A192EF58D00363B90 /* iphoneLibTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iphoneLibTestAppDelegate.m; sourceTree = "<group>"; };
-		032E384B192EF58D00363B90 /* iphoneLibTestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iphoneLibTestViewController.h; sourceTree = "<group>"; };
-		032E384C192EF58D00363B90 /* iphoneLibTestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iphoneLibTestViewController.m; sourceTree = "<group>"; };
 		032E384D192EF58D00363B90 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		032E384E192EF58D00363B90 /* list.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = list.m; sourceTree = "<group>"; };
 		032E384F192EF58D00363B90 /* NetworkController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkController.h; sourceTree = "<group>"; };
@@ -1335,10 +1329,6 @@
 				032E3846192EF58D00363B90 /* FtpDefines.h */,
 				032E3847192EF58D00363B90 /* FtpServer.h */,
 				032E3848192EF58D00363B90 /* FtpServer.m */,
-				032E3849192EF58D00363B90 /* iphoneLibTestAppDelegate.h */,
-				032E384A192EF58D00363B90 /* iphoneLibTestAppDelegate.m */,
-				032E384B192EF58D00363B90 /* iphoneLibTestViewController.h */,
-				032E384C192EF58D00363B90 /* iphoneLibTestViewController.m */,
 				032E384D192EF58D00363B90 /* list.h */,
 				032E384E192EF58D00363B90 /* list.m */,
 				032E384F192EF58D00363B90 /* NetworkController.h */,
@@ -3433,7 +3423,6 @@
 				BBF8DEEA18DCA462005E2B8E /* NSBubbleData.m in Sources */,
 				0735551518C412E2005B319B /* XMPPIQ+LastActivity.m in Sources */,
 				0735552D18C412E2005B319B /* XMPPvCardTempAdrTypes.m in Sources */,
-				032E3855192EF58D00363B90 /* iphoneLibTestAppDelegate.m in Sources */,
 				BBF8DEEB18DCA462005E2B8E /* UIBubbleHeaderTableViewCell.m in Sources */,
 				0735557918C46E15005B319B /* TalkViewController.m in Sources */,
 				071C546918BE0D00005B784E /* LeTemperatureAlarmService.m in Sources */,
@@ -3513,7 +3502,6 @@
 				0762C2A518C2122900ABD7A0 /* PostureScrollView.m in Sources */,
 				032E3854192EF58D00363B90 /* FtpServer.m in Sources */,
 				072A150218C3487600A3758E /* ChatViewController.m in Sources */,
-				032E3856192EF58D00363B90 /* iphoneLibTestViewController.m in Sources */,
 				0735550E18C412E2005B319B /* XMPPRosterMemoryStorage.m in Sources */,
 				0735553818C412E2005B319B /* XMPPIQ+XEP_0066.m in Sources */,
 				070996F8182B8BFB0064D7D3 /* UILabel+Extension.m in Sources */,

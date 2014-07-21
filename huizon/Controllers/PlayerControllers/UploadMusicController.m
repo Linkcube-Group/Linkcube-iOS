@@ -11,7 +11,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#define FTP_PORT 8801
+#define FTP_PORT 20000
 
 @interface UploadMusicController ()
 
