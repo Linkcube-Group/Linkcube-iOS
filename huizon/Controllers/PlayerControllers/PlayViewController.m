@@ -157,6 +157,18 @@
 {
     [super viewDidAppear:animated];
     [self refreshTop:nil];
+    
+    NSArray  *ary = [[NSUserDefaults standardUserDefaults] objectForKey:kMusicLocalKey];
+    if (ary) {
+        self.musicArray = [[MusicList alloc] initWithArray:ary];
+    }
+    
+    if (playIndex>=self.musicArray.count) {
+        playIndex = 0;
+        isPlay = NO;
+        [self setViewInfo:YES];
+        [self playAction:nil];
+    }
 }
 
 - (void)refreshTop:(NSNotification *)noti

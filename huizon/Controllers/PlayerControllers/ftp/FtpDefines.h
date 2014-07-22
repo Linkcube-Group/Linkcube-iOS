@@ -4,7 +4,7 @@ enum {
 
 #define DATASTR(args) [ args dataUsingEncoding:NSUTF8StringEncoding ]
 
-#define SERVER_PORT 20000
+#define SERVER_PORT 2021
 #define READ_TIMEOUT -1
 
 #define FTP_CLIENT_REQUEST 0

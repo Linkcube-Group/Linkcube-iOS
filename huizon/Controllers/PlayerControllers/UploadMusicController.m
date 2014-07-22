@@ -11,7 +11,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#define FTP_PORT 20000
+#define FTP_PORT 2021
 
 @interface UploadMusicController ()
 
@@ -90,10 +90,13 @@
         
         MusicItem *mItem = [[MusicItem alloc] init];
         NSDictionary *dict = [self musicAlbum:name];
-        mItem.musicName = [dict objectForKey:@"title"];
-        mItem.musicPath = name;
-        mItem.author = [dict objectForKey:@"artist"];
-        [musicArray addObject:mItem];
+        if (dict!=nil) {
+            mItem.musicName = [dict objectForKey:@"title"];
+            mItem.musicPath = name;
+            mItem.author = [dict objectForKey:@"artist"];
+            [musicArray addObject:mItem];
+        }
+       
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:musicArray.arrayString forKey:kMusicLocalKey];
@@ -132,15 +135,7 @@
 
 - (NSDictionary *)musicAlbum:(NSString *)path
 {
-    NSMutableDictionary *albumDict = [[NSMutableDictionary alloc] init];
-    
-    NSString *songName = [path substringFromIndex:[self.baseDir length]+1];
-    if ([songName length]>4) {
-        songName = [songName substringToIndex:[songName length]-4];
-    }
-    [albumDict setObject:songName forKey:@"title"];
-    [albumDict setObject:@"" forKey:@"artist"];
-    
+    NSMutableDictionary *albumDict = nil;
     
     
     NSURL * fileURL=[NSURL fileURLWithPath:[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -150,6 +145,16 @@
     
     if ([fileExtension isEqual:@"mp3"]||[fileExtension isEqual:@"m4a"])
     {
+        albumDict = [[NSMutableDictionary alloc] init];
+        
+        NSString *songName = [path substringFromIndex:[self.baseDir length]+1];
+        if ([songName length]>4) {
+            songName = [songName substringToIndex:[songName length]-4];
+        }
+        [albumDict setObject:songName forKey:@"title"];
+        [albumDict setObject:@"" forKey:@"artist"];
+    
+        
         AudioFileID fileID  = nil;
         OSStatus err        = noErr;
         

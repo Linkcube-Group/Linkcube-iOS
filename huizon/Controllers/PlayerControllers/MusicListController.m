@@ -163,6 +163,8 @@
             [self.musicArray removeObjectAtIndex:indexPath.row];
             [tableView setEditing:NO animated:YES];
             
+            [tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:indexPath.row inSection:0]] withRowAnimation:UITableViewRowAnimationLeft];
+            
             [[NSUserDefaults standardUserDefaults] setObject:self.musicArray.arrayString forKey:kMusicLocalKey];
             
             [[NSUserDefaults standardUserDefaults] synchronize];
