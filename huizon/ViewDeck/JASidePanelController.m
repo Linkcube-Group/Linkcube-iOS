@@ -448,6 +448,7 @@ static char ja_kvoContext;
 #pragma mark - Gesture Recognizer Delegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+
     if (gestureRecognizer.view == self.tapView) {
         return YES;
     } else if (self.panningLimitedToTopViewController && ![self _isOnTopLevelViewController:self.centerPanel]) {

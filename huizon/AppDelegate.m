@@ -74,7 +74,7 @@
     RightViewController *right = [[RightViewController alloc] initWithNibName:nil bundle:nil];
     
     JASidePanelController *panel = [[JASidePanelController alloc] init];
-    
+
     panel.leftPanel = left;
     panel.rightPanel = right;
     panel.centerPanel = nav_main;
