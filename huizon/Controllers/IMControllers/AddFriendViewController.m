@@ -8,11 +8,15 @@
 
 #import "AddFriendViewController.h"
 #import "RightCell.h"
+#import "XMPPSearchModule.h"
 @interface AddFriendViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITextField *txtSearch;
     IBOutlet UITableView *tbResult;
     NSMutableArray *dataArray;
+    NSManagedObjectContext *context;
+    NSArray *friends;
+    NSMutableDictionary *dicJidToStatus;
 }
 
 @end
@@ -41,8 +45,25 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
+    dicJidToStatus=[[NSMutableDictionary alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kXMPPNotificationDidAskFriend object:nil];
 }
 
+- (void) refreshTable
+{
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(concurrentQueue, ^{
+        [self getData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [tbResult reloadData];
+            
+        });
+        
+    });
+    //[self getData];
+    //get[tbResult reloadData];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -54,6 +75,13 @@
 - (void)searchModel:(XMPPSearchModule*)searchModul result:(XMPPSearchReported*)result userData:(id)userData
 {
     NSLog(@"search result : %@", result);
+    if  ([result.items count]==0)
+    {
+        NSString *title     = @"";
+        NSString *message   = @"无此账号";
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alertView show];
+    }
     dataArray=[[NSMutableArray alloc] initWithArray:result.items];
     [tbResult reloadData];
     showIndicator(NO);
@@ -64,24 +92,62 @@
     NSLog(@"Get fields : %@", searchModul.result);
 }
 
+- (void)getData
+{
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    NSError *error ;
+    friends = [context executeFetchRequest:request error:&error];
+    for (XMPPUserCoreDataStorageObject *object in friends)
+    {
+        NSString *jidStr=object.jidStr;
+        NSString *status=object.subscription;
+        [dicJidToStatus setObject:status forKey:jidStr];
+    }
+
+    //XMPPUserCoreDataStorageObject *object
+    //[self.friendsArray removeAllObjects];
+    //[self.friendsArray addObjectsFromArray:friends];
+    
+}
 
 -(IBAction)textFieldDoneEditing:(id)sender
 {
     [sender resignFirstResponder];
-    /*
-    NSString *name=txtSearch.text;
-    name =[name stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
-    NSString *requestText=[NSString stringWithFormat:@"%@%@%@",@"已向",txtSearch.text,@"发出请求"];
-    [theApp XMPPAddFriendSubscribe:name];
-     */
-    [theApp.xmppSearchModule addDelegate:self
-                 delegateQueue:dispatch_get_main_queue()];
-    //[theApp.xmppSearchModule askForFields];
-    XMPPSearchSingleNode *search = [[XMPPSearchSingleNode alloc] init];
-    search.name = @"nick";//@"NICKNAME";
-    search.value = txtSearch.text;
-    [theApp.xmppSearchModule searchWithFields:@[search]
-                           userData:nil];
+    
+    
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(concurrentQueue, ^{
+        
+        //[self getMessageData];
+        //[self getData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            
+            /*
+             NSString *name=txtSearch.text;
+             name =[name stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
+             NSString *requestText=[NSString stringWithFormat:@"%@%@%@",@"已向",txtSearch.text,@"发出请求"];
+             [theApp XMPPAddFriendSubscribe:name];
+             */
+            [theApp.xmppSearchModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
+            //[theApp.xmppSearchModule askForFields];
+            XMPPSearchSingleNode *search = [[XMPPSearchSingleNode alloc] init];
+            search.name = @"nick";//@"NICKNAME";
+            search.value = txtSearch.text;
+            [theApp.xmppSearchModule searchWithFields:@[search] userData:nil];
+            //[self updateUI:arrayMessage];
+            //[tbResult reloadData];
+            
+        });
+        
+    });
+    
+    
+    
+
     
     showIndicator(YES);
     //NSString *requestText=[NSString stringWithFormat:@"%@%@%@",@"正在搜索",txtSearch.text,@"用户"];
@@ -133,8 +199,31 @@
     //XMPPUserCoreDataStorageObject *object = [dataArray objectAtIndex:indexPath.row];
     NSDictionary *dic=[dataArray objectAtIndex:indexPath.row];
     [cell setMenuImage:@"portrait-female-small" Name:[dic keyForValue:@"nick"]];
-    [cell setFriendStatus:@"None"];
+    NSString *jidStr=[dic keyForValue:@"jid"];
+    [cell setCellFriendId:jidStr];
+    [cell setCellFriendName:[dic keyForValue:@"nick"]];
     
+    NSString *status=[dicJidToStatus valueForKey:jidStr];
+    if (status.length==0)
+    {
+        [cell setFriendStatus:@"None"];
+    }
+    else
+    {
+        if ([status isEqualToString:@"both"])
+        {
+            status=@"已添加";
+        }
+        else
+        {
+            status=@"等待验证";
+            
+        }
+        [cell setFriendStatus:status];
+        
+    }
+    //[cell setFriendStatus:@"None"];
+
     return cell;
 }
 

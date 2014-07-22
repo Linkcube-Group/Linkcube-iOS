@@ -76,6 +76,7 @@
 - (void)disconnect;
 - (BOOL)isXmppAuthenticated;
 - (void)XMPPAddFriendSubscribe:(NSString *)name;
+- (void)XMPPAddFriendSubscribeWithJid:(NSString *)jidStr;
 - (void)getUserCardTemp;
 - (void)updateUserCardTemp:(XMPPvCardTemp *)card;
 - (void)changePassword:(NSString *)pwd;

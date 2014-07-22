@@ -36,6 +36,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSubscribe:) name:kXMPPNotificationDidReceivePresence object:nil];
+
     }
     return self;
 }
@@ -52,8 +54,17 @@
     [theApp getUserCardTemp];
      [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     // Do any additional setup after loading the view from its nib.
-}
+    }
 
+
+- (void) receiveSubscribe:(NSNotification *) notification
+{
+    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
+    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+    //[theApp.xmppRoster removeUser:jid];
+    
+}
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
 {
     
@@ -115,6 +126,7 @@
     [request setEntity:entity];
     NSError *error ;
     NSArray *friends = [context executeFetchRequest:request error:&error];
+    //XMPPUserCoreDataStorageObject *object
     [self.friendsArray removeAllObjects];
     [self.friendsArray addObjectsFromArray:friends];
 

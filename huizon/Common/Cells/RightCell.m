@@ -7,6 +7,7 @@
 //
 
 #import "RightCell.h"
+#import "RightViewController.h"
 @interface RightCell()
 @property (strong,nonatomic) NSString *iconName;
 @property (strong,nonatomic) IBOutlet UIImageView *imgIcon;
@@ -15,6 +16,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *lbFriendStatus;
 @property (strong,nonatomic) IBOutlet UIButton *btnAdd;
 @property (strong,nonatomic) NSString *friendName;
+@property (strong,nonatomic) NSString *friendId;
 @end
 
 @implementation RightCell
@@ -54,10 +56,16 @@
 }
 
 
-- (void)setFriendName:(NSString *)friendName
+- (void)setCellFriendName:(NSString *)friendName
 {
     self.friendName=friendName;
 }
+
+- (void)setCellFriendId:(NSString *)friendId
+{
+    self.friendId=friendId;
+}
+
 - (void)setFriendStatus:(NSString *)status
 {
     if([status isEqualToString:@"None"])
@@ -79,7 +87,9 @@
 - (IBAction)AddFriend:(id)sender
 {
     
-   
+    NSString *jid=self.friendId;
+    [theApp XMPPAddFriendSubscribeWithJid:jid];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 }
 
 @end
