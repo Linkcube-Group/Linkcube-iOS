@@ -14,6 +14,7 @@
 #import "VoiceControls.h"
 #import "LeDiscovery.h"
 #import "TopControlView.h"
+#import "JingRoundView.h"
 
 @interface PlayViewController ()<AVAudioPlayerDelegate,LeDiscoveryDelegate, LeTemperatureAlarmProtocol>
 {
@@ -33,7 +34,7 @@
 @property (strong,nonatomic) IBOutlet UILabel *lbName;
 @property (strong,nonatomic) IBOutlet UILabel *lbAuthor;
 @property (strong,nonatomic) IBOutlet UIImageView *imgAlbum;
-@property (strong,nonatomic) IBOutlet UIImageView *imgFloat;
+@property (strong,nonatomic) IBOutlet JingRoundView *imgFloat;
 @property (strong,nonatomic) IBOutlet UILabel *lbTimeMin;
 @property (strong,nonatomic) IBOutlet UILabel *lbTimeMax;
 @property (strong,nonatomic) IBOutlet UISlider *slider;
@@ -79,6 +80,9 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
+    self.imgFloat.rotationDuration = 8.0;
+    self.imgFloat.isPlay = NO;
+    
     topView = [[TopControlView alloc] initWithFrame:CGRectMake(0, 27, 320, 44) nibNameOrNil:nil];
     topView.baseController = self;
     
@@ -95,23 +99,15 @@
     
     [self.slider setMinimumTrackTintColor:[UIColor whiteColor]];
     [self.slider setMaximumTrackTintColor:[UIColor colorWithWhite:1.0 alpha:0.8]];
-    __block int angle = 0;
+
     [VoiceControls voiceSingleton].voiceHandler = ^(id acc){
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
         self.lbTimeMin.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
         self.slider.value = [[VoiceControls voiceSingleton] musicCurrentTime]/[[VoiceControls voiceSingleton] musicDuration];
-        self.imgFloat.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
-        angle += 2;
+    
         float degree = abs([acc floatValue]);
         int voiceDegree = abs(degree)+1;
         voiceDegree = 40-voiceDegree;
-        //        if (currentLevel>0) {
-        //            voiceDegree /=currentLevel;
-        //        }
-        //        else{
-        //            currentLevel = 0;
-        //        }
-        
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
@@ -188,6 +184,7 @@
         self.musicInfo = [self.musicArray objectAtIndex:playIndex];
         [[VoiceControls voiceSingleton] startMusic:[self musicNamePath]];
         if (state) {
+            [self startAlbumAnimation:YES];
             [[VoiceControls voiceSingleton] playMusicAction];
             isPlay = YES;
             [self playButtonSetImage];
@@ -198,7 +195,7 @@
     self.slider.value = 0;
     self.lbName.text = [self.musicInfo musicName];
     self.lbAuthor.text = [self.musicInfo author];
-    self.imgFloat.image = [self musicImageInfo:self.musicInfo.musicPath];
+    self.imgFloat.roundImage = [self musicImageInfo:self.musicInfo.musicPath];
     self.lbTimeMin.text = @"00:00";
     int duration = [[VoiceControls voiceSingleton] musicDuration];
     self.lbTimeMax.text = _S(@"%02d:%02d",duration/60,duration%60);
@@ -209,10 +206,12 @@
 - (IBAction)playAction:(id)sender
 {
     if (!isPlay) {
+        [self startAlbumAnimation:YES];
         [[VoiceControls voiceSingleton] playMusicAction];
         isPlay = YES;
     }
     else{
+        [self startAlbumAnimation:NO];
         [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
         [[VoiceControls voiceSingleton] pauseMusic];
         isPlay = NO;
@@ -327,7 +326,7 @@
 {
     playIndex++;
     if (playIndex>self.musicArray.count-1) {
-        playIndex = self.musicArray.count-1;
+        playIndex = 0;
     }
     if (playMusicType==PlayTypeRandom) {
         playIndex = (arc4random() % self.musicArray.count);
@@ -466,6 +465,22 @@
     
     return pathArray;
 }
+
+#pragma mark -
+#pragma mark Animation
+
+- (void)startAlbumAnimation:(BOOL)isStart
+{
+    if (isStart) {
+        [self.imgFloat startRotation];
+
+    }
+    else{
+
+        [self.imgFloat pauseRotation];
+    }
+}
+
 
 
 

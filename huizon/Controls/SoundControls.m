@@ -26,6 +26,26 @@
         //Activate the session
         
         [audioSession setActive:YES error: &error];
+        
+        NSDictionary *recordSetting = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
+                                       [NSNumber numberWithFloat:8000.00], AVSampleRateKey,
+                                       [NSNumber numberWithInt:1], AVNumberOfChannelsKey,
+                                       [NSNumber numberWithInt:16], AVLinearPCMBitDepthKey,
+                                       [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
+                                       [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,
+                                       [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
+                                       nil];
+        
+        recordedTmpFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"caf"]]];
+        NSLog(@"Using File called: %@",recordedTmpFile);
+        //Setup the recorder to use this file and record to it.
+        self.recorder = [[AVAudioRecorder alloc] initWithURL:recordedTmpFile settings:recordSetting error:&error];
+        
+        self.recorder.meteringEnabled = YES;
+        [self.recorder setDelegate:self];
+        
+        [self.recorder prepareToRecord];
     }
     return self;
 }
@@ -44,26 +64,7 @@
 
 - (void)startSoundListener
 {
-    NSError *error;
-    NSDictionary *recordSetting = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
-                                   [NSNumber numberWithFloat:8000.00], AVSampleRateKey,
-                                   [NSNumber numberWithInt:1], AVNumberOfChannelsKey,
-                                   [NSNumber numberWithInt:16], AVLinearPCMBitDepthKey,
-                                   [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-                                   [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,
-                                   [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
-                                   nil];
-    
-    recordedTmpFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"caf"]]];
-    NSLog(@"Using File called: %@",recordedTmpFile);
-    //Setup the recorder to use this file and record to it.
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:recordedTmpFile settings:recordSetting error:&error];
-
-    self.recorder.meteringEnabled = YES;
-    [self.recorder setDelegate:self];
-
-    [self.recorder prepareToRecord];
+   
     [self.recorder record];
     
     if (self.stepTimer && [self.stepTimer isValid]) {

@@ -65,6 +65,7 @@
   
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -301,7 +302,7 @@
     if (blueConn) {
         [[LeDiscovery sharedInstance] startScanningForUUIDString:kDeviceServiceUUIDString];
     }
-   
+   [self.tbMenu reloadData];
 }
 
 - (void) viewDidUnload

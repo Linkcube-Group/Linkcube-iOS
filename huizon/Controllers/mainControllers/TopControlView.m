@@ -42,11 +42,9 @@
         if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.nickname)) {
             [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
         }
-        theApp.sidePanelController.allowRightSwipe = YES;
     }
     else{//not login
         [self.btnStatus setTitle:@"请登录" forState:UIControlStateNormal];
-        theApp.sidePanelController.allowRightSwipe = NO;
     }
        
     if(theApp.blueConnType==1){

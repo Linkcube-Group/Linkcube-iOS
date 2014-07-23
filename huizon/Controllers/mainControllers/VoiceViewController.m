@@ -76,7 +76,7 @@
     
     
     [self.view addSubview:topView];
-    [topView refreshTitleName];
+    
     [[SoundControls soundSingleton] startSoundListener];
     IMP_BLOCK_SELF(VoiceViewController)
     [SoundControls soundSingleton].soundHandler = ^(id acc){
@@ -134,25 +134,13 @@
     
     
     
-//    eq = [[PCSEQVisualizer alloc]initWithNumberOfBars:15];
-    
-    //position eq in the middle of the view
-//    CGRect frame = eq.frame;
-//    frame.origin.x = (self.view.frame.size.width - eq.frame.size.width)/2;
-//    frame.origin.y = theApp.window.frame.size.height-55-frame.size.height;
-//    eq.frame = frame;
-//    
-//    [self.view addSubview:eq];
-    
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
     
     // Do any additional setup after loading the view from its nib.
 }
 
-- (IBAction)shakeAction:(id)sender
+- (IBAction)voiceAction:(id)sender
 {
     isOpen = !isOpen;
     if (isOpen) {
@@ -176,7 +164,7 @@
 {
     [super viewDidAppear:animated];
     isOpen = NO;
-    [self shakeAction:nil];
+    [self voiceAction:nil];
     [self refreshTop];
     
 }

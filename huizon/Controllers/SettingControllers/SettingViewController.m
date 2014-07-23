@@ -12,6 +12,7 @@
 #import "UMFeedbackViewController.h"
 
 #import "UserViewController.h"
+#import "JASidePanelController.h"
 
 @interface SettingViewController ()
 {
@@ -146,6 +147,7 @@
 - (IBAction)loginAction:(id)sender
 {
     if ([theApp isXmppAuthenticated]) {
+
         [theApp logouXmppAuthenticated];
         [btnLogin setBackgroundImage:IMG(@"blue_button") forState:UIControlStateNormal];
         [btnLogin setBackgroundImage:IMG(@"blue_button_s") forState:UIControlStateHighlighted];

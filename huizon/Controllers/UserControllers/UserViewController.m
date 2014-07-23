@@ -9,6 +9,7 @@
 #import "UserViewController.h"
 #import "SignViewController.h"
 #import "UserEditController.h"
+#import "JASidePanelController.h"
 
 @interface UserViewController ()<UITextFieldDelegate>
 

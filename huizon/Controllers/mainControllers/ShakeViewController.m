@@ -74,7 +74,8 @@
     
     
     [self.view addSubview:topView];
-    [topView refreshTitleName];
+
+    
     [[ShakeControls shakeSingleton] startShakeAction];
 
     [ShakeControls shakeSingleton].shakeHandler = ^(id acc){

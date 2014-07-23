@@ -284,6 +284,7 @@
 #pragma mark otherXMPPAction
 - (void)logouXmppAuthenticated
 {
+    self.sidePanelController.allowRightSwipe = NO;
     if ([self.xmppStream isConnected]) {
         [self.xmppStream disconnect];
     }
@@ -293,7 +294,11 @@
 }
 - (BOOL)isXmppAuthenticated
 {
-    return [self.xmppStream isAuthenticated];
+    if([self.xmppStream isAuthenticated]){
+        self.sidePanelController.allowRightSwipe = YES;
+        return YES;
+    }
+    return NO;
 }
 
 
