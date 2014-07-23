@@ -17,6 +17,7 @@
 #import "SettingViewController.h"
 
 #import "MenuCell.h"
+#import "HeaderView.h"
 
 #import "LeDiscovery.h"
 #import "LeTemperatureAlarmService.h"
@@ -32,6 +33,8 @@
 
 @property (strong,nonatomic) NSMutableArray    *connectedBlueArrays;
 @property (strong,nonatomic) NSMutableArray    *blueArray;
+
+@property (strong,nonatomic) HeaderView     *headerView;
 @end
 
 #define MENU_LIST @[@"",@"蓝牙连接",@"控制",@"音乐控制",@"摇摇控制",@"声音控制",@"经典七式",@"其它",@"设置"]
@@ -51,16 +54,24 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+      [[UINavigationBar appearance] setBackgroundImage:IMG(@"navigation-and-status") forBarMetrics:UIBarMetricsDefault];
     //导航条背景
-	if (isIOS7) {
-		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2") forBarMetrics:UIBarMetricsDefault];
-	}else{
-		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title") forBarMetrics:UIBarMetricsDefault];
-	}
+//	if (isIOS7) {
+//		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2.png") forBarMetrics:UIBarMetricsDefault];
+//	}else{
+//		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title.png") forBarMetrics:UIBarMetricsDefault];
+//	}
+  
 }
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.headerView = [[[NSBundle mainBundle]loadNibNamed:@"HeaderView"
+                                                    owner:self
+                                                  options:nil] lastObject];
     blueConn = NO;
     self.blueArray = [[NSMutableArray alloc] init];
     
@@ -72,8 +83,11 @@
     
     [self startBluetoothScan];
     
+    self.tbMenu.tableHeaderView = self.headerView;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startBluetoothScan) name:UIApplicationDidBecomeActiveNotification object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:kNotificationTop object:nil];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -81,6 +95,8 @@
 {
     [self.tbMenu reloadData];
 }
+
+
 
 
 #pragma mark -
@@ -98,7 +114,7 @@
     int bcount = [self.blueArray count];
 
     if (indexPath.row==0) {
-        return 120;
+        return 0;
     }
     else if (indexPath.row==1){
         return 38;
@@ -286,7 +302,7 @@
     if (blueConn) {
         [[LeDiscovery sharedInstance] startScanningForUUIDString:kDeviceServiceUUIDString];
     }
-   
+   [self.tbMenu reloadData];
 }
 
 - (void) viewDidUnload

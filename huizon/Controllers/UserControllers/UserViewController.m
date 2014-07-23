@@ -9,6 +9,7 @@
 #import "UserViewController.h"
 #import "SignViewController.h"
 #import "UserEditController.h"
+#import "JASidePanelController.h"
 
 @interface UserViewController ()<UITextFieldDelegate>
 
@@ -37,6 +38,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
      [super viewWillAppear:animated];
+    if (isIOS7) {
+        [[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2.png") forBarMetrics:UIBarMetricsDefault];
+    }else{
+        [[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title.png") forBarMetrics:UIBarMetricsDefault];
+    }
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginAuthen:) name:kXMPPNotificationDidAuthen object:nil];
    
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"LINKCUBE"];

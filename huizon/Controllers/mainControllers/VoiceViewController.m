@@ -18,11 +18,12 @@
 @interface VoiceViewController ()
 {
     TopControlView  *topView;
-    PCSEQVisualizer* eq;
+//    PCSEQVisualizer* eq;
     
-    int stopCount;
+//    int stopCount;
     BOOL    isOpen;
 }
+@property (strong,nonatomic) IBOutlet UIImageView *imgStrength;
 @property (strong,nonatomic) IBOutlet UIButton *imgVoice;
 @end
 
@@ -39,9 +40,16 @@
 
 - (void)dealloc
 {
+    DLog(@"---dealloc VoicViewController");
+   
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
     [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     isOpen = NO;
-    [eq stop];
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[SoundControls soundSingleton] stopSoundListener];
 }
@@ -49,7 +57,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    stopCount = 0;
+//    stopCount = 0;
     isOpen = NO;
     
     if (iPhone5) {
@@ -68,8 +76,9 @@
     
     
     [self.view addSubview:topView];
-    [topView refreshTitleName];
+    
     [[SoundControls soundSingleton] startSoundListener];
+    IMP_BLOCK_SELF(VoiceViewController)
     [SoundControls soundSingleton].soundHandler = ^(id acc){
         float degree = abs([acc floatValue]);
         
@@ -87,17 +96,17 @@
             if (isOpen) {
                 [theApp sendControlCode:myComm];
                 if (voiceDegree<1) {
-                    stopCount++;
-                    if (stopCount>30 && [eq isStart]) {
-                        [eq stop];
-                    }
+                    [block_self.imgStrength setImage:IMG(@"strength-0.png")];
                 }
                 else{
-                    stopCount = 0;
-                    if ([eq isStart]==NO) {
-                        [eq start];
-                    }
+                    int level = voiceDegree/6+1;
+                    level = level>8?8:level;
+                    [block_self.imgStrength setImage:IMG(_S(@"strength-%d.png",level))];
                 }
+            }
+            else{
+                [theApp sendControlCode:kBluetoothClose];
+                [block_self.imgStrength setImage:IMG(@"strength-0.png")];
             }
             
         }
@@ -105,34 +114,23 @@
             if (isOpen) {
                 [[LeDiscovery sharedInstance] sendCommand:myComm];
                 if (voiceDegree<1) {
-                    stopCount++;
-                    if (stopCount>30 && [eq isStart]) {
-                        [eq stop];
-                    }
+                    [block_self.imgStrength setImage:IMG(@"strength-0.png")];
                 }
                 else{
-                    stopCount = 0;
-                    if ([eq isStart]==NO) {
-                        [eq start];
-                    }
+                    int level = voiceDegree/6+1;
+                    level = level>8?8:level;
+                    [block_self.imgStrength setImage:IMG(_S(@"strength-%d.png",level))];
                 }
             }
+            else{
+                [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
+                [block_self.imgStrength setImage:IMG(@"strength-0.png")];
+            }
+            
             
         }
         
     };
-    
-    
-    
-    eq = [[PCSEQVisualizer alloc]initWithNumberOfBars:15];
-    
-    //position eq in the middle of the view
-    CGRect frame = eq.frame;
-    frame.origin.x = (self.view.frame.size.width - eq.frame.size.width)/2;
-    frame.origin.y = theApp.window.frame.size.height-55-frame.size.height;
-    eq.frame = frame;
-    
-    [self.view addSubview:eq];
     
     
     
@@ -142,15 +140,15 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (IBAction)shakeAction:(id)sender
+- (IBAction)voiceAction:(id)sender
 {
     isOpen = !isOpen;
     if (isOpen) {
-        [eq start];
+//        [eq start];
         [self.imgVoice setImage:IMG(@"mode-voice_s.png") forState:UIControlStateNormal];
     }
     else{
-        [eq stop];
+//        [eq stop];
         if (theApp.currentGamingJid!=nil) {
             [theApp sendControlCode:kBluetoothClose];
         }
@@ -166,7 +164,7 @@
 {
     [super viewDidAppear:animated];
     isOpen = NO;
-    [self shakeAction:nil];
+    [self voiceAction:nil];
     [self refreshTop];
     
 }

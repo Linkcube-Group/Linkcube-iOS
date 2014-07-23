@@ -42,7 +42,6 @@
         if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.nickname)) {
             [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
         }
-        
     }
     else{//not login
         [self.btnStatus setTitle:@"请登录" forState:UIControlStateNormal];

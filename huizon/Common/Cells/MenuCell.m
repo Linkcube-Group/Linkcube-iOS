@@ -38,7 +38,7 @@
 - (void)setBlueStatu:(int)flag
 {
     self.lbBlueStatus.text = flag>0?@"已连接":@"未连接";
-    if (flag==-1) {
+    if (flag!=0) {
         [self.layer removeAllAnimations];
     }
     else{

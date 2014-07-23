@@ -74,14 +74,11 @@
     [[UINavigationController alloc]
       initWithRootViewController:main];
     
-    LeftViewController *left =
-    [[LeftViewController alloc] initWithNibName:nil
-                                              bundle:nil];
+    LeftViewController *left = [[LeftViewController alloc] initWithNibName:nil bundle:nil];
     RightViewController *right = [[RightViewController alloc] initWithNibName:nil bundle:nil];
     
-    JASidePanelController *panel =
-    [[JASidePanelController alloc] init];
-    
+    JASidePanelController *panel = [[JASidePanelController alloc] init];
+
     panel.leftPanel = left;
     panel.rightPanel = right;
     panel.centerPanel = nav_main;
@@ -309,6 +306,7 @@
 #pragma mark otherXMPPAction
 - (void)logouXmppAuthenticated
 {
+    self.sidePanelController.allowRightSwipe = NO;
     if ([self.xmppStream isConnected]) {
         [self.xmppStream disconnect];
     }
@@ -318,7 +316,11 @@
 }
 - (BOOL)isXmppAuthenticated
 {
-    return [self.xmppStream isAuthenticated];
+    if([self.xmppStream isAuthenticated]){
+        self.sidePanelController.allowRightSwipe = YES;
+        return YES;
+    }
+    return NO;
 }
 
 

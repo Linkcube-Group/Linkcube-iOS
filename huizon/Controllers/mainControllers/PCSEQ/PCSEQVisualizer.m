@@ -67,6 +67,7 @@
     
     [timer invalidate];
     timer = nil;
+    [self resetTicker];
     
 }
 
@@ -83,6 +84,22 @@
             
         }
     
+    }];
+}
+
+- (void)resetTicker
+{
+    [UIView animateWithDuration:.2 animations:^{
+        
+        for(UIImageView* bar in barArray){
+            
+            CGRect rect = bar.frame;
+            rect.size.height = 1;
+            bar.frame = rect;
+            
+            
+        }
+        
     }];
 }
 
