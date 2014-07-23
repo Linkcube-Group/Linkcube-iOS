@@ -46,10 +46,32 @@
                             <action selector="AddFriend:" destination="c1s-kP-heM" eventType="touchUpInside" id="Aze-vg-HAr"/>
                         </connections>
                     </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Pk-Or-Kha">
+                        <rect key="frame" x="194" y="7" width="46" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="接受">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="acceptSub:" destination="c1s-kP-heM" eventType="touchUpInside" id="U6O-SC-HZM"/>
+                        </connections>
+                    </button>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="huO-EQ-6Hi">
+                        <rect key="frame" x="248" y="7" width="46" height="30"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="忽略">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="declineSub:" destination="c1s-kP-heM" eventType="touchUpInside" id="RE1-JD-NhO"/>
+                        </connections>
+                    </button>
                 </subviews>
             </tableViewCellContentView>
             <connections>
+                <outlet property="btnAcept" destination="0Pk-Or-Kha" id="3HC-PM-26H"/>
                 <outlet property="btnAdd" destination="b2y-Ga-3Jv" id="cQu-Li-xmV"/>
+                <outlet property="btnReject" destination="huO-EQ-6Hi" id="Hbb-cl-VbC"/>
                 <outlet property="imgIcon" destination="zig-S6-cHs" id="Vzu-V9-GuR"/>
                 <outlet property="lbFriendStatus" destination="RTK-Qf-Vc7" id="Hsb-F0-0RY"/>
                 <outlet property="lbUserName" destination="Jkf-2G-sfw" id="KvN-Nk-5yf"/>

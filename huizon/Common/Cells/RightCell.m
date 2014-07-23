@@ -15,6 +15,8 @@
 @property (strong,nonatomic) IBOutlet UILabel *lbUserName;
 @property (strong,nonatomic) IBOutlet UILabel *lbFriendStatus;
 @property (strong,nonatomic) IBOutlet UIButton *btnAdd;
+@property (strong,nonatomic) IBOutlet UIButton *btnAcept;
+@property (strong,nonatomic) IBOutlet UIButton *btnReject;
 @property (strong,nonatomic) NSString *friendName;
 @property (strong,nonatomic) NSString *friendId;
 @end
@@ -73,6 +75,14 @@
         self.btnAdd.hidden=NO;
         self.lbFriendStatus.hidden=YES;
     }
+    else if([status isEqualToString:@"判断"])
+    {
+        self.btnAdd.hidden=YES;
+        self.lbFriendStatus.hidden=YES;
+        self.lbFriendStatus.text=status;
+        self.btnAcept.hidden=NO;
+        self.btnReject.hidden=NO;
+    }
     else
     {
         self.btnAdd.hidden=YES;
@@ -83,7 +93,20 @@
 }
 
 
-
+- (IBAction)acceptSub:(id)sender
+{
+    NSString *jidStr=self.friendId;
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",jidStr]];
+    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+}
+- (IBAction)declineSub:(id)sender
+{
+    NSString *jidStr=self.friendId;
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",jidStr]];
+    [theApp.xmppRoster rejectPresenceSubscriptionRequestFrom:jid];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+}
 - (IBAction)AddFriend:(id)sender
 {
     

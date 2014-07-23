@@ -15,6 +15,7 @@
 #import "RightCell.h"
 #import "AddFriendViewController.h"
 #import "XMPPvCardTemp.h"
+#import "NotificationViewController.h"
 #define FRIEND_LIST @[@"",@"我的",@"消息",@"情侣"]
 
 @interface RightViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -59,10 +60,11 @@
 
 - (void) receiveSubscribe:(NSNotification *) notification
 {
-    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
-    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
-    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+    //XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
+    //XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
+    //[theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
     //[theApp.xmppRoster removeUser:jid];
+    //[theApp.xmppRoster addU]
     
 }
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
@@ -128,7 +130,14 @@
     NSArray *friends = [context executeFetchRequest:request error:&error];
     //XMPPUserCoreDataStorageObject *object
     [self.friendsArray removeAllObjects];
-    [self.friendsArray addObjectsFromArray:friends];
+    //[self.friendsArray addObjectsFromArray:friends];
+    for(XMPPUserCoreDataStorageObject *object in friends)
+    {
+        if ([object.subscription isEqualToString:@"both"])
+        {
+            [self.friendsArray addObject:object];
+        }
+    }
 
 }
 
@@ -265,6 +274,7 @@
     {
         
         XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        /*
         NSString *name= [object displayName];
         if (!name) {
             name = [object nickname];
@@ -272,6 +282,8 @@
         if (!name) {
             name = [object jidStr];
         }
+         */
+        NSString *name=[theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES].nickname;
         [cell setMenuImage:@"portrait-female-small" Name:name];
         
     }
@@ -301,8 +313,9 @@
     }
     else if (indexPath.row==2)
     {
-        FriendViewController *fvc = [[FriendViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:fvc];
+        //FriendViewController *fvc = [[FriendViewController alloc] init];
+        NotificationViewController *nvc = [[NotificationViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:nvc];
     }
     else if (indexPath.row==3)
     {

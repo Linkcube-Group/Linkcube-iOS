@@ -48,6 +48,7 @@
     context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
     dicJidToStatus=[[NSMutableDictionary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kXMPPNotificationDidAskFriend object:nil];
+    [self refreshTable];
 }
 
 - (void) refreshTable
@@ -94,7 +95,8 @@
 
 - (void)getData
 {
-    
+    [theApp.xmppRoster fetchRoster];
+    //[theApp.xmppRosterStorage.]
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     [request setEntity:entity];

@@ -257,7 +257,7 @@
     XMPPJID *jid=[XMPPJID jidWithString:jidStr];
     XMPPvCardTemp *friednVCard=[xmppvCardTempModule vCardTempForJID:jid shouldFetch:YES];
     [xmppRoster addUser:jid withNickname:friednVCard.nickname];
-    [xmppRoster fetchRoster];
+    //[xmppRoster fetchRoster];
     
 }
 #pragma mark 删除好友,取消加好友，或者加好友后需要删除
@@ -488,7 +488,7 @@
     //}
     
     // 接到加好友请求
-    //if ([presenceType isEqualToString:@"subscribe"])
+    if ([presenceType isEqualToString:@"subscribe"])
     {
         //if ([self.chatDelegate respondsToSelector:@selector(friendSubscription:)])
         //{
