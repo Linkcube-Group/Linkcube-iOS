@@ -80,7 +80,8 @@
         return;
     }
     
-    theApp.xmppvCardUser.nickname = [self.tfName.text trimString];
+    NSString *nickname=[self.tfName.text trimString];
+    theApp.xmppvCardUser.nickname = nickname;
  
     if (self.btnMale.selected) {
         theApp.xmppvCardUser.gender = @"男";
@@ -95,6 +96,32 @@
     showIndicator(YES);
     [theApp updateUserCardTemp:theApp.xmppvCardUser];
     
+
+    
+    
+    //add user nick and email
+    NSString *uname = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyJID];
+    NSString *pwd = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyPassword];
+    NSString *unameOri =[uname stringByReplacingOccurrencesOfString:@"-" withString:@"@"];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:register"];
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"type" stringValue:@"set"];
+    [iq addAttributeWithName:@"to" stringValue:[NSString stringWithFormat:@"%@@%@",uname,kXMPPmyDomain]];
+    [iq addAttributeWithName:@"id" stringValue:@"change1"];
+    
+    
+    DDXMLNode *username=[DDXMLNode elementWithName:@"username" stringValue:uname];
+    DDXMLNode *password=[DDXMLNode elementWithName:@"password" stringValue:pwd];
+    DDXMLNode *nick=[DDXMLNode elementWithName:@"name" stringValue:nickname];
+    DDXMLNode *email=[DDXMLNode elementWithName:@"email" stringValue:unameOri];
+
+    [query addChild:username];
+    [query addChild:password];
+    [query addChild:nick];
+    [query addChild:email];
+    [iq addChild:query];
+    [[theApp xmppStream] sendElement:iq];
+
 }
 
 

@@ -32,6 +32,7 @@
     XMPPvCardCoreDataStorage *xmppvCardStorage;
     XMPPvCardTempModule *xmppvCardTempModule;
     XMPPvCardAvatarModule *xmppvCardAvatarModule;
+    XMPPSearchModule *xmppSearchModule;
 }
 
 
@@ -52,7 +53,7 @@
 @property (nonatomic,strong) XMPPvCardTempModule *xmppvCardTempModule;
 @property (nonatomic,strong) XMPPvCardAvatarModule *xmppvCardAvatarModule;
 @property (nonatomic,strong)  XMPPvCardTemp *xmppvCardUser;
-
+@property (nonatomic,strong)  XMPPSearchModule *xmppSearchModule;
 
 //---------------------------------------------------------------------
 //@property (nonatomic) BOOL isRegistration;
@@ -75,6 +76,7 @@
 - (void)disconnect;
 - (BOOL)isXmppAuthenticated;
 - (void)XMPPAddFriendSubscribe:(NSString *)name;
+- (void)XMPPAddFriendSubscribeWithJid:(NSString *)jidStr;
 - (void)getUserCardTemp;
 - (void)updateUserCardTemp:(XMPPvCardTemp *)card;
 - (void)changePassword:(NSString *)pwd;

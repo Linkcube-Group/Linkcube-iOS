@@ -95,7 +95,6 @@
 		072A150318C3487600A3758E /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 072A150118C3487600A3758E /* ChatViewController.xib */; };
 		072A150618C34ABA00A3758E /* ShakeControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 072A150518C34ABA00A3758E /* ShakeControls.m */; };
 		072A150818C34B0300A3758E /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 072A150718C34B0300A3758E /* CoreMotion.framework */; };
-		072D5B6618AB542E0083626A /* linkcube-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072D5B6518AB542E0083626A /* linkcube-Info.plist */; };
 		072D5B6F18AB56600083626A /* DesignControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 072D5B6E18AB56600083626A /* DesignControls.m */; };
 		072D5B7218AB56CC0083626A /* IMControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 072D5B7118AB56CC0083626A /* IMControls.m */; };
 		072D5B7418AB57440083626A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 072D5B7318AB57440083626A /* CoreBluetooth.framework */; };
@@ -465,6 +464,10 @@
 		BB220EDB19567501000C08CB /* navigation-background.png in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED619567501000C08CB /* navigation-background.png */; };
 		BB220EDC19567501000C08CB /* navigation-only.png in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED719567501000C08CB /* navigation-only.png */; };
 		BB220EDD19567501000C08CB /* search-box.png in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED819567501000C08CB /* search-box.png */; };
+		BB646093197705D300D18206 /* XMPPSearchModule.m in Sources */ = {isa = PBXBuildFile; fileRef = BB64608C197705D300D18206 /* XMPPSearchModule.m */; };
+		BB646094197705D300D18206 /* XMPPSearchNode.m in Sources */ = {isa = PBXBuildFile; fileRef = BB64608E197705D300D18206 /* XMPPSearchNode.m */; };
+		BB646095197705D300D18206 /* XMPPSearchReported.m in Sources */ = {isa = PBXBuildFile; fileRef = BB646090197705D300D18206 /* XMPPSearchReported.m */; };
+		BB646096197705D300D18206 /* XMPPSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BB646092197705D300D18206 /* XMPPSearchResult.m */; };
 		BB6C6ED918D766C300A9C863 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6C6ED718D766C300A9C863 /* UserProfileViewController.m */; };
 		BB6C6EDA18D766C300A9C863 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB6C6ED818D766C300A9C863 /* UserProfileViewController.xib */; };
 		BBB5B7E118D2DA1600A526EF /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB5B7DF18D2DA1600A526EF /* ProtocolViewController.m */; };
@@ -1229,6 +1232,14 @@
 		BB220ED619567501000C08CB /* navigation-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-background.png"; sourceTree = "<group>"; };
 		BB220ED719567501000C08CB /* navigation-only.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-only.png"; sourceTree = "<group>"; };
 		BB220ED819567501000C08CB /* search-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-box.png"; sourceTree = "<group>"; };
+		BB64608B197705D300D18206 /* XMPPSearchModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPSearchModule.h; sourceTree = "<group>"; };
+		BB64608C197705D300D18206 /* XMPPSearchModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPSearchModule.m; sourceTree = "<group>"; };
+		BB64608D197705D300D18206 /* XMPPSearchNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPSearchNode.h; sourceTree = "<group>"; };
+		BB64608E197705D300D18206 /* XMPPSearchNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPSearchNode.m; sourceTree = "<group>"; };
+		BB64608F197705D300D18206 /* XMPPSearchReported.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPSearchReported.h; sourceTree = "<group>"; };
+		BB646090197705D300D18206 /* XMPPSearchReported.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPSearchReported.m; sourceTree = "<group>"; };
+		BB646091197705D300D18206 /* XMPPSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPSearchResult.h; sourceTree = "<group>"; };
+		BB646092197705D300D18206 /* XMPPSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPSearchResult.m; sourceTree = "<group>"; };
 		BB6C6ED618D766C300A9C863 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		BB6C6ED718D766C300A9C863 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		BB6C6ED818D766C300A9C863 /* UserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
@@ -1830,6 +1841,7 @@
 		073553D518C412E2005B319B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				BBE7452A197235650060704D /* XEP-0055 */,
 				073553D618C412E2005B319B /* BandwidthMonitor */,
 				073553D918C412E2005B319B /* CoreDataStorage */,
 				073553DD18C412E2005B319B /* GoogleSharedStatus */,
@@ -2997,6 +3009,21 @@
 			path = right_info;
 			sourceTree = "<group>";
 		};
+		BBE7452A197235650060704D /* XEP-0055 */ = {
+			isa = PBXGroup;
+			children = (
+				BB64608B197705D300D18206 /* XMPPSearchModule.h */,
+				BB64608C197705D300D18206 /* XMPPSearchModule.m */,
+				BB64608D197705D300D18206 /* XMPPSearchNode.h */,
+				BB64608E197705D300D18206 /* XMPPSearchNode.m */,
+				BB64608F197705D300D18206 /* XMPPSearchReported.h */,
+				BB646090197705D300D18206 /* XMPPSearchReported.m */,
+				BB646091197705D300D18206 /* XMPPSearchResult.h */,
+				BB646092197705D300D18206 /* XMPPSearchResult.m */,
+			);
+			path = "XEP-0055";
+			sourceTree = "<group>";
+		};
 		BBF8DEC818DCA462005E2B8E /* UIBubbleTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -3072,7 +3099,7 @@
 		0709963B182B8AB50064D7D3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = zhaopin;
 				TargetAttributes = {
 					07099642182B8AB50064D7D3 = {
@@ -3347,7 +3374,6 @@
 				0762C2BF18C2197D00ABD7A0 /* posture_1@2x.png in Resources */,
 				BBF8DEE118DCA462005E2B8E /* bubbleMine@2x.png in Resources */,
 				07B6E70218D5538F00C17693 /* messages_tableview_background.png in Resources */,
-				072D5B6618AB542E0083626A /* linkcube-Info.plist in Resources */,
 				072F97D118C0BD2A00BEB4C4 /* blue_connected.png in Resources */,
 				073AA8F919442A67008EDD06 /* game_shake@2x.png in Resources */,
 				073AA8DC19440FDD008EDD06 /* icon_arrow@2x.png in Resources */,
@@ -3531,6 +3557,7 @@
 				0735553918C412E2005B319B /* XMPPMessage+XEP_0066.m in Sources */,
 				0735554018C412E2005B319B /* XMPPCapabilities.xcdatamodel in Sources */,
 				0735556218C412E2005B319B /* GCDAsyncSocket.m in Sources */,
+				BB646094197705D300D18206 /* XMPPSearchNode.m in Sources */,
 				0735555A18C412E2005B319B /* XMPPMessage+XEP_0333.m in Sources */,
 				07EAA12F192893E200794ABC /* ShakeViewController.m in Sources */,
 				070996EE182B8BFB0064D7D3 /* RegexKitLite.m in Sources */,
@@ -3547,6 +3574,7 @@
 				07B6E72918D585F000C17693 /* PersonCell.m in Sources */,
 				BBB814A619454E790052D71A /* RightCell.m in Sources */,
 				07E0303618BDCC8A002C684B /* MainViewController.m in Sources */,
+				BB646095197705D300D18206 /* XMPPSearchReported.m in Sources */,
 				0735550218C412E2005B319B /* XMPPStream.m in Sources */,
 				0735551118C412E2005B319B /* XMPPSystemInputActivityMonitor.m in Sources */,
 				07B6E71C18D55F2400C17693 /* Theam.m in Sources */,
@@ -3577,8 +3605,10 @@
 				07099657182B8AB50064D7D3 /* AppDelegate.m in Sources */,
 				078CD1C6182CCED200EBF477 /* CustomAlertView.m in Sources */,
 				078CD1B2182CC68500EBF477 /* NSDate+RFC1123.m in Sources */,
+				BB646093197705D300D18206 /* XMPPSearchModule.m in Sources */,
 				0735552918C412E2005B319B /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				070996D6182B8BFB0064D7D3 /* ModelList.m in Sources */,
+				BB646096197705D300D18206 /* XMPPSearchResult.m in Sources */,
 				073554F718C412E2005B319B /* XMPPXOAuth2Google.m in Sources */,
 				073554FD18C412E2005B319B /* XMPPJID.m in Sources */,
 				0735551318C412E2005B319B /* XMPPIQ+JabberRPCResonse.m in Sources */,
@@ -3612,7 +3642,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3652,7 +3681,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3725,7 +3753,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (

@@ -30,7 +30,7 @@
                     <rect key="frame" x="6" y="72" width="308" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
                     <connections>
                         <action selector="textFieldDoneEditing:" destination="-1" eventType="editingDidEndOnExit" id="a2E-LS-KY0"/>
                     </connections>
@@ -39,6 +39,10 @@
                     <rect key="frame" x="0.0" y="110" width="320" height="465"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="dBW-bw-VIX"/>
+                        <outlet property="delegate" destination="-1" id="Jd7-c2-I91"/>
+                    </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

@@ -18,6 +18,9 @@
 #import "LeftViewController.h"
 #import "RightViewController.h"
 #import "PlayViewController.h"
+#import "XMPPSearchModule.h"
+
+
 
 #define tag_subcribe_alertView 100
 
@@ -35,6 +38,7 @@
 @synthesize sidePanelController;
 
 @synthesize xmppvCardUser;
+@synthesize xmppSearchModule;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -169,6 +173,13 @@
     [xmppvCardAvatarModule activate:xmppStream];
     [xmppvCardTempModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
     [xmppvCardAvatarModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
+    
+    xmppSearchModule = [[XMPPSearchModule alloc] initWithDispatchQueue:dispatch_get_main_queue()];
+    xmppSearchModule.searchHost = @"search.server1";//kXMPPmyDomain;//kXMPPmyServer;
+    [xmppSearchModule activate:xmppStream];
+    
+    
+    
 
     
 }
@@ -234,7 +245,18 @@
     [xmppRoster addUser:jid withNickname:friednVCard.nickname];
     
 }
-
+- (void)XMPPAddFriendSubscribeWithJid:(NSString *)jidStr
+{
+    //XMPPHOST 就是服务器名，  主机名
+    //XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@@%@", [name jidEscapedString],kXMPPmyDomain]];
+    //[presence addAttributeWithName:@"subscription" stringValue:@"好友"];
+    //[xmppRoster subscribePresenceToUser:jid];
+    XMPPJID *jid=[XMPPJID jidWithString:jidStr];
+    XMPPvCardTemp *friednVCard=[xmppvCardTempModule vCardTempForJID:jid shouldFetch:YES];
+    [xmppRoster addUser:jid withNickname:friednVCard.nickname];
+    [xmppRoster fetchRoster];
+    
+}
 #pragma mark 删除好友,取消加好友，或者加好友后需要删除
 - (void)removeBuddy:(NSString *)name
 {
@@ -461,19 +483,21 @@
 {
      NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]]; //online/offline
     NSLog(@"didReceivePresence:\n\n%@\n",presence.description);
-    if (presence.status) {
-        if ([self.chatDelegate respondsToSelector:@selector(friendStatusChangePresence:)]) {
-            [self.chatDelegate friendStatusChangePresence:presence];
-        }
-    }
+    //if (presence.status) {
+    //    if ([self.chatDelegate respondsToSelector:@selector(friendStatusChangePresence:)]) {
+    //        [self.chatDelegate friendStatusChangePresence:presence];
+    //    }
+    //}
     
     // 接到加好友请求
-    if ([presenceType isEqualToString:@"subscribe"])
+    //if ([presenceType isEqualToString:@"subscribe"])
     {
-        if ([self.chatDelegate respondsToSelector:@selector(friendSubscription:)])
-        {
-            [self.chatDelegate friendSubscription:presence];
-        }
+        //if ([self.chatDelegate respondsToSelector:@selector(friendSubscription:)])
+        //{
+        //    [self.chatDelegate friendSubscription:presence];
+        //}
+        NSDictionary *dic=[NSDictionary dictionaryWithObject:presence forKey:@"presence"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidReceivePresence object:nil userInfo:dic];
     }
     /*
     //这里再次加好友

@@ -12,4 +12,6 @@
 - (void)setMenuImage:(NSString *)img Name:(NSString *)name;
 - (void)setRightIcon:(NSString *)imgName;
 - (void)setFriendStatus:(NSString *)status;
+- (void)setCellFriendName:(NSString *)friendName;
+- (void)setCellFriendId:(NSString *)friendId;
 @end
