@@ -78,18 +78,51 @@
     [self.view addSubview:topView];
     
     
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
+    
+    // Do any additional setup after loading the view from its nib.
+}
+
+- (IBAction)voiceAction:(id)sender
+{
+    isOpen = !isOpen;
+    if (isOpen) {
+//        [eq start];
+        [self.imgVoice setImage:IMG(@"mode-voice_s.png") forState:UIControlStateNormal];
+    }
+    else{
+//        [eq stop];
+        if (theApp.currentGamingJid!=nil) {
+            [theApp sendControlCode:kBluetoothClose];
+        }
+        else{
+            [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
+        }
+        
+        [self.imgVoice setImage:IMG(@"mode-voice.png") forState:UIControlStateNormal];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [[SoundControls soundSingleton] startSoundListener];
     IMP_BLOCK_SELF(VoiceViewController)
     [SoundControls soundSingleton].soundHandler = ^(id acc){
         float degree = abs([acc floatValue]);
         
-
+        
         int voiceDegree = abs(degree)+1;
         voiceDegree = 40-voiceDegree;
-     
+        
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
-
-                DLog(@"---|%d",voiceDegree);
+        
+        DLog(@"---|%d",voiceDegree);
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
@@ -131,39 +164,7 @@
         }
         
     };
-    
-    
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
-    
-    // Do any additional setup after loading the view from its nib.
-}
 
-- (IBAction)voiceAction:(id)sender
-{
-    isOpen = !isOpen;
-    if (isOpen) {
-//        [eq start];
-        [self.imgVoice setImage:IMG(@"mode-voice_s.png") forState:UIControlStateNormal];
-    }
-    else{
-//        [eq stop];
-        if (theApp.currentGamingJid!=nil) {
-            [theApp sendControlCode:kBluetoothClose];
-        }
-        else{
-            [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
-        }
-        
-        [self.imgVoice setImage:IMG(@"mode-voice.png") forState:UIControlStateNormal];
-    }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [[SoundControls soundSingleton] startSoundListener];
     isOpen = NO;
     [self voiceAction:nil];
     [self refreshTop];
