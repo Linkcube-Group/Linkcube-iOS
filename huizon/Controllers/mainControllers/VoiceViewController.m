@@ -77,7 +77,7 @@
     
     [self.view addSubview:topView];
     
-    [[SoundControls soundSingleton] startSoundListener];
+    
     IMP_BLOCK_SELF(VoiceViewController)
     [SoundControls soundSingleton].soundHandler = ^(id acc){
         float degree = abs([acc floatValue]);
@@ -163,6 +163,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [[SoundControls soundSingleton] startSoundListener];
     isOpen = NO;
     [self voiceAction:nil];
     [self refreshTop];

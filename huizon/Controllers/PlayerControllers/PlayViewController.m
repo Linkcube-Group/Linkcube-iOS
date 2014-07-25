@@ -99,7 +99,9 @@
     
     [self.slider setMinimumTrackTintColor:[UIColor whiteColor]];
     [self.slider setMaximumTrackTintColor:[UIColor colorWithWhite:1.0 alpha:0.8]];
-
+    [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateHighlighted];
+    [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateNormal];
+    
     [VoiceControls voiceSingleton].voiceHandler = ^(id acc){
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
         self.lbTimeMin.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
