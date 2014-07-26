@@ -209,6 +209,10 @@
     {
         cellIdentifier = @"RightCellLabel";
     }
+    else
+    {
+        cellIdentifier = @"RightCellUser";
+    }
 
     
     RightCell *cell = (RightCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
