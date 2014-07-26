@@ -27,7 +27,7 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"编辑"];
+    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:self.NavTitle];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_PopNav:)];
     
     self.navigationItem.rightBarButtonItem = [[Theam currentTheam] navigationBarRightButtonItemWithImage:nil Title:@"保存" Target:self Selector:@selector(saveAction:)];
