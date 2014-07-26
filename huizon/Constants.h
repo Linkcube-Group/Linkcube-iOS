@@ -22,6 +22,8 @@
 
 #define theApp ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
+//最大蓝牙数50
+static int const kMaxBlueToothNum = 50;
 
 static int const kPageTag = 9011;
 static int const kPageButtonTag = 8923;

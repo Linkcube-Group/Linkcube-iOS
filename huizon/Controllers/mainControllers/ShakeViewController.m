@@ -81,9 +81,12 @@
     [ShakeControls shakeSingleton].shakeHandler = ^(id acc){
         float degree = abs([acc intValue]);
 //        degree *= shakeLevel;
-        int shakeDegree = degree*10;
-        shakeDegree = shakeDegree>39?39:shakeDegree;
-        DLog(@"shake degree===%d",shakeDegree);
+        DLog(@"shake ====|%f",degree);
+        int shakeDegree = degree/5+1;
+        shakeDegree = degree*5;
+        
+        shakeDegree = shakeDegree>=kMaxBlueToothNum?kMaxBlueToothNum-1:shakeDegree;
+//        DLog(@"shake degree===%d",shakeDegree);
         NSString *myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
@@ -91,7 +94,7 @@
                 [theApp sendControlCode:myComm];
                 if (degree<1) {
                     stopCount++;
-                    if (stopCount>50 && [eq isStart]) {
+                    if (stopCount>20 && [eq isStart]) {
                         [eq stop];
                     }
                 }
@@ -109,7 +112,7 @@
                 [[LeDiscovery sharedInstance] sendCommand:myComm];
                 if (degree<1) {
                     stopCount++;
-                    if (stopCount>50 && [eq isStart]) {
+                    if (stopCount>20 && [eq isStart]) {
                         [eq stop];
                     }
                 }

@@ -117,7 +117,7 @@
         
         
         int voiceDegree = abs(degree)+1;
-        voiceDegree = 40-voiceDegree;
+        voiceDegree = kMaxBlueToothNum-voiceDegree;
         
         
         voiceDegree = voiceDegree<0?0:voiceDegree;

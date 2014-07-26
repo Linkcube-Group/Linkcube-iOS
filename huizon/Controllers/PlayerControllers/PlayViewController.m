@@ -109,9 +109,15 @@
     
         float degree = abs([acc floatValue]);
         int voiceDegree = abs(degree)+1;
-        voiceDegree = 40-voiceDegree;
+        voiceDegree = kMaxBlueToothNum-voiceDegree;
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
+        voiceDegree = voiceDegree>=kMaxBlueToothNum?kMaxBlueToothNum-1:voiceDegree;
+        
+        voiceDegree = voiceDegree/5;
+        voiceDegree = voiceDegree*5;
+        DLog(@"----%d",voiceDegree);
+        
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
 //        NSLog(@"cmd===%@",myComm);
         ///如果游戏开始，把控制命令发给对方

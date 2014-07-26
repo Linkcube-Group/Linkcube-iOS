@@ -55,6 +55,12 @@
 {
     self.lbBlueName.text = name;
     self.lbBlueConn.text = flag?@"已连接":@"未连接";
+    if (flag) {
+        self.lbBlueName.textColor = [UIColor colorWithHexString:@"#A52A2A"];
+    }
+    else{
+        self.lbBlueName.textColor = [UIColor colorWithHexString:@"#747474"];;
+    }
 }
 - (void)setLineName:(NSString *)name
 {

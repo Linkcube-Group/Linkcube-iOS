@@ -12,6 +12,7 @@
 {
     CMMotionManager *motionManager;
     NSOperationQueue *operationQueue;
+
 }
 
 @end
@@ -53,10 +54,31 @@
             
             // 所有操作进行同步
             @synchronized(motionManager) {
-                 
+              
+                float accY = fabs(motionManager.accelerometerData.acceleration.y);
+                if (accY<1.3f) {
+                    accY = 0;
+                }
+                else{
+                    accY *= 9.8;
+                }
+                float accX = ABS(motionManager.accelerometerData.acceleration.x);
+                if (accX<1.3f) {
+                    accX = 0;
+                }
+                else{
+                    accX *= 9.8;
+                }
+
+                float accZ = ABS(motionManager.accelerometerData.acceleration.z);
+                if (accZ<1.3f) {
+                    accZ = 0;
+                }
+                else{
+                    accZ *= 9.8;
+                }
                 
-                float acc = ABS(motionManager.accelerometerData.acceleration.y);
-                 acc += ABS(motionManager.accelerometerData.acceleration.x);
+                float acc = accX+accY+accZ;
                 
                 BlockCallWithOneArg(self.shakeHandler, @(acc))
                 //_isShake = [self isShake:_motionManager.accelerometerData];
