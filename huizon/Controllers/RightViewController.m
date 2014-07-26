@@ -245,7 +245,18 @@
                 name=[theApp.xmppvCardUser.jid bare];
             }
             
-            [cell setMenuImage:@"portrait-male-small" Name:name];
+            if(theApp.xmppvCardUser.photo.length)
+            {
+                [cell setMenuImageWithData:theApp.xmppvCardUser.photo Name:name];
+            }
+            else if ([theApp.xmppvCardUser.gender isEqualToString:@"男"])
+            {
+                [cell setMenuImage:@"portrait-male-small" Name:name];
+            }
+            else
+            {
+                [cell setMenuImage:@"portrait-female-small" Name:name];
+            }
         }
         else
         {
