@@ -86,14 +86,15 @@
 - (IBAction)loginAction:(id)sender
 {
     NSString *name = self.txtName.text;
-    name =[name stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
-    NSString *pwd = self.txtPwd.text;
-  
+    
     NSString *nameMsg = IsValidEmail([name UTF8String]);
     if (nameMsg!=nil) {
 		showCustomAlertMessage(nameMsg);
-		//return;
+		return;
 	}
+    
+    name =[name stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
+    NSString *pwd = self.txtPwd.text;
     
     NSString *pwdMsg = IsValidPWD([pwd UTF8String]);
     if (pwdMsg==nil) {
