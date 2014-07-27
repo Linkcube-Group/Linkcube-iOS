@@ -128,7 +128,13 @@
     NSArray *friends = [context executeFetchRequest:request error:&error];
     //XMPPUserCoreDataStorageObject *object
     [self.friendsArray removeAllObjects];
-    [self.friendsArray addObjectsFromArray:friends];
+    for(XMPPUserCoreDataStorageObject *object in friends)
+    {
+        if([object.subscription isEqualToString:@"both"])
+        {
+            [self.friendsArray addObject:object];
+        }
+    }
 
 }
 
@@ -280,6 +286,7 @@
     {
         
         XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        NSLog(@"艹%@",object.subscription);
         NSString *name= [object displayName];
         if (!name) {
             name = [object nickname];
