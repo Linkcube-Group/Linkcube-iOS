@@ -53,7 +53,7 @@
             
             // 所有操作进行同步
             @synchronized(motionManager) {
-                 
+                NSLog(@"--x:%f,y:%f,z:%f",motionManager.accelerometerData.acceleration.x,motionManager.accelerometerData.acceleration.y,motionManager.accelerometerData.acceleration.z);
                 
                 float acc = ABS(motionManager.accelerometerData.acceleration.y);
                  acc += ABS(motionManager.accelerometerData.acceleration.x);
