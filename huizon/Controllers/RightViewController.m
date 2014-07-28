@@ -37,7 +37,7 @@
     if (self) {
         // Custom initialization
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSubscribe:) name:kXMPPNotificationDidReceivePresence object:nil];
-
+        
     }
     return self;
 }
@@ -52,9 +52,9 @@
     
     context=[[[self appDelegate] xmppRosterStorage] mainThreadManagedObjectContext];
     [theApp getUserCardTemp];
-     [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
+    [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     // Do any additional setup after loading the view from its nib.
-    }
+}
 
 
 - (void) receiveSubscribe:(NSNotification *) notification
@@ -88,7 +88,7 @@
     }
     //导航条背景
     [[UINavigationBar appearance] setBackgroundImage:IMG(@"navigation-and-status") forBarMetrics:UIBarMetricsDefault];
-
+    
 }
 
 
@@ -103,7 +103,7 @@
             
             //[self updateUI:arrayMessage];
             [self.tbFriend reloadData];
-
+            
         });
         
     });
@@ -130,12 +130,13 @@
     [self.friendsArray removeAllObjects];
     for(XMPPUserCoreDataStorageObject *object in friends)
     {
-        if([object.subscription isEqualToString:@"both"])
+        NSLog(@"%@ %@",object.nickname,object.subscription);
+        //        if([object.subscription isEqualToString:@"both"])
         {
             [self.friendsArray addObject:object];
         }
     }
-
+    
 }
 
 
@@ -194,7 +195,7 @@
     {
         return 50;
     }
-
+    
     return 70;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -219,7 +220,7 @@
     {
         cellIdentifier = @"RightCellUser";
     }
-
+    
     
     RightCell *cell = (RightCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
@@ -318,7 +319,7 @@
             nav = [[UINavigationController alloc] initWithRootViewController:psc];
             //[self presentViewController:nav animated:YES completion:nil];
         }
-
+        
     }
     else if (indexPath.row==2)
     {
@@ -329,8 +330,8 @@
     {
         /*
          UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请输入用户名" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-        alert.alertViewStyle=UIAlertViewStylePlainTextInput;
-        [alert show];
+         alert.alertViewStyle=UIAlertViewStylePlainTextInput;
+         [alert show];
          */
         AddFriendViewController *afvc=[[AddFriendViewController alloc]init];
         nav = [[UINavigationController alloc] initWithRootViewController:afvc];
@@ -355,8 +356,8 @@
 }
 
 - (IBAction)presentModal:(id)sender {
-   
-//    [self presentViewController:controller animated:YES completion:nil];
+    
+    //    [self presentViewController:controller animated:YES completion:nil];
 }
 
 
