@@ -11,6 +11,7 @@
 @interface RightCell : UITableViewCell
 - (void)setMenuImage:(NSString *)img Name:(NSString *)name;
 - (void)setMenuImageWithData:(NSData *)imgData Name:(NSString *)name;
+- (void)setMenuImageWithImage:(UIImage *)image Name:(NSString *)name;
 - (void)setRightIcon:(NSString *)imgName;
 - (void)setFriendStatus:(NSString *)status;
 - (void)setCellFriendName:(NSString *)friendName;

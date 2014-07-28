@@ -286,7 +286,6 @@
     {
         
         XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
-        NSLog(@"艹%@",object.subscription);
         NSString *name= [object displayName];
         if (!name) {
             name = [object nickname];
