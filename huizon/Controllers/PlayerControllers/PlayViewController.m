@@ -74,7 +74,7 @@
 {
     isPlay = NO;
     [self playButtonSetImage];
-    
+    [self startAlbumAnimation:NO];
     [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     [[VoiceControls voiceSingleton] stopMusic];
 }
@@ -113,18 +113,21 @@
         self.slider.value = [[VoiceControls voiceSingleton] musicCurrentTime]/[[VoiceControls voiceSingleton] musicDuration];
     
         float degree = abs([acc floatValue]);
-        float voiceDegree = abs(degree)+1;
+        float voiceDegree = abs(degree);
         voiceDegree = kMaxBlueToothNum-voiceDegree;
+        voiceDegree = voiceDegree>=50?50:voiceDegree;
+        voiceDegree = voiceDegree<0?0:voiceDegree;
+        
         int vindex = voiceDegree/2.5;
     
         
-        vindex = vindex<0?0:vindex;
-        vindex = vindex>=20?19:voiceDegree;
+//        vindex = vindex<0?0:vindex;
+//        vindex = vindex>=20?19:vindex;
         
         int KWaveSpeed[20] = { 1, 2, 4, 6, 8, 15, 17, 19, 21, 24, 27, 30, 33,36, 39, 42, 45, 47, 49, 50 };
 
-        vindex =KWaveSpeed[vindex];
-        
+        vindex =KWaveSpeed[vindex]-1;
+        DLog(@"--%d",vindex);
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:vindex];
         
 //        NSLog(@"cmd===%@",myComm);
