@@ -131,7 +131,7 @@
     for(XMPPUserCoreDataStorageObject *object in friends)
     {
         NSLog(@"%@ %@",object.nickname,object.subscription);
-        //        if([object.subscription isEqualToString:@"both"])
+        if([object.subscription isEqualToString:@"both"])
         {
             [self.friendsArray addObject:object];
         }
