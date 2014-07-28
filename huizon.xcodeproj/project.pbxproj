@@ -516,6 +516,8 @@
 		BBF8DF1D18DCACC8005E2B8E /* halloween.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1918DCACC8005E2B8E /* halloween.jpg */; };
 		BBF8DF1E18DCACC8005E2B8E /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1A18DCACC8005E2B8E /* icon_57.png */; };
 		BBF8DF1F18DCACC8005E2B8E /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1B18DCACC8005E2B8E /* icon_114.png */; };
+		D403349D19865D9200874FED /* agree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D403349C19865D9200874FED /* agree@2x.png */; };
+		D40334A019865DC200874FED /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D403349F19865DC200874FED /* NotificationCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1299,6 +1301,9 @@
 		BBF8DF1918DCACC8005E2B8E /* halloween.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = halloween.jpg; sourceTree = "<group>"; };
 		BBF8DF1A18DCACC8005E2B8E /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
 		BBF8DF1B18DCACC8005E2B8E /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
+		D403349C19865D9200874FED /* agree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree@2x.png"; sourceTree = "<group>"; };
+		D403349E19865DC200874FED /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
+		D403349F19865DC200874FED /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2605,6 +2610,8 @@
 		074D11781931E2440030583C /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				D403349E19865DC200874FED /* NotificationCell.h */,
+				D403349F19865DC200874FED /* NotificationCell.m */,
 				074D11791931E2710030583C /* MenuCell.h */,
 				074D117A1931E2710030583C /* MenuCell.m */,
 				074D117C1931E2920030583C /* MenuCell.xib */,
@@ -2982,6 +2989,7 @@
 		BBB8149519454DC90052D71A /* right_info */ = {
 			isa = PBXGroup;
 			children = (
+				D403349C19865D9200874FED /* agree@2x.png */,
 				BB220ED419567501000C08CB /* input-box.png */,
 				BB220ED519567501000C08CB /* navigation-and-status.png */,
 				BB220ED619567501000C08CB /* navigation-background.png */,
@@ -3147,6 +3155,7 @@
 				073AA8D619440701008EDD06 /* set_setting_s@2x.png in Resources */,
 				07B6E70818D5538F00C17693 /* nav_btn_bg.png in Resources */,
 				07FCA3B41968F7BE002682DE /* incativy.png in Resources */,
+				D403349D19865D9200874FED /* agree@2x.png in Resources */,
 				BBF8DEE618DCA462005E2B8E /* typingMine.png in Resources */,
 				073AA8D219440701008EDD06 /* set_gesture_s@2x.png in Resources */,
 				BBF8DEE518DCA462005E2B8E /* missingAvatar@2x.png in Resources */,
@@ -3605,6 +3614,7 @@
 				0735552718C412E2005B319B /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
 				0735553118C412E2005B319B /* XMPPvCardTempModule.m in Sources */,
 				0735552218C412E2005B319B /* XMPPRoomOccupantMemoryStorageObject.m in Sources */,
+				D40334A019865DC200874FED /* NotificationCell.m in Sources */,
 				078CD1AF182CC68500EBF477 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				07099657182B8AB50064D7D3 /* AppDelegate.m in Sources */,
 				078CD1C6182CCED200EBF477 /* CustomAlertView.m in Sources */,

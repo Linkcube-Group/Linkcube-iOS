@@ -10,6 +10,7 @@
 #import "UserViewController.h"
 #import "TalkViewController.h"
 #import "RightCell.h"
+#import "NotificationCell.h"
 @interface FriendViewController ()<UITableViewDataSource,UITableViewDelegate,ChatDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) IBOutlet UITableView *tableFriends;
@@ -52,7 +53,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"消息"];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_DisModal:)];
 }
@@ -92,13 +93,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    
     
     return 50;
 }
 
 
-
+#if 0
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -122,9 +123,9 @@
     if (!name) {
         name = [object jidStr];
     }
-
     
-
+    
+    
     
     
     XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
@@ -145,8 +146,8 @@
     XMPPMessageArchiving_Message_CoreDataObject *message=messageArray.lastObject;
     
     NSString *lastMessage=message.body;
-
     
+    NSLog(@"数据%@ %@",object.subscription,object.ask);
     int statusNum=[object.sectionNum intValue];
     NSString *status=@"";
     NSString *subStatus=@"";
@@ -161,7 +162,7 @@
         //subStatus=@"互加好友";
         subStatus=@"已添加";
     else if ([object.subscription isEqualToString:@"from"])
-        subStatus=@"对方已关注你";
+        subStatus=@"";
     else if ([object.subscription isEqualToString:@"to"])
         subStatus=@"你已关注对方";
     else
@@ -174,7 +175,7 @@
     NSString *numUnreadMessages=[NSString stringWithFormat:@"%d",[object.unreadMessages intValue]];
     __unused NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
     
-
+    
     if(object.photo)
     {
         [cell setMenuImageWithImage:object.photo Name:name];
@@ -186,15 +187,19 @@
     return cell;
 }
 
-/*
+#else
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    static NSString *cellIdentifier = @"RightCellRequest";
+    RightCell *cell = (RightCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
+    
     XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
     NSString *name = [object displayName];
     if (!name) {
@@ -203,9 +208,9 @@
     if (!name) {
         name = [object jidStr];
     }
-    cell.textLabel.text = name;
     
-    //if([objcet.sectionNum intValue==0)
+    
+    
     
     
     XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
@@ -224,14 +229,10 @@
     NSArray *messageArray=[moc executeFetchRequest:request error:&error]; //查找与当前用户聊天记录
     
     XMPPMessageArchiving_Message_CoreDataObject *message=messageArray.lastObject;
-
+    
     NSString *lastMessage=message.body;
     
-    
-    
-    
-    
-
+    NSLog(@"数据%@ %@",object.subscription,object.ask);
     int statusNum=[object.sectionNum intValue];
     NSString *status=@"";
     NSString *subStatus=@"";
@@ -243,25 +244,111 @@
     else
         status=@"离线";
     if ([object.subscription isEqualToString:@"both"])
-        subStatus=@"互加好友";
+        //subStatus=@"互加好友";
+        subStatus=@"已添加";
     else if ([object.subscription isEqualToString:@"from"])
-        subStatus=@"对方已关注你";
+        subStatus=@"";
     else if ([object.subscription isEqualToString:@"to"])
         subStatus=@"你已关注对方";
     else
-       
-    if ([object.ask isEqualToString:@"subscribe"])
-        subStatus=@"已发出请求";
-    else
-        subStatus=@"";
+        
+        if ([object.ask isEqualToString:@"subscribe"])
+            //subStatus=@"已发出请求";
+            subStatus=@"等待验证";
+        else
+            subStatus=@"";
     NSString *numUnreadMessages=[NSString stringWithFormat:@"%d",[object.unreadMessages intValue]];
-    NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
+    __unused NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
     
-    cell.detailTextLabel.text = allStatus ;//[[[object primaryResource] presence] status];
-    cell.tag = indexPath.row;
+    
+    if(object.photo)
+    {
+        [cell setMenuImageWithImage:object.photo Name:name];
+    }
+    else
+        [cell setMenuImage:@"portrait-female-small" Name:name];
+    [cell setFriendStatus:subStatus];
+    
     return cell;
 }
-*/
+#endif
+
+/*
+ - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ static NSString *CellIdentifier = @"Cell";
+ UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+ 
+ if (cell==nil) {
+ cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+ }
+ XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
+ NSString *name = [object displayName];
+ if (!name) {
+ name = [object nickname];
+ }
+ if (!name) {
+ name = [object jidStr];
+ }
+ cell.textLabel.text = name;
+ 
+ //if([objcet.sectionNum intValue==0)
+ 
+ 
+ XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+ NSManagedObjectContext *moc = [storage mainThreadManagedObjectContext];
+ NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
+ inManagedObjectContext:moc];
+ 
+ NSFetchRequest *request=[[NSFetchRequest alloc] init];
+ NSString *bareJid=[theApp.xmppStream.myJID bare];
+ 
+ NSString *messageFromBareJid=[object.jid bare];
+ NSPredicate *predicate=[NSPredicate predicateWithFormat:@"bareJidStr==%@ AND streamBareJidStr==%@",messageFromBareJid,bareJid];
+ [request setEntity:entityDescription];
+ [request setPredicate:predicate]; //查找条件
+ NSError *error=nil;
+ NSArray *messageArray=[moc executeFetchRequest:request error:&error]; //查找与当前用户聊天记录
+ 
+ XMPPMessageArchiving_Message_CoreDataObject *message=messageArray.lastObject;
+ 
+ NSString *lastMessage=message.body;
+ 
+ 
+ 
+ 
+ 
+ 
+ int statusNum=[object.sectionNum intValue];
+ NSString *status=@"";
+ NSString *subStatus=@"";
+ NSString *askStatus=@"";
+ if(statusNum==0)
+ status=@"在线";
+ else if (statusNum==1)
+ status=@"离开";
+ else
+ status=@"离线";
+ if ([object.subscription isEqualToString:@"both"])
+ subStatus=@"互加好友";
+ else if ([object.subscription isEqualToString:@"from"])
+ subStatus=@"对方已关注你";
+ else if ([object.subscription isEqualToString:@"to"])
+ subStatus=@"你已关注对方";
+ else
+ 
+ if ([object.ask isEqualToString:@"subscribe"])
+ subStatus=@"已发出请求";
+ else
+ subStatus=@"";
+ NSString *numUnreadMessages=[NSString stringWithFormat:@"%d",[object.unreadMessages intValue]];
+ NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
+ 
+ cell.detailTextLabel.text = allStatus ;//[[[object primaryResource] presence] status];
+ cell.tag = indexPath.row;
+ return cell;
+ }
+ */
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -278,11 +365,11 @@
 - (void)prepareForSegue:(UIStoryboardPopoverSegue *)segue sender:(id)sender
 {
     UITableViewCell *cell = (UITableViewCell *)sender;
-//    if ([[segue destinationViewController] isKindOfClass:[ChatViewController class] ]) {
-//        XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:cell.tag];
-//        ChatViewController *chat = segue.destinationViewController;
-//        chat.xmppUserObject = object;
-//    }
+    //    if ([[segue destinationViewController] isKindOfClass:[ChatViewController class] ]) {
+    //        XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:cell.tag];
+    //        ChatViewController *chat = segue.destinationViewController;
+    //        chat.xmppUserObject = object;
+    //    }
 }
 #pragma mark - IBAction
 
