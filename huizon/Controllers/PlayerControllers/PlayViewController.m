@@ -108,17 +108,20 @@
         self.slider.value = [[VoiceControls voiceSingleton] musicCurrentTime]/[[VoiceControls voiceSingleton] musicDuration];
     
         float degree = abs([acc floatValue]);
-        int voiceDegree = abs(degree)+1;
+        float voiceDegree = abs(degree)+1;
         voiceDegree = kMaxBlueToothNum-voiceDegree;
+        int vindex = voiceDegree/2.5;
+    
         
-        voiceDegree = voiceDegree<0?0:voiceDegree;
-        voiceDegree = voiceDegree>=kMaxBlueToothNum?kMaxBlueToothNum-1:voiceDegree;
+        vindex = vindex<0?0:vindex;
+        vindex = vindex>=20?19:voiceDegree;
         
-        voiceDegree = voiceDegree/5;
-        voiceDegree = voiceDegree*5;
-        DLog(@"----%d",voiceDegree);
+        int KWaveSpeed[20] = { 1, 2, 4, 6, 8, 15, 17, 19, 21, 24, 27, 30, 33,36, 39, 42, 45, 47, 49, 50 };
+
+        vindex =KWaveSpeed[vindex];
         
-        NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
+        NSString * myComm = [kBluetoothSpeeds objectAtIndex:vindex];
+        
 //        NSLog(@"cmd===%@",myComm);
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {

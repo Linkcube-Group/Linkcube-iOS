@@ -77,7 +77,7 @@
                 else{
                     accZ *= 9.8;
                 }
->>>>>>> ae27963d4cfe3331f376cabe4aa814f982349892
+
                 
                 float acc = accX+accY+accZ;
                 

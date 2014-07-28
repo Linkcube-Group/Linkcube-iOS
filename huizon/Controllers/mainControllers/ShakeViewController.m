@@ -85,6 +85,10 @@
         int shakeDegree = degree/5+1;
         shakeDegree = degree*5;
         
+        int KShakeSpeed[10] = { 2, 9, 14, 19, 24, 30, 34, 38, 42, 44 };
+        
+
+        
         shakeDegree = shakeDegree>=kMaxBlueToothNum?kMaxBlueToothNum-1:shakeDegree;
 //        DLog(@"shake degree===%d",shakeDegree);
         NSString *myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];

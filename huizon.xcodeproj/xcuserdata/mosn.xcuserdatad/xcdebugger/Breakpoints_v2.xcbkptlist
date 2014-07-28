@@ -159,7 +159,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "474"
             endingLineNumber = "474"
-            landmarkName = "-startAlbumAnimation:"
+            landmarkName = "-allFilesAtPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
