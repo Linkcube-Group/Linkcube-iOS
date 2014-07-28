@@ -66,12 +66,17 @@
 {
     [super viewDidDisappear:animated];
 
+    [self stopAllAction];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)stopAllAction
+{
     isPlay = NO;
     [self playButtonSetImage];
-
+    
     [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     [[VoiceControls voiceSingleton] stopMusic];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -155,7 +160,7 @@
     
     [LeDiscovery sharedInstance];
 
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAllAction) name:kNotificationStopBlue object:nil];
     // Do any additional setup after loading the view from its nib.
     
 }

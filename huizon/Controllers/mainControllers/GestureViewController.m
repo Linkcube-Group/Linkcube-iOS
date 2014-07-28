@@ -62,6 +62,8 @@
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAllAction) name:kNotificationStopBlue object:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -111,13 +113,21 @@
 
 }
 
+- (void)stopAllAction
+{
+    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
+}
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self stopAllAction];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)dealloc
 {
-    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
 }
 
 - (void)didReceiveMemoryWarning

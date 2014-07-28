@@ -67,4 +67,7 @@ static NSString * const kNotificationTop = @"kNotificationTop";
 
 ///蓝牙断开
 static NSString * const kNotificationDisConnect = @"kNotificationDisConnect";
+
+///停止蓝牙发送
+static NSString * const kNotificationStopBlue = @"kNotificationStopBlue";
 #endif

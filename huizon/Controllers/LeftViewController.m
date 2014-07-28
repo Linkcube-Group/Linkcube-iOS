@@ -88,6 +88,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startBluetoothScan) name:UIApplicationDidBecomeActiveNotification object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:kNotificationTop object:nil];
     
+     [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -96,7 +97,15 @@
     [self.tbMenu reloadData];
 }
 
-
+- (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
+{
+    
+    if ([keyPath isEqual:@"state"] && theApp.sidePanelController.state==JASidePanelLeftVisible) {
+        DLog(@"show left menu");
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStopBlue object:nil];
+    }
+    
+}
 
 
 #pragma mark -
