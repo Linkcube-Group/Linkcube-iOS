@@ -79,6 +79,10 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [super viewDidAppear:animated];
+    CGRect frame = self.tableviewSetting.frame;
+    frame.origin.y = 63.f;
+    self.tableviewSetting.frame = frame;
     if (theApp.xmppvCardUser==nil) {
         [self backAction:nil];
     }
@@ -133,6 +137,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
+        if(theApp.xmppvCardUser.photo.length)
+        {
+            imageHead.image = [[UIImage alloc] initWithData:theApp.xmppvCardUser.photo];
+        }
         return cellHead;
     }
     static NSString *cellIdentifier = @"PersonCell";
@@ -205,6 +213,7 @@
         {
             InputViewController *ivc =  [[InputViewController alloc] init];
             ivc.modifyStr = theApp.xmppvCardUser.nickname;
+            ivc.NavTitle = @"修改昵称";
             ivc.numberOfword = 10;
             
             ivc.saveHandler = ^(id sender){
@@ -246,6 +255,7 @@
         case 4:{
             InputViewController *ivc =  [[InputViewController alloc] init];
             ivc.modifyStr = theApp.xmppvCardUser.personstate;
+            ivc.NavTitle = @"修改个性签名";
             ivc.numberOfword = 140;
             ivc.saveHandler = ^(id sender){
                 NSString *str = (NSString *)sender;

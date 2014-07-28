@@ -48,6 +48,27 @@
     self.lbUserName.text = name;
 }
 
+
+// set name of the icon in the front and the name of the text, for the RightCellLabel
+
+- (void)setMenuImageWithData:(NSData *)imgData Name:(NSString *)name
+{
+    self.imgIcon.image = [[UIImage alloc] initWithData:imgData];
+    self.imgIcon.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
+    self.imgIcon.layer.masksToBounds = YES;
+    self.lbUserName.text = name;
+}
+
+// set name of the icon in the front and the name of the text, for the RightCellLabel
+
+- (void)setMenuImageWithImage:(UIImage *)image Name:(NSString *)name
+{
+    self.imgIcon.image = image;
+    self.imgIcon.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
+    self.imgIcon.layer.masksToBounds = YES;
+    self.lbUserName.text = name;
+}
+
 // set right icon 
 
 - (void)setRightIcon:(NSString *)imgName

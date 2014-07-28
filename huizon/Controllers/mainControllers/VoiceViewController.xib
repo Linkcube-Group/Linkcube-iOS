@@ -31,10 +31,10 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="shakeAction:" destination="-1" eventType="touchUpInside" id="UvY-2n-Ply"/>
+                        <action selector="voiceAction:" destination="-1" eventType="touchUpInside" id="KJj-6X-KTW"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="uxS-yN-sxL">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="strength-0.png" id="uxS-yN-sxL">
                     <rect key="frame" x="121" y="451" width="79" height="37"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </imageView>
@@ -46,5 +46,6 @@
     </objects>
     <resources>
         <image name="mode_shake.png" width="160" height="160"/>
+        <image name="strength-0.png" width="79" height="37"/>
     </resources>
 </document>

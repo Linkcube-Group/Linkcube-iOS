@@ -172,11 +172,15 @@
         else
             subStatus=@"";
     NSString *numUnreadMessages=[NSString stringWithFormat:@"%d",[object.unreadMessages intValue]];
-    NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
+    __unused NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
     
 
-    
-    [cell setMenuImage:@"portrait-female-small" Name:name];
+    if(object.photo)
+    {
+        [cell setMenuImageWithImage:object.photo Name:name];
+    }
+    else
+        [cell setMenuImage:@"portrait-female-small" Name:name];
     [cell setFriendStatus:subStatus];
     
     return cell;

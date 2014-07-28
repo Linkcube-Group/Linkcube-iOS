@@ -128,7 +128,13 @@
     NSArray *friends = [context executeFetchRequest:request error:&error];
     //XMPPUserCoreDataStorageObject *object
     [self.friendsArray removeAllObjects];
-    [self.friendsArray addObjectsFromArray:friends];
+    for(XMPPUserCoreDataStorageObject *object in friends)
+    {
+        if([object.subscription isEqualToString:@"both"])
+        {
+            [self.friendsArray addObject:object];
+        }
+    }
 
 }
 
@@ -209,6 +215,10 @@
     {
         cellIdentifier = @"RightCellLabel";
     }
+    else
+    {
+        cellIdentifier = @"RightCellUser";
+    }
 
     
     RightCell *cell = (RightCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -241,7 +251,18 @@
                 name=[theApp.xmppvCardUser.jid bare];
             }
             
-            [cell setMenuImage:@"portrait-male-small" Name:name];
+            if(theApp.xmppvCardUser.photo.length)
+            {
+                [cell setMenuImageWithData:theApp.xmppvCardUser.photo Name:name];
+            }
+            else if ([theApp.xmppvCardUser.gender isEqualToString:@"男"])
+            {
+                [cell setMenuImage:@"portrait-male-small" Name:name];
+            }
+            else
+            {
+                [cell setMenuImage:@"portrait-female-small" Name:name];
+            }
         }
         else
         {
@@ -252,7 +273,7 @@
     else if(indexPath.row==2)
     {
         [cell setMenuImage:@"icon-message" Name:@"消息"];
-        [cell setRightIcon:@"button-add"];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if(indexPath.row==3)
     {
