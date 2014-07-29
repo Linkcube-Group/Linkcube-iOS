@@ -88,11 +88,14 @@
     NSString *name = self.txtName.text;
     
     NSString *nameMsg = IsValidEmail([name UTF8String]);
-    if (nameMsg!=nil) {
-		showCustomAlertMessage(nameMsg);
-		return;
-	}
-    
+//    if (nameMsg!=nil) {
+//		showCustomAlertMessage(nameMsg);
+//		return;
+//	}
+    if (StringIsNullOrEmpty(nameMsg)) {
+        showCustomAlertMessage(@"请输入正确的用户名");
+        return;
+    }
     name =[name stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
     NSString *pwd = self.txtPwd.text;
     
