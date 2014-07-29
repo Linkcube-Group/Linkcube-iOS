@@ -91,7 +91,7 @@
 		self.changeRoot = false;		// true if you want them to be sandboxed/chrooted into the basedir	
 
 		// the default client encoding is UTF8
-		self.clientEncoding = -2147482063;
+		self.clientEncoding = NSUnicodeStringEncoding;
     }
     return self;
 }

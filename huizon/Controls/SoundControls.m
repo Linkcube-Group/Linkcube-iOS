@@ -22,7 +22,7 @@
     if (self) {
         AVAudioSession * audioSession = [AVAudioSession sharedInstance];
         NSError *error;
-        [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error: &error];
+        [audioSession setCategory:AVAudioSessionCategoryRecord error: &error];
         //Activate the session
         
         [audioSession setActive:YES error: &error];

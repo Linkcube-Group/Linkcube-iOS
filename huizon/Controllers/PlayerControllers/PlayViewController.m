@@ -59,13 +59,13 @@
 
 - (void)dealloc
 {
-   
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-
+    
     [self stopAllAction];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -75,7 +75,7 @@
     isPlay = NO;
     [self playButtonSetImage];
     [self startAlbumAnimation:NO];
-
+    
     [[VoiceControls voiceSingleton] stopMusic];
     
     [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
@@ -113,7 +113,7 @@
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
         self.lbTimeMin.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
         self.slider.value = [[VoiceControls voiceSingleton] musicCurrentTime]/[[VoiceControls voiceSingleton] musicDuration];
-    
+        
         float degree = abs([acc floatValue]);
         float voiceDegree = abs(degree);
         voiceDegree = kMaxBlueToothNum-voiceDegree;
@@ -121,18 +121,18 @@
         voiceDegree = voiceDegree<0?0:voiceDegree;
         
         int vindex = voiceDegree/2.5;
-    
         
-//        vindex = vindex<0?0:vindex;
-//        vindex = vindex>=20?19:vindex;
+        
+        //        vindex = vindex<0?0:vindex;
+        //        vindex = vindex>=20?19:vindex;
         
         int KWaveSpeed[20] = { 1, 2, 4, 6, 8, 15, 17, 19, 21, 24, 27, 30, 33,36, 39, 42, 45, 47, 49, 50 };
-
+        
         vindex =KWaveSpeed[vindex]-1;
         DLog(@"--%d",vindex);
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:vindex];
         
-//        NSLog(@"cmd===%@",myComm);
+        //        NSLog(@"cmd===%@",myComm);
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
             [theApp sendControlCode:myComm];
@@ -161,11 +161,14 @@
     [self setViewInfo:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop:) name:kNotificationTop object:nil];
- 
+    
     
     [LeDiscovery sharedInstance];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAllAction) name:kNotificationStopBlue object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopRotate) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRotate) name:UIApplicationDidBecomeActiveNotification object:nil];
     // Do any additional setup after loading the view from its nib.
     
 }
@@ -220,8 +223,8 @@
     self.lbTimeMin.text = @"00:00";
     int duration = [[VoiceControls voiceSingleton] musicDuration];
     self.lbTimeMax.text = _S(@"%02d:%02d",duration/60,duration%60);
-   // self.imgFloat.layer.cornerRadius = 76;
-   // self.imgFloat.layer.masksToBounds = YES;
+    // self.imgFloat.layer.cornerRadius = 76;
+    // self.imgFloat.layer.masksToBounds = YES;
 }
 
 - (IBAction)playAction:(id)sender
@@ -290,7 +293,7 @@
         if (ary) {
             self.musicArray = [[MusicList alloc] initWithArray:ary];
         }
-//        block_self.musicInfo = (MusicItem *)sender;
+        //        block_self.musicInfo = (MusicItem *)sender;
         playIndex = [sender intValue];
         isPlay = NO;
         [block_self setViewInfo:YES];
@@ -397,7 +400,7 @@
             NSLog(@"commonKey:%@",metadataItem.commonKey);
             if ([metadataItem.commonKey isEqualToString:@"artwork"]) {
                 img =[UIImage imageWithData:[(NSDictionary*)metadataItem.value objectForKey:@"data"]];
-               
+                
                 img = [UIImage scaleToSize:img size:CGSizeMake(240, 240)];
                 img = [img roundedRectWith:120];
             }
@@ -493,16 +496,27 @@
 - (void)startAlbumAnimation:(BOOL)isStart
 {
     if (isStart) {
-        [self.imgFloat startRotation];
-
+        [self.imgFloat startRotation:NO];
     }
     else{
-
         [self.imgFloat pauseRotation];
     }
 }
 
+- (void)stopRotate
+{
+    [self startAlbumAnimation:NO];
+}
 
+- (void)startRotate
+{
+    [self.imgFloat initJingRound];
+    if (isPlay) {
+        
+        [self.imgFloat startRotation:YES];
+    }
+    
+}
 
 
 @end

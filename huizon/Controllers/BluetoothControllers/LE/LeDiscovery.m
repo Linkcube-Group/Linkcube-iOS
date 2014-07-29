@@ -212,10 +212,18 @@
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-	if (![foundPeripherals containsObject:peripheral]) {
-		[foundPeripherals addObject:peripheral];
-		[discoveryDelegate discoveryDidRefresh];
-	}
+
+    if ([peripheral.name isEqualToString:BLUE_NAME1] ||
+        [peripheral.name isEqualToString:BLUE_NAME2] ||
+        [peripheral.name isEqualToString:BLUE_LINK]){
+        
+        if (![foundPeripherals containsObject:peripheral]) {
+            [foundPeripherals addObject:peripheral];
+            [discoveryDelegate discoveryDidRefresh];
+        }
+        
+    }
+
 }
 
 

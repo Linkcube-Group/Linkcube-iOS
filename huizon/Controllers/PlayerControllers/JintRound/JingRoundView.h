@@ -29,10 +29,11 @@
 @property (assign, nonatomic) BOOL isPlay;
 @property (assign, nonatomic) float rotationDuration;
 
+-(void) initJingRound;
 
 -(void) play;
 -(void) pause;
 
--(void) startRotation;
+-(void) startRotation:(BOOL)forceStart;
 -(void) pauseRotation;
 @end
