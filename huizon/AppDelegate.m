@@ -19,6 +19,7 @@
 #import "RightViewController.h"
 #import "PlayViewController.h"
 #import "XMPPSearchModule.h"
+#import "FileManager.h"
 
 
 
@@ -498,6 +499,15 @@
         //}
         NSDictionary *dic=[NSDictionary dictionaryWithObject:presence forKey:@"presence"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidReceivePresence object:nil userInfo:dic];
+    }
+    //收到加好友请求
+    if([presenceType isEqualToString:@"subscribe"])
+    {
+        NSMutableArray * receiveArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
+        NSDictionary * dict = [NSDictionary dictionaryWithObjectsAndKeys:[presence from],@"from",[presence to],@"to",[presence type],@"type", nil];
+        NSLog(@"好友请求的内容%@",presence);
+        [receiveArray addObject:dict];
+//        [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
     }
     /*
     //这里再次加好友

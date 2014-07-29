@@ -11,8 +11,11 @@
 #import "TalkViewController.h"
 #import "RightCell.h"
 #import "NotificationCell.h"
+#import "FileManager.h"
+
 @interface FriendViewController ()<UITableViewDataSource,UITableViewDelegate,ChatDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSMutableArray * receiveAddFriendArray;
 @property (nonatomic, strong) IBOutlet UITableView *tableFriends;
 
 @end
@@ -34,12 +37,28 @@
     [super viewDidLoad];
     
     self.dataArray = [[NSMutableArray alloc] init];
+    self.receiveAddFriendArray = [[NSMutableArray alloc] init];
     self.tableFriends.delegate = self;
     self.tableFriends.dataSource = self;
     [self getData];
     
     [self.tableFriends reloadData];
     // Do any additional setup after loading the view from its nib.
+}
+
+#pragma mark
+#pragma mark - 获得收到的加好友请求
+
+-(void)getAddFriendIQFromCache
+{
+    self.receiveAddFriendArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
+}
+
+#pragma mark - 再存回去
+
+-(void)SaveNewCache
+{
+    [FileManager saveObject:self.receiveAddFriendArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
 }
 
 
