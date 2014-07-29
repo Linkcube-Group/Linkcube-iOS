@@ -20,6 +20,7 @@ typedef enum {
 
 @property (nonatomic) NotificationType notiType;
 @property (nonatomic, strong) UIImageView * headerImageView;
-@property (nonatomic, strong) NSString * name;
+@property (nonatomic, strong) UILabel * nameLabel;
+@property (nonatomic) NSString * temp;
 
 @end

@@ -34,6 +34,8 @@
     [super viewDidLoad];
     
     self.dataArray = [[NSMutableArray alloc] init];
+    self.tableFriends.delegate = self;
+    self.tableFriends.dataSource = self;
     [self getData];
     
     [self.tableFriends reloadData];
@@ -64,10 +66,11 @@
     theApp.chatDelegate = self;
 	return theApp;
 }
-
-//not used
-- (void)getData{
+#if 1
+- (void)getData
+{
     NSManagedObjectContext *context = [[[self appDelegate] xmppRosterStorage] mainThreadManagedObjectContext];
+    //XMPPUserCoreDataStorageObject
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     [request setEntity:entity];
@@ -76,6 +79,26 @@
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:friends];
 }
+#else
+
+- (void)getData
+{
+    XMPPJID * jid = theApp.xmppStream.myJID;
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"from" stringValue:jid.description];
+    [iq addAttributeWithName:@"to" stringValue:jid.domain];
+    [iq addAttributeWithName:@"id" stringValue:@"id"];
+    [iq addAttributeWithName:@"type" stringValue:@"get"];
+    [iq addChild:query];
+    [[[self appDelegate] xmppStream] sendElement:iq];
+    //回调到receiveIQ里面
+}
+
+
+
+#endif
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -190,16 +213,15 @@
 #else
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //测试用163添加qq
     static NSString *cellIdentifier = @"RightCellRequest";
-    RightCell *cell = (RightCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NotificationCell *cell = (NotificationCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
     {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:cellIdentifier owner:self options:nil];
-        cell = [topLevelObjects objectAtIndex:0];
+        cell = [[NotificationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    
     XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
     NSString *name = [object displayName];
     if (!name) {
@@ -209,34 +231,9 @@
         name = [object jidStr];
     }
     
-    
-    
-    
-    
-    XMPPMessageArchivingCoreDataStorage *storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
-    NSManagedObjectContext *moc = [storage mainThreadManagedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"XMPPMessageArchiving_Message_CoreDataObject"
-                                                         inManagedObjectContext:moc];
-    
-    NSFetchRequest *request=[[NSFetchRequest alloc] init];
-    NSString *bareJid=[theApp.xmppStream.myJID bare];
-    
-    NSString *messageFromBareJid=[object.jid bare];
-    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"bareJidStr==%@ AND streamBareJidStr==%@",messageFromBareJid,bareJid];
-    [request setEntity:entityDescription];
-    [request setPredicate:predicate]; //查找条件
-    NSError *error=nil;
-    NSArray *messageArray=[moc executeFetchRequest:request error:&error]; //查找与当前用户聊天记录
-    
-    XMPPMessageArchiving_Message_CoreDataObject *message=messageArray.lastObject;
-    
-    NSString *lastMessage=message.body;
-    
-    NSLog(@"数据%@ %@",object.subscription,object.ask);
     int statusNum=[object.sectionNum intValue];
     NSString *status=@"";
     NSString *subStatus=@"";
-    NSString *askStatus=@"";
     if(statusNum==0)
         status=@"在线";
     else if (statusNum==1)
@@ -247,7 +244,7 @@
         //subStatus=@"互加好友";
         subStatus=@"已添加";
     else if ([object.subscription isEqualToString:@"from"])
-        subStatus=@"";
+        subStatus=@"对方已关注你";
     else if ([object.subscription isEqualToString:@"to"])
         subStatus=@"你已关注对方";
     else
@@ -257,18 +254,26 @@
             subStatus=@"等待验证";
         else
             subStatus=@"";
-    NSString *numUnreadMessages=[NSString stringWithFormat:@"%d",[object.unreadMessages intValue]];
-    __unused NSString *allStatus=[NSString stringWithFormat:@"%@,%@,%@,%@,%@",status,subStatus,askStatus,numUnreadMessages,lastMessage];
     
-    
-    if(object.photo)
+    cell.headerImageView.image = [UIImage imageNamed:@"portrait-female-small"];
+    cell.nameLabel.text = name;
+    NSLog(@"%@-------------------------------->%@",object.subscription,object.ask);
+    if([object.subscription isEqualToString:@"from"])
     {
-        [cell setMenuImageWithImage:object.photo Name:name];
+        cell.notiType = NotificationTypeFrom;
+    }
+    else if ([object.subscription isEqualToString:@"to"])
+    {
+        cell.notiType = NotificationTypeTo;
+    }
+    else if ([object.subscription isEqualToString:@"both"])
+    {
+        cell.notiType = NotificationTypeBoth;
     }
     else
-        [cell setMenuImage:@"portrait-female-small" Name:name];
-    [cell setFriendStatus:subStatus];
-    
+    {
+        cell.notiType = NotificationTypeNone;
+    }
     return cell;
 }
 #endif
