@@ -518,6 +518,8 @@
 		BBF8DF1F18DCACC8005E2B8E /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1B18DCACC8005E2B8E /* icon_114.png */; };
 		D403349D19865D9200874FED /* agree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D403349C19865D9200874FED /* agree@2x.png */; };
 		D40334A019865DC200874FED /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D403349F19865DC200874FED /* NotificationCell.m */; };
+		D41097641987A040002BF338 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097631987A040002BF338 /* FileManager.m */; };
+		D41097671987A0DF002BF338 /* NSString+SFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097661987A0DF002BF338 /* NSString+SFCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1304,6 +1306,10 @@
 		D403349C19865D9200874FED /* agree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree@2x.png"; sourceTree = "<group>"; };
 		D403349E19865DC200874FED /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
 		D403349F19865DC200874FED /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
+		D41097621987A040002BF338 /* FileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileManager.h; sourceTree = "<group>"; };
+		D41097631987A040002BF338 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
+		D41097651987A0DF002BF338 /* NSString+SFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SFCategory.h"; sourceTree = "<group>"; };
+		D41097661987A0DF002BF338 /* NSString+SFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SFCategory.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1450,6 +1456,7 @@
 		0709967B182B8B0B0064D7D3 /* iosTools */ = {
 			isa = PBXGroup;
 			children = (
+				D41097611987A040002BF338 /* FileManager */,
 				078CD193182CC68500EBF477 /* Protocol */,
 				0709967F182B8BFB0064D7D3 /* Model */,
 				0709968B182B8BFB0064D7D3 /* UIHelper */,
@@ -3084,6 +3091,17 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		D41097611987A040002BF338 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				D41097651987A0DF002BF338 /* NSString+SFCategory.h */,
+				D41097661987A0DF002BF338 /* NSString+SFCategory.m */,
+				D41097621987A040002BF338 /* FileManager.h */,
+				D41097631987A040002BF338 /* FileManager.m */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3434,6 +3452,7 @@
 				032E3857192EF58D00363B90 /* list.m in Sources */,
 				07C5CE0019278B6E0070B958 /* RightViewController.m in Sources */,
 				0735553718C412E2005B319B /* TURNSocket.m in Sources */,
+				D41097671987A0DF002BF338 /* NSString+SFCategory.m in Sources */,
 				0735555E18C412E2005B319B /* RFImageToDataTransformer.m in Sources */,
 				073AE93618CF382200795941 /* SettingViewController.m in Sources */,
 				0735551C18C412E2005B319B /* XMPPRoomHybrid.xcdatamodeld in Sources */,
@@ -3503,6 +3522,7 @@
 				0735553518C412E2005B319B /* XMPPIQ+XEP_0060.m in Sources */,
 				070996E9182B8BFB0064D7D3 /* NSString+Extension.m in Sources */,
 				0735552B18C412E2005B319B /* XMPPvCardTemp.m in Sources */,
+				D41097641987A040002BF338 /* FileManager.m in Sources */,
 				073554F918C412E2005B319B /* NSNumber+XMPP.m in Sources */,
 				073B328818C89C12009FE1DA /* MediaViewController.m in Sources */,
 				078CD1B0182CC68500EBF477 /* NSData+Base64.m in Sources */,
