@@ -22,6 +22,9 @@
 
 #define theApp ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
+//收到加好友消息通知的缓存路径
+#define XMPP_RECEIVE_ADDFRIEND_IQ
+
 //最大蓝牙数50
 static int const kMaxBlueToothNum = 50;
 
@@ -70,4 +73,5 @@ static NSString * const kNotificationDisConnect = @"kNotificationDisConnect";
 
 ///停止蓝牙发送
 static NSString * const kNotificationStopBlue = @"kNotificationStopBlue";
+
 #endif
