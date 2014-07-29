@@ -75,8 +75,10 @@
     isPlay = NO;
     [self playButtonSetImage];
     [self startAlbumAnimation:NO];
-    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
+
     [[VoiceControls voiceSingleton] stopMusic];
+    
+    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
 }
 
 - (void)viewDidLoad

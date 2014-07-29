@@ -52,11 +52,13 @@
 
 - (void)stopAllAction
 {
-    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
+
     isOpen = NO;
     [eq stop];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[ShakeControls shakeSingleton] stopShakeAction];
+    
+    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
 }
 
 - (void)viewDidLoad

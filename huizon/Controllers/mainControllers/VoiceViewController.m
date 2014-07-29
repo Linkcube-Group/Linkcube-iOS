@@ -54,10 +54,11 @@
 
 - (void)stopAllAction
 {
-    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
     isOpen = NO;
     
     [[SoundControls soundSingleton] stopSoundListener];
+    
+    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
 }
 
 - (void)viewDidLoad
