@@ -22,5 +22,6 @@ typedef enum {
 @property (nonatomic, strong) UIImageView * headerImageView;
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic) NSString * temp;
+@property (nonatomic, strong) XMPPJID * jid;
 
 @end

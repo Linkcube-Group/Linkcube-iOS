@@ -59,9 +59,9 @@
 
 - (void) receiveSubscribe:(NSNotification *) notification
 {
-    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
-    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
-    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+//    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
+//    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
+//    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
     //[theApp.xmppRoster removeUser:jid];
     
 }

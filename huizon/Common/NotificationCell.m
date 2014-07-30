@@ -10,7 +10,7 @@
 //cell高度
 #define NOTICELLHEIGHT 50.f
 //后面状态的宽度
-#define TYPELENGTH 60.f
+#define TYPELENGTH 80.f
 
 @implementation NotificationCell
 
@@ -18,6 +18,7 @@
 @synthesize nameLabel;
 @synthesize notiType;
 @synthesize temp;
+@synthesize jid;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -49,6 +50,17 @@
     {
         case NotificationTypeFrom:
         {
+            UIButton * agreementButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            agreementButton.frame = CGRectMake(nameLabel.frame.origin.x + nameLabel.frame.size.width + TYPELENGTH - 60, nameLabel.frame.origin.y, 60.f, nameLabel.frame.size.height);
+            [agreementButton setBackgroundImage:[UIImage imageNamed:@"agree.png"] forState:UIControlStateNormal];
+            [agreementButton setTitle:@"同意" forState:UIControlStateNormal];
+            [agreementButton setTitleColor:[UIColor colorWithRed:38/255.f green:128/255.f blue:38/255.f alpha:1.f] forState:UIControlStateNormal];
+            [agreementButton addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+            [self.contentView addSubview:agreementButton];
+            break;
+        }
+        case NotificationTypeTo:
+        {
             UILabel * label = [[UILabel alloc] init];
             label.frame = CGRectMake(nameLabel.frame.origin.x + nameLabel.frame.size.width, nameLabel.frame.origin.y, TYPELENGTH, nameLabel.frame.size.height);
             label.backgroundColor = [UIColor clearColor];
@@ -57,17 +69,6 @@
             label.textColor = [UIColor darkGrayColor];
             label.text = NSLocalizedString(@"等待验证", nil);
             [self.contentView addSubview:label];
-            break;
-        }
-        case NotificationTypeTo:
-        {
-            UIButton * agreementButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            agreementButton.frame = CGRectMake(nameLabel.frame.origin.x + nameLabel.frame.size.width, nameLabel.frame.origin.y, TYPELENGTH, nameLabel.frame.size.height);
-            [agreementButton setBackgroundImage:[UIImage imageNamed:@"agree.png"] forState:UIControlStateNormal];
-            [agreementButton setTitle:@"同意" forState:UIControlStateNormal];
-            [agreementButton setTitleColor:[UIColor colorWithRed:38/255.f green:128/255.f blue:38/255.f alpha:1.f] forState:UIControlStateNormal];
-            [agreementButton addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.contentView addSubview:agreementButton];
             break;
         }
         case NotificationTypeBoth:
@@ -95,6 +96,7 @@
 -(void)btnClick
 {
     NSLog(@"同意%@ %d",temp,notiType);
+    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
