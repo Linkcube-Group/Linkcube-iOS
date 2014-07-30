@@ -480,17 +480,12 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:KXMPPNotificationDidReceiveMessage object:nil];
 }
-- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
+
+- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
 {
-     NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]]; //online/offline
-    NSLog(@"didReceivePresence:\n\n%@\n",presence.description);
-    //if (presence.status) {
-    //    if ([self.chatDelegate respondsToSelector:@selector(friendStatusChangePresence:)]) {
-    //        [self.chatDelegate friendStatusChangePresence:presence];
-    //    }
-    //}
-    NSLog(@"曹操%@",presenceType);
+    NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]];
     //收到加好友请求
+    NSLog(@"这个哈哈哈哈:%@",presenceType);
     if([presenceType isEqualToString:@"subscribe"])
     {
         NSMutableArray * receiveArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
@@ -498,6 +493,27 @@
         [receiveArray addObject:presence];
         [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
     }
+}
+
+- (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
+{
+     NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]]; //online/offline
+    NSLog(@"这个呵呵呵呵:%@",presenceType);
+    NSLog(@"didReceivePresence:\n\n%@\n",presence.description);
+    //if (presence.status) {
+    //    if ([self.chatDelegate respondsToSelector:@selector(friendStatusChangePresence:)]) {
+    //        [self.chatDelegate friendStatusChangePresence:presence];
+    //    }
+    //}
+    NSLog(@"曹操%@",presenceType);
+//    //收到加好友请求
+//    if([presenceType isEqualToString:@"subscribe"])
+//    {
+//        NSMutableArray * receiveArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
+//        NSLog(@"好友请求的内容%@",presence);
+//        [receiveArray addObject:presence];
+//        [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
+//    }
     
     // 接到加好友请求
     //if ([presenceType isEqualToString:@"subscribe"])
@@ -513,8 +529,8 @@
     //这里再次加好友
     if ([presenceType isEqualToString:@"subscribed"]) {
         XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
-//        [xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:NO];
-        [xmppRoster addUser:jid withNickname:nil];
+        [xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:NO];
+//        [xmppRoster addUser:jid withNickname:nil];
     }
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(NSXMLElement *)error
@@ -564,14 +580,6 @@
     NSLog(@"xmppStreamDidDisconnect: %@",error.description);
 }
 #pragma mark - XMPPRosterDelegate
-- (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
-{
-    /*
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:presence.fromStr message:@"add" delegate:self cancelButtonTitle:@"cancle" otherButtonTitles:@"yes", nil];
-    alertView.tag = tag_subcribe_alertView;
-    [alertView show];
-     */
-}
 
 - (NSManagedObjectContext *)managedObjectContext_roster
 {
