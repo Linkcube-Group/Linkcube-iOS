@@ -104,7 +104,6 @@
     {
         NSString *jidStr=object.jidStr;
         NSString *status=object.subscription;
-        NSLog(@"数据:--->%@",object.subscription);
         [dicJidToStatus setObject:status forKey:jidStr];
     }
 
@@ -205,7 +204,6 @@
     [cell setCellFriendName:[dic keyForValue:@"nick"]];
     
     NSString *status=[dicJidToStatus valueForKey:jidStr];
-    NSLog(@"状态:%@",status);
     if (status.length==0)
     {
         [cell setFriendStatus:@"None"];
