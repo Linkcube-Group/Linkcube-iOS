@@ -28,8 +28,15 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kXMPPNotificationDidReceivePresence object:nil];
     }
     return self;
+}
+
+-(void)reloadTableData
+{
+    [self getAddFriendIQFromCache];
+    [self.tableFriends reloadData];
 }
 
 - (void)viewDidLoad
@@ -41,7 +48,7 @@
     self.tableFriends.delegate = self;
     self.tableFriends.dataSource = self;
     [self getData];
-    
+    [self reloadTableData];
     [self.tableFriends reloadData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -219,57 +226,63 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryNone;
     }
-    XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
-    NSString *name = [object displayName];
-    if (!name) {
-        name = [object nickname];
-    }
-    if (!name) {
-        name = [object jidStr];
-    }
-    NSLog(@"=================>%@ %@",object.subscription,object.ask);
-    int statusNum=[object.sectionNum intValue];
-    NSString *status=@"";
-    NSString *subStatus=@"";
-    if(statusNum==0)
-        status=@"在线";
-    else if (statusNum==1)
-        status=@"离开";
-    else
-        status=@"离线";
-    if ([object.subscription isEqualToString:@"both"])
-        //subStatus=@"互加好友";
-        subStatus=@"已添加";
-    else if ([object.subscription isEqualToString:@"from"])
-        subStatus=@"对方已关注你";
-    else if ([object.subscription isEqualToString:@"to"])
-        subStatus=@"你已关注对方";
-    else
-        
-        if ([object.ask isEqualToString:@"subscribe"])
-            //subStatus=@"已发出请求";
-            subStatus=@"等待验证";
-        else
-            subStatus=@"";
-    
-    cell.headerImageView.image = [UIImage imageNamed:@"portrait-female-small"];
-    cell.nameLabel.text = name;
-    if([object.subscription isEqualToString:@"from"])
+    if(indexPath.row < self.receiveAddFriendArray.count)
     {
+        XMPPPresence * presence = [self.receiveAddFriendArray objectAtIndex:indexPath.row];
+        cell.headerImageView.image = [UIImage imageNamed:@"portrait-female-small"];
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@",[presence from]];
         cell.notiType = NotificationTypeFrom;
-    }
-    else if ([object.subscription isEqualToString:@"to"])
-    {
-        cell.notiType = NotificationTypeTo;
-    }
-    else if ([object.subscription isEqualToString:@"both"])
-    {
-        cell.notiType = NotificationTypeBoth;
+        cell.jid = [presence from];
     }
     else
     {
-        cell.notiType = NotificationTypeNone;
+        XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row-self.receiveAddFriendArray.count];
+        NSString *name = [object displayName];
+        if (!name) {
+            name = [object nickname];
+        }
+        if (!name) {
+            name = [object jidStr];
+        }
+        NSLog(@"=================>%@ %@",object.subscription,object.ask);
+        int statusNum=[object.sectionNum intValue];
+        NSString *status=@"";
+        NSString *subStatus=@"";
+        if(statusNum==0)
+            status=@"在线";
+        else if (statusNum==1)
+            status=@"离开";
+        else
+            status=@"离线";
+        if ([object.subscription isEqualToString:@"both"])
+            //subStatus=@"互加好友";
+            subStatus=@"已添加";
+        else if ([object.subscription isEqualToString:@"from"])
+            subStatus=@"对方已关注你";
+        else if ([object.subscription isEqualToString:@"to"])
+            subStatus=@"你已关注对方";
+        else
+            
+            if ([object.ask isEqualToString:@"subscribe"])
+                //subStatus=@"已发出请求";
+                subStatus=@"等待验证";
+            else
+                subStatus=@"";
+        
+        cell.headerImageView.image = [UIImage imageNamed:@"portrait-female-small"];
+        cell.nameLabel.text = name;
+        if([object.subscription isEqualToString:@"both"])
+        {
+            cell.notiType = NotificationTypeBoth;
+        }
+        else
+        {
+            cell.notiType = NotificationTypeTo;
+        }
     }
+    
+    
+    
     return cell;
 }
 #endif
