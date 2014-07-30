@@ -70,16 +70,10 @@
 
 - (void)didLoginAuthen:(NSNotification *)noti
 {
-    if(theApp.xmppvCardUser.nickname.length)
-    {
         [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else
-    {
         UserEditController *uvc = [[UserEditController alloc] init];
         //[self presentViewController:uvc animated:YES completion:nil];
         [self.navigationController pushViewController:uvc animated:YES];
-    }
 
 }
 
