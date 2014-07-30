@@ -356,6 +356,8 @@
 		078CD1BD182CC77D00EBF477 /* ELUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 078CD1BB182CC77D00EBF477 /* ELUtils.m */; };
 		078CD1C0182CCAE100EBF477 /* protocolHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 078CD1BF182CCAE100EBF477 /* protocolHelper.m */; };
 		078CD1C6182CCED200EBF477 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 078CD1C5182CCED200EBF477 /* CustomAlertView.m */; };
+		078CE940198952DB00B498F0 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 078CE93E198952DB00B498F0 /* libMobClickLibrary.a */; };
+		078CE9421989537500B498F0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 078CE9411989537500B498F0 /* libz.dylib */; };
 		0796FD1518BC6900001F27B3 /* VoiceControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0796FD1418BC6900001F27B3 /* VoiceControls.m */; };
 		0796FD1718BC693A001F27B3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0796FD1618BC693A001F27B3 /* AVFoundation.framework */; };
 		0796FD1918BC6940001F27B3 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0796FD1818BC6940001F27B3 /* CoreAudio.framework */; };
@@ -1100,6 +1102,9 @@
 		078CD1C1182CCE3F00EBF477 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		078CD1C4182CCED200EBF477 /* CustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlertView.h; sourceTree = "<group>"; };
 		078CD1C5182CCED200EBF477 /* CustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlertView.m; sourceTree = "<group>"; };
+		078CE93E198952DB00B498F0 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
+		078CE93F198952DB00B498F0 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
+		078CE9411989537500B498F0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		0796FD1318BC6900001F27B3 /* VoiceControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceControls.h; sourceTree = "<group>"; };
 		0796FD1418BC6900001F27B3 /* VoiceControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceControls.m; sourceTree = "<group>"; };
 		0796FD1618BC693A001F27B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -1317,6 +1322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				078CE9421989537500B498F0 /* libz.dylib in Frameworks */,
 				07B6E71418D5538F00C17693 /* libUMFeedback.a in Frameworks */,
 				07588F5F18C877CC0031344D /* MediaAccessibility.framework in Frameworks */,
 				07588F6018C877CC0031344D /* MediaPlayer.framework in Frameworks */,
@@ -1326,6 +1332,7 @@
 				070996FC182B8E150064D7D3 /* CFNetwork.framework in Frameworks */,
 				07099649182B8AB50064D7D3 /* CoreGraphics.framework in Frameworks */,
 				072A150818C34B0300A3758E /* CoreMotion.framework in Frameworks */,
+				078CE940198952DB00B498F0 /* libMobClickLibrary.a in Frameworks */,
 				0796FD1918BC6940001F27B3 /* CoreAudio.framework in Frameworks */,
 				0796FD1718BC693A001F27B3 /* AVFoundation.framework in Frameworks */,
 				072D5B7418AB57440083626A /* CoreBluetooth.framework in Frameworks */,
@@ -1399,6 +1406,7 @@
 		07099645182B8AB50064D7D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				078CE9411989537500B498F0 /* libz.dylib */,
 				07588F5C18C877CC0031344D /* MediaAccessibility.framework */,
 				07588F5D18C877CC0031344D /* MediaPlayer.framework */,
 				07588F5E18C877CC0031344D /* MediaToolbox.framework */,
@@ -1426,6 +1434,7 @@
 		0709964C182B8AB50064D7D3 /* huizon */ = {
 			isa = PBXGroup;
 			children = (
+				078CE93D198952DB00B498F0 /* UMengAnalytics */,
 				07EAA1381928B47A00794ABC /* ViewDeck */,
 				072D5B7518AB66F10083626A /* Controllers */,
 				074401BF182E3D0C00273680 /* Models */,
@@ -2742,6 +2751,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		078CE93D198952DB00B498F0 /* UMengAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				078CE93E198952DB00B498F0 /* libMobClickLibrary.a */,
+				078CE93F198952DB00B498F0 /* MobClick.h */,
+			);
+			path = UMengAnalytics;
+			sourceTree = "<group>";
+		};
 		07B6E6CC18D5538F00C17693 /* UMFeedback_SDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -3768,6 +3786,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/huizon/IM/XMPP/Vendor/libidn",
 					"$(SRCROOT)/huizon/Controllers/SettingControllers/UMFeedback_SDK",
+					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
 				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
@@ -3801,6 +3820,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/huizon/IM/XMPP/Vendor/libidn",
 					"$(SRCROOT)/huizon/Controllers/SettingControllers/UMFeedback_SDK",
+					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
 				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";

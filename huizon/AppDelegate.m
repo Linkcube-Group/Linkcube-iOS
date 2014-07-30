@@ -57,6 +57,8 @@
 
 #endif
     
+    [MobClick startWithAppkey:@"53d91ac6fd98c5548d00ac45"];
+    
     self.currentGamingJid = NO;
     self.blueConnType = 0;
     
