@@ -218,7 +218,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //测试用163添加qq
-    static NSString *cellIdentifier = @"RightCellRequest";
+    static NSString *cellIdentifier;
+    if(indexPath.row < self.receiveAddFriendArray.count)
+    {
+        cellIdentifier = @"RightCellRequestFrom";
+    }
+    else
+    {
+        cellIdentifier = @"RightCellRequest";
+    }
     NotificationCell *cell = (NotificationCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
     {
