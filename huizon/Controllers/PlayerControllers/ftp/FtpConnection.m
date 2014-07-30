@@ -289,7 +289,7 @@
 		[ dataConnection writeData:data ];
 		
 	}
-	else
+	else if(data!=nil)
 	{
 		[ queuedData addObject:data ];
 	}

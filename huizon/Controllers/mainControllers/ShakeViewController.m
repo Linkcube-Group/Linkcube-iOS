@@ -90,16 +90,18 @@
     [ShakeControls shakeSingleton].shakeHandler = ^(id acc){
         float degree = abs([acc intValue]);
 //        degree *= shakeLevel;
-        DLog(@"shake ====|%f",degree);
-        int shakeDegree = degree/5+1;
-        shakeDegree = degree*5;
+       // DLog(@"shake ====|%f",degree);
+        int shakeDegree = degree/8;
         
-        int KShakeSpeed[10] = { 2, 9, 14, 19, 24, 30, 34, 38, 42, 44 };
+        shakeDegree = shakeDegree<0?0:shakeDegree;
+        shakeDegree = shakeDegree>9?9:shakeDegree;
+        
+        int KShakeSpeed[10] = { 1, 9, 14, 19, 24, 30, 34, 38, 42, 44 };
         
 
         
-        shakeDegree = shakeDegree>=kMaxBlueToothNum?kMaxBlueToothNum-1:shakeDegree;
-//        DLog(@"shake degree===%d",shakeDegree);
+        shakeDegree = KShakeSpeed[shakeDegree];
+       DLog(@"shake degree===%d",shakeDegree);
         NSString *myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {

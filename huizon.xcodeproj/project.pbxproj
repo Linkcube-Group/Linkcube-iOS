@@ -3753,8 +3753,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3770,7 +3770,7 @@
 					"$(SRCROOT)/huizon/Controllers/SettingControllers/UMFeedback_SDK",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
+				PROVISIONING_PROFILE = "7E3AA5E8-2C74-4A2F-BA89-D13433C09E5B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -3786,8 +3786,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3803,7 +3803,7 @@
 					"$(SRCROOT)/huizon/Controllers/SettingControllers/UMFeedback_SDK",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
+				PROVISIONING_PROFILE = "7E3AA5E8-2C74-4A2F-BA89-D13433C09E5B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

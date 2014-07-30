@@ -54,16 +54,16 @@
             
             // 所有操作进行同步
             @synchronized(motionManager) {
-              
+//                DLog(@"|%f|%f|%f",motionManager.accelerometerData.acceleration.x,motionManager.accelerometerData.acceleration.y,motionManager.accelerometerData.acceleration.z);
                 float accY = fabs(motionManager.accelerometerData.acceleration.y);
-                if (accY<1.3f) {
+                if (accY<1.0f) {
                     accY = 0;
                 }
                 else{
                     accY *= 9.8;
                 }
                 float accX = ABS(motionManager.accelerometerData.acceleration.x);
-                if (accX<1.3f) {
+                if (accX<1.0f) {
                     accX = 0;
                 }
                 else{
@@ -71,7 +71,7 @@
                 }
 
                 float accZ = ABS(motionManager.accelerometerData.acceleration.z);
-                if (accZ<1.3f) {
+                if (accZ<1.1f) {
                     accZ = 0;
                 }
                 else{

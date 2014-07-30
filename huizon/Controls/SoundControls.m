@@ -20,12 +20,12 @@
 {
     self = [super init];
     if (self) {
-        AVAudioSession * audioSession = [AVAudioSession sharedInstance];
+
         NSError *error;
-        [audioSession setCategory:AVAudioSessionCategoryRecord error: &error];
+ 
         //Activate the session
         
-        [audioSession setActive:YES error: &error];
+        [[AVAudioSession sharedInstance] setActive:YES error: &error];
         
         NSDictionary *recordSetting = [NSDictionary dictionaryWithObjectsAndKeys:
                                        [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
@@ -45,7 +45,7 @@
         self.recorder.meteringEnabled = YES;
         [self.recorder setDelegate:self];
         
-        [self.recorder prepareToRecord];
+        
     }
     return self;
 }
@@ -64,9 +64,12 @@
 
 - (void)startSoundListener
 {
+    if ([self.recorder isRecording]==NO) {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:nil];
+        [self.recorder prepareToRecord];
+        [self.recorder record];
+    }
    
-    [self.recorder record];
-    
     if (self.stepTimer && [self.stepTimer isValid]) {
         [self.stepTimer invalidate];
     }
