@@ -99,7 +99,7 @@
 //		showCustomAlertMessage(nameMsg);
 //		return;
 //	}
-    if (StringIsNullOrEmpty(nameMsg)) {
+    if (StringNotNullAndEmpty(nameMsg)) {
         showCustomAlertMessage(@"请输入正确的用户名");
         return;
     }
