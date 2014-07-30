@@ -73,7 +73,7 @@
     [self.delegate playStatuUpdate:self.isPlay];
 }
 
--(void) startRotation:(BOOL)forceStart
+-(void) startRotation
 {
     if (self.layer.speed>0) {
         return;

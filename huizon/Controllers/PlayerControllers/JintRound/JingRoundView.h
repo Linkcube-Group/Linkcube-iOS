@@ -34,6 +34,6 @@
 -(void) play;
 -(void) pause;
 
--(void) startRotation:(BOOL)forceStart;
+-(void) startRotation;
 -(void) pauseRotation;
 @end

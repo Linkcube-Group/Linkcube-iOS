@@ -91,12 +91,15 @@
         float degree = abs([acc intValue]);
 //        degree *= shakeLevel;
        // DLog(@"shake ====|%f",degree);
+        if (degree>1 && degree<8) {
+            degree+=8;
+        }
         int shakeDegree = degree/8;
         
         shakeDegree = shakeDegree<0?0:shakeDegree;
         shakeDegree = shakeDegree>9?9:shakeDegree;
         
-        int KShakeSpeed[10] = { 1, 9, 14, 19, 24, 30, 34, 38, 42, 44 };
+        int KShakeSpeed[10] = { 0, 5, 12, 19, 24, 30, 34, 38, 42, 44 };
         
 
         

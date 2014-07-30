@@ -182,12 +182,18 @@
     if (ary) {
         self.musicArray = [[MusicList alloc] initWithArray:ary];
     }
+    [self.imgFloat initJingRound];
+    
     
     if (playIndex>=self.musicArray.count) {
         playIndex = 0;
         isPlay = NO;
         [self setViewInfo:YES];
         [self playAction:nil];
+    }
+    
+    if (isPlay) {
+        [self startAlbumAnimation:YES];
     }
 }
 
@@ -286,6 +292,12 @@
 
 - (IBAction)openMusicList:(id)sender
 {
+    if (isIOS7) {
+        [[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2.png") forBarMetrics:UIBarMetricsDefault];
+    }else{
+        [[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title.png") forBarMetrics:UIBarMetricsDefault];
+    }
+    
     IMP_BLOCK_SELF(PlayViewController)
     MusicListController *mvc = [[MusicListController alloc] init];
     mvc.musicHandler = ^(id sender){
@@ -297,7 +309,7 @@
         playIndex = [sender intValue];
         isPlay = NO;
         [block_self setViewInfo:YES];
-        [block_self playAction:nil];
+//        [block_self playAction:nil];
     };
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mvc];
     [self presentViewController:nav animated:YES completion:nil];
@@ -496,7 +508,7 @@
 - (void)startAlbumAnimation:(BOOL)isStart
 {
     if (isStart) {
-        [self.imgFloat startRotation:NO];
+        [self.imgFloat startRotation];
     }
     else{
         [self.imgFloat pauseRotation];
@@ -513,7 +525,7 @@
     [self.imgFloat initJingRound];
     if (isPlay) {
         
-        [self.imgFloat startRotation:YES];
+        [self.imgFloat startRotation];
     }
     
 }

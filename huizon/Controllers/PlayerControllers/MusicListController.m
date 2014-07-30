@@ -66,14 +66,18 @@
         
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-        [self.tbMusic reloadData];
+    [self.tbMusic reloadData];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+   
+    
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"歌曲列表"];
-    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(backAction:)];
+    self.navigationItem.leftBarButtonItem = [[Theam currentTheam] navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:self Selector:@selector(backAction:)];
+    
+  
 	self.navigationItem.rightBarButtonItem=[[Theam currentTheam] navigationBarRightButtonItemWithImage:nil Title:@"导入" Target:self Selector:@selector(uploadAction:)];
 }
 
@@ -134,7 +138,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BlockCallWithOneArg(self.musicHandler,@(indexPath.row))
     [self dismissViewControllerAnimated:YES completion:nil];
 }
