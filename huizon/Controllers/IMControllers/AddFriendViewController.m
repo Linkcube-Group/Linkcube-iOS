@@ -104,6 +104,7 @@
     {
         NSString *jidStr=object.jidStr;
         NSString *status=object.subscription;
+        NSLog(@"数据:--->%@",object.subscription);
         [dicJidToStatus setObject:status forKey:jidStr];
     }
 
@@ -122,7 +123,7 @@
     dispatch_async(concurrentQueue, ^{
         
         //[self getMessageData];
-        //[self getData];
+        [self getData];
         dispatch_async(dispatch_get_main_queue(), ^{
             
             
@@ -204,6 +205,7 @@
     [cell setCellFriendName:[dic keyForValue:@"nick"]];
     
     NSString *status=[dicJidToStatus valueForKey:jidStr];
+    NSLog(@"状态:%@",status);
     if (status.length==0)
     {
         [cell setFriendStatus:@"None"];
