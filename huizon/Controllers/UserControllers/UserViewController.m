@@ -10,6 +10,7 @@
 #import "SignViewController.h"
 #import "UserEditController.h"
 #import "JASidePanelController.h"
+#import "XMPPvCardTemp.h"
 
 @interface UserViewController ()<UITextFieldDelegate>
 
@@ -24,6 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginAuthen:) name:kXMPPNotificationDidAuthen object:nil];
     }
     return self;
 }
@@ -68,11 +70,16 @@
 
 - (void)didLoginAuthen:(NSNotification *)noti
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    UserEditController *uvc = [[UserEditController alloc] init];
-    //[self presentViewController:uvc animated:YES completion:nil];
-    [self.navigationController pushViewController:uvc animated:YES];
+    if(theApp.xmppvCardUser.nickname.length)
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        UserEditController *uvc = [[UserEditController alloc] init];
+        //[self presentViewController:uvc animated:YES completion:nil];
+        [self.navigationController pushViewController:uvc animated:YES];
+    }
 
 }
 
