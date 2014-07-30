@@ -66,8 +66,40 @@
     }
    
     BlockCallWithOneArg(self.saveHandler, self.tfModify.text);
-    
+    if(_isNickNamePush)
+    {
+        [self synNickData];
+    }
     [self backAction];
+}
+
+- (void)synNickData
+{
+    
+    
+    //add user nick and email
+    NSString *uname = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyJID];
+    NSString *pwd = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyPassword];
+    NSString *unameOri =[uname stringByReplacingOccurrencesOfString:@"-" withString:@"@"];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:register"];
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"type" stringValue:@"set"];
+    [iq addAttributeWithName:@"to" stringValue:[NSString stringWithFormat:@"%@@%@",uname,kXMPPmyDomain]];
+    [iq addAttributeWithName:@"id" stringValue:@"change1"];
+    
+    
+    DDXMLNode *username=[DDXMLNode elementWithName:@"username" stringValue:uname];
+    DDXMLNode *password=[DDXMLNode elementWithName:@"password" stringValue:pwd];
+    DDXMLNode *nick=[DDXMLNode elementWithName:@"name" stringValue:self.tfModify.text];
+    DDXMLNode *email=[DDXMLNode elementWithName:@"email" stringValue:unameOri];
+    
+    [query addChild:username];
+    [query addChild:password];
+    [query addChild:nick];
+    [query addChild:email];
+    [iq addChild:query];
+    [[theApp xmppStream] sendElement:iq];
+    
 }
 
 

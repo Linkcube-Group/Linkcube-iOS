@@ -85,7 +85,7 @@
     theApp.chatDelegate = self;
 	return theApp;
 }
-#if 1
+
 - (void)getData
 {
     NSManagedObjectContext *context = [[[self appDelegate] xmppRosterStorage] mainThreadManagedObjectContext];
@@ -98,25 +98,6 @@
     [self.dataArray removeAllObjects];
     [self.dataArray addObjectsFromArray:friends];
 }
-#else
-
-- (void)getData
-{
-    XMPPJID * jid = theApp.xmppStream.myJID;
-    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:roster"];
-    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
-    [iq addAttributeWithName:@"from" stringValue:jid.description];
-    [iq addAttributeWithName:@"to" stringValue:jid.domain];
-    [iq addAttributeWithName:@"id" stringValue:@"id"];
-    [iq addAttributeWithName:@"type" stringValue:@"get"];
-    [iq addChild:query];
-    [[[self appDelegate] xmppStream] sendElement:iq];
-    //回调到receiveIQ里面
-}
-
-
-
-#endif
 
 #pragma mark - Table view data source
 
@@ -129,14 +110,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.dataArray count];
+    return [self.dataArray count] + [self.receiveAddFriendArray count];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     return 50;
 }
 
@@ -189,7 +168,6 @@
     
     NSString *lastMessage=message.body;
     
-    NSLog(@"数据%@ %@",object.subscription,object.ask);
     int statusNum=[object.sectionNum intValue];
     NSString *status=@"";
     NSString *subStatus=@"";
@@ -249,7 +227,7 @@
     if (!name) {
         name = [object jidStr];
     }
-    
+    NSLog(@"=================>%@ %@",object.subscription,object.ask);
     int statusNum=[object.sectionNum intValue];
     NSString *status=@"";
     NSString *subStatus=@"";
@@ -276,7 +254,6 @@
     
     cell.headerImageView.image = [UIImage imageNamed:@"portrait-female-small"];
     cell.nameLabel.text = name;
-    NSLog(@"%@-------------------------------->%@",object.subscription,object.ask);
     if([object.subscription isEqualToString:@"from"])
     {
         cell.notiType = NotificationTypeFrom;
@@ -452,7 +429,6 @@
 }
 -(void)friendSubscription:(XMPPPresence *)presence
 {
-    NSLog(@"-----------------------%@",presence.toStr);
     [theApp.xmppRoster addUser:presence.to withNickname:presence.toStr groups:Nil subscribeToPresence:NO];
     [self getData];
     [self.tableFriends reloadData];

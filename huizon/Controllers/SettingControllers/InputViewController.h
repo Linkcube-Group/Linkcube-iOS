@@ -17,6 +17,7 @@
 @property (nonatomic) int numberOfword;
 @property (strong, nonatomic) IBOutlet UITextField *tfModify;
 @property (nonatomic, strong) NSString * NavTitle;
+@property (nonatomic) BOOL isNickNamePush;
 
 
 @end
