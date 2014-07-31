@@ -60,9 +60,9 @@
 
 - (void) receiveSubscribe:(NSNotification *) notification
 {
-//    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
-//    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
-//    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+    //    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
+    //    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
+    //    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
     //[theApp.xmppRoster removeUser:jid];
     
 }
@@ -134,7 +134,14 @@
         NSLog(@"%@ %@",object.nickname,object.subscription);
         if([object.subscription isEqualToString:@"both"])
         {
-            [self.friendsArray addObject:object];
+            XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES];
+            NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:object forKey:@"object"];
+            if(vCardTemp.photo.length)
+                [dict setObject:vCardTemp.photo forKey:@"photo"];
+            if(vCardTemp.gender.length)
+                [dict setObject:vCardTemp.gender forKey:@"gender"];
+            [self.friendsArray addObject:dict];
         }
     }
     
@@ -287,7 +294,7 @@
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
         
-        XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
         NSString *name= [object displayName];
         if (!name) {
             name = [object nickname];
@@ -295,7 +302,18 @@
         if (!name) {
             name = [object jidStr];
         }
-        [cell setMenuImage:@"portrait-female-small" Name:name];
+        if(((NSData *)[[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"photo"]).length)
+        {
+            [cell setMenuImageWithData:[[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"photo"] Name:name];
+        }
+        else if([[[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"gender"] isEqualToString:@"男"])
+        {
+            [cell setMenuImage:@"portrait-male-small" Name:name];
+        }
+        else
+        {
+            [cell setMenuImage:@"portrait-female-small" Name:name];
+        }
         cell.headerButton.tag = indexPath.row - 4;
         [cell.headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -307,7 +325,10 @@
 -(void)headerButtonClicked:(UIButton *)button
 {
     NSLog(@"tag===%d",button.tag);
+    XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:button.tag] objectForKey:@"object"];
     FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
+    fvc.jid = object.jid;
+    fvc.isFriend = YES;
     UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
     [self presentViewController:nvc animated:YES completion:nil];
 }
@@ -349,7 +370,7 @@
     }
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
-        XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
         TalkViewController *tvc=[[TalkViewController alloc]init];
         
         //using nickname for now, change later
