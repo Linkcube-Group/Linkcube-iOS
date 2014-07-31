@@ -23,5 +23,6 @@ typedef enum {
 @property (nonatomic, strong) UILabel * nameLabel;
 @property (nonatomic) NSString * temp;
 @property (nonatomic, strong) XMPPJID * jid;
+@property (nonatomic, strong) UIButton * agreementButton;
 
 @end

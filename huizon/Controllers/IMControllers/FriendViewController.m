@@ -241,6 +241,8 @@
         cell.nameLabel.text = [NSString stringWithFormat:@"%@",[presence from]];
         cell.notiType = NotificationTypeFrom;
         cell.jid = [presence from];
+        cell.agreementButton.tag = indexPath.row;
+        [cell.agreementButton addTarget:self action:@selector(agreementButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
@@ -294,6 +296,13 @@
     return cell;
 }
 #endif
+
+-(void)agreementButtonClick:(UIButton *)btn
+{
+    [self.receiveAddFriendArray removeObjectAtIndex:btn.tag];
+    [self SaveNewCache];
+    [self.tableFriends reloadData];
+}
 
 /*
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

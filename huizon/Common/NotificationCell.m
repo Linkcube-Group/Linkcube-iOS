@@ -19,6 +19,7 @@
 @synthesize notiType;
 @synthesize temp;
 @synthesize jid;
+@synthesize agreementButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -50,7 +51,7 @@
     {
         case NotificationTypeFrom:
         {
-            UIButton * agreementButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            agreementButton = [UIButton buttonWithType:UIButtonTypeCustom];
             agreementButton.frame = CGRectMake(nameLabel.frame.origin.x + nameLabel.frame.size.width + TYPELENGTH - 60, nameLabel.frame.origin.y, 60.f, nameLabel.frame.size.height);
             [agreementButton setBackgroundImage:[UIImage imageNamed:@"agree.png"] forState:UIControlStateNormal];
             [agreementButton setTitle:@"同意" forState:UIControlStateNormal];
