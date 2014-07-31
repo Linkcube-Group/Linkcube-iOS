@@ -26,7 +26,7 @@
 @interface LeftViewController ()<LeDiscoveryDelegate, LeTemperatureAlarmProtocol, UITableViewDataSource, UITableViewDelegate>
 {
     BOOL  blueConn;
-
+    
 }
 @property (retain, nonatomic) LeTemperatureAlarmService *currentlyDisplayingService;
 @property (strong,nonatomic) IBOutlet UITableView  *tbMenu;
@@ -55,14 +55,14 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-      [[UINavigationBar appearance] setBackgroundImage:IMG(@"navigation-and-status") forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:IMG(@"navigation-and-status") forBarMetrics:UIBarMetricsDefault];
     //导航条背景
-//	if (isIOS7) {
-//		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2.png") forBarMetrics:UIBarMetricsDefault];
-//	}else{
-//		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title.png") forBarMetrics:UIBarMetricsDefault];
-//	}
-  
+    //	if (isIOS7) {
+    //		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title_2.png") forBarMetrics:UIBarMetricsDefault];
+    //	}else{
+    //		[[UINavigationBar appearance] setBackgroundImage:IMG(@"bg_title.png") forBarMetrics:UIBarMetricsDefault];
+    //	}
+    
 }
 
 
@@ -75,7 +75,7 @@
     blueConn = NO;
     self.blueArray = [[NSMutableArray alloc] init];
     
-  
+    
     [[LeDiscovery sharedInstance] setDiscoveryDelegate:self];
     [[LeDiscovery sharedInstance] setPeripheralDelegate:self];
     
@@ -86,14 +86,18 @@
     self.tbMenu.tableHeaderView = self.headerView;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startBluetoothScan) name:UIApplicationDidBecomeActiveNotification object:nil];
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:kNotificationTop object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshView:) name:kNotificationTop object:nil];
     
-     [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
+    [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     // Do any additional setup after loading the view from its nib.
 }
 
 - (void)refreshView:(id)sender
 {
+    if (theApp.blueConnType<1) {
+        [[LeDiscovery sharedInstance] clearDevices];
+    }
+    
     [self.tbMenu reloadData];
 }
 
@@ -122,7 +126,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int bcount = [self.blueArray count];
-
+    
     if (indexPath.row==0) {
         return 0;
     }
@@ -159,8 +163,8 @@
     else if (indexPath.row>bcount+2){
         cellIdentifier = cellIdentifier1;
     }
-  
-   
+    
+    
     
     MenuCell *cell = (MenuCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
@@ -171,7 +175,7 @@
     }
     
     if (indexPath.row==0) {
-//        cellIdentifier = cellIdentifier5;///setting top bg
+        //        cellIdentifier = cellIdentifier5;///setting top bg
     }
     else if (indexPath.row==1){
         [cell setBlueStatu:theApp.blueConnType];
@@ -229,14 +233,14 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int bcount = [self.blueArray count];
     if (indexPath.row==1) {
         ///conn bluetooth
         blueConn = YES;
-       
+        
         [self startBluetoothScan];
-    
+        
         return;
     }
     else if (indexPath.row>1 && indexPath.row<bcount+2){
@@ -293,7 +297,7 @@
     if (nav) {
         [theApp.sidePanelController setCenterPanel:nav];
     }
-   
+    
 }
 
 
@@ -312,7 +316,7 @@
     if (blueConn) {
         [[LeDiscovery sharedInstance] startScanningForUUIDString:kDeviceServiceUUIDString];
     }
-   [self.tbMenu reloadData];
+    [self.tbMenu reloadData];
 }
 
 - (void) viewDidUnload
@@ -353,11 +357,11 @@
     if ([[service peripheral] isConnected]) {
         NSLog(@"Service (%@) connected", service.peripheral.name);
         
-            if (![self.connectedBlueArrays containsObject:service]) {
-                [self.connectedBlueArrays addObject:service];
-            }
+        if (![self.connectedBlueArrays containsObject:service]) {
+            [self.connectedBlueArrays addObject:service];
+        }
         
-       
+        
     }
     else {
         NSLog(@"Service (%@) disconnected", service.peripheral.name);

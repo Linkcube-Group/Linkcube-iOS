@@ -82,6 +82,7 @@ extern NSString *kDeviceCharacteristicUUID;
 @interface LeTemperatureAlarmService : NSObject
 
 - (id) initWithPeripheral:(CBPeripheral *)peripheral controller:(id<LeTemperatureAlarmProtocol>)controller;
+- (void)updatePeripheral:(CBPeripheral *)peripheral controller:(id<LeTemperatureAlarmProtocol>)controller;
 - (void) reset;
 - (void) start;
 

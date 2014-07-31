@@ -48,4 +48,6 @@
 @property (retain, nonatomic) NSMutableArray	*connectedServices;	// Array of LeTemperatureAlarmService
 
 - (CBCentralManagerState) bluetoothState;
+
+- (void) clearDevices;
 @end

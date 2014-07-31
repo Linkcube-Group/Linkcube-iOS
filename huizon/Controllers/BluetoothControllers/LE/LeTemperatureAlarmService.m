@@ -47,6 +47,14 @@ NSString *kDeviceCharacteristicUUID = @"49535343-8841-43F4-A8D4-ECBE34729BB3";
     return self;
 }
 
+- (void)updatePeripheral:(CBPeripheral *)peripheral controller:(id<LeTemperatureAlarmProtocol>)controller
+{
+    servicePeripheral = peripheral;
+    [servicePeripheral setDelegate:self];
+    peripheralDelegate = controller;
+}
+
+
 
 - (void) dealloc {
 	if (servicePeripheral) {
@@ -178,12 +186,14 @@ NSString *kDeviceCharacteristicUUID = @"49535343-8841-43F4-A8D4-ECBE34729BB3";
         j++;
     }
     NSData *newData = [[NSData alloc] initWithBytes:bytes length:8];
-    NSLog(@"newData=%@",newData);
+
     
     if (servicePeripheral && self.myCharacteristic) {
          [servicePeripheral writeValue:newData forCharacteristic:self.myCharacteristic type:CBCharacteristicWriteWithoutResponse];
     }
-   
+    else{
+        NSLog(@"连接失败，请重新启动应用");
+    }
 }
 
 

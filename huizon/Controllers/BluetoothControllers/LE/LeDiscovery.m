@@ -187,7 +187,9 @@
 {
     @try {
         if (!TARGET_IPHONE_SIMULATOR) {
-            [centralManager scanForPeripheralsWithServices:nil options:nil];
+            [foundPeripherals removeAllObjects];
+            [discoveryDelegate discoveryDidRefresh];
+            [centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
         }
         
     }
@@ -237,7 +239,7 @@
 {
 	//if (![peripheral isConnected])
     {
-		[centralManager connectPeripheral:peripheral options:nil];
+		[centralManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnConnectionKey : @(YES)}];
 	}
 }
 
@@ -266,7 +268,13 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTop object:nil userInfo:nil];
     
 	/* Create a service instance. */
-	self.alarmService = [[LeTemperatureAlarmService alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
+    if (self.alarmService==nil) {
+        self.alarmService = [[LeTemperatureAlarmService alloc] initWithPeripheral:peripheral controller:peripheralDelegate];
+    }
+    else{
+        [self.alarmService updatePeripheral:peripheral controller:peripheralDelegate];
+    }
+	
 	[self.alarmService start];
 
     BOOL contained = NO;
