@@ -10,4 +10,7 @@
 
 @interface FriendInfoViewController : UIViewController
 
+@property(nonatomic, strong) XMPPJID * jid;
+@property(nonatomic) BOOL isFriend;
+
 @end

@@ -9,6 +9,7 @@
 #import "FriendInfoViewController.h"
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardTempModule.h"
+#import "TalkViewController.h"
 
 @interface FriendInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 
@@ -17,6 +18,11 @@
 @implementation FriendInfoViewController
 {
     UITableView * _mainTableView;
+    NSData * _photo;//头像
+    NSString *_gender;//性别
+    NSString *_age;//年龄
+    NSString *_personstate;//个性签名
+    NSString *_nickName;//昵称
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,12 +37,36 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(back)];
+    
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) style:UITableViewStylePlain];
     _mainTableView.dataSource = self;
     _mainTableView.delegate = self;
     _mainTableView.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.f];
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:_mainTableView];
+    
+    //    XMPPvCardTemp * vCardTemp = [theApp vCardTempForJID:nil objectForKey:@"buddyName"]] shouldFetch:YES];
+    XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:self.jid shouldFetch:YES];
+    _photo = [[NSData alloc] initWithData:vCardTemp.photo];
+    _gender = vCardTemp.gender;
+    
+    NSLog(@"%@",vCardTemp.birthday);
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd";
+    NSDate * date = [NSDate dateWithString:vCardTemp.birthday Format:@"yyyy-MM-dd"];
+    NSTimeInterval  timeInterval = [date timeIntervalSinceNow];
+    _age = [NSString stringWithFormat:@"%d",abs((int)(timeInterval/60.f/60.f/24.f/365.f))];
+    
+    _personstate = vCardTemp.personstate;
+    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:vCardTemp.nickname];
+    _nickName = vCardTemp.nickname;
+    
+}
+-(void)back
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark
@@ -58,13 +88,13 @@
     switch (indexPath.row)
     {
         case 0:
-            height = 100.f;
+            height = 120.f;
             break;
         case 1:
-            height = 30.f;
+            height = 40.f;
             break;
         case 2:
-            height = 80.f;
+            height = 160.f;
             break;
         case 3:
             height = 44.f;
@@ -91,27 +121,52 @@
     if(indexPath.row == 0)
     {
         UIImageView * headerImageView = [[UIImageView alloc] init];
-#warning 记得改大小
         headerImageView.frame = CGRectMake(0, 0, 100, 100);
         headerImageView.center = CGPointMake(self.view.frame.size.width/2.f, 60.f);
         headerImageView.layer.cornerRadius = headerImageView.frame.size.height/2.f;
         headerImageView.layer.masksToBounds = YES;
+        if(_photo.length)
+        {
+            headerImageView.image = [[UIImage alloc] initWithData:_photo];
+        }
+        else
+        {
+            if([_gender isEqualToString:@"男"])
+            {
+                headerImageView.image = [UIImage imageNamed:@"portrait-male-large.png"];
+            }
+            else
+            {
+                headerImageView.image = [UIImage imageNamed:@"portrait-female-large.png"];
+            }
+        }
         [cell.contentView addSubview:headerImageView];
     }
     //性别和年龄
     if(indexPath.row == 1)
     {
+        CGSize ageSize = [_age sizeWithFont:[UIFont systemFontOfSize:17.0] constrainedToSize:CGSizeMake(130.0, 999) lineBreakMode:NSLineBreakByCharWrapping];
+        
         UIImageView * iconImageView = [[UIImageView alloc] init];
-        iconImageView.frame = CGRectMake(0, 0, 30, 30);
+        iconImageView.frame = CGRectMake((self.view.frame.size.width - ageSize.width - 10 - 30)/2.f, 0, 30, 30);
         iconImageView.layer.cornerRadius = iconImageView.frame.size.height/2.f;
         iconImageView.layer.masksToBounds = YES;
+        if([_gender isEqualToString:@"男"])
+        {
+            iconImageView.image = [UIImage imageNamed:@"male-large.png"];
+        }
+        else
+        {
+            iconImageView.image = [UIImage imageNamed:@"female-large.png"];
+        }
         [cell.contentView addSubview:iconImageView];
         
         UILabel * ageLabel = [[UILabel alloc] init];
-        ageLabel.frame = CGRectMake(30, 0, 60, 30);
+        ageLabel.frame = CGRectMake(iconImageView.frame.origin.x + iconImageView.frame.size.width + 10.f, 0, ageSize.width, 30);
         ageLabel.backgroundColor = [UIColor clearColor];
+        ageLabel.font = [UIFont systemFontOfSize:17.0];
         ageLabel.textAlignment = NSTextAlignmentCenter;
-        ageLabel.text = @"23";
+        ageLabel.text = _age;
         [cell.contentView addSubview:ageLabel];
         //分隔线
         UIView * lineView = [[UIView alloc] init];
@@ -126,35 +181,59 @@
         signatureLabel.frame = CGRectMake(20, 0, 80, 30);
         signatureLabel.backgroundColor = [UIColor clearColor];
         signatureLabel.textAlignment = NSTextAlignmentLeft;
-        signatureLabel.font = [UIFont systemFontOfSize:19.f];
+        signatureLabel.font = [UIFont boldSystemFontOfSize:19.f];
         signatureLabel.text = NSLocalizedString(@"个性签名", nil);
         [cell.contentView addSubview:signatureLabel];
         
+        
+        CGSize signatureSize = [_personstate sizeWithFont:[UIFont systemFontOfSize:17.0] constrainedToSize:CGSizeMake(self.view.frame.size.width - signatureLabel.frame.origin.x - signatureLabel.frame.size.width - 10, 154) lineBreakMode:NSLineBreakByCharWrapping];
         UILabel * signatureContentLabel = [[UILabel alloc] init];
-        signatureContentLabel.frame = CGRectMake(signatureLabel.frame.origin.x + signatureLabel.frame.size.width + 10, signatureLabel.frame.origin.y, self.view.frame.size.width - signatureLabel.frame.origin.x - signatureLabel.frame.size.width - 10, 80);
+        signatureContentLabel.frame = CGRectMake(signatureLabel.frame.origin.x + signatureLabel.frame.size.width + 10, 6, signatureSize.width, signatureSize.height);
         signatureContentLabel.backgroundColor = [UIColor clearColor];
         signatureContentLabel.textColor = [UIColor darkGrayColor];
-        signatureContentLabel.numberOfLines = 4;
-        signatureContentLabel.text = @"哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈";
+        signatureContentLabel.font = [UIFont systemFontOfSize:17.f];
+        signatureContentLabel.numberOfLines = 999;
+        signatureContentLabel.text = _personstate;
         [cell.contentView addSubview:signatureContentLabel];
     }
     if(indexPath.row == 3)
     {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(30, 0, self.view.frame.size.width - 60, 44);
+        button.frame = CGRectMake(10, 0, self.view.frame.size.width - 20, 44);
         [button setBackgroundImage:[UIImage imageNamed:@"blue_button"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"blue_button_s"] forState:UIControlStateSelected];
-        if(1)
+        if(self.isFriend)
         {
             [button setTitle:NSLocalizedString(@"发送消息", nil) forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(sendMessageToOther) forControlEvents:UIControlEventTouchUpInside];
         }
         else
         {
             [button setTitle:NSLocalizedString(@"添加好友", nil) forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(addFriend) forControlEvents:UIControlEventTouchUpInside];
         }
         [cell.contentView addSubview:button];
     }
     return cell;
+}
+
+-(void)sendMessageToOther
+{
+    TalkViewController *tvc=[[TalkViewController alloc]init];
+    
+    //using nickname for now, change later
+    
+    //tvc.xmppFriendJID=[XMPPJID jidWithUser:[object nickname] domain:kXMPPmyDomain resource:@"ios"];
+    tvc.xmppFriendJID=self.jid;
+    tvc.xmppFriendNickname=_nickName;
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:tvc];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+-(void)addFriend
+{
+    [theApp XMPPAddFriendSubscribeWithJid:[NSString stringWithFormat:@"%@",self.jid]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,14 +243,14 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
