@@ -9,6 +9,8 @@
 #import "AddFriendViewController.h"
 #import "RightCell.h"
 #import "XMPPSearchModule.h"
+#import "XMPPvCardTemp.h"
+
 @interface AddFriendViewController () <UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UITextField *txtSearch;
@@ -82,6 +84,18 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alertView show];
     }
+    
+    for(NSDictionary * dict in result.items)
+    {
+        NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
+        XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:[XMPPJID jidWithString:[dict objectForKey:@"jid"]] shouldFetch:YES];
+        if(vCardTemp.photo.length)
+            [mDict setObject:vCardTemp.photo forKey:@"photo"];
+        if(vCardTemp.gender.length)
+            [mDict setObject:vCardTemp.gender forKey:@"gender"];
+        [dataArray addObject:mDict];
+    }
+    
     dataArray=[[NSMutableArray alloc] initWithArray:result.items];
     [tbResult reloadData];
     showIndicator(NO);
@@ -106,7 +120,7 @@
         NSString *status=object.subscription;
         [dicJidToStatus setObject:status forKey:jidStr];
     }
-
+    
     //XMPPUserCoreDataStorageObject *object
     //[self.friendsArray removeAllObjects];
     //[self.friendsArray addObjectsFromArray:friends];
@@ -147,7 +161,7 @@
     
     
     
-
+    
     
     showIndicator(YES);
     //NSString *requestText=[NSString stringWithFormat:@"%@%@%@",@"正在搜索",txtSearch.text,@"用户"];
@@ -174,8 +188,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     return 50;
 }
 
@@ -198,7 +210,19 @@
     
     //XMPPUserCoreDataStorageObject *object = [dataArray objectAtIndex:indexPath.row];
     NSDictionary *dic=[dataArray objectAtIndex:indexPath.row];
-    [cell setMenuImage:@"portrait-female-small" Name:[dic keyForValue:@"nick"]];
+    //    [cell setMenuImage:@"portrait-female-small" Name:[dic keyForValue:@"nick"]];
+    if(((NSData *)[dic objectForKey:@"photo"]).length)
+    {
+        [cell setMenuImageWithData:[dic objectForKey:@"photo"] Name:[dic keyForValue:@"nick"]];
+    }
+    else if ([[dic objectForKey:@"gender"] isEqualToString:@"男"])
+    {
+        [cell setMenuImage:@"portrait-male-small" Name:[dic keyForValue:@"nick"]];
+    }
+    else
+    {
+        [cell setMenuImage:@"portrait-female-small" Name:[dic keyForValue:@"nick"]];
+    }
     NSString *jidStr=[dic keyForValue:@"jid"];
     [cell setCellFriendId:jidStr];
     [cell setCellFriendName:[dic keyForValue:@"nick"]];
@@ -223,7 +247,7 @@
         
     }
     //[cell setFriendStatus:@"None"];
-
+    
     return cell;
 }
 
