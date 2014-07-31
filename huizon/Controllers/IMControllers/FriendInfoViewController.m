@@ -117,6 +117,7 @@
     }
     cell.contentView.backgroundColor = [UIColor clearColor];
     cell.backgroundColor = [UIColor clearColor];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //头像
     if(indexPath.row == 0)
     {
@@ -170,7 +171,7 @@
         [cell.contentView addSubview:ageLabel];
         //分隔线
         UIView * lineView = [[UIView alloc] init];
-        lineView.frame = CGRectMake(0, 29.5, self.view.frame.size.width, 0.5);
+        lineView.frame = CGRectMake(0, 39.5, self.view.frame.size.width, 0.5);
         lineView.backgroundColor = [UIColor whiteColor];
         [cell.contentView addSubview:lineView];
     }
