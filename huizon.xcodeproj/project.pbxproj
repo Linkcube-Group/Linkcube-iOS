@@ -518,6 +518,7 @@
 		BBF8DF1D18DCACC8005E2B8E /* halloween.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1918DCACC8005E2B8E /* halloween.jpg */; };
 		BBF8DF1E18DCACC8005E2B8E /* icon_57.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1A18DCACC8005E2B8E /* icon_57.png */; };
 		BBF8DF1F18DCACC8005E2B8E /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DF1B18DCACC8005E2B8E /* icon_114.png */; };
+		D4023E28198A059C0034C4CC /* FriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4023E27198A059C0034C4CC /* FriendInfoViewController.m */; };
 		D403349D19865D9200874FED /* agree@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D403349C19865D9200874FED /* agree@2x.png */; };
 		D40334A019865DC200874FED /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D403349F19865DC200874FED /* NotificationCell.m */; };
 		D41097641987A040002BF338 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097631987A040002BF338 /* FileManager.m */; };
@@ -1308,6 +1309,8 @@
 		BBF8DF1918DCACC8005E2B8E /* halloween.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = halloween.jpg; sourceTree = "<group>"; };
 		BBF8DF1A18DCACC8005E2B8E /* icon_57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_57.png; sourceTree = "<group>"; };
 		BBF8DF1B18DCACC8005E2B8E /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
+		D4023E26198A059C0034C4CC /* FriendInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoViewController.h; sourceTree = "<group>"; };
+		D4023E27198A059C0034C4CC /* FriendInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoViewController.m; sourceTree = "<group>"; };
 		D403349C19865D9200874FED /* agree@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "agree@2x.png"; sourceTree = "<group>"; };
 		D403349E19865DC200874FED /* NotificationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationCell.h; sourceTree = "<group>"; };
 		D403349F19865DC200874FED /* NotificationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationCell.m; sourceTree = "<group>"; };
@@ -1688,6 +1691,8 @@
 		072D5B7718AB66F10083626A /* IMControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D4023E26198A059C0034C4CC /* FriendInfoViewController.h */,
+				D4023E27198A059C0034C4CC /* FriendInfoViewController.m */,
 				BBF8DEC818DCA462005E2B8E /* UIBubbleTableView */,
 				072A14FF18C3487600A3758E /* ChatViewController.h */,
 				072A150018C3487600A3758E /* ChatViewController.m */,
@@ -3544,6 +3549,7 @@
 				073554F918C412E2005B319B /* NSNumber+XMPP.m in Sources */,
 				073B328818C89C12009FE1DA /* MediaViewController.m in Sources */,
 				078CD1B0182CC68500EBF477 /* NSData+Base64.m in Sources */,
+				D4023E28198A059C0034C4CC /* FriendInfoViewController.m in Sources */,
 				070996EF182B8BFB0064D7D3 /* UIButton+Extension.m in Sources */,
 				073554F318C412E2005B319B /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				0709965D182B8AB50064D7D3 /* ViewController.m in Sources */,
