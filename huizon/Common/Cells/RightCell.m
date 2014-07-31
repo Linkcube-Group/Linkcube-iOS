@@ -46,6 +46,13 @@
     self.iconName = imgName;
     self.imgIcon.image = IMG(_S(@"%@.png",self.iconName));
     self.lbUserName.text = name;
+    
+    self.headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.headerButton.backgroundColor = [UIColor clearColor];
+    self.headerButton.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
+    self.headerButton.frame = CGRectMake(0, 0, self.imgIcon.frame.size.width, self.imgIcon.frame.size.height);
+    self.imgIcon.userInteractionEnabled = YES;
+    [self.imgIcon addSubview:self.headerButton];
 }
 
 
@@ -57,6 +64,13 @@
     self.imgIcon.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
     self.imgIcon.layer.masksToBounds = YES;
     self.lbUserName.text = name;
+    
+    self.headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.headerButton.backgroundColor = [UIColor clearColor];
+    self.headerButton.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
+    self.headerButton.frame = CGRectMake(0, 0, self.imgIcon.frame.size.width, self.imgIcon.frame.size.height);
+    self.imgIcon.userInteractionEnabled = YES;
+    [self.imgIcon addSubview:self.headerButton];
 }
 
 // set name of the icon in the front and the name of the text, for the RightCellLabel
@@ -67,6 +81,13 @@
     self.imgIcon.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
     self.imgIcon.layer.masksToBounds = YES;
     self.lbUserName.text = name;
+    
+    self.headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.headerButton.backgroundColor = [UIColor clearColor];
+    self.headerButton.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
+    self.headerButton.frame = CGRectMake(0, 0, self.imgIcon.frame.size.width, self.imgIcon.frame.size.height);
+    self.imgIcon.userInteractionEnabled = YES;
+    [self.imgIcon addSubview:self.headerButton];
 }
 
 // set right icon 

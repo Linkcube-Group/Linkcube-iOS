@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface RightCell : UITableViewCell
+
+@property (nonatomic, strong) UIButton * headerButton;
+
 - (void)setMenuImage:(NSString *)img Name:(NSString *)name;
 - (void)setMenuImageWithData:(NSData *)imgData Name:(NSString *)name;
 - (void)setMenuImageWithImage:(UIImage *)image Name:(NSString *)name;

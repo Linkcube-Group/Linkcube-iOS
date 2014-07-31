@@ -15,6 +15,7 @@
 #import "RightCell.h"
 #import "AddFriendViewController.h"
 #import "XMPPvCardTemp.h"
+#import "FriendInfoViewController.h"
 #define FRIEND_LIST @[@"",@"我的",@"消息",@"情侣"]
 
 @interface RightViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -295,10 +296,20 @@
             name = [object jidStr];
         }
         [cell setMenuImage:@"portrait-female-small" Name:name];
+        cell.headerButton.tag = indexPath.row - 4;
+        [cell.headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     //cell.textLabel.text = [FRIEND_LIST objectAtIndex:indexPath.row];
     return cell;
+}
+
+-(void)headerButtonClicked:(UIButton *)button
+{
+    NSLog(@"tag===%d",button.tag);
+    FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
