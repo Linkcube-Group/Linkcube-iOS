@@ -108,6 +108,7 @@
     if ([self.audioPlayer isPlaying]) {
         [self.audioPlayer stop];
     }
+    [[AVAudioSession sharedInstance] setActive:NO error:nil];
 }
 
 - (void)pauseMusic

@@ -25,8 +25,6 @@
  
         //Activate the session
         
-        [[AVAudioSession sharedInstance] setActive:YES error: &error];
-        
         NSDictionary *recordSetting = [NSDictionary dictionaryWithObjectsAndKeys:
                                        [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
                                        [NSNumber numberWithFloat:8000.00], AVSampleRateKey,
@@ -65,7 +63,8 @@
 - (void)startSoundListener
 {
     if ([self.recorder isRecording]==NO) {
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryRecord error:nil];
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
         [self.recorder prepareToRecord];
         [self.recorder record];
     }
@@ -88,6 +87,7 @@
     if ([self.stepTimer isValid]) {
         [self.stepTimer invalidate];
     }
+    [[AVAudioSession sharedInstance] setActive:NO error:nil];
     [self.recorder stop];
 }
 @end

@@ -130,7 +130,7 @@
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
         
-//        DLog(@"---|%d",voiceDegree);
+       DLog(@"---|%d",voiceDegree);
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {

@@ -81,7 +81,7 @@
     
     blueConn = YES;
     
-    [self startBluetoothScan];
+    
     
     self.tbMenu.tableHeaderView = self.headerView;
     
@@ -102,6 +102,7 @@
     
     if ([keyPath isEqual:@"state"] && theApp.sidePanelController.state==JASidePanelLeftVisible) {
         DLog(@"show left menu");
+        [self startBluetoothScan];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStopBlue object:nil];
     }
     
