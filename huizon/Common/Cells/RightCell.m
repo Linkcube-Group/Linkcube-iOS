@@ -14,7 +14,6 @@
 @property (strong,nonatomic) IBOutlet UIImageView *imgIconRight;
 @property (strong,nonatomic) IBOutlet UILabel *lbUserName;
 @property (strong,nonatomic) IBOutlet UILabel *lbFriendStatus;
-@property (strong,nonatomic) IBOutlet UIButton *btnAdd;
 @property (strong,nonatomic) NSString *friendName;
 @property (strong,nonatomic) NSString *friendId;
 @end

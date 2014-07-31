@@ -210,7 +210,7 @@
         }
         else
         {
-            [button setTitle:NSLocalizedString(@"添加好友", nil) forState:UIControlStateNormal];
+            [button setTitle:NSLocalizedString(@"加为情侣", nil) forState:UIControlStateNormal];
             [button addTarget:self action:@selector(addFriend) forControlEvents:UIControlEventTouchUpInside];
         }
         [cell.contentView addSubview:button];

@@ -10,6 +10,7 @@
 #import "RightCell.h"
 #import "XMPPSearchModule.h"
 #import "XMPPvCardTemp.h"
+#import "FriendInfoViewController.h"
 
 @interface AddFriendViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -231,24 +232,55 @@
     if (status.length==0)
     {
         [cell setFriendStatus:@"None"];
+        [cell.btnAdd addTarget:self action:@selector(reloadTableView) forControlEvents:UIControlEventTouchUpInside];
+        cell.headerButton.tag = indexPath.row;
+        [cell.headerButton addTarget:self action:@selector(nHeaderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
         if ([status isEqualToString:@"both"])
         {
             status=@"已添加";
+            cell.headerButton.tag = indexPath.row;
+            [cell.headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         }
         else
         {
             status=@"等待验证";
+            cell.headerButton.tag = indexPath.row;
+            [cell.headerButton addTarget:self action:@selector(nHeaderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             
         }
         [cell setFriendStatus:status];
-        
     }
     //[cell setFriendStatus:@"None"];
     
     return cell;
+}
+
+-(void)reloadTableView
+{
+    [tbResult reloadData];
+}
+
+-(void)headerButtonClicked:(UIButton *)button
+{
+    NSLog(@"tag===%d",button.tag);
+    FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
+    fvc.jid = [XMPPJID jidWithString:[[dataArray objectAtIndex:button.tag] objectForKey:@"jid"]];
+    fvc.isFriend = YES;
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+    [self presentViewController:nvc animated:YES completion:nil];
+}
+
+-(void)nHeaderButtonClicked:(UIButton *)button
+{
+    NSLog(@"tag===%d",button.tag);
+    FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
+    fvc.jid = [XMPPJID jidWithString:[[dataArray objectAtIndex:button.tag] objectForKey:@"jid"]];
+    fvc.isFriend = NO;
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 @end
