@@ -523,6 +523,7 @@
 		D40334A019865DC200874FED /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D403349F19865DC200874FED /* NotificationCell.m */; };
 		D41097641987A040002BF338 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097631987A040002BF338 /* FileManager.m */; };
 		D41097671987A0DF002BF338 /* NSString+SFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097661987A0DF002BF338 /* NSString+SFCategory.m */; };
+		D41613B9198B1EE7005FBF01 /* next_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41613B8198B1EE7005FBF01 /* next_grey@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1318,6 +1319,7 @@
 		D41097631987A040002BF338 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		D41097651987A0DF002BF338 /* NSString+SFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SFCategory.h"; sourceTree = "<group>"; };
 		D41097661987A0DF002BF338 /* NSString+SFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SFCategory.m"; sourceTree = "<group>"; };
+		D41613B8198B1EE7005FBF01 /* next_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_grey@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3019,6 +3021,7 @@
 		BBB8149519454DC90052D71A /* right_info */ = {
 			isa = PBXGroup;
 			children = (
+				D41613B8198B1EE7005FBF01 /* next_grey@2x.png */,
 				D403349C19865D9200874FED /* agree@2x.png */,
 				BB220ED419567501000C08CB /* input-box.png */,
 				BB220ED519567501000C08CB /* navigation-and-status.png */,
@@ -3219,6 +3222,7 @@
 				072F97D718C0BD2A00BEB4C4 /* head_default.png in Resources */,
 				072F97D018C0BD2A00BEB4C4 /* blue_connect.png in Resources */,
 				BBF8DF1E18DCACC8005E2B8E /* icon_57.png in Resources */,
+				D41613B9198B1EE7005FBF01 /* next_grey@2x.png in Resources */,
 				07B6E6FA18D5538F00C17693 /* icon_rightArrow@2x.png in Resources */,
 				07EAA12219288B9F00794ABC /* MusicListController.xib in Resources */,
 				0762C2C018C2197D00ABD7A0 /* posture_2@2x.png in Resources */,
