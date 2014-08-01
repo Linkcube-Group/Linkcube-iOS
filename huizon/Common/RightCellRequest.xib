@@ -37,9 +37,10 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2y-Ga-3Jv">
-                        <rect key="frame" x="266" y="6" width="46" height="30"/>
+                        <rect key="frame" x="252" y="7" width="60" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="添加">
+                        <state key="normal" title="添加" backgroundImage="agree.png">
+                            <color key="titleColor" red="0.22374864108956735" green="0.64699388586956519" blue="0.24722519759817418" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                         <connections>
@@ -56,4 +57,7 @@
             </connections>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="agree.png" width="44" height="22"/>
+    </resources>
 </document>
