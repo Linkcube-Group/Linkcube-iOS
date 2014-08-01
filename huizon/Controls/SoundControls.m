@@ -30,7 +30,7 @@
                                 inputEnabled:YES];
         
         self.audioController.preferredBufferDuration = 0.005;
-        [self.audioController start:NULL];
+
     }
     return self;
 }
@@ -60,6 +60,7 @@
             return;
         }
         
+        [self.audioController start:NULL];
         
         [_audioController addOutputReceiver:_recorder];
         [_audioController addInputReceiver:_recorder];
@@ -90,6 +91,7 @@
         [self.stepTimer invalidate];
     }
 
+    [self.audioController stop];
     if ( _recorder ) {
         [_recorder finishRecording];
         [_audioController removeOutputReceiver:_recorder];

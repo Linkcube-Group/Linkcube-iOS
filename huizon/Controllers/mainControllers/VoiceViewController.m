@@ -18,9 +18,9 @@
 @interface VoiceViewController ()
 {
     TopControlView  *topView;
-//    PCSEQVisualizer* eq;
+    //    PCSEQVisualizer* eq;
     
-//    int stopCount;
+    //    int stopCount;
     BOOL    isOpen;
 }
 @property (strong,nonatomic) IBOutlet UIImageView *imgStrength;
@@ -41,7 +41,7 @@
 - (void)dealloc
 {
     DLog(@"---dealloc VoicViewController");
-   
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -64,7 +64,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    stopCount = 0;
+    //    stopCount = 0;
     isOpen = NO;
     
     if (iPhone5) {
@@ -128,7 +128,7 @@
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
         
-       DLog(@"---|%d",voiceDegree);
+        DLog(@"---|%d",voiceDegree);
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
         ///如果游戏开始，把控制命令发给对方
         if (theApp.currentGamingJid!=nil) {
@@ -170,7 +170,7 @@
         }
         
     };
-
+    
     isOpen = NO;
     [self voiceAction:nil];
     [self refreshTop];
