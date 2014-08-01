@@ -15,21 +15,35 @@
 @interface TalkViewController ()<ChatDelegate>
 {
     
+    //tableview
     IBOutlet UIBubbleTableView *bubbleTable;
+    //输入的整个view
     IBOutlet UIView *textInputView;
+    //游戏键盘的view
     IBOutlet UIView *gameView;
+    //输入框
     IBOutlet UITextField *textField;
+    //申请游戏的那个按钮
     IBOutlet UIImageView *imgGame;
+    //要改成发送按钮
     IBOutlet UIImageView *imgSend;
+    //游戏种类view
     IBOutlet UIImageView *imgShake;
+    //拒绝
     IBOutlet UIImageView *imgDecline;
+    //接收
     IBOutlet UIImageView *imgAccept;
+    //拒绝
     IBOutlet UILabel *lblDecline;
+    //接收
     IBOutlet UILabel *lblAccept;
+    //提示
     IBOutlet UILabel *lblPrompt;
+    //结束游戏按钮
     IBOutlet UIButton *btnHangUp;
     int secondsCountDown;
     NSTimer *countDownTimer;
+    //聊天内容数组
     NSMutableArray *bubbleData;
     //bool isGameDisplayed;
     //0 no one displayed;1 keyboard;2 Game button;3 request interface
