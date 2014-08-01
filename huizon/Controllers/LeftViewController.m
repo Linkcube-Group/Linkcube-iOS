@@ -102,6 +102,7 @@
     
     if ([keyPath isEqual:@"state"] && theApp.sidePanelController.state==JASidePanelLeftVisible) {
         DLog(@"show left menu");
+        blueConn = YES;
         [self startBluetoothScan];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationStopBlue object:nil];
     }
@@ -302,8 +303,9 @@
 #pragma mark BlueSetting
 - (void)startBluetoothScan
 {
-    theApp.blueConnType = 0;
+
     if ([[LeDiscovery sharedInstance] bluetoothState]!=CBCentralManagerStatePoweredOn) {
+        theApp.blueConnType = 0;
         [self discoveryStatePoweredOff];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTop object:nil userInfo:nil];
         [self.tbMenu reloadData];

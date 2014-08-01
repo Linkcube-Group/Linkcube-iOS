@@ -53,8 +53,8 @@
 }
 - (void)setBLueConn:(NSString *)name Status:(BOOL)flag
 {
-    self.lbBlueName.text = name;
-    self.lbBlueConn.text = flag?@"已连接":@"未连接";
+    self.lbBlueName.text = flag?name:_S(@"%@ 点击连接",name);
+    self.lbBlueConn.text = flag?@"已连接":@"";
     if (flag) {
         self.lbBlueName.textColor = [UIColor colorWithHexString:@"#A52A2A"];
     }

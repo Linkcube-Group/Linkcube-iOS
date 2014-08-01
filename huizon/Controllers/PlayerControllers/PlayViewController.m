@@ -110,6 +110,7 @@
     [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateNormal];
     
     [VoiceControls voiceSingleton].voiceHandler = ^(id acc){
+        
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
         self.lbTimeMin.text = _S(@"%02d:%02d",currentTime/60,currentTime%60);
         self.slider.value = [[VoiceControls voiceSingleton] musicCurrentTime]/[[VoiceControls voiceSingleton] musicDuration];
@@ -236,14 +237,15 @@
 - (IBAction)playAction:(id)sender
 {
     if (!isPlay) {
-        [self startAlbumAnimation:YES];
         [[VoiceControls voiceSingleton] playMusicAction];
+        [self startAlbumAnimation:YES];
         isPlay = YES;
     }
     else{
+        [[VoiceControls voiceSingleton] pauseMusic];
         [self startAlbumAnimation:NO];
         [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
-        [[VoiceControls voiceSingleton] pauseMusic];
+        
         isPlay = NO;
     }
     
