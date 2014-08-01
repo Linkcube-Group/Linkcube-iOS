@@ -99,11 +99,9 @@
 {
     isOpen = !isOpen;
     if (isOpen) {
-//        [eq start];
         [self.imgVoice setImage:IMG(@"mode-voice_s.png") forState:UIControlStateNormal];
     }
     else{
-//        [eq stop];
         if (theApp.currentGamingJid!=nil) {
             [theApp sendControlCode:kBluetoothClose];
         }

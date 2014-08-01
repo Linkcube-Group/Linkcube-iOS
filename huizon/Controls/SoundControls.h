@@ -16,7 +16,7 @@
     NSURL *recordedTmpFile;
 
 }
-@property (strong,nonatomic)     AVAudioRecorder *recorder;
+
 @property (nonatomic,copy) EventHandler soundHandler;
 
 + (SoundControls *)soundSingleton;

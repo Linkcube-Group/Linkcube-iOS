@@ -8,6 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		03007986197EC246007412F6 /* ftp_commands.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03007985197EC246007412F6 /* ftp_commands.plist */; };
+		0325F112198B9F1200497770 /* AEAudioController+Audiobus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0EB198B9F1200497770 /* AEAudioController+Audiobus.m */; };
+		0325F113198B9F1200497770 /* AEAudioController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0EE198B9F1200497770 /* AEAudioController.m */; };
+		0325F114198B9F1200497770 /* AEAudioFileLoaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0F0198B9F1200497770 /* AEAudioFileLoaderOperation.m */; };
+		0325F115198B9F1200497770 /* AEAudioFilePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0F2198B9F1200497770 /* AEAudioFilePlayer.m */; };
+		0325F116198B9F1200497770 /* AEAudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0F4198B9F1200497770 /* AEAudioFileWriter.m */; };
+		0325F117198B9F1200497770 /* AEAudioUnitChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0F6198B9F1200497770 /* AEAudioUnitChannel.m */; };
+		0325F118198B9F1200497770 /* AEAudioUnitFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0F8198B9F1200497770 /* AEAudioUnitFilter.m */; };
+		0325F119198B9F1200497770 /* AEBlockAudioReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0FA198B9F1200497770 /* AEBlockAudioReceiver.m */; };
+		0325F11A198B9F1200497770 /* AEBlockChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0FC198B9F1200497770 /* AEBlockChannel.m */; };
+		0325F11B198B9F1200497770 /* AEBlockFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0FE198B9F1200497770 /* AEBlockFilter.m */; };
+		0325F11C198B9F1200497770 /* AEBlockScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F100198B9F1200497770 /* AEBlockScheduler.m */; };
+		0325F11D198B9F1200497770 /* AEFloatConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F102198B9F1200497770 /* AEFloatConverter.m */; };
+		0325F11E198B9F1200497770 /* AEMixerBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F104198B9F1200497770 /* AEMixerBuffer.m */; };
+		0325F11F198B9F1200497770 /* AERecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F106198B9F1200497770 /* AERecorder.m */; };
+		0325F120198B9F1200497770 /* AEUtilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0325F107198B9F1200497770 /* AEUtilities.c */; };
+		0325F121198B9F1200497770 /* README.markdown in Resources */ = {isa = PBXBuildFile; fileRef = 0325F10B198B9F1200497770 /* README.markdown */; };
+		0325F122198B9F1200497770 /* TPCircularBuffer+AudioBufferList.c in Sources */ = {isa = PBXBuildFile; fileRef = 0325F10C198B9F1200497770 /* TPCircularBuffer+AudioBufferList.c */; };
+		0325F123198B9F1200497770 /* TPCircularBuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0325F10E198B9F1200497770 /* TPCircularBuffer.c */; };
+		0325F125198B9F2000497770 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0325F124198B9F2000497770 /* Accelerate.framework */; };
+		0325F127198B9F2800497770 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0325F126198B9F2800497770 /* AudioToolbox.framework */; };
 		032E383C192EE99C00363B90 /* MusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E383B192EE99C00363B90 /* MusicItem.m */; };
 		032E383E192EEA0600363B90 /* Music.json in Resources */ = {isa = PBXBuildFile; fileRef = 032E383D192EEA0600363B90 /* Music.json */; };
 		032E3851192EF58D00363B90 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3841192EF58D00363B90 /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -528,6 +548,46 @@
 
 /* Begin PBXFileReference section */
 		03007985197EC246007412F6 /* ftp_commands.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ftp_commands.plist; sourceTree = "<group>"; };
+		0325F0EA198B9F1200497770 /* AEAudioController+Audiobus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AEAudioController+Audiobus.h"; sourceTree = "<group>"; };
+		0325F0EB198B9F1200497770 /* AEAudioController+Audiobus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AEAudioController+Audiobus.m"; sourceTree = "<group>"; };
+		0325F0EC198B9F1200497770 /* AEAudioController+AudiobusStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AEAudioController+AudiobusStub.h"; sourceTree = "<group>"; };
+		0325F0ED198B9F1200497770 /* AEAudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAudioController.h; sourceTree = "<group>"; };
+		0325F0EE198B9F1200497770 /* AEAudioController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAudioController.m; sourceTree = "<group>"; };
+		0325F0EF198B9F1200497770 /* AEAudioFileLoaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAudioFileLoaderOperation.h; sourceTree = "<group>"; };
+		0325F0F0198B9F1200497770 /* AEAudioFileLoaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAudioFileLoaderOperation.m; sourceTree = "<group>"; };
+		0325F0F1198B9F1200497770 /* AEAudioFilePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAudioFilePlayer.h; sourceTree = "<group>"; };
+		0325F0F2198B9F1200497770 /* AEAudioFilePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAudioFilePlayer.m; sourceTree = "<group>"; };
+		0325F0F3198B9F1200497770 /* AEAudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAudioFileWriter.h; sourceTree = "<group>"; };
+		0325F0F4198B9F1200497770 /* AEAudioFileWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAudioFileWriter.m; sourceTree = "<group>"; };
+		0325F0F5198B9F1200497770 /* AEAudioUnitChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAudioUnitChannel.h; sourceTree = "<group>"; };
+		0325F0F6198B9F1200497770 /* AEAudioUnitChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAudioUnitChannel.m; sourceTree = "<group>"; };
+		0325F0F7198B9F1200497770 /* AEAudioUnitFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEAudioUnitFilter.h; sourceTree = "<group>"; };
+		0325F0F8198B9F1200497770 /* AEAudioUnitFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEAudioUnitFilter.m; sourceTree = "<group>"; };
+		0325F0F9198B9F1200497770 /* AEBlockAudioReceiver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlockAudioReceiver.h; sourceTree = "<group>"; };
+		0325F0FA198B9F1200497770 /* AEBlockAudioReceiver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlockAudioReceiver.m; sourceTree = "<group>"; };
+		0325F0FB198B9F1200497770 /* AEBlockChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlockChannel.h; sourceTree = "<group>"; };
+		0325F0FC198B9F1200497770 /* AEBlockChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlockChannel.m; sourceTree = "<group>"; };
+		0325F0FD198B9F1200497770 /* AEBlockFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlockFilter.h; sourceTree = "<group>"; };
+		0325F0FE198B9F1200497770 /* AEBlockFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlockFilter.m; sourceTree = "<group>"; };
+		0325F0FF198B9F1200497770 /* AEBlockScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEBlockScheduler.h; sourceTree = "<group>"; };
+		0325F100198B9F1200497770 /* AEBlockScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEBlockScheduler.m; sourceTree = "<group>"; };
+		0325F101198B9F1200497770 /* AEFloatConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEFloatConverter.h; sourceTree = "<group>"; };
+		0325F102198B9F1200497770 /* AEFloatConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEFloatConverter.m; sourceTree = "<group>"; };
+		0325F103198B9F1200497770 /* AEMixerBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEMixerBuffer.h; sourceTree = "<group>"; };
+		0325F104198B9F1200497770 /* AEMixerBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AEMixerBuffer.m; sourceTree = "<group>"; };
+		0325F105198B9F1200497770 /* AERecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AERecorder.h; sourceTree = "<group>"; };
+		0325F106198B9F1200497770 /* AERecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AERecorder.m; sourceTree = "<group>"; };
+		0325F107198B9F1200497770 /* AEUtilities.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AEUtilities.c; sourceTree = "<group>"; };
+		0325F108198B9F1200497770 /* AEUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AEUtilities.h; sourceTree = "<group>"; };
+		0325F10B198B9F1200497770 /* README.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.markdown; sourceTree = "<group>"; };
+		0325F10C198B9F1200497770 /* TPCircularBuffer+AudioBufferList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "TPCircularBuffer+AudioBufferList.c"; sourceTree = "<group>"; };
+		0325F10D198B9F1200497770 /* TPCircularBuffer+AudioBufferList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TPCircularBuffer+AudioBufferList.h"; sourceTree = "<group>"; };
+		0325F10E198B9F1200497770 /* TPCircularBuffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TPCircularBuffer.c; sourceTree = "<group>"; };
+		0325F10F198B9F1200497770 /* TPCircularBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPCircularBuffer.h; sourceTree = "<group>"; };
+		0325F110198B9F1200497770 /* TheAmazingAudioEngine-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TheAmazingAudioEngine-Prefix.pch"; sourceTree = "<group>"; };
+		0325F111198B9F1200497770 /* TheAmazingAudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheAmazingAudioEngine.h; sourceTree = "<group>"; };
+		0325F124198B9F2000497770 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		0325F126198B9F2800497770 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		032E383A192EE99C00363B90 /* MusicItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicItem.h; sourceTree = "<group>"; };
 		032E383B192EE99C00363B90 /* MusicItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicItem.m; sourceTree = "<group>"; };
 		032E383D192EEA0600363B90 /* Music.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Music.json; sourceTree = "<group>"; };
@@ -1327,6 +1387,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0325F127198B9F2800497770 /* AudioToolbox.framework in Frameworks */,
+				0325F125198B9F2000497770 /* Accelerate.framework in Frameworks */,
 				078CE9421989537500B498F0 /* libz.dylib in Frameworks */,
 				07B6E71418D5538F00C17693 /* libUMFeedback.a in Frameworks */,
 				07588F5F18C877CC0031344D /* MediaAccessibility.framework in Frameworks */,
@@ -1356,6 +1418,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0325F0E9198B9F1200497770 /* TheAmazingAudioEngine */ = {
+			isa = PBXGroup;
+			children = (
+				0325F0EA198B9F1200497770 /* AEAudioController+Audiobus.h */,
+				0325F0EB198B9F1200497770 /* AEAudioController+Audiobus.m */,
+				0325F0EC198B9F1200497770 /* AEAudioController+AudiobusStub.h */,
+				0325F0ED198B9F1200497770 /* AEAudioController.h */,
+				0325F0EE198B9F1200497770 /* AEAudioController.m */,
+				0325F0EF198B9F1200497770 /* AEAudioFileLoaderOperation.h */,
+				0325F0F0198B9F1200497770 /* AEAudioFileLoaderOperation.m */,
+				0325F0F1198B9F1200497770 /* AEAudioFilePlayer.h */,
+				0325F0F2198B9F1200497770 /* AEAudioFilePlayer.m */,
+				0325F0F3198B9F1200497770 /* AEAudioFileWriter.h */,
+				0325F0F4198B9F1200497770 /* AEAudioFileWriter.m */,
+				0325F0F5198B9F1200497770 /* AEAudioUnitChannel.h */,
+				0325F0F6198B9F1200497770 /* AEAudioUnitChannel.m */,
+				0325F0F7198B9F1200497770 /* AEAudioUnitFilter.h */,
+				0325F0F8198B9F1200497770 /* AEAudioUnitFilter.m */,
+				0325F0F9198B9F1200497770 /* AEBlockAudioReceiver.h */,
+				0325F0FA198B9F1200497770 /* AEBlockAudioReceiver.m */,
+				0325F0FB198B9F1200497770 /* AEBlockChannel.h */,
+				0325F0FC198B9F1200497770 /* AEBlockChannel.m */,
+				0325F0FD198B9F1200497770 /* AEBlockFilter.h */,
+				0325F0FE198B9F1200497770 /* AEBlockFilter.m */,
+				0325F0FF198B9F1200497770 /* AEBlockScheduler.h */,
+				0325F100198B9F1200497770 /* AEBlockScheduler.m */,
+				0325F101198B9F1200497770 /* AEFloatConverter.h */,
+				0325F102198B9F1200497770 /* AEFloatConverter.m */,
+				0325F103198B9F1200497770 /* AEMixerBuffer.h */,
+				0325F104198B9F1200497770 /* AEMixerBuffer.m */,
+				0325F105198B9F1200497770 /* AERecorder.h */,
+				0325F106198B9F1200497770 /* AERecorder.m */,
+				0325F107198B9F1200497770 /* AEUtilities.c */,
+				0325F108198B9F1200497770 /* AEUtilities.h */,
+				0325F109198B9F1200497770 /* Library */,
+				0325F110198B9F1200497770 /* TheAmazingAudioEngine-Prefix.pch */,
+				0325F111198B9F1200497770 /* TheAmazingAudioEngine.h */,
+			);
+			name = TheAmazingAudioEngine;
+			path = huizon/TheAmazingAudioEngine;
+			sourceTree = SOURCE_ROOT;
+		};
+		0325F109198B9F1200497770 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				0325F10A198B9F1200497770 /* TPCircularBuffer */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		0325F10A198B9F1200497770 /* TPCircularBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				0325F10B198B9F1200497770 /* README.markdown */,
+				0325F10C198B9F1200497770 /* TPCircularBuffer+AudioBufferList.c */,
+				0325F10D198B9F1200497770 /* TPCircularBuffer+AudioBufferList.h */,
+				0325F10E198B9F1200497770 /* TPCircularBuffer.c */,
+				0325F10F198B9F1200497770 /* TPCircularBuffer.h */,
+			);
+			path = TPCircularBuffer;
+			sourceTree = "<group>";
+		};
 		032E383F192EF58D00363B90 /* ftp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1411,6 +1535,8 @@
 		07099645182B8AB50064D7D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0325F126198B9F2800497770 /* AudioToolbox.framework */,
+				0325F124198B9F2000497770 /* Accelerate.framework */,
 				078CE9411989537500B498F0 /* libz.dylib */,
 				07588F5C18C877CC0031344D /* MediaAccessibility.framework */,
 				07588F5D18C877CC0031344D /* MediaPlayer.framework */,
@@ -1644,6 +1770,7 @@
 		072D5B6918AB55AF0083626A /* Controls */ = {
 			isa = PBXGroup;
 			children = (
+				0325F0E9198B9F1200497770 /* TheAmazingAudioEngine */,
 				072D5B6D18AB56600083626A /* DesignControls.h */,
 				072D5B6E18AB56600083626A /* DesignControls.m */,
 				0796FD1318BC6900001F27B3 /* VoiceControls.h */,
@@ -3240,6 +3367,7 @@
 				07B6E70F18D5538F00C17693 /* UMContactViewController.xib in Resources */,
 				0762C2C418C2197D00ABD7A0 /* posture_6@2x.png in Resources */,
 				0701AB73194D4A8900C0DA9F /* mode_posture@2x.png in Resources */,
+				0325F121198B9F1200497770 /* README.markdown in Resources */,
 				074D11811931E2D00030583C /* MenuCellConn.xib in Resources */,
 				BBB5B7E218D2DA1600A526EF /* ProtocolViewController.xib in Resources */,
 				BBB7E5E719473426001B3ED9 /* button-add.png in Resources */,
@@ -3483,16 +3611,20 @@
 				0735555E18C412E2005B319B /* RFImageToDataTransformer.m in Sources */,
 				073AE93618CF382200795941 /* SettingViewController.m in Sources */,
 				0735551C18C412E2005B319B /* XMPPRoomHybrid.xcdatamodeld in Sources */,
+				0325F112198B9F1200497770 /* AEAudioController+Audiobus.m in Sources */,
 				070996E8182B8BFB0064D7D3 /* NSObject+Extention.m in Sources */,
 				07C5CDF619278A3E0070B958 /* PlayViewController.m in Sources */,
 				070996DC182B8BFB0064D7D3 /* DDFileLogger.m in Sources */,
 				0735552418C412E2005B319B /* XMPPMUC.m in Sources */,
+				0325F116198B9F1200497770 /* AEAudioFileWriter.m in Sources */,
+				0325F118198B9F1200497770 /* AEAudioUnitFilter.m in Sources */,
 				070996F9182B8BFB0064D7D3 /* UIView+Extension.m in Sources */,
 				0735556018C412E2005B319B /* XMPPSRVResolver.m in Sources */,
 				0735551F18C412E2005B319B /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
 				078CD1BD182CC77D00EBF477 /* ELUtils.m in Sources */,
 				073554F818C412E2005B319B /* NSData+XMPP.m in Sources */,
 				07B6E70E18D5538F00C17693 /* UMContactViewController.m in Sources */,
+				0325F11D198B9F1200497770 /* AEFloatConverter.m in Sources */,
 				070996F6182B8BFB0064D7D3 /* UIExpandingTextViewInternal.m in Sources */,
 				0735551218C412E2005B319B /* XMPPIQ+JabberRPC.m in Sources */,
 				078CD1B5182CC68500EBF477 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -3512,6 +3644,7 @@
 				0735550718C412E2005B319B /* XMPPReconnect.m in Sources */,
 				0735554418C412E2005B319B /* XMPPCapabilities.m in Sources */,
 				BBF8DEED18DCA462005E2B8E /* UIBubbleTableViewCell.m in Sources */,
+				0325F11F198B9F1200497770 /* AERecorder.m in Sources */,
 				078CD1C0182CCAE100EBF477 /* protocolHelper.m in Sources */,
 				070996D5182B8BFB0064D7D3 /* ModelBase.m in Sources */,
 				072D5B6F18AB56600083626A /* DesignControls.m in Sources */,
@@ -3524,15 +3657,19 @@
 				BBF8DEEB18DCA462005E2B8E /* UIBubbleHeaderTableViewCell.m in Sources */,
 				0735557918C46E15005B319B /* TalkViewController.m in Sources */,
 				071C546918BE0D00005B784E /* LeTemperatureAlarmService.m in Sources */,
+				0325F123198B9F1200497770 /* TPCircularBuffer.c in Sources */,
 				074D11881931F5870030583C /* MusicListCell.m in Sources */,
 				070996ED182B8BFB0064D7D3 /* PRTableView.m in Sources */,
 				073AA8E819442336008EDD06 /* TopControlView.m in Sources */,
 				07E0304018BDCD9C002C684B /* UserViewController.m in Sources */,
+				0325F120198B9F1200497770 /* AEUtilities.c in Sources */,
 				073AE93118CF380400795941 /* ChangePwdController.m in Sources */,
 				071C546F18BE2BCD005B784E /* CustomTabbar.m in Sources */,
 				0735551718C412E2005B319B /* XMPPPrivacy.m in Sources */,
 				0735552318C412E2005B319B /* XMPPMessage+XEP0045.m in Sources */,
 				0735554C18C412E2005B319B /* XMPPPresence+XEP_0172.m in Sources */,
+				0325F113198B9F1200497770 /* AEAudioController.m in Sources */,
+				0325F11E198B9F1200497770 /* AEMixerBuffer.m in Sources */,
 				078CD1B7182CC68500EBF477 /* MKNetworkOperation.m in Sources */,
 				0735550F18C412E2005B319B /* XMPPUserMemoryStorageObject.m in Sources */,
 				070996F4182B8BFB0064D7D3 /* UIImage+Extension.m in Sources */,
@@ -3549,6 +3686,7 @@
 				0735553518C412E2005B319B /* XMPPIQ+XEP_0060.m in Sources */,
 				070996E9182B8BFB0064D7D3 /* NSString+Extension.m in Sources */,
 				0735552B18C412E2005B319B /* XMPPvCardTemp.m in Sources */,
+				0325F119198B9F1200497770 /* AEBlockAudioReceiver.m in Sources */,
 				D41097641987A040002BF338 /* FileManager.m in Sources */,
 				073554F918C412E2005B319B /* NSNumber+XMPP.m in Sources */,
 				073B328818C89C12009FE1DA /* MediaViewController.m in Sources */,
@@ -3562,6 +3700,7 @@
 				0735552E18C412E2005B319B /* XMPPvCardTempBase.m in Sources */,
 				073554FB18C412E2005B319B /* XMPPElement.m in Sources */,
 				0735550A18C412E2005B319B /* XMPPRoster.xcdatamodel in Sources */,
+				0325F117198B9F1200497770 /* AEAudioUnitChannel.m in Sources */,
 				0735551418C412E2005B319B /* XMPPJabberRPCModule.m in Sources */,
 				0735555818C412E2005B319B /* NSXMLElement+XEP_0297.m in Sources */,
 				035E95CE19801AD7009DC34A /* JingRoundView.m in Sources */,
@@ -3573,6 +3712,7 @@
 				070996E7182B8BFB0064D7D3 /* NSDictionary+Extension.m in Sources */,
 				032E383C192EE99C00363B90 /* MusicItem.m in Sources */,
 				0735555118C412E2005B319B /* XMPPPing.m in Sources */,
+				0325F11B198B9F1200497770 /* AEBlockFilter.m in Sources */,
 				0735552F18C412E2005B319B /* XMPPvCardTempEmail.m in Sources */,
 				07DFAFD5193C6EB000C1EC70 /* PCSEQVisualizer.m in Sources */,
 				0735552518C412E2005B319B /* XMPPRoom.m in Sources */,
@@ -3586,6 +3726,7 @@
 				0735550918C412E2005B319B /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				0735553618C412E2005B319B /* XMPPPubSub.m in Sources */,
 				0735552A18C412E2005B319B /* XMPPvCardTempCoreDataStorageObject.m in Sources */,
+				0325F11A198B9F1200497770 /* AEBlockChannel.m in Sources */,
 				0735555618C412E2005B319B /* XMPPAttentionModule.m in Sources */,
 				0735552C18C412E2005B319B /* XMPPvCardTempAdr.m in Sources */,
 				0735551918C412E2005B319B /* XMPPRoomCoreDataStorage.m in Sources */,
@@ -3596,6 +3737,7 @@
 				0735554518C412E2005B319B /* XMPPMessageArchiving.xcdatamodeld in Sources */,
 				0735554B18C412E2005B319B /* XMPPMessage+XEP_0172.m in Sources */,
 				032E3852192EF58D00363B90 /* FtpConnection.m in Sources */,
+				0325F122198B9F1200497770 /* TPCircularBuffer+AudioBufferList.c in Sources */,
 				070996DF182B8BFB0064D7D3 /* ContextFilterLogFormatter.m in Sources */,
 				070996F7182B8BFB0064D7D3 /* UIInputToolbar.m in Sources */,
 				0735550018C412E2005B319B /* XMPPParser.m in Sources */,
@@ -3605,6 +3747,7 @@
 				072A150218C3487600A3758E /* ChatViewController.m in Sources */,
 				0735550E18C412E2005B319B /* XMPPRosterMemoryStorage.m in Sources */,
 				0735553818C412E2005B319B /* XMPPIQ+XEP_0066.m in Sources */,
+				0325F115198B9F1200497770 /* AEAudioFilePlayer.m in Sources */,
 				070996F8182B8BFB0064D7D3 /* UILabel+Extension.m in Sources */,
 				07FEF65B197B6B73003FF446 /* HeaderView.m in Sources */,
 				073554FC18C412E2005B319B /* XMPPIQ.m in Sources */,
@@ -3669,11 +3812,13 @@
 				078CD1B2182CC68500EBF477 /* NSDate+RFC1123.m in Sources */,
 				BB646093197705D300D18206 /* XMPPSearchModule.m in Sources */,
 				0735552918C412E2005B319B /* XMPPvCardCoreDataStorageObject.m in Sources */,
+				0325F11C198B9F1200497770 /* AEBlockScheduler.m in Sources */,
 				070996D6182B8BFB0064D7D3 /* ModelList.m in Sources */,
 				BB646096197705D300D18206 /* XMPPSearchResult.m in Sources */,
 				073554F718C412E2005B319B /* XMPPXOAuth2Google.m in Sources */,
 				073554FD18C412E2005B319B /* XMPPJID.m in Sources */,
 				0735551318C412E2005B319B /* XMPPIQ+JabberRPCResonse.m in Sources */,
+				0325F114198B9F1200497770 /* AEAudioFileLoaderOperation.m in Sources */,
 				0735555418C412E2005B319B /* NSXMLElement+XEP_0203.m in Sources */,
 				0735554318C412E2005B319B /* XMPPCapsResourceCoreDataStorageObject.m in Sources */,
 				073554FF18C412E2005B319B /* XMPPModule.m in Sources */,
@@ -3781,8 +3926,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3799,7 +3944,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
+				PROVISIONING_PROFILE = "7E3AA5E8-2C74-4A2F-BA89-D13433C09E5B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -3815,7 +3960,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
@@ -3833,7 +3978,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
+				PROVISIONING_PROFILE = "7E3AA5E8-2C74-4A2F-BA89-D13433C09E5B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

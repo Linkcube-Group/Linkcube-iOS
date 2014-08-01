@@ -94,10 +94,6 @@
 
 - (void)refreshView:(id)sender
 {
-    if (theApp.blueConnType<1) {
-        [[LeDiscovery sharedInstance] clearDevices];
-    }
-    
     [self.tbMenu reloadData];
 }
 

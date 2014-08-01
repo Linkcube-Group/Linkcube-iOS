@@ -7,11 +7,15 @@
 //
 
 #import "SoundControls.h"
+#import "TheAmazingAudioEngine.h"
+#import "AERecorder.h"
 
 @interface SoundControls()
-{
 
-}
+@property (nonatomic, strong) AEAudioController *audioController;
+
+@property (nonatomic, strong) AERecorder *recorder;
+
 @property (nonatomic,strong)    NSTimer *stepTimer;
 @end
 @implementation SoundControls
@@ -21,29 +25,12 @@
     self = [super init];
     if (self) {
 
-        NSError *error;
- 
-        //Activate the session
+        self.audioController = [[AEAudioController alloc]
+                                initWithAudioDescription:[AEAudioController nonInterleaved16BitStereoAudioDescription]
+                                inputEnabled:YES];
         
-        NSDictionary *recordSetting = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       [NSNumber numberWithInt:kAudioFormatLinearPCM], AVFormatIDKey,
-                                       [NSNumber numberWithFloat:8000.00], AVSampleRateKey,
-                                       [NSNumber numberWithInt:1], AVNumberOfChannelsKey,
-                                       [NSNumber numberWithInt:16], AVLinearPCMBitDepthKey,
-                                       [NSNumber numberWithBool:NO], AVLinearPCMIsNonInterleaved,
-                                       [NSNumber numberWithBool:NO],AVLinearPCMIsFloatKey,
-                                       [NSNumber numberWithBool:NO], AVLinearPCMIsBigEndianKey,
-                                       nil];
-        
-        recordedTmpFile = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent: [NSString stringWithFormat: @"%.0f.%@", [NSDate timeIntervalSinceReferenceDate] * 1000.0, @"caf"]]];
-        NSLog(@"Using File called: %@",recordedTmpFile);
-        //Setup the recorder to use this file and record to it.
-        self.recorder = [[AVAudioRecorder alloc] initWithURL:recordedTmpFile settings:recordSetting error:&error];
-        
-        self.recorder.meteringEnabled = YES;
-        [self.recorder setDelegate:self];
-        
-        
+        self.audioController.preferredBufferDuration = 0.005;
+        [self.audioController start:NULL];
     }
     return self;
 }
@@ -62,12 +49,22 @@
 
 - (void)startSoundListener
 {
-    if ([self.recorder isRecording]==NO) {
-        [[AVAudioSession sharedInstance] setActive:YES error:nil];
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-        [self.recorder prepareToRecord];
-        [self.recorder record];
+    if (self.recorder==nil) {
+        self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
+        NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *path = [[documentsFolders objectAtIndex:0] stringByAppendingPathComponent:@"Recording.aiff"];
+        NSError *error = nil;
+        if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileAIFFType error:&error] ) {
+            showCustomAlertMessage(@"没有权限，无法启动录音");
+            self.recorder = nil;
+            return;
+        }
+        
+        
+        [_audioController addOutputReceiver:_recorder];
+        [_audioController addInputReceiver:_recorder];
     }
+   
    
     if (self.stepTimer && [self.stepTimer isValid]) {
         [self.stepTimer invalidate];
@@ -76,9 +73,14 @@
 }
 
 - (void)levelTimerCallback:(NSTimer *)timer {
-	[self.recorder updateMeters];
 
-    BlockCallWithOneArg(self.soundHandler, @([self.recorder averagePowerForChannel:0]))
+    Float32 inputAvg, inputPeak, outputAvg, outputPeak;
+    [_audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
+    [_audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
+   
+    int degree = inputAvg+inputPeak;
+    
+    BlockCallWithOneArg(self.soundHandler, @(degree))
     
 }
 
@@ -87,7 +89,13 @@
     if ([self.stepTimer isValid]) {
         [self.stepTimer invalidate];
     }
-    [[AVAudioSession sharedInstance] setActive:NO error:nil];
-    [self.recorder stop];
+
+    if ( _recorder ) {
+        [_recorder finishRecording];
+        [_audioController removeOutputReceiver:_recorder];
+        [_audioController removeInputReceiver:_recorder];
+        self.recorder = nil;
+        
+    }
 }
 @end
