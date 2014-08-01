@@ -544,6 +544,7 @@
 		D41097641987A040002BF338 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097631987A040002BF338 /* FileManager.m */; };
 		D41097671987A0DF002BF338 /* NSString+SFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097661987A0DF002BF338 /* NSString+SFCategory.m */; };
 		D41613B9198B1EE7005FBF01 /* next_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41613B8198B1EE7005FBF01 /* next_grey@2x.png */; };
+		D41613BF198BB2CB005FBF01 /* ChatWithOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1380,6 +1381,8 @@
 		D41097651987A0DF002BF338 /* NSString+SFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SFCategory.h"; sourceTree = "<group>"; };
 		D41097661987A0DF002BF338 /* NSString+SFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SFCategory.m"; sourceTree = "<group>"; };
 		D41613B8198B1EE7005FBF01 /* next_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_grey@2x.png"; sourceTree = "<group>"; };
+		D41613BD198BB2CB005FBF01 /* ChatWithOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatWithOtherViewController.h; sourceTree = "<group>"; };
+		D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatWithOtherViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1820,6 +1823,8 @@
 		072D5B7718AB66F10083626A /* IMControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D41613BD198BB2CB005FBF01 /* ChatWithOtherViewController.h */,
+				D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */,
 				D4023E26198A059C0034C4CC /* FriendInfoViewController.h */,
 				D4023E27198A059C0034C4CC /* FriendInfoViewController.m */,
 				BBF8DEC818DCA462005E2B8E /* UIBubbleTableView */,
@@ -3810,6 +3815,7 @@
 				07099657182B8AB50064D7D3 /* AppDelegate.m in Sources */,
 				078CD1C6182CCED200EBF477 /* CustomAlertView.m in Sources */,
 				078CD1B2182CC68500EBF477 /* NSDate+RFC1123.m in Sources */,
+				D41613BF198BB2CB005FBF01 /* ChatWithOtherViewController.m in Sources */,
 				BB646093197705D300D18206 /* XMPPSearchModule.m in Sources */,
 				0735552918C412E2005B319B /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				0325F11C198B9F1200497770 /* AEBlockScheduler.m in Sources */,
