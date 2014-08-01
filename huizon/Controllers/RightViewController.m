@@ -282,7 +282,8 @@
     else if(indexPath.row==2)
     {
         [cell setMenuImage:@"icon-message" Name:@"消息"];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        [cell setRightIcon:@"next_grey"];
     }
     else if(indexPath.row==3)
     {
