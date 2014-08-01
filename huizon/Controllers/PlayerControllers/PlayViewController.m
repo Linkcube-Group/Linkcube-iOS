@@ -127,9 +127,9 @@
         //        vindex = vindex<0?0:vindex;
         //        vindex = vindex>=20?19:vindex;
         
-        int KWaveSpeed[20] = { 1, 2, 4, 6, 8, 15, 17, 19, 21, 24, 27, 30, 33,36, 39, 42, 45, 47, 49, 50 };
+        int KWaveSpeed[21] = { 1, 2, 4, 6, 8,10,13, 15, 17, 19, 21, 24, 27, 30, 33,36, 39, 41, 44, 47,49};
         
-        vindex =KWaveSpeed[vindex]-1;
+        vindex =KWaveSpeed[vindex];
         DLog(@"--%d",vindex);
         NSString * myComm = [kBluetoothSpeeds objectAtIndex:vindex];
         
