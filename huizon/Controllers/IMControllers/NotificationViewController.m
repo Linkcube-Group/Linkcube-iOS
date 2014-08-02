@@ -29,7 +29,7 @@
     if (self) {
         // Custom initialization
         dataArray=[[NSMutableArray alloc]init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSubscribe:) name:kXMPPNotificationDidReceivePresence object:nil];
+        //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSubscribe:) name:kXMPPNotificationDidReceivePresence object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kXMPPNotificationDidAskFriend object:nil];
 
     }
@@ -142,6 +142,28 @@
     */
     [dataArray removeAllObjects];
     //[dataArray addObjectsFromArray:friends];
+    
+    NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+    NSArray *subscribePresence=[defaults arrayForKey:@"subscribe"];
+    
+    for(NSString *from in subscribePresence)
+    {
+        //XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
+        XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",from]];
+        
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+        
+        XMPPUserCoreDataStorageObject *object =[[XMPPUserCoreDataStorageObject alloc]initWithEntity:entity insertIntoManagedObjectContext:context];
+        object.jid=jid;
+        object.jidStr=jid.bare;
+        object.subscription=@"Ask";
+        //dicJidToStatus[object.jidStr]=@"Ask";
+        [dataArray addObject:object];
+        
+    }
+    
+    
+    
     for(XMPPUserCoreDataStorageObject *object in friends)
     {
         NSString * status=object.subscription;
@@ -150,7 +172,8 @@
             [dataArray addObject:object];
         }
     }
-   
+    
+    
     //XMPPUserCoreDataStorageObject *object
     //[self.friendsArray removeAllObjects];
     //[self.friendsArray addObjectsFromArray:friends];

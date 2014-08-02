@@ -496,6 +496,37 @@
         //{
         //    [self.chatDelegate friendSubscription:presence];
         //}
+        
+        NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+        NSArray *subscribePresence=[defaults arrayForKey:@"subscribe"];
+        /*
+        NSArray *test=[[NSArray alloc]init];
+        [defaults setObject:test forKey:@"subscribe"];
+        [defaults synchronize];
+         */
+        NSMutableArray *newArray;
+        if (subscribePresence==nil)
+        {
+            newArray=[[NSMutableArray alloc] init];
+        }
+        else
+        {
+            newArray=[NSMutableArray arrayWithArray:subscribePresence];
+        }
+        //[newArray addObject:presence];
+        BOOL flagFound=NO;
+        for (NSString *from in newArray)
+        {
+            if ([from isEqualToString:presence.fromStr])
+            {
+                flagFound=YES;
+            }
+        }
+        if(!flagFound)
+            [newArray addObject:presence.fromStr];
+        NSArray *array=[NSArray arrayWithArray:newArray];
+        [defaults setObject:array forKey:@"subscribe"];
+        [defaults synchronize];
         NSDictionary *dic=[NSDictionary dictionaryWithObject:presence forKey:@"presence"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidReceivePresence object:nil userInfo:dic];
     }
