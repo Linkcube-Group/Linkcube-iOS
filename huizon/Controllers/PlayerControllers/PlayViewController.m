@@ -237,6 +237,7 @@
 - (IBAction)playAction:(id)sender
 {
     if (!isPlay) {
+        [self needleAnimation];
         [[VoiceControls voiceSingleton] playMusicAction];
         [self startAlbumAnimation:YES];
         isPlay = YES;
@@ -529,6 +530,13 @@
         
         [self.imgFloat startRotation];
     }
+    
+}
+
+#pragma mark -
+#pragma mark NeedleAnimation
+- (void)needleAnimation
+{
     
 }
 

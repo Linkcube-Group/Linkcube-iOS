@@ -338,11 +338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
-            timestampString = "428593361.684991"
+            timestampString = "428686566.105652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "-openMusicList:"
             landmarkType = "5">
          </BreakpointContent>
