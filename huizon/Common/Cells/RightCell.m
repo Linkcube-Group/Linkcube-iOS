@@ -114,6 +114,7 @@
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 
+    
 }
 - (IBAction)acceptSub:(id)sender
 {
