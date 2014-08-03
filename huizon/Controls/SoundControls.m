@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) AERecorder *recorder;
 
+@property (nonatomic, strong) AEAudioFilePlayer *player;
+
 @property (nonatomic,strong)    NSTimer *stepTimer;
 @end
 @implementation SoundControls
@@ -30,6 +32,8 @@
                                 inputEnabled:YES];
         
         self.audioController.preferredBufferDuration = 0.005;
+
+        self.audioController.useMeasurementMode = YES;
 
     }
     return self;
@@ -50,20 +54,21 @@
 - (void)startSoundListener
 {
     if (self.recorder==nil) {
-        self.recorder = [[AERecorder alloc] initWithAudioController:_audioController];
+        [self.audioController start:NULL];
+        self.recorder = [[AERecorder alloc] initWithAudioController:self.audioController];
         NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *path = [[documentsFolders objectAtIndex:0] stringByAppendingPathComponent:@"Recording.aiff"];
         NSError *error = nil;
-        if ( ![_recorder beginRecordingToFileAtPath:path fileType:kAudioFileAIFFType error:&error] ) {
+        if ( ![self.recorder beginRecordingToFileAtPath:path fileType:kAudioFileAIFFType error:&error] ) {
             showCustomAlertMessage(@"没有权限，无法启动录音");
             self.recorder = nil;
             return;
         }
         
-        [self.audioController start:NULL];
+
         
-        [_audioController addOutputReceiver:_recorder];
-        [_audioController addInputReceiver:_recorder];
+        [self.audioController addOutputReceiver:self.recorder];
+        [self.audioController addInputReceiver:self.recorder];
     }
    
    
@@ -76,8 +81,8 @@
 - (void)levelTimerCallback:(NSTimer *)timer {
 
     Float32 inputAvg, inputPeak, outputAvg, outputPeak;
-    [_audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
-    [_audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
+    [self.audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
+    [self.audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
    
     int degree = inputAvg+inputPeak;
     
@@ -92,12 +97,15 @@
     }
 
     [self.audioController stop];
-    if ( _recorder ) {
-        [_recorder finishRecording];
-        [_audioController removeOutputReceiver:_recorder];
-        [_audioController removeInputReceiver:_recorder];
+    if ( self.recorder ) {
+        [self.recorder finishRecording];
+        [self.audioController removeOutputReceiver:self.recorder];
+        [self.audioController removeInputReceiver:self.recorder];
         self.recorder = nil;
         
     }
 }
+
+
+
 @end

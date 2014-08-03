@@ -465,13 +465,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/mainControllers/TopControlView.m"
-            timestampString = "428592901.510733"
+            filePath = "huizon/Controls/SoundControls.m"
+            timestampString = "428736874.970627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
-            landmarkName = "-refreshTitleName"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "-startSoundListener"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "huizon/Controls/SoundControls.m"
+            timestampString = "428736874.970627"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-startSoundListener"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

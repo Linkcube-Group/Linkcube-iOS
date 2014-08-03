@@ -26,7 +26,7 @@
 @interface LeftViewController ()<LeDiscoveryDelegate, LeTemperatureAlarmProtocol, UITableViewDataSource, UITableViewDelegate>
 {
     BOOL  blueConn;
-    
+
 }
 @property (retain, nonatomic) LeTemperatureAlarmService *currentlyDisplayingService;
 @property (strong,nonatomic) IBOutlet UITableView  *tbMenu;
@@ -69,6 +69,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
     self.headerView = [[[NSBundle mainBundle]loadNibNamed:@"HeaderView"
                                                     owner:self
                                                   options:nil] lastObject];

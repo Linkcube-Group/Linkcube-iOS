@@ -18,9 +18,10 @@
 }
 
 @property (nonatomic,copy) EventHandler soundHandler;
-
 + (SoundControls *)soundSingleton;
 
 - (void)startSoundListener;
 - (void)stopSoundListener;
+
+
 @end

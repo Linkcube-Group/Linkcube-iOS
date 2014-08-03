@@ -97,7 +97,7 @@
     
     self.imgAlbum.center = CGPointMake(160, theApp.window.frame.size.height/2);
     self.imgFloat.center = CGPointMake(160, theApp.window.frame.size.height/2);
-    self.imgNeedler.originY = theApp.window.frame.size.height/2-116;
+    self.imgNeedler.originY = theApp.window.frame.size.height/2-182;
     
     playMusicType = PlayTypeCircle;
     isPlay = NO;
@@ -215,6 +215,7 @@
         self.musicInfo = [self.musicArray objectAtIndex:playIndex];
         [[VoiceControls voiceSingleton] startMusic:[self musicNamePath]];
         if (state) {
+            [self needleAnimation];
             [self startAlbumAnimation:YES];
             [[VoiceControls voiceSingleton] playMusicAction];
             isPlay = YES;
@@ -237,7 +238,6 @@
 - (IBAction)playAction:(id)sender
 {
     if (!isPlay) {
-        [self needleAnimation];
         [[VoiceControls voiceSingleton] playMusicAction];
         [self startAlbumAnimation:YES];
         isPlay = YES;
@@ -537,7 +537,13 @@
 #pragma mark NeedleAnimation
 - (void)needleAnimation
 {
-    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.imgNeedler.transform=CGAffineTransformMakeRotation(-M_PI/6);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.imgNeedler.transform=CGAffineTransformMakeRotation(0);
+        }];
+    }];
 }
 
 

@@ -56,7 +56,7 @@
     NSError *setCategoryError = nil;
     
    BOOL success = [[AVAudioSession sharedInstance]
-                    setCategory:AVAudioSessionCategoryPlayback
+                    setCategory:AVAudioSessionCategoryPlayAndRecord
                     error: &setCategoryError];
     [[AVAudioSession sharedInstance] setActive:YES error:nil];
 

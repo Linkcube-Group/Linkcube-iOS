@@ -86,8 +86,6 @@
     
     
     
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
     
@@ -116,6 +114,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    isOpen = YES;
+    [self.imgVoice setImage:IMG(@"mode-voice_s.png") forState:UIControlStateNormal];
+    [self refreshTop];
+    
     [[SoundControls soundSingleton] startSoundListener];
     IMP_BLOCK_SELF(VoiceViewController)
     [SoundControls soundSingleton].soundHandler = ^(id acc){
@@ -171,9 +173,7 @@
         
     };
     
-    isOpen = NO;
-    [self voiceAction:nil];
-    [self refreshTop];
+    
     
 }
 

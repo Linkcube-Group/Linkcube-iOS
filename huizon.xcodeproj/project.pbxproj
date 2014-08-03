@@ -378,6 +378,7 @@
 		078CD1C6182CCED200EBF477 /* CustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 078CD1C5182CCED200EBF477 /* CustomAlertView.m */; };
 		078CE940198952DB00B498F0 /* libMobClickLibrary.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 078CE93E198952DB00B498F0 /* libMobClickLibrary.a */; };
 		078CE9421989537500B498F0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 078CE9411989537500B498F0 /* libz.dylib */; };
+		078D3605198DD8BA0081FD8D /* needle_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 078D3604198DD8BA0081FD8D /* needle_bg@2x.png */; };
 		0796FD1518BC6900001F27B3 /* VoiceControls.m in Sources */ = {isa = PBXBuildFile; fileRef = 0796FD1418BC6900001F27B3 /* VoiceControls.m */; };
 		0796FD1718BC693A001F27B3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0796FD1618BC693A001F27B3 /* AVFoundation.framework */; };
 		0796FD1918BC6940001F27B3 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0796FD1818BC6940001F27B3 /* CoreAudio.framework */; };
@@ -1168,6 +1169,7 @@
 		078CE93E198952DB00B498F0 /* libMobClickLibrary.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMobClickLibrary.a; sourceTree = "<group>"; };
 		078CE93F198952DB00B498F0 /* MobClick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MobClick.h; sourceTree = "<group>"; };
 		078CE9411989537500B498F0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		078D3604198DD8BA0081FD8D /* needle_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "needle_bg@2x.png"; sourceTree = "<group>"; };
 		0796FD1318BC6900001F27B3 /* VoiceControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceControls.h; sourceTree = "<group>"; };
 		0796FD1418BC6900001F27B3 /* VoiceControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoiceControls.m; sourceTree = "<group>"; };
 		0796FD1618BC693A001F27B3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -2735,6 +2737,7 @@
 		074A29F7194458F0007CB3DA /* plays */ = {
 			isa = PBXGroup;
 			children = (
+				078D3604198DD8BA0081FD8D /* needle_bg@2x.png */,
 				07899C191982A6ED0054E13F /* slide_thumb@2x.png */,
 				074066CA19724782008DEE79 /* needle@2x.png */,
 				0394ECC0194FDC2E00B16F52 /* mode-music-front@2x.png */,
@@ -3553,6 +3556,7 @@
 				07C5CDF719278A3E0070B958 /* PlayViewController.xib in Resources */,
 				074A2A15194458F0007CB3DA /* button-play-disabled@2x.png in Resources */,
 				072F97D518C0BD2A00BEB4C4 /* dot_s.png in Resources */,
+				078D3605198DD8BA0081FD8D /* needle_bg@2x.png in Resources */,
 				07B6E72B18D585FF00C17693 /* PersonCell.xib in Resources */,
 				07EAA135192893F300794ABC /* GestureViewController.xib in Resources */,
 				0701AB88194D90D100C0DA9F /* female-large@2x.png in Resources */,
