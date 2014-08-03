@@ -17,7 +17,6 @@
 		0325F118198B9F1200497770 /* AEAudioUnitFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0F8198B9F1200497770 /* AEAudioUnitFilter.m */; };
 		0325F119198B9F1200497770 /* AEBlockAudioReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0FA198B9F1200497770 /* AEBlockAudioReceiver.m */; };
 		0325F11A198B9F1200497770 /* AEBlockChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0FC198B9F1200497770 /* AEBlockChannel.m */; };
-		0325F11B198B9F1200497770 /* AEBlockFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F0FE198B9F1200497770 /* AEBlockFilter.m */; };
 		0325F11C198B9F1200497770 /* AEBlockScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F100198B9F1200497770 /* AEBlockScheduler.m */; };
 		0325F11D198B9F1200497770 /* AEFloatConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F102198B9F1200497770 /* AEFloatConverter.m */; };
 		0325F11E198B9F1200497770 /* AEMixerBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0325F104198B9F1200497770 /* AEMixerBuffer.m */; };
@@ -494,6 +493,7 @@
 		BB646096197705D300D18206 /* XMPPSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = BB646092197705D300D18206 /* XMPPSearchResult.m */; };
 		BB6C6ED918D766C300A9C863 /* UserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6C6ED718D766C300A9C863 /* UserProfileViewController.m */; };
 		BB6C6EDA18D766C300A9C863 /* UserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB6C6ED818D766C300A9C863 /* UserProfileViewController.xib */; };
+		BB88DA64197F694300E8F40D /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB88DA62197F694300E8F40D /* NotificationViewController.xib */; };
 		BBB5B7E118D2DA1600A526EF /* ProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BBB5B7DF18D2DA1600A526EF /* ProtocolViewController.m */; };
 		BBB5B7E218D2DA1600A526EF /* ProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBB5B7E018D2DA1600A526EF /* ProtocolViewController.xib */; };
 		BBB7E5DF19472CDA001B3ED9 /* RightCellHead.xib in Resources */ = {isa = PBXBuildFile; fileRef = BBB7E5DE19472CDA001B3ED9 /* RightCellHead.xib */; };
@@ -520,6 +520,7 @@
 		BBB9144E19531F9200AD8840 /* button-short-green.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB9144A19531F9200AD8840 /* button-short-green.png */; };
 		BBB9144F19531F9200AD8840 /* button-short-red-pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB9144B19531F9200AD8840 /* button-short-red-pressed.png */; };
 		BBB9145019531F9200AD8840 /* button-short-red.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB9144C19531F9200AD8840 /* button-short-red.png */; };
+		BBE4E595198EE3B7001FBF8C /* NotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB88DA61197F694300E8F40D /* NotificationViewController.m */; };
 		BBF8DEE018DCA462005E2B8E /* bubbleMine.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DECA18DCA462005E2B8E /* bubbleMine.png */; };
 		BBF8DEE118DCA462005E2B8E /* bubbleMine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DECB18DCA462005E2B8E /* bubbleMine@2x.png */; };
 		BBF8DEE218DCA462005E2B8E /* bubbleSomeone.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF8DECC18DCA462005E2B8E /* bubbleSomeone.png */; };
@@ -1319,6 +1320,9 @@
 		BB6C6ED618D766C300A9C863 /* UserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileViewController.h; sourceTree = "<group>"; };
 		BB6C6ED718D766C300A9C863 /* UserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileViewController.m; sourceTree = "<group>"; };
 		BB6C6ED818D766C300A9C863 /* UserProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileViewController.xib; sourceTree = "<group>"; };
+		BB88DA60197F694300E8F40D /* NotificationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationViewController.h; sourceTree = "<group>"; };
+		BB88DA61197F694300E8F40D /* NotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationViewController.m; sourceTree = "<group>"; };
+		BB88DA62197F694300E8F40D /* NotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
 		BBB5B7DE18D2DA1500A526EF /* ProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProtocolViewController.h; sourceTree = "<group>"; };
 		BBB5B7DF18D2DA1600A526EF /* ProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProtocolViewController.m; sourceTree = "<group>"; };
 		BBB5B7E018D2DA1600A526EF /* ProtocolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProtocolViewController.xib; sourceTree = "<group>"; };
@@ -1842,6 +1846,9 @@
 				BB220ECF19566DB8000C08CB /* AddFriendViewController.h */,
 				BB220ED019566DB8000C08CB /* AddFriendViewController.m */,
 				BB220ED119566DB8000C08CB /* AddFriendViewController.xib */,
+				BB88DA60197F694300E8F40D /* NotificationViewController.h */,
+				BB88DA61197F694300E8F40D /* NotificationViewController.m */,
+				BB88DA62197F694300E8F40D /* NotificationViewController.xib */,
 			);
 			path = IMControllers;
 			sourceTree = "<group>";
@@ -3412,6 +3419,7 @@
 				BBB8149D19454DC90052D71A /* icon-lover.png in Resources */,
 				07B6E70418D5538F00C17693 /* messages_toolbar_background.png in Resources */,
 				074A2A1C194458F0007CB3DA /* button-repeat-one@2x.png in Resources */,
+				BB88DA64197F694300E8F40D /* NotificationViewController.xib in Resources */,
 				07B6E70318D5538F00C17693 /* messages_tableview_background@2x.png in Resources */,
 				074A2A14194458F0007CB3DA /* button-pause@2x.png in Resources */,
 				0745C88F18C5611800976FD2 /* scan_button.png in Resources */,
@@ -3582,6 +3590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBE4E595198EE3B7001FBF8C /* NotificationViewController.m in Sources */,
 				07B6E71118D5538F00C17693 /* UMFeedbackTableViewCellRight.m in Sources */,
 				032E3858192EF58D00363B90 /* NetworkController.m in Sources */,
 				0735553418C412E2005B319B /* XMPPResultSet.m in Sources */,
@@ -3721,7 +3730,6 @@
 				070996E7182B8BFB0064D7D3 /* NSDictionary+Extension.m in Sources */,
 				032E383C192EE99C00363B90 /* MusicItem.m in Sources */,
 				0735555118C412E2005B319B /* XMPPPing.m in Sources */,
-				0325F11B198B9F1200497770 /* AEBlockFilter.m in Sources */,
 				0735552F18C412E2005B319B /* XMPPvCardTempEmail.m in Sources */,
 				07DFAFD5193C6EB000C1EC70 /* PCSEQVisualizer.m in Sources */,
 				0735552518C412E2005B319B /* XMPPRoom.m in Sources */,
@@ -3936,8 +3944,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3954,7 +3962,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
+				PROVISIONING_PROFILE = "7E3AA5E8-2C74-4A2F-BA89-D13433C09E5B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -3970,7 +3978,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
@@ -3988,7 +3996,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "16ED9AFF-ABD6-4422-8CA6-18309354C81D";
+				PROVISIONING_PROFILE = "7E3AA5E8-2C74-4A2F-BA89-D13433C09E5B";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;

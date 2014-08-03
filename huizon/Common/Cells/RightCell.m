@@ -14,6 +14,9 @@
 @property (strong,nonatomic) IBOutlet UIImageView *imgIconRight;
 @property (strong,nonatomic) IBOutlet UILabel *lbUserName;
 @property (strong,nonatomic) IBOutlet UILabel *lbFriendStatus;
+@property (strong,nonatomic) IBOutlet UIButton *btnAdd;
+@property (strong,nonatomic) IBOutlet UIButton *btnAcept;
+@property (strong,nonatomic) IBOutlet UIButton *btnReject;
 @property (strong,nonatomic) NSString *friendName;
 @property (strong,nonatomic) NSString *friendId;
 @end
@@ -45,48 +48,6 @@
     self.iconName = imgName;
     self.imgIcon.image = IMG(_S(@"%@.png",self.iconName));
     self.lbUserName.text = name;
-    
-    self.headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.headerButton.backgroundColor = [UIColor clearColor];
-    self.headerButton.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
-    self.headerButton.frame = CGRectMake(0, 0, self.imgIcon.frame.size.width, self.imgIcon.frame.size.height);
-    self.imgIcon.userInteractionEnabled = YES;
-    [self.imgIcon addSubview:self.headerButton];
-}
-
-
-// set name of the icon in the front and the name of the text, for the RightCellLabel
-
-- (void)setMenuImageWithData:(NSData *)imgData Name:(NSString *)name
-{
-    self.imgIcon.image = [[UIImage alloc] initWithData:imgData];
-    self.imgIcon.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
-    self.imgIcon.layer.masksToBounds = YES;
-    self.lbUserName.text = name;
-    
-    self.headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.headerButton.backgroundColor = [UIColor clearColor];
-    self.headerButton.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
-    self.headerButton.frame = CGRectMake(0, 0, self.imgIcon.frame.size.width, self.imgIcon.frame.size.height);
-    self.imgIcon.userInteractionEnabled = YES;
-    [self.imgIcon addSubview:self.headerButton];
-}
-
-// set name of the icon in the front and the name of the text, for the RightCellLabel
-
-- (void)setMenuImageWithImage:(UIImage *)image Name:(NSString *)name
-{
-    self.imgIcon.image = image;
-    self.imgIcon.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
-    self.imgIcon.layer.masksToBounds = YES;
-    self.lbUserName.text = name;
-    
-    self.headerButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.headerButton.backgroundColor = [UIColor clearColor];
-    self.headerButton.layer.cornerRadius = self.imgIcon.frame.size.width/2.f;
-    self.headerButton.frame = CGRectMake(0, 0, self.imgIcon.frame.size.width, self.imgIcon.frame.size.height);
-    self.imgIcon.userInteractionEnabled = YES;
-    [self.imgIcon addSubview:self.headerButton];
 }
 
 // set right icon 
@@ -114,6 +75,14 @@
         self.btnAdd.hidden=NO;
         self.lbFriendStatus.hidden=YES;
     }
+    else if([status isEqualToString:@"判断"])
+    {
+        self.btnAdd.hidden=YES;
+        self.lbFriendStatus.hidden=YES;
+        self.lbFriendStatus.text=status;
+        self.btnAcept.hidden=NO;
+        self.btnReject.hidden=NO;
+    }
     else
     {
         self.btnAdd.hidden=YES;
@@ -123,14 +92,52 @@
     
 }
 
+- (void)deleteUserInCoreData:(NSString *)jidStr
+{
+    
+    //XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",presence.from]];
+    NSManagedObjectContext *context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"jidStr==%@",jidStr];
+    [request setPredicate:predicate];
+    [request setIncludesPropertyValues:NO];
+    [request setEntity:entity];
+    NSError *error=nil;
+    NSArray *datas=[context executeFetchRequest:request error:&error];
+    if(!error &&datas &&[datas count])
+    {
+        for(NSManagedObject *obj in datas)
+            [context deleteObject:obj];
+        if(![context save:&error])
+            NSLog(@"error:%@",error);
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 
-
+}
+- (IBAction)acceptSub:(id)sender
+{
+    NSString *jidStr=self.friendId;
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",jidStr]];
+    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    [self deleteUserInCoreData:jidStr];
+}
+- (IBAction)declineSub:(id)sender
+{
+    NSString *jidStr=self.friendId;
+    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",jidStr]];
+    [theApp.xmppRoster rejectPresenceSubscriptionRequestFrom:jid];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    [self deleteUserInCoreData:jidStr];
+}
 - (IBAction)AddFriend:(id)sender
 {
     
     NSString *jid=self.friendId;
     [theApp XMPPAddFriendSubscribeWithJid:jid];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    //self.lbFriendStatus.text=@"等待验证";
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 }
 
 @end

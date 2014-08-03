@@ -10,7 +10,6 @@
 #import "SignViewController.h"
 #import "UserEditController.h"
 #import "JASidePanelController.h"
-#import "XMPPvCardTemp.h"
 
 @interface UserViewController ()<UITextFieldDelegate>
 
@@ -25,7 +24,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginAuthen:) name:kXMPPNotificationDidAuthen object:nil];
     }
     return self;
 }
@@ -70,10 +68,11 @@
 
 - (void)didLoginAuthen:(NSNotification *)noti
 {
-        [self dismissViewControllerAnimated:YES completion:nil];
-        UserEditController *uvc = [[UserEditController alloc] init];
-        //[self presentViewController:uvc animated:YES completion:nil];
-        [self.navigationController pushViewController:uvc animated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    UserEditController *uvc = [[UserEditController alloc] init];
+    //[self presentViewController:uvc animated:YES completion:nil];
+    [self.navigationController pushViewController:uvc animated:YES];
 
 }
 
@@ -87,18 +86,16 @@
 - (IBAction)loginAction:(id)sender
 {
     NSString *name = self.txtName.text;
-    
     NSString *nameMsg = IsValidEmail([name UTF8String]);
-//    if (nameMsg!=nil) {
-//		showCustomAlertMessage(nameMsg);
-//		return;
-//	}
-    if (StringNotNullAndEmpty(nameMsg)) {
-        showCustomAlertMessage(@"请输入正确的用户名");
-        return;
-    }
+    if (nameMsg!=nil) {
+		showCustomAlertMessage(nameMsg);
+		//return;
+	}
+    
     name =[name stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
     NSString *pwd = self.txtPwd.text;
+  
+    
     
     NSString *pwdMsg = IsValidPWD([pwd UTF8String]);
     if (pwdMsg==nil) {

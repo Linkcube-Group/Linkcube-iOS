@@ -15,7 +15,7 @@
 #import "RightCell.h"
 #import "AddFriendViewController.h"
 #import "XMPPvCardTemp.h"
-#import "FriendInfoViewController.h"
+#import "NotificationViewController.h"
 #define FRIEND_LIST @[@"",@"我的",@"消息",@"情侣"]
 
 @interface RightViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -38,7 +38,7 @@
     if (self) {
         // Custom initialization
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSubscribe:) name:kXMPPNotificationDidReceivePresence object:nil];
-        
+
     }
     return self;
 }
@@ -53,17 +53,18 @@
     
     context=[[[self appDelegate] xmppRosterStorage] mainThreadManagedObjectContext];
     [theApp getUserCardTemp];
-    [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
+     [theApp.sidePanelController addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     // Do any additional setup after loading the view from its nib.
-}
+    }
 
 
 - (void) receiveSubscribe:(NSNotification *) notification
 {
-    //    XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
-    //    XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
-    //    [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
+    //XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
+    //XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
+    //[theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
     //[theApp.xmppRoster removeUser:jid];
+    //[theApp.xmppRoster addU]
     
 }
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
@@ -89,7 +90,7 @@
     }
     //导航条背景
     [[UINavigationBar appearance] setBackgroundImage:IMG(@"navigation-and-status") forBarMetrics:UIBarMetricsDefault];
-    
+
 }
 
 
@@ -104,7 +105,7 @@
             
             //[self updateUI:arrayMessage];
             [self.tbFriend reloadData];
-            
+
         });
         
     });
@@ -129,22 +130,15 @@
     NSArray *friends = [context executeFetchRequest:request error:&error];
     //XMPPUserCoreDataStorageObject *object
     [self.friendsArray removeAllObjects];
+    //[self.friendsArray addObjectsFromArray:friends];
     for(XMPPUserCoreDataStorageObject *object in friends)
     {
-        NSLog(@"%@ %@",object.nickname,object.subscription);
-        if([object.subscription isEqualToString:@"both"])
+        if ([object.subscription isEqualToString:@"both"])
         {
-            XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES];
-            NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
-            [dict setObject:object forKey:@"object"];
-            if(vCardTemp.photo.length)
-                [dict setObject:vCardTemp.photo forKey:@"photo"];
-            if(vCardTemp.gender.length)
-                [dict setObject:vCardTemp.gender forKey:@"gender"];
-            [self.friendsArray addObject:dict];
+            [self.friendsArray addObject:object];
         }
     }
-    
+
 }
 
 
@@ -203,7 +197,7 @@
     {
         return 50;
     }
-    
+
     return 70;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -224,11 +218,7 @@
     {
         cellIdentifier = @"RightCellLabel";
     }
-    else
-    {
-        cellIdentifier = @"RightCellUser";
-    }
-    
+
     
     RightCell *cell = (RightCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil)
@@ -260,18 +250,7 @@
                 name=[theApp.xmppvCardUser.jid bare];
             }
             
-            if(theApp.xmppvCardUser.photo.length)
-            {
-                [cell setMenuImageWithData:theApp.xmppvCardUser.photo Name:name];
-            }
-            else if ([theApp.xmppvCardUser.gender isEqualToString:@"男"])
-            {
-                [cell setMenuImage:@"portrait-male-small" Name:name];
-            }
-            else
-            {
-                [cell setMenuImage:@"portrait-female-small" Name:name];
-            }
+            [cell setMenuImage:@"portrait-male-small" Name:name];
         }
         else
         {
@@ -282,8 +261,7 @@
     else if(indexPath.row==2)
     {
         [cell setMenuImage:@"icon-message" Name:@"消息"];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        [cell setRightIcon:@"next_grey"];
+        [cell setRightIcon:@"button-add"];
     }
     else if(indexPath.row==3)
     {
@@ -295,7 +273,8 @@
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
         
-        XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
+        XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        /*
         NSString *name= [object displayName];
         if (!name) {
             name = [object nickname];
@@ -303,35 +282,13 @@
         if (!name) {
             name = [object jidStr];
         }
-        if(((NSData *)[[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"photo"]).length)
-        {
-            [cell setMenuImageWithData:[[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"photo"] Name:name];
-        }
-        else if([[[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"gender"] isEqualToString:@"男"])
-        {
-            [cell setMenuImage:@"portrait-male-small" Name:name];
-        }
-        else
-        {
-            [cell setMenuImage:@"portrait-female-small" Name:name];
-        }
-        cell.headerButton.tag = indexPath.row - 4;
-        [cell.headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+         */
+        NSString *name=[theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES].nickname;
+        [cell setMenuImage:@"portrait-female-small" Name:name];
         
     }
     //cell.textLabel.text = [FRIEND_LIST objectAtIndex:indexPath.row];
     return cell;
-}
-
--(void)headerButtonClicked:(UIButton *)button
-{
-    NSLog(@"tag===%d",button.tag);
-    XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:button.tag] objectForKey:@"object"];
-    FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
-    fvc.jid = object.jid;
-    fvc.isFriend = YES;
-    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
-    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -352,26 +309,27 @@
             nav = [[UINavigationController alloc] initWithRootViewController:psc];
             //[self presentViewController:nav animated:YES completion:nil];
         }
-        
+
     }
     else if (indexPath.row==2)
     {
-        FriendViewController *fvc = [[FriendViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:fvc];
+        //FriendViewController *fvc = [[FriendViewController alloc] init];
+        NotificationViewController *nvc = [[NotificationViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:nvc];
     }
     else if (indexPath.row==3)
     {
         /*
          UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"请输入用户名" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定",nil];
-         alert.alertViewStyle=UIAlertViewStylePlainTextInput;
-         [alert show];
+        alert.alertViewStyle=UIAlertViewStylePlainTextInput;
+        [alert show];
          */
         AddFriendViewController *afvc=[[AddFriendViewController alloc]init];
         nav = [[UINavigationController alloc] initWithRootViewController:afvc];
     }
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
-        XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
+        XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
         TalkViewController *tvc=[[TalkViewController alloc]init];
         
         //using nickname for now, change later
@@ -389,8 +347,8 @@
 }
 
 - (IBAction)presentModal:(id)sender {
-    
-    //    [self presentViewController:controller animated:YES completion:nil];
+   
+//    [self presentViewController:controller animated:YES completion:nil];
 }
 
 

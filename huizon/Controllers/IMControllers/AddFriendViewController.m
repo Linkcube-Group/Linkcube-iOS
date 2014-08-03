@@ -42,6 +42,7 @@
     
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"添加情侣"];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_DisModal:)];
+    //[self refreshTable];
     
 }
 - (void)viewDidLoad
@@ -51,8 +52,13 @@
     context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
     dicJidToStatus=[[NSMutableDictionary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kXMPPNotificationDidAskFriend object:nil];
+    [self refreshTable];
 }
 
+- (void) refreshTableNoGettingData
+{
+    [tbResult reloadData];
+}
 - (void) refreshTable
 {
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
@@ -109,7 +115,8 @@
 
 - (void)getData
 {
-    
+    [theApp.xmppRoster fetchRoster];
+    //[theApp.xmppRosterStorage.]
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc]init];
     [request setEntity:entity];
@@ -232,23 +239,19 @@
     if (status.length==0)
     {
         [cell setFriendStatus:@"None"];
-        [cell.btnAdd addTarget:self action:@selector(reloadTableView) forControlEvents:UIControlEventTouchUpInside];
-        cell.headerButton.tag = indexPath.row;
-        [cell.headerButton addTarget:self action:@selector(nHeaderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
     }
     else
     {
         if ([status isEqualToString:@"both"])
         {
             status=@"已添加";
-            cell.headerButton.tag = indexPath.row;
-            [cell.headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+
         }
         else
         {
             status=@"等待验证";
-            cell.headerButton.tag = indexPath.row;
-            [cell.headerButton addTarget:self action:@selector(nHeaderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+
             
         }
         [cell setFriendStatus:status];
