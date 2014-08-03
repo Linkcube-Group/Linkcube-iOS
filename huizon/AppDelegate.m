@@ -310,6 +310,7 @@
     if ([self.xmppStream isConnected]) {
         [self.xmppStream disconnect];
     }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"subscribe"];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPmyPassword];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPmyJID];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -468,7 +469,13 @@
     else if([iq isResultIQ]){
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTop object:nil userInfo:nil];
     }
-    
+    else
+    {
+        
+        //when get iq set to roster from server
+        //[xmppRoster fetchRoster];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    }
     return YES;
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
@@ -496,14 +503,10 @@
         //{
         //    [self.chatDelegate friendSubscription:presence];
         //}
-        
+        /*
         NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
         NSArray *subscribePresence=[defaults arrayForKey:@"subscribe"];
-        /*
-        NSArray *test=[[NSArray alloc]init];
-        [defaults setObject:test forKey:@"subscribe"];
-        [defaults synchronize];
-         */
+        
         NSMutableArray *newArray;
         if (subscribePresence==nil)
         {
@@ -527,6 +530,18 @@
         NSArray *array=[NSArray arrayWithArray:newArray];
         [defaults setObject:array forKey:@"subscribe"];
         [defaults synchronize];
+        */
+        
+        XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",presence.from]];
+        NSManagedObjectContext *context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+        
+        XMPPUserCoreDataStorageObject *object =[[XMPPUserCoreDataStorageObject alloc]initWithEntity:entity insertIntoManagedObjectContext:context];
+        object.jid=jid;
+        object.jidStr=jid.bare;
+        object.subscription=@"Ask";
+        //dicJidToStatus[object.jidStr]=@"Ask";
+        
         NSDictionary *dic=[NSDictionary dictionaryWithObject:presence forKey:@"presence"];
         [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidReceivePresence object:nil userInfo:dic];
     }
@@ -544,8 +559,11 @@
 - (void)xmppStream:(XMPPStream *)sender didSendIQ:(XMPPIQ *)iq
 {
     NSLog(@"didSendIQ:\n\n%@\n\n",iq.description);
-    if ([iq.type isEqualToString:@"set"]) {
-         [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPvCardTempElement object:@(1)];
+    if ([iq.type isEqualToString:@"set"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPvCardTempElement object:@(1)];
+       
+        
     }
     
 }
@@ -557,6 +575,7 @@
 - (void)xmppStream:(XMPPStream *)sender didSendPresence:(XMPPPresence *)presence
 {
     NSLog(@"didSendPresence:\n\n%@\n",presence.description);
+    
 }
 - (void)xmppStream:(XMPPStream *)sender didFailToSendIQ:(XMPPIQ *)iq error:(NSError *)error
 {

@@ -36,7 +36,7 @@
     return self;
 }
 
-
+//not used any more
 - (void) receiveSubscribe:(NSNotification *) notification
 {
     XMPPPresence * presence=[notification.userInfo objectForKey:@"presence"];
@@ -115,21 +115,11 @@
 
 
 
-
+//first add add friend request then other friend status
 - (void)getData
 {
 
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc]init];
-    [request setEntity:entity];
-    NSError *error ;
-    friends = [context executeFetchRequest:request error:&error];
-    for (XMPPUserCoreDataStorageObject *object in friends)
-    {
-        NSString *jidStr=object.jidStr;
-        NSString *status=object.subscription;
-        [dicJidToStatus setObject:status forKey:jidStr];
-    }
+
     /*
     //theApp.xmppRoster.autoClearAllUsersAndResources=YES;
     for (NSManagedObject *obj in friends)
@@ -143,6 +133,7 @@
     [dataArray removeAllObjects];
     //[dataArray addObjectsFromArray:friends];
     
+    /*
     NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
     NSArray *subscribePresence=[defaults arrayForKey:@"subscribe"];
     
@@ -157,17 +148,28 @@
         object.jid=jid;
         object.jidStr=jid.bare;
         object.subscription=@"Ask";
-        //dicJidToStatus[object.jidStr]=@"Ask";
-        [dataArray addObject:object];
+        dicJidToStatus[object.jidStr]=@"Ask";
+        //[dataArray addObject:object];
         
     }
+    */
     
-    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    NSError *error ;
+    friends = [context executeFetchRequest:request error:&error];
+    for (XMPPUserCoreDataStorageObject *object in friends)
+    {
+        NSString *jidStr=object.jidStr;
+        NSString *status=object.subscription;
+        [dicJidToStatus setObject:status forKey:jidStr];
+    }
     
     for(XMPPUserCoreDataStorageObject *object in friends)
     {
         NSString * status=object.subscription;
-        if(status.length!=0&&!([status isEqualToString:@"none"]))
+        if(status.length!=0)//&&!([status isEqualToString:@"none"]))
         {
             [dataArray addObject:object];
         }
@@ -247,10 +249,14 @@
         {
             status=@"判断";
         }
-        else
+        else if([status isEqualToString:@"from"])
         {
             status=@"等待验证";
             
+        }
+        else if([status isEqualToString:@"none"])
+        {
+            status=@"判断";
         }
         [cell setFriendStatus:status];
         

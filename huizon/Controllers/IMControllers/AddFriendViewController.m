@@ -39,6 +39,7 @@
     
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"添加情侣"];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_DisModal:)];
+    //[self refreshTable];
     
 }
 - (void)viewDidLoad
@@ -51,6 +52,10 @@
     [self refreshTable];
 }
 
+- (void) refreshTableNoGettingData
+{
+    [tbResult reloadData];
+}
 - (void) refreshTable
 {
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

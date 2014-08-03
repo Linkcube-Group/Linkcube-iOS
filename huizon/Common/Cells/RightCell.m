@@ -92,27 +92,52 @@
     
 }
 
+- (void)deleteUserInCoreData:(NSString *)jidStr
+{
+    
+    //XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",presence.from]];
+    NSManagedObjectContext *context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"jidStr==%@",jidStr];
+    [request setPredicate:predicate];
+    [request setIncludesPropertyValues:NO];
+    [request setEntity:entity];
+    NSError *error=nil;
+    NSArray *datas=[context executeFetchRequest:request error:&error];
+    if(!error &&datas &&[datas count])
+    {
+        for(NSManagedObject *obj in datas)
+            [context deleteObject:obj];
+        if(![context save:&error])
+            NSLog(@"error:%@",error);
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 
+}
 - (IBAction)acceptSub:(id)sender
 {
     NSString *jidStr=self.friendId;
     XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",jidStr]];
     [theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    [self deleteUserInCoreData:jidStr];
 }
 - (IBAction)declineSub:(id)sender
 {
     NSString *jidStr=self.friendId;
     XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",jidStr]];
     [theApp.xmppRoster rejectPresenceSubscriptionRequestFrom:jid];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    [self deleteUserInCoreData:jidStr];
 }
 - (IBAction)AddFriend:(id)sender
 {
     
     NSString *jid=self.friendId;
     [theApp XMPPAddFriendSubscribeWithJid:jid];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
+    //self.lbFriendStatus.text=@"等待验证";
+    //[[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidAskFriend object:nil];
 }
 
 @end
