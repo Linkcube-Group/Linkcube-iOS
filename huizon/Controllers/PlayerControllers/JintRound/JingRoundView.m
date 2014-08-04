@@ -14,8 +14,8 @@
 
 @interface JingRoundView ()
 
-@property (strong, nonatomic) UIImageView *roundImageView;
-@property (strong, nonatomic) CABasicAnimation* rotationAnimation;
+
+//@property (strong, nonatomic) CABasicAnimation* rotationAnimation;
 @end
 
 @implementation JingRoundView
@@ -30,14 +30,20 @@
     self.roundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     [self.roundImageView setCenter:center];
     [self.roundImageView setImage:roundImage];
-    [self addSubview:self.roundImageView];
+    [self insertSubview:self.roundImageView atIndex:0];
     
     
+    
+}
+
+- (void)initRound
+{
+        [self.layer removeAllAnimations];
     //Rotation
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 ];
-    
+    rotationAnimation.fromValue = 0;
     //default RotationDuration value
     if (self.rotationDuration == 0) {
         self.rotationDuration = kRotationDuration;
@@ -46,17 +52,19 @@
     rotationAnimation.duration = self.rotationDuration;
     rotationAnimation.RepeatCount = FLT_MAX;
     rotationAnimation.cumulative = NO;
+
     [self.roundImageView.layer addAnimation:rotationAnimation forKey:nil];
     
     //pause
-    if (!self.isPlay) {
+//    if (!self.isPlay) {
         self.layer.speed = 0.0;
-    }
+//    }
 }
 
 - (void)drawRect:(CGRect)rect
 {
     [self initJingRound];
+    [self initRound];
 }
 
 
@@ -73,18 +81,22 @@
     [self.delegate playStatuUpdate:self.isPlay];
 }
 
--(void) startRotation
+-(void) startRotation:(BOOL)force
 {
     if (self.layer.speed>0) {
         return;
     }
     //start Animation
     CFTimeInterval pausedTime = [self.layer timeOffset];
+  
     self.layer.speed = 1.0;
     self.layer.timeOffset = 0.0;
     self.layer.beginTime = 0.0;
    
+   
+    
     CFTimeInterval timeSincePause = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pausedTime;
+   
     self.layer.beginTime = timeSincePause;
   
     

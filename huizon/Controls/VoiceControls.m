@@ -41,6 +41,10 @@
 
 - (void)playMusicAction
 {
+    UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+    AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(sessionCategory), &sessionCategory);
+    
+    
     if (self.audioPlayer && ![self.audioPlayer isPlaying]) {
         [self.audioPlayer play];
         

@@ -11,8 +11,8 @@
                 <outlet property="btnPlay" destination="oe1-0L-gxw" id="Dlr-QO-QpS"/>
                 <outlet property="btnPriview" destination="j6J-sy-uiH" id="eJW-H3-wSN"/>
                 <outlet property="btnType" destination="Kg2-gE-mgR" id="rTa-MT-DUb"/>
-                <outlet property="imgAlbum" destination="2cm-aP-4Dm" id="vGK-FZ-rcA"/>
-                <outlet property="imgFloat" destination="Jzu-t2-chx" id="ewP-37-vfw"/>
+                <outlet property="imgAlbum" destination="hNk-6f-Xo5" id="9SJ-9A-J0j"/>
+                <outlet property="imgFloat" destination="NP6-k8-Sdb" id="u7q-f0-Xmz"/>
                 <outlet property="imgNeedler" destination="Zrv-s1-4os" id="qRV-2O-3I2"/>
                 <outlet property="lbAuthor" destination="1xw-bg-pz4" id="grm-61-VdK"/>
                 <outlet property="lbName" destination="2Bw-JH-Mcm" id="v5j-1T-i46"/>
@@ -125,13 +125,15 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mode-music.png" id="2cm-aP-4Dm">
-                    <rect key="frame" x="45" y="164" width="240" height="240"/>
+                <view contentMode="scaleToFill" id="hNk-6f-Xo5" customClass="JingRoundView">
+                    <rect key="frame" x="45" y="146" width="240" height="240"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <view contentMode="scaleToFill" id="Jzu-t2-chx" customClass="JingRoundView">
-                    <rect key="frame" x="90" y="209" width="150" height="150"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="NP6-k8-Sdb">
+                            <rect key="frame" x="45" y="45" width="150" height="150"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="needle_bg.png" id="Zrv-s1-4os">
@@ -154,7 +156,6 @@
         <image name="button-menu.png" width="30" height="30"/>
         <image name="button-play.png" width="40" height="40"/>
         <image name="button-repeat.png" width="30" height="30"/>
-        <image name="mode-music.png" width="240" height="240"/>
         <image name="needle_bg.png" width="134" height="182"/>
     </resources>
 </document>

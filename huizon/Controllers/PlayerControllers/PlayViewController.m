@@ -33,8 +33,8 @@
 
 @property (strong,nonatomic) IBOutlet UILabel *lbName;
 @property (strong,nonatomic) IBOutlet UILabel *lbAuthor;
-@property (strong,nonatomic) IBOutlet UIImageView *imgAlbum;
-@property (strong,nonatomic) IBOutlet JingRoundView *imgFloat;
+@property (strong,nonatomic) IBOutlet JingRoundView *imgAlbum;
+@property (strong,nonatomic) IBOutlet UIImageView *imgFloat;
 @property (strong,nonatomic) IBOutlet UILabel *lbTimeMin;
 @property (strong,nonatomic) IBOutlet UILabel *lbTimeMax;
 @property (strong,nonatomic) IBOutlet UISlider *slider;
@@ -87,16 +87,20 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-    self.imgFloat.rotationDuration = 8.0;
-    self.imgFloat.isPlay = NO;
+    self.imgAlbum.rotationDuration = 8.0;
+    self.imgAlbum.isPlay = NO;
     
     topView = [[TopControlView alloc] initWithFrame:CGRectMake(0, 27, 320, 44) nibNameOrNil:nil];
     topView.baseController = self;
     
     [self.view addSubview:topView];
-    
+     [self.imgAlbum initJingRound];
     self.imgAlbum.center = CGPointMake(160, theApp.window.frame.size.height/2);
-    self.imgFloat.center = CGPointMake(160, theApp.window.frame.size.height/2);
+    self.imgAlbum.roundImage = IMG(@"mode-music.png");
+   
+    [self.imgAlbum.roundImageView addSubview:self.imgFloat];
+    
+//    self.imgFloat.center = self.imgAlbum.center;//CGPointMake(160, theApp.window.frame.size.height/2);
     self.imgNeedler.originY = theApp.window.frame.size.height/2-182;
     
     playMusicType = PlayTypeCircle;
@@ -109,6 +113,7 @@
     [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateHighlighted];
     [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateNormal];
     
+
     [VoiceControls voiceSingleton].voiceHandler = ^(id acc){
         
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
@@ -183,7 +188,7 @@
     if (ary) {
         self.musicArray = [[MusicList alloc] initWithArray:ary];
     }
-    [self.imgFloat initJingRound];
+    [self.imgAlbum initRound];
     
     
     if (playIndex>=self.musicArray.count) {
@@ -227,7 +232,7 @@
     self.slider.value = 0;
     self.lbName.text = [self.musicInfo musicName];
     self.lbAuthor.text = [self.musicInfo author];
-    self.imgFloat.roundImage = [self musicImageInfo:self.musicInfo.musicPath];
+    self.imgFloat.image = [self musicImageInfo:self.musicInfo.musicPath];
     self.lbTimeMin.text = @"00:00";
     int duration = [[VoiceControls voiceSingleton] musicDuration];
     self.lbTimeMax.text = _S(@"%02d:%02d",duration/60,duration%60);
@@ -511,10 +516,10 @@
 - (void)startAlbumAnimation:(BOOL)isStart
 {
     if (isStart) {
-        [self.imgFloat startRotation];
+        [self.imgAlbum startRotation:NO];
     }
     else{
-        [self.imgFloat pauseRotation];
+        [self.imgAlbum pauseRotation];
     }
 }
 
@@ -525,10 +530,10 @@
 
 - (void)startRotate
 {
-    [self.imgFloat initJingRound];
+    [self.imgAlbum initRound];
     if (isPlay) {
         
-        [self.imgFloat startRotation];
+        [self.imgAlbum startRotation:YES];
     }
     
 }

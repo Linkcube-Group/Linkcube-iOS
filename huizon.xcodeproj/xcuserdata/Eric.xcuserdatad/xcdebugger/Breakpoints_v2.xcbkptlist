@@ -338,11 +338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
-            timestampString = "428686566.105652"
+            timestampString = "428855658.221056"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
             landmarkName = "-openMusicList:"
             landmarkType = "5">
          </BreakpointContent>
@@ -465,29 +465,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controls/SoundControls.m"
-            timestampString = "428736874.970627"
+            filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
+            timestampString = "428858841.027979"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-startSoundListener"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "huizon/Controls/SoundControls.m"
-            timestampString = "428736874.970627"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-startSoundListener"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
+            landmarkName = "-stopRotate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

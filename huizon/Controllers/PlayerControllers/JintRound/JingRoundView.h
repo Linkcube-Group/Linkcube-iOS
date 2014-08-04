@@ -25,15 +25,17 @@
 
 @property (assign, nonatomic) id<JingRoundViewDelegate> delegate;
 
+@property (strong, nonatomic) UIImageView *roundImageView;
 @property (strong, nonatomic) UIImage *roundImage;
 @property (assign, nonatomic) BOOL isPlay;
 @property (assign, nonatomic) float rotationDuration;
 
+- (void)initRound;
 -(void) initJingRound;
 
 -(void) play;
 -(void) pause;
 
--(void) startRotation;
+-(void) startRotation:(BOOL)force;
 -(void) pauseRotation;
 @end
