@@ -238,8 +238,8 @@
     {
         if ([theApp.xmppStream isAuthenticated])
         {
-            //XMPPvCardTemp *xmppvCardTemp=[theApp.xmppvCardTempModule myvCardTemp];
-            
+            XMPPvCardTemp *xmppvCardTemp=[theApp.xmppvCardTempModule myvCardTemp];
+            NSData * photo = xmppvCardTemp.photo;
             //NSString *uname = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyJID];
             NSString *name=theApp.xmppvCardUser.nickname;
             if (!name)
@@ -250,8 +250,18 @@
             {
                 name=[theApp.xmppvCardUser.jid bare];
             }
-            
-            [cell setMenuImage:@"portrait-male-small" Name:name];
+            if(photo.length)
+            {
+                [cell setMenuImageWithData:photo Name:name];
+            }
+            else if ([xmppvCardTemp.gender isEqualToString:@"男"])
+            {
+                [cell setMenuImage:@"portrait-male-small" Name:name];
+            }
+            else
+            {
+                [cell setMenuImage:@"portrait-female-small" Name:name];
+            }
         }
         else
         {
