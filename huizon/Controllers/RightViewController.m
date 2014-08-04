@@ -276,7 +276,7 @@
         [cell setRightIcon:@"next_grey"];
         UIView * lineView = [[UIView alloc] init];
         lineView.frame = CGRectMake(0, 34.f, self.view.frame.size.width, 1);
-        lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+        lineView.backgroundColor = [UIColor colorWithHexString:@"afafaf"];
         cell.contentView.backgroundColor = [UIColor colorWithHexString:@"cccccc"];
         [cell.contentView addSubview:lineView];
     }
