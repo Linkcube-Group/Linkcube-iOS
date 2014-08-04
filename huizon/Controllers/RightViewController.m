@@ -230,6 +230,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         
     }
+//    cell.contentView.backgroundColor = [UIColor whiteColor];
     if (indexPath.row==0)
     {
         
@@ -265,7 +266,7 @@
         }
         else
         {
-            [cell setMenuImage:@"portrait-male-small" Name:@"未登录"];
+            [cell setMenuImage:@"portrait-male-small" Name:NSLocalizedString(@"未登录", nil)];
         }
         
     }
@@ -276,13 +277,14 @@
         UIView * lineView = [[UIView alloc] init];
         lineView.frame = CGRectMake(0, 34.f, self.view.frame.size.width, 1);
         lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"cccccc"];
         [cell.contentView addSubview:lineView];
     }
     else if(indexPath.row==3)
     {
         [cell setMenuImage:@"icon-lover" Name:@"情侣"];
         [cell setRightIcon:@"button-add"];
-        
+        cell.contentView.backgroundColor = [UIColor colorWithHexString:@"cccccc"];
         
     }
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
