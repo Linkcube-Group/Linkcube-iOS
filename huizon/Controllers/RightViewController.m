@@ -262,7 +262,7 @@
     else if(indexPath.row==2)
     {
         [cell setMenuImage:@"icon-message" Name:@"消息"];
-        [cell setRightIcon:@"button-add"];
+        [cell setRightIcon:@"next_grey"];
         UIView * lineView = [[UIView alloc] init];
         lineView.frame = CGRectMake(0, 34.f, self.view.frame.size.width, 1);
         lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
