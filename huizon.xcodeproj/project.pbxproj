@@ -479,6 +479,10 @@
 		07FEF658197B64D9003FF446 /* strength-8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64F197B64D9003FF446 /* strength-8@2x.png */; };
 		07FEF65B197B6B73003FF446 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEF65A197B6B73003FF446 /* HeaderView.m */; };
 		07FEF65D197B6B8A003FF446 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF65C197B6B8A003FF446 /* HeaderView.xib */; };
+		2620954B198FD88D000E6E5C /* button_keyboard_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209547198FD88D000E6E5C /* button_keyboard_pressed.png */; };
+		2620954C198FD88D000E6E5C /* button_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209548198FD88D000E6E5C /* button_keyboard.png */; };
+		2620954D198FD88D000E6E5C /* button_switch_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209549198FD88D000E6E5C /* button_switch_pressed.png */; };
+		2620954E198FD88D000E6E5C /* button_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 2620954A198FD88D000E6E5C /* button_switch.png */; };
 		BB220ECC19559B16000C08CB /* RightCellRequest.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ECB19559B16000C08CB /* RightCellRequest.xib */; };
 		BB220ED219566DB8000C08CB /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB220ED019566DB8000C08CB /* AddFriendViewController.m */; };
 		BB220ED319566DB8000C08CB /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED119566DB8000C08CB /* AddFriendViewController.xib */; };
@@ -1300,6 +1304,10 @@
 		07FEF659197B6B73003FF446 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		07FEF65A197B6B73003FF446 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		07FEF65C197B6B8A003FF446 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		26209547198FD88D000E6E5C /* button_keyboard_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_keyboard_pressed.png; sourceTree = "<group>"; };
+		26209548198FD88D000E6E5C /* button_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_keyboard.png; sourceTree = "<group>"; };
+		26209549198FD88D000E6E5C /* button_switch_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch_pressed.png; sourceTree = "<group>"; };
+		2620954A198FD88D000E6E5C /* button_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch.png; sourceTree = "<group>"; };
 		BB220ECB19559B16000C08CB /* RightCellRequest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightCellRequest.xib; sourceTree = "<group>"; };
 		BB220ECF19566DB8000C08CB /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		BB220ED019566DB8000C08CB /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
@@ -3163,6 +3171,10 @@
 		BBB8149519454DC90052D71A /* right_info */ = {
 			isa = PBXGroup;
 			children = (
+				26209547198FD88D000E6E5C /* button_keyboard_pressed.png */,
+				26209548198FD88D000E6E5C /* button_keyboard.png */,
+				26209549198FD88D000E6E5C /* button_switch_pressed.png */,
+				2620954A198FD88D000E6E5C /* button_switch.png */,
 				D41613B8198B1EE7005FBF01 /* next_grey@2x.png */,
 				D403349C19865D9200874FED /* agree@2x.png */,
 				BB220ED419567501000C08CB /* input-box.png */,
@@ -3366,6 +3378,7 @@
 				BBF8DF1E18DCACC8005E2B8E /* icon_57.png in Resources */,
 				D41613B9198B1EE7005FBF01 /* next_grey@2x.png in Resources */,
 				07B6E6FA18D5538F00C17693 /* icon_rightArrow@2x.png in Resources */,
+				2620954C198FD88D000E6E5C /* button_keyboard.png in Resources */,
 				07EAA12219288B9F00794ABC /* MusicListController.xib in Resources */,
 				0762C2C018C2197D00ABD7A0 /* posture_2@2x.png in Resources */,
 				074A2A1A194458F0007CB3DA /* button-repeat-disabled@2x.png in Resources */,
@@ -3461,6 +3474,7 @@
 				0394ECC1194FDC2E00B16F52 /* mode-music-front@2x.png in Resources */,
 				BB6C6EDA18D766C300A9C863 /* UserProfileViewController.xib in Resources */,
 				072F97D318C0BD2A00BEB4C4 /* blue_reseted.png in Resources */,
+				2620954D198FD88D000E6E5C /* button_switch_pressed.png in Resources */,
 				BBB814A019454DC90052D71A /* portrait-female-large.png in Resources */,
 				0701AB8D194D90D100C0DA9F /* male-large@2x.png in Resources */,
 				07FEF655197B64D9003FF446 /* strength-5@2x.png in Resources */,
@@ -3501,6 +3515,7 @@
 				BBB9144D19531F9200AD8840 /* button-short-green-pressed.png in Resources */,
 				073AA8DD19440FDD008EDD06 /* red_button_s@2x.png in Resources */,
 				BBF8DEE218DCA462005E2B8E /* bubbleSomeone.png in Resources */,
+				2620954B198FD88D000E6E5C /* button_keyboard_pressed.png in Resources */,
 				074A2A1B194458F0007CB3DA /* button-repeat-one-disabled@2x.png in Resources */,
 				07B6E70C18D5538F00C17693 /* send_selected@2x.png in Resources */,
 				07FEF657197B64D9003FF446 /* strength-7@2x.png in Resources */,
@@ -3522,6 +3537,7 @@
 				BB220ED919567501000C08CB /* input-box.png in Resources */,
 				07E38E4D193B152B00745C02 /* 1.mp3 in Resources */,
 				074066D619725835008DEE79 /* VoiceViewController.xib in Resources */,
+				2620954E198FD88D000E6E5C /* button_switch.png in Resources */,
 				0701AB79194D5FFD00C0DA9F /* white_box@2x.png in Resources */,
 				0701AB7F194D8FA000C0DA9F /* UserEditController.xib in Resources */,
 				0701AB77194D5FFD00C0DA9F /* icon-email@2x.png in Resources */,
