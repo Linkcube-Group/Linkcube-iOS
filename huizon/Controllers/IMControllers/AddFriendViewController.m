@@ -86,10 +86,7 @@
     NSLog(@"search result : %@", result);
     if  ([result.items count]==0)
     {
-        NSString *title     = @"";
-        NSString *message   = @"无此账号";
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil];
-        [alertView show];
+        showCustomAlertMessage(@"无此账号");
     }
     
     for(NSDictionary * dict in result.items)
