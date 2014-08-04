@@ -157,7 +157,8 @@
             [theApp.xmppSearchModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
             //[theApp.xmppSearchModule askForFields];
             XMPPSearchSingleNode *search = [[XMPPSearchSingleNode alloc] init];
-            search.name = @"nick";//@"NICKNAME";
+            //nick email
+            search.name = @"email";//@"NICKNAME";
             search.value = txtSearch.text;
             [theApp.xmppSearchModule searchWithFields:@[search] userData:nil];
             //[self updateUI:arrayMessage];
