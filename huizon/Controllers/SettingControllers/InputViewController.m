@@ -26,7 +26,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    UIImageView * bgImageView = [[UIImageView alloc] init];
+    bgImageView.frame = CGRectMake(20, 110, 280, 40);
+    bgImageView.image = [UIImage imageNamed:@"white_box.png"];
+    [self.view addSubview:bgImageView];
+    self.tfModify = [[UITextField alloc] init];
+    self.tfModify.delegate = self;
+    self.tfModify.placeholder = NSLocalizedString(@"请输入昵称", nil);
+    self.tfModify.frame = CGRectMake(20, 5, 320, 30);
+    [bgImageView addSubview:self.tfModify];
+    [self.tfModify becomeFirstResponder];
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:self.NavTitle];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_PopNav:)];
     
@@ -59,7 +68,7 @@
         showCustomAlertMessage(@"不能为空");
         return;
     }else if(getTextLength(self.tfModify.text) > self.numberOfword){
-        
+        //这个长度判断(⊙o⊙)…
         showCustomAlertMessage(_S(@"不得超过%d个",self.numberOfword));
         return;
         
