@@ -277,10 +277,14 @@
     }
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
-        UIView * lineView = [[UIView alloc] init];
-        lineView.frame = CGRectMake(0, 49.f, self.view.frame.size.width, 1);
-        lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
-        [cell.contentView addSubview:lineView];
+        if(self.friendsArray.count > 1)
+        {
+            UIView * lineView = [[UIView alloc] init];
+            lineView.frame = CGRectMake(0, 49.f, self.view.frame.size.width, 1);
+            lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+            [cell.contentView addSubview:lineView];
+        }
+        
         XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
         /*
         NSString *name= [object displayName];
