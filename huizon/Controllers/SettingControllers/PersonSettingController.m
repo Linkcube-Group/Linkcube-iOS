@@ -214,7 +214,7 @@
             InputViewController *ivc =  [[InputViewController alloc] init];
             ivc.modifyStr = theApp.xmppvCardUser.nickname;
             ivc.NavTitle = @"修改昵称";
-            ivc.numberOfword = 10;
+            ivc.numberOfword = 7;
             ivc.isNickNamePush = YES;
             
             ivc.saveHandler = ^(id sender){
