@@ -553,6 +553,7 @@
 		D41606CE1990A4EF00FCCA92 /* navigation-unknown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41606CC1990A4EF00FCCA92 /* navigation-unknown@2x.png */; };
 		D41613B9198B1EE7005FBF01 /* next_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41613B8198B1EE7005FBF01 /* next_grey@2x.png */; };
 		D41613BF198BB2CB005FBF01 /* ChatWithOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */; };
+		D4EE9BF91990B9D10088C0F2 /* JSBadgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EE9BF81990B9D10088C0F2 /* JSBadgeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1401,6 +1402,8 @@
 		D41613B8198B1EE7005FBF01 /* next_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_grey@2x.png"; sourceTree = "<group>"; };
 		D41613BD198BB2CB005FBF01 /* ChatWithOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatWithOtherViewController.h; sourceTree = "<group>"; };
 		D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatWithOtherViewController.m; sourceTree = "<group>"; };
+		D4EE9BF71990B9D10088C0F2 /* JSBadgeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBadgeView.h; sourceTree = "<group>"; };
+		D4EE9BF81990B9D10088C0F2 /* JSBadgeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBadgeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2896,6 +2899,7 @@
 		078CD1B9182CC75800EBF477 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D4EE9BF61990B9D10088C0F2 /* JSBadgeView */,
 				074D11781931E2440030583C /* Cells */,
 				07B6E71918D55F2400C17693 /* Theam */,
 				07A1BFA918D02D2F008031CF /* TSLibraryImport.h */,
@@ -3288,6 +3292,15 @@
 			path = FileManager;
 			sourceTree = "<group>";
 		};
+		D4EE9BF61990B9D10088C0F2 /* JSBadgeView */ = {
+			isa = PBXGroup;
+			children = (
+				D4EE9BF71990B9D10088C0F2 /* JSBadgeView.h */,
+				D4EE9BF81990B9D10088C0F2 /* JSBadgeView.m */,
+			);
+			path = JSBadgeView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3677,6 +3690,7 @@
 				07E0303B18BDCD0B002C684B /* FriendViewController.m in Sources */,
 				07EAA12119288B9F00794ABC /* MusicListController.m in Sources */,
 				0735555B18C412E2005B319B /* NSXMLElement+XEP_0335.m in Sources */,
+				D4EE9BF91990B9D10088C0F2 /* JSBadgeView.m in Sources */,
 				07EAA12619288BAF00794ABC /* UploadMusicController.m in Sources */,
 				BB220ED219566DB8000C08CB /* AddFriendViewController.m in Sources */,
 				078CD1B3182CC68500EBF477 /* NSDictionary+RequestEncoding.m in Sources */,
