@@ -9,6 +9,7 @@
 #import "NotificationViewController.h"
 #import "RightCell.h"
 #import "XMPPvCardTemp.h"
+#import "IMControls.h"
 
 @interface NotificationViewController () <UITableViewDataSource,UITableViewDelegate>
 {
@@ -99,7 +100,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    //进来清空通知数
+    [[IMControls defaultControls] clearNewNoticesCountWithType:NotificationTypeAddfriend];
     context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
     dicJidToStatus=[[NSMutableDictionary alloc] init];
     //[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kXMPPNotificationDidAskFriend object:nil];
