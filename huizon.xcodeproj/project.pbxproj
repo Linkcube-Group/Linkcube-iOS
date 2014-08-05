@@ -483,6 +483,9 @@
 		2620954C198FD88D000E6E5C /* button_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209548198FD88D000E6E5C /* button_keyboard.png */; };
 		2620954D198FD88D000E6E5C /* button_switch_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209549198FD88D000E6E5C /* button_switch_pressed.png */; };
 		2620954E198FD88D000E6E5C /* button_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 2620954A198FD88D000E6E5C /* button_switch.png */; };
+		266AB17B19913A0900F36F66 /* button-circle-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266AB17819913A0900F36F66 /* button-circle-green@2x.png */; };
+		266AB17C19913A0900F36F66 /* button-circle-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266AB17919913A0900F36F66 /* button-circle-grey@2x.png */; };
+		266AB17D19913A0900F36F66 /* button-circle-red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266AB17A19913A0900F36F66 /* button-circle-red@2x.png */; };
 		BB220ECC19559B16000C08CB /* RightCellRequest.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ECB19559B16000C08CB /* RightCellRequest.xib */; };
 		BB220ED219566DB8000C08CB /* AddFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB220ED019566DB8000C08CB /* AddFriendViewController.m */; };
 		BB220ED319566DB8000C08CB /* AddFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB220ED119566DB8000C08CB /* AddFriendViewController.xib */; };
@@ -1311,6 +1314,9 @@
 		26209548198FD88D000E6E5C /* button_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_keyboard.png; sourceTree = "<group>"; };
 		26209549198FD88D000E6E5C /* button_switch_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch_pressed.png; sourceTree = "<group>"; };
 		2620954A198FD88D000E6E5C /* button_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch.png; sourceTree = "<group>"; };
+		266AB17819913A0900F36F66 /* button-circle-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-circle-green@2x.png"; sourceTree = "<group>"; };
+		266AB17919913A0900F36F66 /* button-circle-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-circle-grey@2x.png"; sourceTree = "<group>"; };
+		266AB17A19913A0900F36F66 /* button-circle-red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-circle-red@2x.png"; sourceTree = "<group>"; };
 		BB220ECB19559B16000C08CB /* RightCellRequest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightCellRequest.xib; sourceTree = "<group>"; };
 		BB220ECF19566DB8000C08CB /* AddFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddFriendViewController.h; sourceTree = "<group>"; };
 		BB220ED019566DB8000C08CB /* AddFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddFriendViewController.m; sourceTree = "<group>"; };
@@ -3179,6 +3185,9 @@
 		BBB8149519454DC90052D71A /* right_info */ = {
 			isa = PBXGroup;
 			children = (
+				266AB17819913A0900F36F66 /* button-circle-green@2x.png */,
+				266AB17919913A0900F36F66 /* button-circle-grey@2x.png */,
+				266AB17A19913A0900F36F66 /* button-circle-red@2x.png */,
 				D41606CB1990A4EF00FCCA92 /* navigation-unknown-pressed@2x.png */,
 				D41606CC1990A4EF00FCCA92 /* navigation-unknown@2x.png */,
 				26209547198FD88D000E6E5C /* button_keyboard_pressed.png */,
@@ -3425,6 +3434,7 @@
 				07E0304C18BDD14D002C684B /* tab_friend.png in Resources */,
 				07E0304E18BDD14D002C684B /* tab_main.png in Resources */,
 				07B6E70618D5538F00C17693 /* nav_bar_bg@2x.png in Resources */,
+				266AB17B19913A0900F36F66 /* button-circle-green@2x.png in Resources */,
 				0709965F182B8AB50064D7D3 /* Images.xcassets in Resources */,
 				07FEF653197B64D9003FF446 /* strength-3@2x.png in Resources */,
 				073AA8D419440701008EDD06 /* set_play_s@2x.png in Resources */,
@@ -3511,6 +3521,8 @@
 				BB220ECC19559B16000C08CB /* RightCellRequest.xib in Resources */,
 				07FEF650197B64D9003FF446 /* strength-0@2x.png in Resources */,
 				074A2A0C194458F0007CB3DA /* button-backward-pressed@2x.png in Resources */,
+				266AB17D19913A0900F36F66 /* button-circle-red@2x.png in Resources */,
+				266AB17C19913A0900F36F66 /* button-circle-grey@2x.png in Resources */,
 				BBB8149E19454DC90052D71A /* icon-message.png in Resources */,
 				0701AB87194D90D100C0DA9F /* female-large_s@2x.png in Resources */,
 				074A2A13194458F0007CB3DA /* button-pause-pressed@2x.png in Resources */,
