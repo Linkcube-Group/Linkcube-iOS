@@ -29,7 +29,12 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
+        self.btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.btnHead.frame = CGRectMake(267, 5, 34, 34);
+        [self.btnHead setImage:[UIImage imageNamed:@"icon-nickname.png"] forState:UIControlStateNormal];
+        self.btnHead.layer.cornerRadius = 17;
+        self.btnHead.layer.masksToBounds = YES;
+        [self addSubview:self.btnHead];
         
     }
     return self;
@@ -41,10 +46,12 @@
         [theApp getUserCardTemp];
         if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.nickname)) {
             [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
+            [self.btnHead setImage:[[UIImage alloc] initWithData:theApp.xmppvCardUser.photo] forState:UIControlStateNormal];
         }
     }
     else{//not login
         [self.btnStatus setTitle:@"请登录" forState:UIControlStateNormal];
+        [self.btnHead setImage:[UIImage imageNamed:@"icon-nickname.png"] forState:UIControlStateNormal];
     }
        
     if(theApp.blueConnType==1){
