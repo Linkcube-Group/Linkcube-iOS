@@ -20,7 +20,7 @@
 #import "PlayViewController.h"
 #import "XMPPSearchModule.h"
 #import "FileManager.h"
-
+#import "IMControls.h"
 
 
 #define tag_subcribe_alertView 100
@@ -503,6 +503,8 @@
         NSLog(@"好友请求的内容%@",presence);
         [receiveArray addObject:presence];
         [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
+        [[IMControls defaultControls] receiveNewNoticesWithNotiType:NotificationTypeAddfriend];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPNotificationDidReceivePresence object:nil];
     }
 }
 

@@ -9,16 +9,10 @@
 #warning 记得最后改完删掉
 /*
  add by yuyang to note
- 1.非登陆状态禁止左划
- 2.注册成功提示应该是ios7风格
- 3.提交成功后保存成功的提示ios7风格
  4.添加好友，消息提示
- 5.好友搜索按着email搜
- 6.列表点击头像进详情，加好友或者发消息
  7.聊天界面
- 8.主界面上显示头像icon-nickname
  9.消息界面问题还很大
- 10.朋友的个人界面ui
+ 10.注册完成后先给放上默认的nickname
  */
 
 #import "RightViewController.h"
