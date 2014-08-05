@@ -227,27 +227,29 @@
     {
         [cell setMenuImage:@"portrait-female-small" Name:[dic keyForValue:@"nick"]];
     }
+    
     NSString *jidStr=[dic keyForValue:@"jid"];
     [cell setCellFriendId:jidStr];
     [cell setCellFriendName:[dic keyForValue:@"nick"]];
     
     NSString *status=[dicJidToStatus valueForKey:jidStr];
+    cell.headerButton.tag = indexPath.row;
     if (status.length==0)
     {
         [cell setFriendStatus:@"None"];
-        
+        [cell.headerButton addTarget:self action:@selector(nHeaderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
         if ([status isEqualToString:@"both"])
         {
             status=@"已添加";
-
+            [cell.headerButton addTarget:self action:@selector(headerButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
         }
         else
         {
             status=@"等待验证";
-
+            [cell.headerButton addTarget:self action:@selector(nHeaderButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
             
         }
         [cell setFriendStatus:status];
@@ -264,9 +266,8 @@
 
 -(void)headerButtonClicked:(UIButton *)button
 {
-    NSLog(@"tag===%d",button.tag);
     FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
-    fvc.jid = [XMPPJID jidWithString:[[dataArray objectAtIndex:button.tag] objectForKey:@"jid"]];
+    fvc.jid = [XMPPJID jidWithString:[[dataArray objectAtIndex:button.tag] keyForValue:@"jid"]];
     fvc.isFriend = YES;
     UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
     [self presentViewController:nvc animated:YES completion:nil];
@@ -274,9 +275,8 @@
 
 -(void)nHeaderButtonClicked:(UIButton *)button
 {
-    NSLog(@"tag===%d",button.tag);
     FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
-    fvc.jid = [XMPPJID jidWithString:[[dataArray objectAtIndex:button.tag] objectForKey:@"jid"]];
+    fvc.jid = [XMPPJID jidWithString:[[dataArray objectAtIndex:button.tag] keyForValue:@"jid"]];
     fvc.isFriend = NO;
     UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
     [self presentViewController:nvc animated:YES completion:nil];
