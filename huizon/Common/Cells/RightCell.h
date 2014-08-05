@@ -10,7 +10,7 @@
 
 @interface RightCell : UITableViewCell
 
-//@property (nonatomic, strong) UIButton * headerButton;
+@property (nonatomic, strong) UIButton * headerButton;
 //@property (strong,nonatomic) IBOutlet UIButton *btnAdd;
 
 - (void)setMenuImage:(NSString *)img Name:(NSString *)name;
