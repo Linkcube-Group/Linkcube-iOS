@@ -31,6 +31,7 @@
 #import "AddFriendViewController.h"
 #import "XMPPvCardTemp.h"
 #import "NotificationViewController.h"
+#import "FriendInfoViewController.h"
 #define FRIEND_LIST @[@"",@"我的",@"消息",@"情侣"]
 
 @interface RightViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -144,14 +145,19 @@
     [request setEntity:entity];
     NSError *error ;
     NSArray *friends = [context executeFetchRequest:request error:&error];
-    //XMPPUserCoreDataStorageObject *object
     [self.friendsArray removeAllObjects];
-    //[self.friendsArray addObjectsFromArray:friends];
     for(XMPPUserCoreDataStorageObject *object in friends)
     {
         if ([object.subscription isEqualToString:@"both"])
         {
-            [self.friendsArray addObject:object];
+            XMPPvCardTemp * temp = [[theApp xmppvCardTempModule] vCardTempForJID:object.jid shouldFetch:YES];
+            NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
+            [dict setObject:object forKey:@"object"];
+            if(temp.photo)
+                [dict setObject:temp.photo forKey:@"photo"];
+            if(temp.gender)
+                [dict setObject:temp.gender forKey:@"gender"];
+            [self.friendsArray addObject:dict];
         }
     }
 
@@ -312,7 +318,7 @@
             [cell.contentView addSubview:lineView];
         }
         
-        XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
         /*
         NSString *name= [object displayName];
         if (!name) {
@@ -323,11 +329,36 @@
         }
          */
         NSString *name=[theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES].nickname;
-        [cell setMenuImage:@"portrait-female-small" Name:name];
+        NSData * photoImageData = [[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"photo"];
+        NSString * gender = [[self.friendsArray objectAtIndex:indexPath.row - 4] objectForKey:@"gender"];
+        if(photoImageData.length)
+        {
+            [cell setMenuImageWithData:photoImageData Name:name];
+        }
+        else if ([gender isEqualToString:@"男"])
+        {
+            [cell setMenuImage:@"portrait-male-small" Name:name];
+        }
+        else
+        {
+            [cell setMenuImage:@"portrait-female-small" Name:name];
+        }
+        cell.headerButton.tag = indexPath.row - 4;
+        [cell.headerButton addTarget:self action:@selector(friendInfo:) forControlEvents:UIControlEventTouchUpInside];
         
     }
     //cell.textLabel.text = [FRIEND_LIST objectAtIndex:indexPath.row];
     return cell;
+}
+
+-(void)friendInfo:(UIButton *)button
+{
+    XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:button.tag] objectForKey:@"object"];
+    FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
+    fvc.isFriend = YES;
+    fvc.jid = object.jid;
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+    [self presentViewController:nvc animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -368,7 +399,7 @@
     }
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
-        XMPPUserCoreDataStorageObject *object = [self.friendsArray objectAtIndex:indexPath.row-4];
+        XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
         TalkViewController *tvc=[[TalkViewController alloc]init];
         
         //using nickname for now, change later
