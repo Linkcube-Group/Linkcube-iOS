@@ -86,6 +86,7 @@
     panel.rightPanel = right;
     panel.centerPanel = nav_main;
     panel.leftFixedWidth = 270;
+    panel.allowRightSwipe = NO;
     self.sidePanelController = panel;
     
     
@@ -422,6 +423,7 @@
 - (void)xmppStreamDidAuthenticate:(XMPPStream *)sender
 {
     NSLog(@"xmppStreamDidAuthenticate");
+    theApp.sidePanelController.allowRightSwipe = YES;
     XMPPPresence *presence = [XMPPPresence presence];
 	[[self xmppStream] sendElement:presence];
     
