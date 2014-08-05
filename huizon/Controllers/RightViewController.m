@@ -12,6 +12,7 @@
  4.添加好友，消息提示
  7.聊天界面
  9.消息界面问题还很大
+ 10.注册完成后先给放上默认的nickname
  */
 
 #import "RightViewController.h"
