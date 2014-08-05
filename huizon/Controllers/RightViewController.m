@@ -32,6 +32,9 @@
 #import "XMPPvCardTemp.h"
 #import "NotificationViewController.h"
 #import "FriendInfoViewController.h"
+#import "IMControls.h"
+#import "JSBadgeView.h"
+
 #define FRIEND_LIST @[@"",@"我的",@"消息",@"情侣"]
 
 @interface RightViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -82,6 +85,7 @@
     //[theApp.xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
     //[theApp.xmppRoster removeUser:jid];
     //[theApp.xmppRoster addU]
+    [self.tbFriend reloadData];
     
 }
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
@@ -300,12 +304,21 @@
         lineView.backgroundColor = [UIColor colorWithHexString:@"afafaf"];
         cell.contentView.backgroundColor = [UIColor colorWithHexString:@"cccccc"];
         [cell.contentView addSubview:lineView];
+        
+        JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
+        jsbView.badgePositionAdjustment = CGPointMake(-45.0, -17.5);
+        NSInteger count = [[IMControls defaultControls] getNewNoticesCountWithType:NotificationTypeAddfriend];
+        jsbView.badgeText = count>0?[NSString stringWithFormat:@"%d",count]:nil;
     }
     else if(indexPath.row==3)
     {
         [cell setMenuImage:@"icon-lover" Name:@"情侣"];
         [cell setRightIcon:@"button-add"];
         cell.contentView.backgroundColor = [UIColor colorWithHexString:@"cccccc"];
+        
+        JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
+        jsbView.badgePositionAdjustment = CGPointMake(-45.0, -18.0);
+        jsbView.badgeText = nil;
         
     }
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
@@ -346,6 +359,9 @@
         cell.headerButton.tag = indexPath.row - 4;
         [cell.headerButton addTarget:self action:@selector(friendInfo:) forControlEvents:UIControlEventTouchUpInside];
         
+        JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
+        jsbView.badgePositionAdjustment = CGPointMake(-20.0, -25.0);
+        jsbView.badgeText = nil;
     }
     //cell.textLabel.text = [FRIEND_LIST objectAtIndex:indexPath.row];
     return cell;
