@@ -10,4 +10,6 @@
 
 @interface IMControls : NSObject
 
++(IMControls *)defaultControls;
+
 @end
