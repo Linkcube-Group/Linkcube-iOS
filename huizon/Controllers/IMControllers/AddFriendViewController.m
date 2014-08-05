@@ -88,19 +88,17 @@
     {
         showCustomAlertMessage(@"无此账号");
     }
-    
+    dataArray = [[NSMutableArray alloc] init];
     for(NSDictionary * dict in result.items)
     {
         NSMutableDictionary * mDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
-        XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:[XMPPJID jidWithString:[dict objectForKey:@"jid"]] shouldFetch:YES];
+        XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:[XMPPJID jidWithString:[mDict keyForValue:@"jid"]] shouldFetch:YES];
         if(vCardTemp.photo.length)
             [mDict setObject:vCardTemp.photo forKey:@"photo"];
         if(vCardTemp.gender.length)
             [mDict setObject:vCardTemp.gender forKey:@"gender"];
         [dataArray addObject:mDict];
     }
-    
-    dataArray=[[NSMutableArray alloc] initWithArray:result.items];
     [tbResult reloadData];
     showIndicator(NO);
 }
@@ -221,7 +219,7 @@
     {
         [cell setMenuImageWithData:[dic objectForKey:@"photo"] Name:[dic keyForValue:@"nick"]];
     }
-    else if ([[dic objectForKey:@"gender"] isEqualToString:@"男"])
+    else if ([[dic keyForValue:@"gender"] isEqualToString:@"男"])
     {
         [cell setMenuImage:@"portrait-male-small" Name:[dic keyForValue:@"nick"]];
     }
