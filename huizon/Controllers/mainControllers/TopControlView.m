@@ -31,7 +31,8 @@
         // Initialization code
         self.btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
         self.btnHead.frame = CGRectMake(267, 5, 34, 34);
-        [self.btnHead setImage:[UIImage imageNamed:@"icon-nickname.png"] forState:UIControlStateNormal];
+        self.btnHead.backgroundColor = [UIColor whiteColor];
+        [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
         self.btnHead.layer.cornerRadius = 17;
         self.btnHead.layer.masksToBounds = YES;
         [self addSubview:self.btnHead];
@@ -51,7 +52,7 @@
     }
     else{//not login
         [self.btnStatus setTitle:@"请登录" forState:UIControlStateNormal];
-        [self.btnHead setImage:[UIImage imageNamed:@"icon-nickname.png"] forState:UIControlStateNormal];
+        [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
     }
        
     if(theApp.blueConnType==1){
