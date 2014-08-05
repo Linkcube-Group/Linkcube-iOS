@@ -32,7 +32,7 @@
     [self.view addSubview:bgImageView];
     self.tfModify = [[UITextField alloc] init];
     self.tfModify.delegate = self;
-    self.tfModify.placeholder = NSLocalizedString(@"请输入昵称", nil);
+    self.tfModify.placeholder = NSLocalizedString(@"请输入", nil);
     self.tfModify.frame = CGRectMake(20, 5, 320, 30);
     [bgImageView addSubview:self.tfModify];
     [self.tfModify becomeFirstResponder];
