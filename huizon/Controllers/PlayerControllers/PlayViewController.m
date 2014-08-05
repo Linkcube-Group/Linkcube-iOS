@@ -27,6 +27,8 @@
     TopControlView  *topView;
     
     PlayType playMusicType;
+    
+    BOOL isAnimation;
 }
 
 @property (strong,nonatomic) MusicList *musicArray;
@@ -87,8 +89,8 @@
     
     self.navigationController.navigationBar.hidden = YES;
     
-    self.imgAlbum.rotationDuration = 8.0;
-    self.imgAlbum.isPlay = NO;
+//    self.imgAlbum.rotationDuration = 8.0;
+//    self.imgAlbum.isPlay = NO;
     
     topView = [[TopControlView alloc] initWithFrame:CGRectMake(0, 27, 320, 44) nibNameOrNil:nil];
     topView.baseController = self;
@@ -188,7 +190,7 @@
     if (ary) {
         self.musicArray = [[MusicList alloc] initWithArray:ary];
     }
-    [self.imgAlbum initRound];
+//    [self.imgAlbum initRound];
     
     
     if (playIndex>=self.musicArray.count) {
@@ -199,7 +201,10 @@
     }
     
     if (isPlay) {
-        [self startAlbumAnimation:YES];
+        if (!isAnimation) {
+            [self startAlbumAnimation:YES];
+        }
+        
     }
 }
 
@@ -221,7 +226,10 @@
         [[VoiceControls voiceSingleton] startMusic:[self musicNamePath]];
         if (state) {
             [self needleAnimation];
-            [self startAlbumAnimation:YES];
+            if (!isAnimation) {
+                 [self startAlbumAnimation:YES];
+            }
+           
             [[VoiceControls voiceSingleton] playMusicAction];
             isPlay = YES;
             [self playButtonSetImage];
@@ -244,7 +252,10 @@
 {
     if (!isPlay) {
         [[VoiceControls voiceSingleton] playMusicAction];
-        [self startAlbumAnimation:YES];
+        if (!isAnimation) {
+             [self startAlbumAnimation:YES];
+        }
+       
         isPlay = YES;
     }
     else{
@@ -512,29 +523,52 @@
 
 #pragma mark -
 #pragma mark Animation
+static  int angle = 10;
 
 - (void)startAlbumAnimation:(BOOL)isStart
 {
     if (isStart) {
-        [self.imgAlbum startRotation:NO];
+        isAnimation = YES;
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.1];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+        [UIView setAnimationBeginsFromCurrentState:YES];
+        [UIView setAnimationDidStopSelector:@selector(endAnimation)];
+        self.imgAlbum.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+        [UIView commitAnimations];
+//        [self.imgAlbum startRotation:NO];
     }
     else{
-        [self.imgAlbum pauseRotation];
+        isAnimation = NO;
+//        self.imgAlbum.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+//        [self.imgAlbum.layer removeAllAnimations];
+//        [self.imgAlbum pauseRotation];
     }
+}
+
+-(void)endAnimation
+{
+    if (isAnimation) {
+        angle += 10;
+        angle %= 360;
+        [self startAlbumAnimation:YES];
+    }
+    
 }
 
 - (void)stopRotate
 {
-    [self startAlbumAnimation:NO];
+//    [self startAlbumAnimation:NO];
 }
 
 - (void)startRotate
 {
-    [self.imgAlbum initRound];
-    if (isPlay) {
-        
-        [self.imgAlbum startRotation:YES];
-    }
+//    [self.imgAlbum initRound];
+//    if (isPlay) {
+//        
+//        [self.imgAlbum startRotation:YES];
+//    }
     
 }
 

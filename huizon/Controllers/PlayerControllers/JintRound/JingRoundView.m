@@ -38,6 +38,7 @@
 
 - (void)initRound
 {
+    return;
         [self.layer removeAllAnimations];
     //Rotation
     CABasicAnimation* rotationAnimation;

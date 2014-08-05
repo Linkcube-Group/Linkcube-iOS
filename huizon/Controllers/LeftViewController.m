@@ -26,8 +26,9 @@
 @interface LeftViewController ()<LeDiscoveryDelegate, LeTemperatureAlarmProtocol, UITableViewDataSource, UITableViewDelegate>
 {
     BOOL  blueConn;
-
+    int selectPath;
 }
+
 @property (retain, nonatomic) LeTemperatureAlarmService *currentlyDisplayingService;
 @property (strong,nonatomic) IBOutlet UITableView  *tbMenu;
 
@@ -69,7 +70,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    selectPath = 0;
     self.headerView = [[[NSBundle mainBundle]loadNibNamed:@"HeaderView"
                                                     owner:self
                                                   options:nil] lastObject];
@@ -187,15 +188,27 @@
     else if (indexPath.row>bcount+2){
         if (indexPath.row==bcount+3) {
             [cell setMenuImage:@"set_play" Name:@"音乐控制"];
+            if (selectPath==1) {
+                [cell setSelected:YES animated:NO];
+            }
         }
         else if (indexPath.row==bcount+4){
             [cell setMenuImage:@"set_shake" Name:@"摇摇控制"];
+            if (selectPath==2) {
+                [cell setSelected:YES animated:NO];
+            }
         }
         else if (indexPath.row==bcount+5){
             [cell setMenuImage:@"set_voice" Name:@"声音控制"];
+            if (selectPath==3) {
+                [cell setSelected:YES animated:NO];
+            }
         }
         else if (indexPath.row==bcount+6){
             [cell setMenuImage:@"set_gesture" Name:@"经典七式"];
+            if (selectPath==4) {
+                [cell setSelected:YES animated:NO];
+            }
         }
         else if (indexPath.row==bcount+8){
             [cell setMenuImage:@"set_setting" Name:@"设置"];
@@ -231,6 +244,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    selectPath = 0;
     //    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     int bcount = [self.blueArray count];
     if (indexPath.row==1) {
@@ -269,18 +283,22 @@
     UINavigationController *nav = nil;
     
     if (indexPath.row==bcount+3) {
+        selectPath = 1;
         PlayViewController *pvc = [[PlayViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:pvc];
     }
     else if (indexPath.row==bcount+4){
+        selectPath = 2;
         ShakeViewController *svc = [[ShakeViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:svc];
     }
     else if (indexPath.row==bcount+5){
+        selectPath = 3;
         VoiceViewController *vvc = [[VoiceViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:vvc];
     }
     else if (indexPath.row==bcount+6){
+        selectPath = 4;
         GestureViewController *gvc = [[GestureViewController alloc] init];
         nav = [[UINavigationController alloc] initWithRootViewController:gvc];
     }
