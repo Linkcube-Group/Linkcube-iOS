@@ -70,7 +70,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    selectPath = 0;
+    selectPath = 1;
     self.headerView = [[[NSBundle mainBundle]loadNibNamed:@"HeaderView"
                                                     owner:self
                                                   options:nil] lastObject];
@@ -187,31 +187,22 @@
     }
     else if (indexPath.row>bcount+2){
         if (indexPath.row==bcount+3) {
-            [cell setMenuImage:@"set_play" Name:@"音乐控制"];
-            if (selectPath==1) {
-                [cell setSelected:YES animated:NO];
-            }
+            [cell setMenuImage:@"set_play" Name:@"音乐控制" WithSelect:(selectPath==1?YES:NO)];
         }
         else if (indexPath.row==bcount+4){
-            [cell setMenuImage:@"set_shake" Name:@"摇摇控制"];
-            if (selectPath==2) {
-                [cell setSelected:YES animated:NO];
-            }
+            [cell setMenuImage:@"set_shake" Name:@"摇摇控制"  WithSelect:(selectPath==2?YES:NO)];
+           
         }
         else if (indexPath.row==bcount+5){
-            [cell setMenuImage:@"set_voice" Name:@"声音控制"];
-            if (selectPath==3) {
-                [cell setSelected:YES animated:NO];
-            }
+            [cell setMenuImage:@"set_voice" Name:@"声音控制" WithSelect:(selectPath==3?YES:NO)];
+            
         }
         else if (indexPath.row==bcount+6){
-            [cell setMenuImage:@"set_gesture" Name:@"经典七式"];
-            if (selectPath==4) {
-                [cell setSelected:YES animated:NO];
-            }
+            [cell setMenuImage:@"set_gesture" Name:@"经典七式" WithSelect:(selectPath==4?YES:NO)];
+            
         }
         else if (indexPath.row==bcount+8){
-            [cell setMenuImage:@"set_setting" Name:@"设置"];
+            [cell setMenuImage:@"set_setting" Name:@"设置" WithSelect:NO];
         }
     }
     else{

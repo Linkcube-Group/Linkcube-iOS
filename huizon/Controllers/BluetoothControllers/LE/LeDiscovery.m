@@ -42,6 +42,7 @@
 {
     self = [super init];
     if (self) {
+        self.alarmService = nil;
 		pendingInit = YES;
 		centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_main_queue()];
 
@@ -189,6 +190,7 @@
         if (!TARGET_IPHONE_SIMULATOR) {
             [foundPeripherals removeAllObjects];
             [discoveryDelegate discoveryDidRefresh];
+#warning 这里可能是iphone4s
             [centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
         }
         
@@ -266,7 +268,7 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationTop object:nil userInfo:nil];
-    
+    #warning 这里可能是iphone4s
 	/* Create a service instance. */
     if (self.alarmService==nil) {
         self.alarmService = [[LeTemperatureAlarmService alloc] initWithPeripheral:peripheral controller:peripheralDelegate];

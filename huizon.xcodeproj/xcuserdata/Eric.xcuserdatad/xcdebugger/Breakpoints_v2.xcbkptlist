@@ -354,11 +354,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huizon/Controllers/BluetoothControllers/LE/LeDiscovery.m"
-            timestampString = "428514265.058637"
+            timestampString = "428947430.525729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "-centralManager:didConnectPeripheral:"
             landmarkType = "5">
          </BreakpointContent>
@@ -370,11 +370,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huizon/Controllers/BluetoothControllers/LE/LeDiscovery.m"
-            timestampString = "428515445.122692"
+            timestampString = "428947430.525729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
             landmarkName = "-centralManager:didFailToConnectPeripheral:error:"
             landmarkType = "5">
          </BreakpointContent>
@@ -386,11 +386,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huizon/Controllers/BluetoothControllers/LE/LeDiscovery.m"
-            timestampString = "428514279.226291"
+            timestampString = "428947430.525729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "251"
+            endingLineNumber = "251"
             landmarkName = "-disconnectPeripheral:"
             landmarkType = "5">
          </BreakpointContent>
@@ -465,13 +465,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
-            timestampString = "428858841.027979"
+            filePath = "huizon/Controllers/LeftViewController.m"
+            timestampString = "428945417.382866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "528"
-            endingLineNumber = "528"
-            landmarkName = "-stopRotate"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

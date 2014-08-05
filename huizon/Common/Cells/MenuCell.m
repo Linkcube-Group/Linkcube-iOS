@@ -20,6 +20,8 @@
 @property (strong,nonatomic) IBOutlet UIImageView *imgIcon;
 
 @property (strong,nonatomic) IBOutlet UIImageView *imgRefresh;
+
+@property (nonatomic) BOOL  selectItem;
 @end
 
 @implementation MenuCell
@@ -45,11 +47,20 @@
         [self animationRefresh];
     }
 }
-- (void)setMenuImage:(NSString *)imgName Name:(NSString *)name
+- (void)setMenuImage:(NSString *)imgName Name:(NSString *)name WithSelect:(BOOL)selected
 {
+    self.selectItem = selected;
     self.iconName = imgName;
-    self.imgIcon.image = IMG(_S(@"%@.png",self.iconName));
+   
     self.lbControlName.text = name;
+    if (selected) {
+        self.imgIcon.image = IMG(_S(@"%@_s.png",self.iconName));
+        self.lbControlName.textColor = RGBColor(109, 0, 64);
+    }
+    else{
+         self.imgIcon.image = IMG(_S(@"%@.png",self.iconName));
+        self.lbControlName.textColor = RGBColor(97, 97, 97);
+    }
 }
 - (void)setBLueConn:(NSString *)name Status:(BOOL)flag
 {
@@ -68,14 +79,6 @@
 }
 
 
-- (void)startAnimation
-{
-}
-
-- (void)stopAnimation
-{
- 
-}
 
 
 - (void)animationRefresh
@@ -96,14 +99,15 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    if (selected) {
-        self.imgIcon.image = IMG(_S(@"%@_s.png",self.iconName));
-        self.lbControlName.textColor = RGBColor(109, 0, 64);
-    }
-    else{
-        self.imgIcon.image = IMG(_S(@"%@.png",self.iconName));
-       self.lbControlName.textColor = RGBColor(97, 97, 97);
-    }
+    
+//    if (selected) {
+//        self.imgIcon.image = IMG(_S(@"%@_s.png",self.iconName));
+//        self.lbControlName.textColor = RGBColor(109, 0, 64);
+//    }
+//    else{
+//        self.imgIcon.image = IMG(_S(@"%@.png",self.iconName));
+//       self.lbControlName.textColor = RGBColor(97, 97, 97);
+//    }
     // Configure the view for the selected state
 }
 

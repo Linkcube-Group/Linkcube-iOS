@@ -12,7 +12,7 @@
 
 
 - (void)setBlueStatu:(int)flag;
-- (void)setMenuImage:(NSString *)img Name:(NSString *)name;
+- (void)setMenuImage:(NSString *)imgName Name:(NSString *)name WithSelect:(BOOL)selected;
 - (void)setBLueConn:(NSString *)name Status:(BOOL)flag;
 - (void)setLineName:(NSString *)name;
 @end
