@@ -219,7 +219,7 @@
     {
         [cell setMenuImageWithData:[dic objectForKey:@"photo"] Name:[dic keyForValue:@"nick"]];
     }
-    else if ([[dic keyForValue:@"gender"] isEqualToString:@"男"])
+    else if ([[dic objectForKey:@"gender"] isEqualToString:@"男"])
     {
         [cell setMenuImage:@"portrait-male-small" Name:[dic keyForValue:@"nick"]];
     }
