@@ -549,6 +549,8 @@
 		D40334A019865DC200874FED /* NotificationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D403349F19865DC200874FED /* NotificationCell.m */; };
 		D41097641987A040002BF338 /* FileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097631987A040002BF338 /* FileManager.m */; };
 		D41097671987A0DF002BF338 /* NSString+SFCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = D41097661987A0DF002BF338 /* NSString+SFCategory.m */; };
+		D41606CD1990A4EF00FCCA92 /* navigation-unknown-pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41606CB1990A4EF00FCCA92 /* navigation-unknown-pressed@2x.png */; };
+		D41606CE1990A4EF00FCCA92 /* navigation-unknown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41606CC1990A4EF00FCCA92 /* navigation-unknown@2x.png */; };
 		D41613B9198B1EE7005FBF01 /* next_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D41613B8198B1EE7005FBF01 /* next_grey@2x.png */; };
 		D41613BF198BB2CB005FBF01 /* ChatWithOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */; };
 /* End PBXBuildFile section */
@@ -1394,6 +1396,8 @@
 		D41097631987A040002BF338 /* FileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileManager.m; sourceTree = "<group>"; };
 		D41097651987A0DF002BF338 /* NSString+SFCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SFCategory.h"; sourceTree = "<group>"; };
 		D41097661987A0DF002BF338 /* NSString+SFCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SFCategory.m"; sourceTree = "<group>"; };
+		D41606CB1990A4EF00FCCA92 /* navigation-unknown-pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-unknown-pressed@2x.png"; sourceTree = "<group>"; };
+		D41606CC1990A4EF00FCCA92 /* navigation-unknown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-unknown@2x.png"; sourceTree = "<group>"; };
 		D41613B8198B1EE7005FBF01 /* next_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next_grey@2x.png"; sourceTree = "<group>"; };
 		D41613BD198BB2CB005FBF01 /* ChatWithOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatWithOtherViewController.h; sourceTree = "<group>"; };
 		D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatWithOtherViewController.m; sourceTree = "<group>"; };
@@ -3171,6 +3175,8 @@
 		BBB8149519454DC90052D71A /* right_info */ = {
 			isa = PBXGroup;
 			children = (
+				D41606CB1990A4EF00FCCA92 /* navigation-unknown-pressed@2x.png */,
+				D41606CC1990A4EF00FCCA92 /* navigation-unknown@2x.png */,
 				26209547198FD88D000E6E5C /* button_keyboard_pressed.png */,
 				26209548198FD88D000E6E5C /* button_keyboard.png */,
 				26209549198FD88D000E6E5C /* button_switch_pressed.png */,
@@ -3533,6 +3539,7 @@
 				074066DC19725A84008DEE79 /* mode_shake_s@2x.png in Resources */,
 				0762C2C118C2197D00ABD7A0 /* posture_3@2x.png in Resources */,
 				074D117D1931E2920030583C /* MenuCell.xib in Resources */,
+				D41606CE1990A4EF00FCCA92 /* navigation-unknown@2x.png in Resources */,
 				072F97D618C0BD2A00BEB4C4 /* dot.png in Resources */,
 				BB220ED919567501000C08CB /* input-box.png in Resources */,
 				07E38E4D193B152B00745C02 /* 1.mp3 in Resources */,
@@ -3566,6 +3573,7 @@
 				073AA8D319440701008EDD06 /* set_play@2x.png in Resources */,
 				07FEF656197B64D9003FF446 /* strength-6@2x.png in Resources */,
 				0394ECC3194FDDCF00B16F52 /* close_btn@2x.png in Resources */,
+				D41606CD1990A4EF00FCCA92 /* navigation-unknown-pressed@2x.png in Resources */,
 				BBB8F34A194EC7AD0020B0A1 /* dialog-box-lover.png in Resources */,
 				BB220EDA19567501000C08CB /* navigation-and-status.png in Resources */,
 				073AE93218CF380400795941 /* ChangePwdController.xib in Resources */,
