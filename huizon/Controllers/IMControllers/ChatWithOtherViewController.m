@@ -11,6 +11,8 @@
 #import "UIBubbleTableView.h"
 #import "NSBubbleData.h"
 #import "LeDiscovery.h"
+#import "XmppVcardTemp.h"
+#import "XMPPvCardTempModule.h"
 
 @interface ChatWithOtherViewController ()<ChatDelegate,UITextFieldDelegate>
 
@@ -58,7 +60,12 @@
     NSManagedObjectContext *moc;
     //message数组
     NSArray *arrayMessage;
+    
+    UIImage * avatarOfMe;
+    UIImage * avatarOfOther;
+    
 }
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,6 +73,39 @@
         // Custom initialization
     }
     return self;
+}
+
+#pragma mark
+#pragma mark - 获取双方头像
+
+-(void)getAvatar
+{
+    if(theApp.xmppvCardUser.photo.length)
+    {
+        avatarOfMe = [[UIImage alloc] initWithData:theApp.xmppvCardUser.photo];
+    }
+    else if([theApp.xmppvCardUser.gender isEqualToString:@"男"])
+    {
+        avatarOfMe = [UIImage imageNamed:@"portrait-male-small.png"];
+    }
+    else
+    {
+        avatarOfMe = [UIImage imageNamed:@"portrait-female-small.png"];
+    }
+    XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:self.xmppFriendJID shouldFetch:YES];
+    if(vCardTemp.photo.length)
+    {
+        avatarOfOther = [[UIImage alloc] initWithData:vCardTemp.photo];
+    }
+    else if([vCardTemp.gender isEqualToString:@"男"])
+    {
+        avatarOfOther = [UIImage imageNamed:@"portrait-male-small.png"];
+    }
+    else
+    {
+        avatarOfOther = [UIImage imageNamed:@"portrait-female-small.png"];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -103,6 +143,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self getAvatar];
     bubbleData = [[NSMutableArray alloc] init];
     isWaitingReply = NO;
     storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
@@ -460,20 +501,21 @@
         if(message.isOutgoing)
         {
             bb=[NSBubbleData dataWithText:messageBody date:message.timestamp type:BubbleTypeMine];
-            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+//            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+            bb.avatar = avatarOfMe;
         }
         else
         {
             bb=[NSBubbleData dataWithText:messageBody date:message.timestamp type:BubbleTypeSomeoneElse];
-            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+//            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+            bb.avatar = avatarOfOther;
         }
         [bubbleData addObject:bb];
     }
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
-    
-    
 }
+
 -(void) gotoLastMessage:(bool) animated
 {
     
