@@ -312,7 +312,6 @@
 //每行数据
 - (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
 {
-    DLog(@"聊天数组里面的数据---->%@",[bubbleData objectAtIndex:row]);
     return [bubbleData objectAtIndex:row];
 }
 
