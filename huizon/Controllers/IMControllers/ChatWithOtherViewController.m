@@ -285,18 +285,19 @@
     }
     currentMode=1;
     NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    DLog(@"高度:%f",kbSize.height);
     [UIView animateWithDuration:0.2f animations:^{
-        
+
         CGRect frame = textInputView.frame;
-        frame.origin.y -= kbSize.height;
+        frame.origin.y = self.view.frame.size.height - kbSize.height - 50;
         textInputView.frame = frame;
         
         frame = bubbleTable.frame;
-        frame.size.height -= kbSize.height;
+        frame.size.height = self.view.frame.size.height - kbSize.height - 50;
         bubbleTable.frame = frame;
         [self gotoLastMessage:NO];
+
     }];
 }
 
