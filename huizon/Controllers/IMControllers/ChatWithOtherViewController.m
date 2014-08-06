@@ -104,6 +104,9 @@
     [super viewDidLoad];
     
     isWaitingReply = NO;
+    storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
+    moc = [storage mainThreadManagedObjectContext];
+    currentMode = 0;
     
     //列表
     bubbleTable = [[UIBubbleTableView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44 - 50) style:UITableViewStylePlain];
@@ -149,7 +152,7 @@
     [sendButton setTitleColor:[UIColor colorWithCGColor:sendButton.layer.borderColor] forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     sendButton.enabled = NO;
-    [textInputView addSubview:textInputView];
+    [textInputView addSubview:sendButton];
     
     //game的view
     gameView = [[UIView alloc] init];
@@ -235,11 +238,6 @@
     [btnHangUp setTitle:NSLocalizedString(@"结束游戏", nil) forState:UIControlStateNormal];
     [btnHangUp addTarget:self action:@selector(hangUpButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [gameView addSubview:btnHangUp];
-    
-    
-    storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
-    moc = [storage mainThreadManagedObjectContext];
-    currentMode = 0;
     
     //几个通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
@@ -403,21 +401,6 @@
 
 #pragma mark - Actions
 
-//not used
-- (IBAction)initiateGame:(id)sender
-{
-    [inputTextField resignFirstResponder];
-    NSString *message=@"c:connectrequest";
-    //生成消息对象
-    //XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithUser:@"test950" domain:kXMPPmyDomain resource:@"ios"]];
-    XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
-    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
-    //发送消息
-    [theApp.xmppStream sendElement:mes];
-    secondsCountDown=30;
-    countDownTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
-    
-}
 -(void) timeFireMethod
 {
     secondsCountDown--;
@@ -434,213 +417,11 @@
     }
 }
 
-// not used
-- (IBAction)sayPressed:(id)sender
+
+-(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-    
-    /*
-     NSBubbleData *sayBubble = [NSBubbleData dataWithText:textField.text date:[NSDate dateWithTimeIntervalSinceNow:0] type:BubbleTypeMine];
-     [bubbleData addObject:sayBubble];
-     [bubbleTable reloadData];
-     */
-    //textField.text = @"";
-    [inputTextField resignFirstResponder];
-    
-    
-    NSString *message=inputTextField.text;
-    //生成消息对象
-    
-    //XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithUser:@"test950" domain:kXMPPmyDomain resource:@"ios"]];
-    XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
-    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
-    
-    //发送消息
-    [theApp.xmppStream sendElement:mes];
-    //[self getMessageData];
-    //[bubbleTable reloadData];
-    inputTextField.text=@"";
-    
-    
+    [textField resignFirstResponder];
 }
-
--(IBAction)textFieldDoneEditing:(id)sender
-{
-    [sender resignFirstResponder];
-}
-
-
-/*
- - (IBAction)sendIt:(id)sender
- {
- NSString *message=self.textMessage.text;
- //生成消息对象
- XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithUser:@"test001" domain:kXMPPmyDomain resource:@"ios"]];
- [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
- 
- //发送消息
- [theApp.xmppStream sendElement:mes];
- 
- [self.textMessage setText:nil];
- 
- }
- 
- 
- - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
- {
- static NSString *CellIdentifier = @"Cell";
- UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
- 
- if (cell==nil) {
- cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
- }
- NSUInteger row=[indexPath row];
- XMPPMessageArchiving_Message_CoreDataObject *message=[self.messageList objectAtIndex:row];
- cell.textLabel.text=message.body;
- cell.detailTextLabel.text=message.bareJidStr;
- return cell;
- }
- */
-
-
-
--(void)clickGame:(UITapGestureRecognizer *)gestureRecognizer
-{
-    NSLog(@"click");
-    NSLog(@"%hhd",[gestureRecognizer isMemberOfClass:[UITapGestureRecognizer class]]);
-    
-    UIView *viewClicked=[gestureRecognizer view];
-//    if (viewClicked==imgGame)
-    {
-        if (currentMode==0)
-        {
-            [self displayGame:2];
-        }
-        else if (currentMode==1)
-        {
-            [inputTextField resignFirstResponder];
-            [self displayGame:2];
-        }
-        else if (currentMode>=2)
-        {
-            [self hideGame];
-        }
-        
-        
-    }
-//    else if(viewClicked==imgSend)
-    {
-        bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-        [inputTextField resignFirstResponder];
-        
-        
-        
-        NSString *message=inputTextField.text;
-        NSString *messageBody=[self filterMessage:message];
-        NSBubbleData *bb;
-        bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-        bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
-        [bubbleData addObject:bb];
-        [bubbleTable reloadData];
-        [self gotoLastMessage:NO];
-        //生成消息对象
-        //XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithUser:@"test950" domain:kXMPPmyDomain resource:@"ios"]];
-        XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
-        [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
-        //发送消息
-        [theApp.xmppStream sendElement:mes];
-        inputTextField.text=@"";
-    }
-//    else if(viewClicked==imgShake)
-    {
-        if (!isWaitingReply)
-        {
-            //[textField resignFirstResponder];
-            NSString *message=@"c:connectrequest";
-            NSString *messageBody=[self filterMessage:message];
-            NSBubbleData *bb;
-            bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
-            [bubbleData addObject:bb];
-            [bubbleTable reloadData];
-            [self gotoLastMessage:NO];
-            
-            
-            
-            //生成消息对象
-            XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
-            [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
-            //发送消息
-            [theApp.xmppStream sendElement:mes];
-            secondsCountDown=30;
-            lblPrompt.hidden=NO;
-            isWaitingReply=YES;
-            countDownTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
-        }
-    }
-//    else if(viewClicked==imgAccept)
-    {
-        NSString *message=@"c:acceptconnect";
-        XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
-        [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
-        [theApp.xmppStream sendElement:mes];
-        [self hideGame];
-        
-        NSString *messageBody=[self filterMessage:message];
-        NSBubbleData *bb;
-        bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-        bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
-        [bubbleData addObject:bb];
-        [bubbleTable reloadData];
-        [self gotoLastMessage:NO];
-        
-        
-        
-        //to add game code here
-        [theApp showAlertView:@"游戏连接已建立"];
-        [countDownTimer invalidate];
-        lblPrompt.text=@"游戏中";
-        lblPrompt.hidden=NO;
-        [btnHangUp setHidden:NO];
-        theApp.currentGamingJid=self.xmppFriendJID;
-        if (currentMode==0)
-        {
-            [self displayGame:3];
-        }
-        else if (currentMode==1)
-        {
-            [inputTextField resignFirstResponder];
-            [self displayGame:3];
-        }
-        else if (currentMode==2)
-        {
-            [self hideGame];
-            [self displayGame:3];
-        }
-        gameKindScrollView.hidden=NO;
-        acceptButton.hidden=YES;
-        declineButton.hidden=YES;
-        
-    }
-//    else if(viewClicked==imgDecline)
-    {
-        NSString *message=@"c:refuseconnect";
-        XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
-        [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
-        [theApp.xmppStream sendElement:mes];
-        [self hideGame];
-        
-        NSString *messageBody=[self filterMessage:message];
-        NSBubbleData *bb;
-        bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-        bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
-        [bubbleData addObject:bb];
-        [bubbleTable reloadData];
-        [self gotoLastMessage:NO];
-    }
-    
-}
-
 
 -(NSString *)filterMessage:(NSString *)originMessage
 {
@@ -684,18 +465,6 @@
             bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
         }
         [bubbleData addObject:bb];
-        
-        /*
-         NSLog(@"messageStr param is %@",message.messageStr);
-         NSXMLElement *element = [[NSXMLElement alloc] initWithXMLString:message.messageStr error:nil];
-         NSLog(@"to param is %@",[element attributeStringValueForName:@"to"]);
-         NSLog(@"NSCore object id param is %@",message.objectID);
-         NSLog(@"bareJid param is %@",message.bareJid);
-         NSLog(@"bareJidStr param is %@",message.bareJidStr);
-         NSLog(@"body param is %@",message.body);
-         NSLog(@"timestamp param is %@",message.timestamp);
-         NSLog(@"outgoing param is %d",[message.outgoing intValue]);
-         */
     }
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -817,8 +586,8 @@
     
 }
 
-
--(IBAction)hangUp:(id)sender
+//结束游戏按钮
+-(void)hangUpButtonClicked
 {
     NSString *message=@"c:disconnect";
     //生成消息对象
@@ -841,58 +610,160 @@
     showCustomAlertMessage(@"已挂断");
     [btnHangUp setHidden:YES];
     theApp.currentGamingJid = nil;
-    
-}
-
-
-//结束游戏按钮
--(void)hangUpButtonClicked
-{
-#warning hangUpButtonClicked
-    NSLog(@"!!!!hangUpButtonClicked!!!!");
 }
 
 //经典7式按钮
 -(void)sevenButtonClicked
 {
-#warning sevenButtonClicked
-    NSLog(@"!!!!sevenButtonClicked!!!!");
+    if (!isWaitingReply)
+    {
+        //[textField resignFirstResponder];
+        NSString *message=@"c:connectrequest";
+        NSString *messageBody=[self filterMessage:message];
+        NSBubbleData *bb;
+        bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
+        bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+        [bubbleData addObject:bb];
+        [bubbleTable reloadData];
+        [self gotoLastMessage:NO];
+        
+        
+        
+        //生成消息对象
+        XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
+        [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
+        //发送消息
+        [theApp.xmppStream sendElement:mes];
+        secondsCountDown=30;
+        lblPrompt.hidden=NO;
+        isWaitingReply=YES;
+        countDownTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
+    }
 }
 
 //拒绝按钮
 -(void)declineButtonClick
 {
-#warning declineButtonClick
-    NSLog(@"!!!!declineButtonClick!!!!");
+    NSString *message=@"c:refuseconnect";
+    XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
+    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
+    [theApp.xmppStream sendElement:mes];
+    [self hideGame];
+    
+    NSString *messageBody=[self filterMessage:message];
+    NSBubbleData *bb;
+    bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
+    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    [bubbleData addObject:bb];
+    [bubbleTable reloadData];
+    [self gotoLastMessage:NO];
 }
 
 //同意那妞
 -(void)acceptButtonClicked
 {
-#warning acceptButtonClicked
-    NSLog(@"!!!!acceptButtonClicked!!!!");
+    NSString *message=@"c:acceptconnect";
+    XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
+    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
+    [theApp.xmppStream sendElement:mes];
+    [self hideGame];
+    
+    NSString *messageBody=[self filterMessage:message];
+    NSBubbleData *bb;
+    bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
+    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    [bubbleData addObject:bb];
+    [bubbleTable reloadData];
+    [self gotoLastMessage:NO];
+    
+    
+    
+    //to add game code here
+    [theApp showAlertView:@"游戏连接已建立"];
+    [countDownTimer invalidate];
+    lblPrompt.text=@"游戏中";
+    lblPrompt.hidden=NO;
+    [btnHangUp setHidden:NO];
+    theApp.currentGamingJid=self.xmppFriendJID;
+    if (currentMode==0)
+    {
+        [self displayGame:3];
+    }
+    else if (currentMode==1)
+    {
+        [inputTextField resignFirstResponder];
+        [self displayGame:3];
+    }
+    else if (currentMode==2)
+    {
+        [self hideGame];
+        [self displayGame:3];
+    }
+    gameKindScrollView.hidden=NO;
+    acceptButton.hidden=YES;
+    declineButton.hidden=YES;
 }
 
 //申请游戏
 -(void)applyGame
 {
-#warning applyGame
-    NSLog(@"!!!!applyGame!!!!");
+    if (currentMode==0)
+    {
+        [self displayGame:2];
+    }
+    else if (currentMode==1)
+    {
+        [inputTextField resignFirstResponder];
+        [self displayGame:2];
+    }
+    else if (currentMode>=2)
+    {
+        [self hideGame];
+    }
 }
 
 //游戏按钮
 -(void)gameButtonClicked
 {
-#warning gameButtonClicked
-    NSLog(@"!!!!gameButtonClicked!!!!");
+    if (currentMode==0)
+    {
+        [self displayGame:2];
+    }
+    else if (currentMode==1)
+    {
+        [inputTextField resignFirstResponder];
+        [self displayGame:2];
+    }
+    else if (currentMode>=2)
+    {
+        [self hideGame];
+    }
 }
 
 //发送按钮
 -(void)sendButtonClicked
 {
-#warning sendButtonClicked
-    NSLog(@"!!!!sendButtonClicked!!!!");
+    bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     [inputTextField resignFirstResponder];
+    
+    
+    
+    NSString *message=inputTextField.text;
+    NSString *messageBody=[self filterMessage:message];
+    NSBubbleData *bb;
+    bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
+    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    [bubbleData addObject:bb];
+    [bubbleTable reloadData];
+    [self gotoLastMessage:NO];
+    //生成消息对象
+    //XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:[XMPPJID jidWithUser:@"test950" domain:kXMPPmyDomain resource:@"ios"]];
+    XMPPMessage *mes=[XMPPMessage messageWithType:@"chat" to:self.xmppFriendJID];
+    [mes addChild:[DDXMLNode elementWithName:@"body" stringValue:message]];
+    //发送消息
+    [theApp.xmppStream sendElement:mes];
+    inputTextField.text=@"";
+//    [inputTextField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
