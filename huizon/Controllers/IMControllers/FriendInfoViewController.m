@@ -9,7 +9,8 @@
 #import "FriendInfoViewController.h"
 #import "XMPPvCardTemp.h"
 #import "XMPPvCardTempModule.h"
-#import "TalkViewController.h"
+//#import "TalkViewController.h"
+#import "ChatWithOtherViewController.h"
 
 @interface FriendInfoViewController ()<UITableViewDataSource,UITableViewDelegate,UINavigationControllerDelegate>
 
@@ -220,7 +221,7 @@
 
 -(void)sendMessageToOther
 {
-    TalkViewController *tvc=[[TalkViewController alloc]init];
+    ChatWithOtherViewController *tvc=[[ChatWithOtherViewController alloc]init];
     
     //using nickname for now, change later
     

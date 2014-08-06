@@ -8,7 +8,8 @@
 
 #import "FriendViewController.h"
 #import "UserViewController.h"
-#import "TalkViewController.h"
+//#import "TalkViewController.h"
+#import "ChatWithOtherViewController.h"
 #import "RightCell.h"
 #import "NotificationCell.h"
 #import "FileManager.h"
@@ -385,7 +386,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
-    TalkViewController *tvc=[[TalkViewController alloc]init];
+    ChatWithOtherViewController *tvc=[[ChatWithOtherViewController alloc]init];
     
     //using nickname for now, change later
     

@@ -18,7 +18,8 @@
 #import "RightViewController.h"
 #import "JASidePanelController.h"
 #import "UserViewController.h"
-#import "TalkViewController.h"
+//#import "TalkViewController.h"
+#import "ChatWithOtherViewController.h"
 #import "FriendViewController.h"
 #import "PersonSettingController.h"
 #import "RightCell.h"
@@ -410,7 +411,7 @@
     else if (indexPath.row>3 && indexPath.row<4+[self.friendsArray count])
     {
         XMPPUserCoreDataStorageObject *object = [[self.friendsArray objectAtIndex:indexPath.row-4] objectForKey:@"object"];
-        TalkViewController *tvc=[[TalkViewController alloc]init];
+        ChatWithOtherViewController *tvc=[[ChatWithOtherViewController alloc]init];
         
         //using nickname for now, change later
         
