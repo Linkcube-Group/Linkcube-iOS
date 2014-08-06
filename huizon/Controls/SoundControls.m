@@ -53,7 +53,7 @@
 
 - (void)startSoundListener
 {
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+//    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
     if (self.recorder==nil) {
         [self.audioController start:NULL];
         self.recorder = [[AERecorder alloc] initWithAudioController:self.audioController];

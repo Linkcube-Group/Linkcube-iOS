@@ -22,6 +22,10 @@
 #import "FileManager.h"
 #import "IMControls.h"
 
+#ifdef DEBUG_REVEL
+#import <dlfcn.h>
+#endif
+
 
 #define tag_subcribe_alertView 100
 
@@ -55,6 +59,10 @@
     DDFileLogger *filelog=[[DDFileLogger alloc] initWithLogFileManager:defaultlog];
     [DDLog addLogger:filelog];
 
+#endif
+    
+#ifdef DEBUG_REVEL
+    [self loadReveal];
 #endif
     
     [MobClick startWithAppkey:@"53d91ac6fd98c5548d00ac45"];
@@ -100,6 +108,21 @@
 
     return YES;
 }
+
+- (void)loadReveal
+{
+#ifdef DEBUG_REVEL
+    void *revealLib = dlopen("/Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/libReveal.dylib", 2);
+    if (revealLib) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"IBARevealRequestStart" object:0];
+    }
+    else{
+        char *error = dlerror();
+        NSLog(@"Reveal dlopen error: %s", error);
+    }
+#endif
+}
+
 
 - (void)loadMusicInfo
 {

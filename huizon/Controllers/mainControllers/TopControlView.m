@@ -29,20 +29,22 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.btnHead.frame = CGRectMake(267, 5, 34, 34);
-        self.btnHead.backgroundColor = [UIColor whiteColor];
-        [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
-        self.btnHead.layer.cornerRadius = 17;
-        self.btnHead.layer.masksToBounds = YES;
-        [self addSubview:self.btnHead];
-        
+//        self.btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
+//        self.btnHead.frame = CGRectMake(267, 5, 34, 34);
+//        self.btnHead.backgroundColor = [UIColor whiteColor];
+//        [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
+//        self.btnHead.layer.cornerRadius = 17;
+//        self.btnHead.layer.masksToBounds = YES;
+////        [self addSubview:self.btnHead];
+//        
     }
     return self;
 }
 
 - (void)refreshTitleName
 {
+    self.btnHead.layer.cornerRadius = 18;
+    self.btnHead.layer.masksToBounds = YES;
     if ([theApp isXmppAuthenticated]) {
         [theApp getUserCardTemp];
         if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.nickname)) {

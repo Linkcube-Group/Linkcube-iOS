@@ -22,6 +22,8 @@
     
     //    int stopCount;
     BOOL    isOpen;
+    
+    int currentCmd;
 }
 @property (strong,nonatomic) IBOutlet UIImageView *imgStrength;
 @property (strong,nonatomic) IBOutlet UIButton *imgVoice;
@@ -64,6 +66,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    currentCmd = 0;
     //    stopCount = 0;
     isOpen = NO;
     
@@ -130,46 +133,51 @@
         
         voiceDegree = voiceDegree<0?0:voiceDegree;
         
-        DLog(@"---|%d",voiceDegree);
-        NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
-        ///如果游戏开始，把控制命令发给对方
-        if (theApp.currentGamingJid!=nil) {
-            if (isOpen) {
-                [theApp sendControlCode:myComm];
-                if (voiceDegree<1) {
-                    [block_self.imgStrength setImage:IMG(@"strength-0.png")];
+        if (currentCmd!=voiceDegree) {
+            currentCmd = voiceDegree;
+            
+            DLog(@"---|%d",voiceDegree);
+            NSString * myComm = [kBluetoothSpeeds objectAtIndex:voiceDegree];
+            ///如果游戏开始，把控制命令发给对方
+            if (theApp.currentGamingJid!=nil) {
+                if (isOpen) {
+                    [theApp sendControlCode:myComm];
+                    if (voiceDegree<1) {
+                        [block_self.imgStrength setImage:IMG(@"strength-0.png")];
+                    }
+                    else{
+                        int level = voiceDegree/6+1;
+                        level = level>8?8:level;
+                        [block_self.imgStrength setImage:IMG(_S(@"strength-%d.png",level))];
+                    }
                 }
                 else{
-                    int level = voiceDegree/6+1;
-                    level = level>8?8:level;
-                    [block_self.imgStrength setImage:IMG(_S(@"strength-%d.png",level))];
-                }
-            }
-            else{
-                [theApp sendControlCode:kBluetoothClose];
-                [block_self.imgStrength setImage:IMG(@"strength-0.png")];
-            }
-            
-        }
-        else{
-            if (isOpen) {
-                [[LeDiscovery sharedInstance] sendCommand:myComm];
-                if (voiceDegree<1) {
+                    [theApp sendControlCode:kBluetoothClose];
                     [block_self.imgStrength setImage:IMG(@"strength-0.png")];
                 }
-                else{
-                    int level = voiceDegree/6+1;
-                    level = level>8?8:level;
-                    [block_self.imgStrength setImage:IMG(_S(@"strength-%d.png",level))];
-                }
+                
             }
             else{
-                [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
-                [block_self.imgStrength setImage:IMG(@"strength-0.png")];
+                if (isOpen) {
+                    [[LeDiscovery sharedInstance] sendCommand:myComm];
+                    if (voiceDegree<1) {
+                        [block_self.imgStrength setImage:IMG(@"strength-0.png")];
+                    }
+                    else{
+                        int level = voiceDegree/6+1;
+                        level = level>8?8:level;
+                        [block_self.imgStrength setImage:IMG(_S(@"strength-%d.png",level))];
+                    }
+                }
+                else{
+                    [[LeDiscovery sharedInstance] sendCommand:kBluetoothClose];
+                    [block_self.imgStrength setImage:IMG(@"strength-0.png")];
+                }
+                
+                
             }
-            
-            
         }
+        
         
     };
     

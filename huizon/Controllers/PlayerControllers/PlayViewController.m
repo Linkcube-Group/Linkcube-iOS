@@ -29,6 +29,8 @@
     PlayType playMusicType;
     
     BOOL isAnimation;
+    
+    int currentCmd;
 }
 
 @property (strong,nonatomic) MusicList *musicArray;
@@ -86,23 +88,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    currentCmd = 0;
     self.navigationController.navigationBar.hidden = YES;
     
-//    self.imgAlbum.rotationDuration = 8.0;
-//    self.imgAlbum.isPlay = NO;
+    //    self.imgAlbum.rotationDuration = 8.0;
+    //    self.imgAlbum.isPlay = NO;
     
     topView = [[TopControlView alloc] initWithFrame:CGRectMake(0, 27, 320, 44) nibNameOrNil:nil];
     topView.baseController = self;
     
     [self.view addSubview:topView];
-     [self.imgAlbum initJingRound];
+    [self.imgAlbum initJingRound];
     self.imgAlbum.center = CGPointMake(160, theApp.window.frame.size.height/2);
     self.imgAlbum.roundImage = IMG(@"mode-music.png");
-   
+    
     [self.imgAlbum.roundImageView addSubview:self.imgFloat];
     
-//    self.imgFloat.center = self.imgAlbum.center;//CGPointMake(160, theApp.window.frame.size.height/2);
+    //    self.imgFloat.center = self.imgAlbum.center;//CGPointMake(160, theApp.window.frame.size.height/2);
     self.imgNeedler.originY = theApp.window.frame.size.height/2-182;
     
     playMusicType = PlayTypeCircle;
@@ -115,7 +117,7 @@
     [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateHighlighted];
     [self.slider setThumbImage:IMG(@"slide_thumb.png") forState:UIControlStateNormal];
     
-
+    
     [VoiceControls voiceSingleton].voiceHandler = ^(id acc){
         
         int currentTime = [[VoiceControls voiceSingleton] musicCurrentTime];
@@ -137,17 +139,21 @@
         int KWaveSpeed[21] = { 1, 2, 4, 6, 8,10,13, 15, 17, 19, 21, 24, 27, 30, 33,36, 39, 41, 44, 47,49};
         
         vindex =KWaveSpeed[vindex];
-        DLog(@"--%d",vindex);
-        NSString * myComm = [kBluetoothSpeeds objectAtIndex:vindex];
+        if (vindex!=currentCmd) {
+            currentCmd = vindex;
+            DLog(@"--%d",vindex);
+            NSString * myComm = [kBluetoothSpeeds objectAtIndex:vindex];
+            
+            //        NSLog(@"cmd===%@",myComm);
+            ///如果游戏开始，把控制命令发给对方
+            if (theApp.currentGamingJid!=nil) {
+                [theApp sendControlCode:myComm];
+            }
+            else{
+                [[LeDiscovery sharedInstance] sendCommand:myComm];
+            }
+        }
         
-        //        NSLog(@"cmd===%@",myComm);
-        ///如果游戏开始，把控制命令发给对方
-        if (theApp.currentGamingJid!=nil) {
-            [theApp sendControlCode:myComm];
-        }
-        else{
-            [[LeDiscovery sharedInstance] sendCommand:myComm];
-        }
         
         
     };
@@ -190,7 +196,7 @@
     if (ary) {
         self.musicArray = [[MusicList alloc] initWithArray:ary];
     }
-//    [self.imgAlbum initRound];
+    //    [self.imgAlbum initRound];
     
     
     if (playIndex>=self.musicArray.count) {
@@ -227,9 +233,9 @@
         if (state) {
             [self needleAnimation];
             if (!isAnimation) {
-                 [self startAlbumAnimation:YES];
+                [self startAlbumAnimation:YES];
             }
-           
+            
             [[VoiceControls voiceSingleton] playMusicAction];
             isPlay = YES;
             [self playButtonSetImage];
@@ -253,9 +259,9 @@
     if (!isPlay) {
         [[VoiceControls voiceSingleton] playMusicAction];
         if (!isAnimation) {
-             [self startAlbumAnimation:YES];
+            [self startAlbumAnimation:YES];
         }
-       
+        
         isPlay = YES;
     }
     else{
@@ -328,7 +334,7 @@
         playIndex = [sender intValue];
         isPlay = NO;
         [block_self setViewInfo:YES];
-//        [block_self playAction:nil];
+        //        [block_self playAction:nil];
     };
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:mvc];
     [self presentViewController:nav animated:YES completion:nil];
@@ -530,20 +536,20 @@ static  int angle = 10;
     if (isStart) {
         isAnimation = YES;
         [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.1];
+        [UIView setAnimationDuration:0.3];
         [UIView setAnimationDelegate:self];
         [UIView setAnimationCurve:UIViewAnimationCurveLinear];
         [UIView setAnimationBeginsFromCurrentState:YES];
         [UIView setAnimationDidStopSelector:@selector(endAnimation)];
         self.imgAlbum.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
         [UIView commitAnimations];
-//        [self.imgAlbum startRotation:NO];
+        //        [self.imgAlbum startRotation:NO];
     }
     else{
         isAnimation = NO;
-//        self.imgAlbum.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
-//        [self.imgAlbum.layer removeAllAnimations];
-//        [self.imgAlbum pauseRotation];
+        //        self.imgAlbum.transform = CGAffineTransformMakeRotation(angle * (M_PI / 180.0f));
+        //        [self.imgAlbum.layer removeAllAnimations];
+        //        [self.imgAlbum pauseRotation];
     }
 }
 
@@ -559,16 +565,16 @@ static  int angle = 10;
 
 - (void)stopRotate
 {
-//    [self startAlbumAnimation:NO];
+    //    [self startAlbumAnimation:NO];
 }
 
 - (void)startRotate
 {
-//    [self.imgAlbum initRound];
-//    if (isPlay) {
-//        
-//        [self.imgAlbum startRotation:YES];
-//    }
+    //    [self.imgAlbum initRound];
+    //    if (isPlay) {
+    //
+    //        [self.imgAlbum startRotation:YES];
+    //    }
     
 }
 

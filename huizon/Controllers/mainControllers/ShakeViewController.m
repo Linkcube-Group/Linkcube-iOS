@@ -21,6 +21,8 @@
     
     int stopCount;
     BOOL    isOpen;
+    
+    int currentCmd;
 }
 @property (strong,nonatomic) IBOutlet UIButton *imgShake;
 @end
@@ -44,15 +46,15 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-        [super viewDidDisappear:animated];
+    [super viewDidDisappear:animated];
     [self stopAllAction];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-   
+    
 }
 
 - (void)stopAllAction
 {
-
+    
     isOpen = NO;
     [eq stop];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -66,9 +68,10 @@
     [super viewDidLoad];
     stopCount = 0;
     isOpen = NO;
+    currentCmd = 0;
     
     if (iPhone5) {
-        [self.view.layer setContents:(id)[IMG(@"play_bg_2.png") CGImage]]; 
+        [self.view.layer setContents:(id)[IMG(@"play_bg_2.png") CGImage]];
     }
     else{
         [self.view.layer setContents:(id)[IMG(@"play_bg.png") CGImage]];
@@ -83,67 +86,72 @@
     
     
     [self.view addSubview:topView];
-
+    
     
     [[ShakeControls shakeSingleton] startShakeAction];
-
+    
     [ShakeControls shakeSingleton].shakeHandler = ^(id acc){
         float degree = abs([acc intValue]);
-//        degree *= shakeLevel;
-       // DLog(@"shake ====|%f",degree);
+        //        degree *= shakeLevel;
+        DLog(@"shake ====|%f",degree);
         if (degree>1 && degree<8) {
             degree+=8;
         }
-        int shakeDegree = degree/8;
+        int shakeDegree = degree/5;
         
         shakeDegree = shakeDegree<0?0:shakeDegree;
         shakeDegree = shakeDegree>9?9:shakeDegree;
         
-        int KShakeSpeed[10] = { 0, 5, 12, 19, 24, 30, 34, 38, 42, 44 };
+        int KShakeSpeed[10] = { 0,5,17, 25, 30, 38, 40, 44, 47,49 };
         
-
+        
         
         shakeDegree = KShakeSpeed[shakeDegree];
-       DLog(@"shake degree===%d",shakeDegree);
-        NSString *myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
-        ///如果游戏开始，把控制命令发给对方
-        if (theApp.currentGamingJid!=nil) {
-            if (isOpen) {
-                [theApp sendControlCode:myComm];
-                if (degree<1) {
-                    stopCount++;
-                    if (stopCount>20 && [eq isStart]) {
-                        [eq stop];
+        DLog(@"shake degree===%d",shakeDegree);
+        
+        if (currentCmd!=shakeDegree || shakeDegree==0) {
+            currentCmd = shakeDegree;
+            NSString *myComm = [kBluetoothSpeeds objectAtIndex:shakeDegree];
+            ///如果游戏开始，把控制命令发给对方
+            if (theApp.currentGamingJid!=nil) {
+                if (isOpen) {
+                    [theApp sendControlCode:myComm];
+                    if (degree<1) {
+                        stopCount++;
+                        if (stopCount>20 && [eq isStart]) {
+                            [eq stop];
+                        }
+                    }
+                    else{
+                        stopCount = 0;
+                        if ([eq isStart]==NO) {
+                            [eq start];
+                        }
                     }
                 }
-                else{
-                    stopCount = 0;
-                    if ([eq isStart]==NO) {
-                        [eq start];
-                    }
-                }
+                
             }
-            
-        }
-        else{
-            if (isOpen) {
-                [[LeDiscovery sharedInstance] sendCommand:myComm];
-                if (degree<1) {
-                    stopCount++;
-                    if (stopCount>20 && [eq isStart]) {
-                        [eq stop];
+            else{
+                if (isOpen) {
+                    [[LeDiscovery sharedInstance] sendCommand:myComm];
+                    if (degree<1) {
+                        stopCount++;
+                        if (stopCount>20 && [eq isStart]) {
+                            [eq stop];
+                        }
+                    }
+                    else{
+                        stopCount = 0;
+                        if ([eq isStart]==NO) {
+                            [eq start];
+                        }
                     }
                 }
-                else{
-                    stopCount = 0;
-                    if ([eq isStart]==NO) {
-                        [eq start];
-                    }
-                }
+                
             }
-            
         }
-    
+        
+        
     };
     
     
@@ -192,7 +200,7 @@
     isOpen = NO;
     [self shakeAction:nil];
     [self refreshTop];
-  
+    
 }
 
 - (void)refreshTop

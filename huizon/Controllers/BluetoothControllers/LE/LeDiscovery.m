@@ -241,6 +241,7 @@
 {
 	//if (![peripheral isConnected])
     {
+        [centralManager cancelPeripheralConnection:peripheral];
 		[centralManager connectPeripheral:peripheral options:@{CBConnectPeripheralOptionNotifyOnConnectionKey : @(YES)}];
 	}
 }
@@ -276,8 +277,9 @@
     else{
         [self.alarmService updatePeripheral:peripheral controller:peripheralDelegate];
     }
-	
+    
 	[self.alarmService start];
+	
 
     BOOL contained = NO;
 

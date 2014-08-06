@@ -13,6 +13,7 @@
 #define zhaopin_Constants_h
 
 ///打印日志，发布时关闭
+//#define DEBUG_REVEL 1
 //#define DEBUG_CONSOLE 1
 //#define DEBUG_FILE  1
 ///判断是否是ios7

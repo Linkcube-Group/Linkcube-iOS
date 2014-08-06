@@ -52,6 +52,7 @@ NSString *kDeviceCharacteristicUUID = @"49535343-8841-43F4-A8D4-ECBE34729BB3";
     servicePeripheral = peripheral;
     [servicePeripheral setDelegate:self];
     peripheralDelegate = controller;
+    
 }
 
 
@@ -83,7 +84,7 @@ NSString *kDeviceCharacteristicUUID = @"49535343-8841-43F4-A8D4-ECBE34729BB3";
 /****************************************************************************/
 - (void) start
 {
-    NSMutableArray *uuids = [[NSMutableArray alloc] initWithObjects:[CBUUID UUIDWithString:kDeviceInfoService], [CBUUID UUIDWithString:kDeviceIsscProprietaryService], nil];
+    NSMutableArray *uuids = [[NSMutableArray alloc] initWithObjects:[CBUUID UUIDWithString:kDeviceInfoService], [CBUUID UUIDWithString:kDeviceIsscProprietaryService],[CBUUID UUIDWithString:kDeviceServiceUUIDString],[CBUUID UUIDWithString:kDeviceCharacteristicUUID], nil];
     
     [servicePeripheral discoverServices:uuids];
 }
@@ -150,6 +151,19 @@ NSString *kDeviceCharacteristicUUID = @"49535343-8841-43F4-A8D4-ECBE34729BB3";
 	}
 }
 
+
+///add 806
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *) characteristic error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"Error changing notification state:%@", error.localizedDescription);
+    }
+    if ([[characteristic UUID] isEqual:[CBUUID UUIDWithString:kDeviceCharacteristicUUID]]) {
+        self.myCharacteristic = characteristic;
+    }
+    
+}
+
 - (void)sendHexCommand:(NSString *)hexString
 {
     if (hexString==nil || [hexString length]!=16) {
@@ -196,9 +210,15 @@ NSString *kDeviceCharacteristicUUID = @"49535343-8841-43F4-A8D4-ECBE34729BB3";
     }
 }
 
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverIncludedServicesForService:(CBService *)service error:(NSError *)error
+{
+    NSLog(@"didDiscoverIncludedServicesForService");
+}
 
-
-
+- (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral
+{
+    NSLog(@"peripheralDidInvalidateServices");
+}
 
 - (void) peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {

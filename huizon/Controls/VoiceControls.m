@@ -25,6 +25,14 @@
     self = [super init];
     if (self) {
         self.audioPlayer = nil;
+        NSError *setCategoryError = nil;
+        
+//        BOOL success = [[AVAudioSession sharedInstance]
+//                        setCategory:AVAudioSessionCategoryPlayAndRecord
+//                        error: &setCategoryError];
+//        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+//        
+
     }
     return self;
 }
@@ -57,21 +65,14 @@
 -(void)startMusic:(NSURL *)audioURL
 {
     //
-    NSError *setCategoryError = nil;
-    
-   BOOL success = [[AVAudioSession sharedInstance]
-                    setCategory:AVAudioSessionCategoryPlayAndRecord
-                    error: &setCategoryError];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
-
-    if (success) {
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:&setCategoryError];
+   
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
         self.audioPlayer.delegate = self;
         self.audioPlayer.meteringEnabled = YES;
         self.audioPlayer.numberOfLoops = 0;
         //准备播放
         [self.audioPlayer prepareToPlay];
-    }
+    
  
 
 }

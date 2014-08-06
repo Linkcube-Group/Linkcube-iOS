@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
-            timestampString = "428927874.439337"
+            filePath = "huizon/Controllers/BluetoothControllers/LE/LeTemperatureAlarmService.m"
+            timestampString = "429026026.982083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "530"
-            endingLineNumber = "530"
-            landmarkName = "-startAlbumAnimation:"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "-start"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -35,13 +35,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
-            timestampString = "428927874.439337"
+            filePath = "huizon/Controllers/BluetoothControllers/LE/LeTemperatureAlarmService.m"
+            timestampString = "429023254.249287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "552"
-            endingLineNumber = "552"
-            landmarkName = "-endAnimation"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-initWithPeripheral:controller:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -51,13 +51,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/LeftViewController.m"
-            timestampString = "428928519.120577"
+            filePath = "huizon/Controllers/BluetoothControllers/LE/LeTemperatureAlarmService.m"
+            timestampString = "429026026.982083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "-peripheral:didUpdateValueForCharacteristic:error:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -67,13 +67,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/LeftViewController.m"
-            timestampString = "428929285.068452"
+            filePath = "huizon/Controllers/BluetoothControllers/LE/LeTemperatureAlarmService.m"
+            timestampString = "429026026.982083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "203"
-            endingLineNumber = "203"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-peripheral:didWriteValueForCharacteristic:error:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -83,13 +83,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "huizon/Controllers/LeftViewController.m"
-            timestampString = "428929285.978442"
+            filePath = "huizon/Controllers/BluetoothControllers/LE/LeTemperatureAlarmService.m"
+            timestampString = "429026026.982083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
+            landmarkName = "-peripheral:didDiscoverIncludedServicesForService:error:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "huizon/Controllers/BluetoothControllers/LE/LeTemperatureAlarmService.m"
+            timestampString = "429026026.982083"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "-peripheralDidInvalidateServices:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
