@@ -7,6 +7,7 @@
 //
 
 #import "ChatWithOtherViewController.h"
+#import "UIBubbleTableViewDataSource.h"
 #import "UIBubbleTableView.h"
 #import "NSBubbleData.h"
 #import "LeDiscovery.h"
@@ -102,14 +103,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    bubbleData = [[NSMutableArray alloc] init];
     isWaitingReply = NO;
     storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
     moc = [storage mainThreadManagedObjectContext];
     currentMode = 0;
     
     //列表
-    bubbleTable = [[UIBubbleTableView alloc] initWithFrame:CGRectMake(0, 44, self.view.frame.size.width, self.view.frame.size.height - 44 - 50) style:UITableViewStylePlain];
+    bubbleTable = [[UIBubbleTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50) style:UITableViewStylePlain];
     //代理
     bubbleTable.bubbleDataSource = self;
     //120秒没有人发言就加入时间
@@ -270,6 +271,7 @@
 //每行数据
 - (NSBubbleData *)bubbleTableView:(UIBubbleTableView *)tableView dataForRow:(NSInteger)row
 {
+    DLog(@"聊天数组里面的数据---->%@",[bubbleData objectAtIndex:row]);
     return [bubbleData objectAtIndex:row];
 }
 
