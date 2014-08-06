@@ -144,13 +144,13 @@
     inputTextField.placeholder = NSLocalizedString(@"输入信息", nil);
     [textInputView addSubview:inputTextField];
     
-    sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     sendButton.frame = CGRectMake(inputTextField.frame.origin.x + inputTextField.frame.size.width + 5, inputTextField.frame.origin.y, self.view.frame.size.width - inputTextField.frame.origin.x - inputTextField.frame.size.width - 5 - 5, 40);
-    sendButton.layer.cornerRadius = 10.f;
-    sendButton.layer.borderWidth = 1.f;
-    sendButton.layer.borderColor = [UIColor blueColor].CGColor;
+//    sendButton.layer.cornerRadius = 10.f;
+//    sendButton.layer.borderWidth = 1.f;
+//    sendButton.layer.borderColor = [UIColor blueColor].CGColor;
     [sendButton setTitle:NSLocalizedString(@"发送", nil) forState:UIControlStateNormal];
-    [sendButton setTitleColor:[UIColor colorWithCGColor:sendButton.layer.borderColor] forState:UIControlStateNormal];
+    [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     sendButton.enabled = NO;
     [textInputView addSubview:sendButton];
