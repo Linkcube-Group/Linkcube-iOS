@@ -43,17 +43,13 @@
     UIButton *btnHangUp;
     //倒计时的数
     int secondsCountDown;
-#warning 没初始化
     //计数器
     NSTimer *countDownTimer;
-#warning 没初始化
     //聊天内容数组
     NSMutableArray *bubbleData;
-#warning 没初始化
     //bool isGameDisplayed;
     //模式 0 no one displayed;1 keyboard;2 Game button;3 request interface
     int currentMode;
-#warning 没初始化
     //等待答复
     bool isWaitingReply;
     
@@ -85,7 +81,16 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-#warning 没写呢
+    dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(concurrentQueue, ^{
+        
+        [self getMessageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self updateUI:arrayMessage];
+        });
+        
+    });
 }
 
 -(AppDelegate *)appDelegate
