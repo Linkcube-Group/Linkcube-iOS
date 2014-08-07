@@ -52,6 +52,7 @@
     context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
     dicJidToStatus=[[NSMutableDictionary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTable) name:kXMPPNotificationDidAskFriend object:nil];
+    tbResult.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self refreshTable];
 }
 
@@ -255,7 +256,13 @@
         [cell setFriendStatus:status];
     }
     //[cell setFriendStatus:@"None"];
-    
+    if(dataArray.count > 1)
+    {
+        UIView * lineView = [[UIView alloc] init];
+        lineView.frame = CGRectMake(20, 43.5, self.view.frame.size.width - 20, 0.5);
+        lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+        [cell.contentView addSubview:lineView];
+    }
     return cell;
 }
 
