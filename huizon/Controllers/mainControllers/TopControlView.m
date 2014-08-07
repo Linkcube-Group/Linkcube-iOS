@@ -29,14 +29,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-//        self.btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
-//        self.btnHead.frame = CGRectMake(267, 5, 34, 34);
-//        self.btnHead.backgroundColor = [UIColor whiteColor];
-//        [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
-//        self.btnHead.layer.cornerRadius = 17;
-//        self.btnHead.layer.masksToBounds = YES;
-////        [self addSubview:self.btnHead];
-//        
+        //        self.btnHead = [UIButton buttonWithType:UIButtonTypeCustom];
+        //        self.btnHead.frame = CGRectMake(267, 5, 34, 34);
+        //        self.btnHead.backgroundColor = [UIColor whiteColor];
+        //        [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
+        //        self.btnHead.layer.cornerRadius = 17;
+        //        self.btnHead.layer.masksToBounds = YES;
+        ////        [self addSubview:self.btnHead];
+        //
     }
     return self;
 }
@@ -49,14 +49,22 @@
         [theApp getUserCardTemp];
         if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.nickname)) {
             [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
-            [self.btnHead setImage:[[UIImage alloc] initWithData:theApp.xmppvCardUser.photo] forState:UIControlStateNormal];
+            if(theApp.xmppvCardUser.photo.length)
+            {
+                [self.btnHead setImage:[[UIImage alloc] initWithData:theApp.xmppvCardUser.photo] forState:UIControlStateNormal];
+            }
+            else
+            {
+                [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
+            }
+            
         }
     }
     else{//not login
         [self.btnStatus setTitle:@"请登录" forState:UIControlStateNormal];
         [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
     }
-       
+    
     if(theApp.blueConnType==1){
         self.imgTool.hidden = NO;
         self.imgTool.image = IMG(@"icon-mars.png");
