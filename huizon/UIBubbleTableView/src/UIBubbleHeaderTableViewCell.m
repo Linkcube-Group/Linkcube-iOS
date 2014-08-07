@@ -50,6 +50,8 @@
     self.label.textColor = [UIColor darkGrayColor];
     self.label.backgroundColor = [UIColor clearColor];
     [self addSubview:self.label];
+    self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
 }
 
 

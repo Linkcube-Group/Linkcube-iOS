@@ -115,9 +115,10 @@
     }
     else {
         //self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:14];
+        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:20 topCapHeight:8];
     }
-    
+    self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
     self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom );
 }
 
