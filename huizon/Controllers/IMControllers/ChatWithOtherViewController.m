@@ -83,6 +83,7 @@
 
 -(void)getAvatar
 {
+    
     if(theApp.xmppvCardUser.photo.length)
     {
         avatarOfMe = [[UIImage alloc] initWithData:theApp.xmppvCardUser.photo];
@@ -108,7 +109,7 @@
     {
         avatarOfOther = [UIImage imageNamed:@"portrait-female-small.png"];
     }
-
+//    DLog(@"头像1%@\n头像2%@",theApp.xmppvCardUser.photo,vCardTemp.photo);
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -568,7 +569,7 @@
     NSString *messageBody=[self filterMessage:body];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeSomeoneElse];
-    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    bb.avatar=avatarOfOther;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -648,7 +649,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    bb.avatar=avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -670,7 +671,7 @@
         NSString *messageBody=[self filterMessage:message];
         NSBubbleData *bb;
         bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-        bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+        bb.avatar=avatarOfMe;
         [bubbleData addObject:bb];
         [bubbleTable reloadData];
         [self gotoLastMessage:NO];
@@ -701,7 +702,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    bb.avatar=avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -719,7 +720,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    bb.avatar=avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -802,7 +803,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
+    bb.avatar=avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
