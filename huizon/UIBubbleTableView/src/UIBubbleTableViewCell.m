@@ -115,7 +115,7 @@
     }
     else {
         //self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:25];
+        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:14];
     }
     
     self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom );
