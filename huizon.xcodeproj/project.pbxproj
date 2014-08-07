@@ -479,6 +479,8 @@
 		07FEF658197B64D9003FF446 /* strength-8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF64F197B64D9003FF446 /* strength-8@2x.png */; };
 		07FEF65B197B6B73003FF446 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 07FEF65A197B6B73003FF446 /* HeaderView.m */; };
 		07FEF65D197B6B8A003FF446 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07FEF65C197B6B8A003FF446 /* HeaderView.xib */; };
+		2606E2C01993F4CA004EC608 /* navigation-female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2606E2BE1993F4CA004EC608 /* navigation-female@2x.png */; };
+		2606E2C11993F4CA004EC608 /* navigation-male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2606E2BF1993F4CA004EC608 /* navigation-male@2x.png */; };
 		2620954B198FD88D000E6E5C /* button_keyboard_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209547198FD88D000E6E5C /* button_keyboard_pressed.png */; };
 		2620954C198FD88D000E6E5C /* button_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209548198FD88D000E6E5C /* button_keyboard.png */; };
 		2620954D198FD88D000E6E5C /* button_switch_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209549198FD88D000E6E5C /* button_switch_pressed.png */; };
@@ -1310,6 +1312,8 @@
 		07FEF659197B6B73003FF446 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		07FEF65A197B6B73003FF446 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 		07FEF65C197B6B8A003FF446 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		2606E2BE1993F4CA004EC608 /* navigation-female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-female@2x.png"; sourceTree = "<group>"; };
+		2606E2BF1993F4CA004EC608 /* navigation-male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation-male@2x.png"; sourceTree = "<group>"; };
 		26209547198FD88D000E6E5C /* button_keyboard_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_keyboard_pressed.png; sourceTree = "<group>"; };
 		26209548198FD88D000E6E5C /* button_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_keyboard.png; sourceTree = "<group>"; };
 		26209549198FD88D000E6E5C /* button_switch_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch_pressed.png; sourceTree = "<group>"; };
@@ -3185,6 +3189,8 @@
 		BBB8149519454DC90052D71A /* right_info */ = {
 			isa = PBXGroup;
 			children = (
+				2606E2BE1993F4CA004EC608 /* navigation-female@2x.png */,
+				2606E2BF1993F4CA004EC608 /* navigation-male@2x.png */,
 				266AB17819913A0900F36F66 /* button-circle-green@2x.png */,
 				266AB17919913A0900F36F66 /* button-circle-grey@2x.png */,
 				266AB17A19913A0900F36F66 /* button-circle-red@2x.png */,
@@ -3398,6 +3404,7 @@
 				073B328918C89C12009FE1DA /* MediaViewController.xib in Resources */,
 				072F97DF18C0BD2A00BEB4C4 /* phone_shake_w.png in Resources */,
 				07FEF651197B64D9003FF446 /* strength-1@2x.png in Resources */,
+				2606E2C01993F4CA004EC608 /* navigation-female@2x.png in Resources */,
 				074D11831931E2E80030583C /* MenuCellLine.xib in Resources */,
 				BBF8DF1D18DCACC8005E2B8E /* halloween.jpg in Resources */,
 				BBB8F341194E8C650020B0A1 /* button-connect.png in Resources */,
@@ -3614,6 +3621,7 @@
 				074A2A15194458F0007CB3DA /* button-play-disabled@2x.png in Resources */,
 				072F97D518C0BD2A00BEB4C4 /* dot_s.png in Resources */,
 				078D3605198DD8BA0081FD8D /* needle_bg@2x.png in Resources */,
+				2606E2C11993F4CA004EC608 /* navigation-male@2x.png in Resources */,
 				07B6E72B18D585FF00C17693 /* PersonCell.xib in Resources */,
 				07EAA135192893F300794ABC /* GestureViewController.xib in Resources */,
 				0701AB88194D90D100C0DA9F /* female-large@2x.png in Resources */,
