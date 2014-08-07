@@ -13,9 +13,9 @@
 + (MusicItem *)musicDefaul1
 {
     MusicItem *mItem = [[MusicItem alloc] init];
-    mItem.musicName = @"Apolize";
+    mItem.musicName = @"My Humps";
     mItem.musicPath = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp3"];
-    mItem.author = @"Black Street";
+    mItem.author = @"Black Eyed Peas";
     return mItem;
 }
 + (MusicItem *)musicDefaul2
