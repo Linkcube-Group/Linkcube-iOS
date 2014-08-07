@@ -215,6 +215,8 @@
 	return item;
 }
 
+#if 0
+
 -(UIBarButtonItem*)navigationBarButtonBackItemWithTarget:(id)target Selector:(SEL)sel
 {
 	UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -246,6 +248,14 @@
 	
 	return item;
 }
+
+#else
+-(UIBarButtonItem*)navigationBarButtonBackItemWithTarget:(id)target Selector:(SEL)sel
+{
+    // change by yuyang
+	return [self navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:target Selector:sel];
+}
+#endif
 
 -(UIFont*)labelFontTitle1
 {
