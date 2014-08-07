@@ -73,7 +73,7 @@
     }
     
     //nameArray = @[@"",@"昵称",@"性别",@"出生年月",@"个性签名",@"连酷ID",@"注册邮箱"];
-    nameArray = @[@"",@"昵称",@"性别",@"出生年月",@"个性签名",@"注册邮箱"];
+    nameArray = @[@"",@"昵称",@"性别",@"出生年月",@"个性签名"];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -125,7 +125,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 5;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -166,15 +166,15 @@
         case 4:
             [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.personstate Other:NO];
             break;
-            
+            /*
              case 5:
              [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.email Other:NO];
              break;
-            /*
+            
              case 6:
              [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.email Other:NO];
              break;
-             */
+            */
         default:
             break;
     }
