@@ -64,8 +64,7 @@ static IMControls * defaultManagerInstance = nil;
 {
     if(type == NotificationCountTypeAddfriend)
     {
-#warning ????crash
-        NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:NOTICES_RECEIVE_ADDFRIEND_COUNT_NEW];
+        NSInteger count = [[[NSUserDefaults standardUserDefaults] objectForKey:NOTICES_RECEIVE_ADDFRIEND_COUNT_NEW] integerValue];
         return count>99?99:count;
     }
     return 0;
