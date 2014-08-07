@@ -94,10 +94,13 @@
     int  state = [[noti object] intValue];
     if (state==1){
         if(StringNotNullAndEmpty(myvCard.nickname)) {
-            showCustomAlertMessage(@"保存成功");
+//            showCustomAlertMessage(@"保存成功");
 //            showCustomAlertMessage(NSLocalizedString(@"注册成功", nil));
             
         }
+//        [theApp updateUserCardTemp:theApp.xmppvCardUser];
+//        [theApp.xmppvCardStorage setvCardTemp:myvCard forJID:theApp.xmppvCardUser.jid xmppStream:theApp.xmppStream];
+        
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else{
