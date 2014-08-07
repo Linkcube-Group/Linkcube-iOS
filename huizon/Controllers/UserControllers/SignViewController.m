@@ -36,7 +36,6 @@
 {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginAuthen:) name:kXMPPNotificationDidAuthen object:nil];
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"LINKCUBE"];
     self.navigationItem.leftBarButtonItem = [[Theam currentTheam] navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:self Selector:@selector(btBack_DisModal:)];
 }
@@ -53,14 +52,6 @@
     }
 }
 
-
-- (void)didLoginAuthen:(NSNotification *)noti
-{
-    showIndicator(NO);
-    UserEditController *uvc = [[UserEditController alloc] init];
-    [self.navigationController pushViewController:uvc animated:YES];
-}
-
 #pragma mark -
 #pragma mark Action
 - (IBAction)signAction:(id)sender
@@ -70,25 +61,17 @@
     NSString *cpwd = self.confirmPassword.text;
     NSString *mail = self.mail.text;
 
-
-    
-    
-    
-     
      //check email format
-//     if(![self isValidEmail:mail])
-//     {
-//     //NSLog(@"Email is not valid");
-//         showCustomAlertMessage(@"请输入正确的邮箱格式");
-//     //[theApp showAlertView:@"请输入正确的邮箱格式"];
-//     return;
-//     }
+     if([mail componentsSeparatedByString:@"@"].count != 2)
+     {
+         showCustomAlertMessage(@"请输入正确格式的邮箱");
+         return;
+     }
     
      //check length of password
      if(pwd.length<6||pwd.length>14)
      {
          showCustomAlertMessage(@"密码必须由6-14个字符组成");
-         //[theApp showAlertView:@"密码必须由6-14个字符组成"];
          return;
      }
      
@@ -96,14 +79,18 @@
      if(![pwd isEqualToString:cpwd])
      {
          showCustomAlertMessage(@"两次输入的密码不一致");
-         //[theApp showAlertView:@"两次输入的密码不一致"];
          return;
      }
     
-    showIndicator(YES);
-    mail =[mail stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:pwd,@"pwd",mail,@"lid", nil];
-    [theApp beginRegister:dict];
+    UserEditController *uvc = [[UserEditController alloc] init];
+    uvc.email = mail;
+    uvc.password = pwd;
+    [self.navigationController pushViewController:uvc animated:YES];
+    
+//    showIndicator(YES);
+//    mail =[mail stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
+//    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:pwd,@"pwd",mail,@"lid", nil];
+//    [theApp beginRegister:dict];
 }
 
 - (IBAction)loginAction:(id)sender
