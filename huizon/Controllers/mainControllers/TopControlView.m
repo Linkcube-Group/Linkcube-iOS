@@ -55,7 +55,15 @@
             }
             else
             {
-                [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
+//                [self.btnHead setImage:[UIImage imageNamed:@"navigation-unknown"] forState:UIControlStateNormal];
+                if([theApp.xmppvCardUser.gender isEqualToString:@"男"])
+                {
+                    [self.btnHead setImage:[UIImage imageNamed:@"navigation-male"] forState:UIControlStateNormal];
+                }
+                else
+                {
+                    [self.btnHead setImage:[UIImage imageNamed:@"navigation-female"] forState:UIControlStateNormal];
+                }
             }
             
         }
