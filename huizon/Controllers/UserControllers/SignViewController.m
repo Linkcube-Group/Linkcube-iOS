@@ -37,17 +37,13 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginAuthen:) name:kXMPPNotificationDidAuthen object:nil];
-   
-    
+    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"LINKCUBE"];
+    self.navigationItem.leftBarButtonItem = [[Theam currentTheam] navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:self Selector:@selector(btBack_DisModal:)];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"LINKCUBE"];
-    self.navigationItem.leftBarButtonItem=nil;
-    
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
