@@ -21,8 +21,8 @@
 + (MusicItem *)musicDefaul2
 {
     MusicItem *mItem1 = [[MusicItem alloc] init];
-    mItem1.musicName = @"Helle world";
-    mItem1.author = @"Baby";
+    mItem1.musicName = @"Having fun together";
+    mItem1.author = @"Raimond Lap";
     mItem1.musicPath = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
     return mItem1;
 }
