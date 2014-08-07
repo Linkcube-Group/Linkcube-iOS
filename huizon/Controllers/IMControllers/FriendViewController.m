@@ -15,6 +15,7 @@
 #import "FileManager.h"
 #import "FriendInfoViewController.h"
 #import "IMControls.h"
+#import "XMPPvCardTemp.h"
 
 @interface FriendViewController ()<UITableViewDataSource,UITableViewDelegate,ChatDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -252,13 +253,14 @@
     else
     {
         XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row-self.receiveAddFriendArray.count];
-        NSString *name = [object displayName];
-        if (!name) {
-            name = [object nickname];
-        }
-        if (!name) {
-            name = [object jidStr];
-        }
+//        NSString *name = [object displayName];
+//        if (!name) {
+//            name = [object nickname];
+//        }
+//        if (!name) {
+//            name = [object jidStr];
+//        }
+        NSString * name = [theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES].nickname;;
         NSLog(@"=================>%@ %@",object.subscription,object.ask);
         int statusNum=[object.sectionNum intValue];
         NSString *status=@"";
