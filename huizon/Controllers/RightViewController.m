@@ -288,7 +288,7 @@
         {
             [cell setMenuImage:@"portrait-male-small" Name:NSLocalizedString(@"未登录", nil)];
         }
-        
+        [cell.headerButton addTarget:self action:@selector(selfInfo) forControlEvents:UIControlEventTouchUpInside];
     }
     else if(indexPath.row==2)
     {
@@ -370,6 +370,13 @@
     fvc.jid = object.jid;
     UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
     [self presentViewController:nvc animated:YES completion:nil];
+}
+
+-(void)selfInfo
+{
+    PersonSettingController *psc=[[PersonSettingController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:psc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
