@@ -192,7 +192,7 @@
         emailLabel.backgroundColor = [UIColor clearColor];
         emailLabel.textAlignment = NSTextAlignmentLeft;
         emailLabel.font = [UIFont systemFontOfSize:15.f];
-        emailLabel.text = NSLocalizedString(@"邮箱", nil);
+        emailLabel.text = NSLocalizedString(@"注册邮箱", nil);
         [cell.contentView addSubview:emailLabel];
         
         UILabel * emailContentLabel = [[UILabel alloc] init];
