@@ -13,7 +13,10 @@
 #import "LeDiscovery.h"
 #import "XmppVcardTemp.h"
 #import "XMPPvCardTempModule.h"
-
+/*
+ 聊天界面有点问题哈：1）发送按钮改成类似于iphone短信的那个发送吧（颜色为深灰色，字体大一些）；2）现在对话框是根据发出文字长度，直接拉伸的（这样小三角和圆角就变形了），应该只拉伸圆角矩形的长边或短边。文字框和头像应该平行对齐。3）会有一个白底（见上方截图）；4）在聊天界面收不到对方的消息，必须返回到上一层界面，再返回聊天界面，才能看到新消息；
+ 嗯，还有就是，被对话者，最上方中间没显示对方名称（如截图）。发起对话的人有显示对方名称。
+ */
 @interface ChatWithOtherViewController ()<ChatDelegate,UITextFieldDelegate>
 
 @end
@@ -185,15 +188,14 @@
     inputTextField.placeholder = NSLocalizedString(@"输入信息", nil);
     [textInputView addSubview:inputTextField];
     
-    sendButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    sendButton.frame = CGRectMake(inputTextField.frame.origin.x + inputTextField.frame.size.width + 5, inputTextField.frame.origin.y, self.view.frame.size.width - inputTextField.frame.origin.x - inputTextField.frame.size.width - 5 - 5, 40);
-//    sendButton.layer.cornerRadius = 10.f;
-//    sendButton.layer.borderWidth = 1.f;
-//    sendButton.layer.borderColor = [UIColor blueColor].CGColor;
+    sendButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    sendButton.frame = CGRectMake(inputTextField.frame.origin.x + inputTextField.frame.size.width + 5, inputTextField.frame.origin.y + 5, self.view.frame.size.width - inputTextField.frame.origin.x - inputTextField.frame.size.width - 5 - 5, 30);
+    sendButton.layer.cornerRadius = 8.f;
+    sendButton.backgroundColor = [UIColor grayColor];
     [sendButton setTitle:NSLocalizedString(@"发送", nil) forState:UIControlStateNormal];
-    [sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [sendButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [sendButton addTarget:self action:@selector(sendButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    sendButton.enabled = NO;
+    sendButton.enabled = YES;
     [textInputView addSubview:sendButton];
     
     //game的view
@@ -290,14 +292,17 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    if(textField.text.length)
-    {
-        sendButton.enabled = YES;
-    }
-    else
-    {
-        sendButton.enabled = NO;
-    }
+    
+//    NSString *myString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+//    DLog(@"输入字的长度%d",myString.length);
+//    if(myString.length)
+//    {
+//        sendButton.enabled = YES;
+//    }
+//    else
+//    {
+//        sendButton.enabled = NO;
+//    }
     return YES;
 }
 
@@ -787,6 +792,8 @@
 //发送按钮
 -(void)sendButtonClicked
 {
+    if(!inputTextField.text.length)
+        return;
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     [inputTextField resignFirstResponder];
     
