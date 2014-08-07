@@ -180,10 +180,10 @@
     if(indexPath.row == 2)
     {
         UILabel * signatureLabel = [[UILabel alloc] init];
-        signatureLabel.frame = CGRectMake(20, 0, 80, 30);
+        signatureLabel.frame = CGRectMake(20, 3, 80, 30);
         signatureLabel.backgroundColor = [UIColor clearColor];
         signatureLabel.textAlignment = NSTextAlignmentLeft;
-        signatureLabel.font = [UIFont boldSystemFontOfSize:19.f];
+        signatureLabel.font = [UIFont systemFontOfSize:15.f];
         signatureLabel.text = NSLocalizedString(@"个性签名", nil);
         [cell.contentView addSubview:signatureLabel];
         
