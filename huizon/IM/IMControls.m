@@ -45,9 +45,9 @@ static IMControls * defaultManagerInstance = nil;
 #pragma mark
 #pragma mark - 收到新消息
 
--(void)receiveNewNoticesWithNotiType:(NotificationType)type
+-(void)receiveNewNoticesWithNotiType:(NotificationCountType)type
 {
-    if(type == NotificationTypeAddfriend)
+    if(type == NotificationCountTypeAddfriend)
     {
         NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:NOTICES_RECEIVE_ADDFRIEND_COUNT_NEW];
         count++;
@@ -60,9 +60,9 @@ static IMControls * defaultManagerInstance = nil;
 #pragma mark
 #pragma mark - 获取新消息数
 
--(NSInteger)getNewNoticesCountWithType:(NotificationType)type
+-(NSInteger)getNewNoticesCountWithType:(NotificationCountType)type
 {
-    if(type == NotificationTypeAddfriend)
+    if(type == NotificationCountTypeAddfriend)
     {
 #warning ????crash
         NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:NOTICES_RECEIVE_ADDFRIEND_COUNT_NEW];
@@ -74,7 +74,7 @@ static IMControls * defaultManagerInstance = nil;
 #pragma mark
 #pragma mark - 新消息数减1
 
--(NSInteger)deleteOneNoticeCountWithType:(NotificationType)type
+-(NSInteger)deleteOneNoticeCountWithType:(NotificationCountType)type
 {
     NSInteger count = [[NSUserDefaults standardUserDefaults] integerForKey:NOTICES_RECEIVE_ADDFRIEND_COUNT_NEW];
     if(count>0)
@@ -87,9 +87,9 @@ static IMControls * defaultManagerInstance = nil;
 #pragma mark
 #pragma mark - 清空消息数
 
--(void)clearNewNoticesCountWithType:(NotificationType)type
+-(void)clearNewNoticesCountWithType:(NotificationCountType)type
 {
-    if(type == NotificationTypeAddfriend)
+    if(type == NotificationCountTypeAddfriend)
     {
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:NOTICES_RECEIVE_ADDFRIEND_COUNT_NEW];
         [[NSUserDefaults standardUserDefaults] synchronize];

@@ -29,7 +29,7 @@
         // Initialization code
         //头像
         self.headerImageView = [[UIImageView alloc] init];
-        self.headerImageView.frame = CGRectMake(10, 10, NOTICELLHEIGHT - 20, NOTICELLHEIGHT - 20);
+        self.headerImageView.frame = CGRectMake(20, 5, NOTICELLHEIGHT - 20, NOTICELLHEIGHT - 20);
         self.headerImageView.layer.cornerRadius = (NOTICELLHEIGHT - 20)/2.f;
         self.headerImageView.layer.masksToBounds = YES;
         [self.contentView addSubview:self.headerImageView];

@@ -302,7 +302,7 @@
         
         JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
         jsbView.badgePositionAdjustment = CGPointMake(-45.0, -17.5);
-        NSInteger count = [[IMControls defaultControls] getNewNoticesCountWithType:NotificationTypeAddfriend];
+        NSInteger count = [[IMControls defaultControls] getNewNoticesCountWithType:NotificationCountTypeAddfriend];
         jsbView.badgeText = count>0?[NSString stringWithFormat:@"%d",count]:nil;
     }
     else if(indexPath.row==3)
@@ -394,9 +394,9 @@
     }
     else if (indexPath.row==2)
     {
-        //FriendViewController *fvc = [[FriendViewController alloc] init];
-        NotificationViewController *nvc = [[NotificationViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:nvc];
+        FriendViewController *fvc = [[FriendViewController alloc] init];
+        //NotificationViewController *nvc = [[NotificationViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:fvc];
     }
     else if (indexPath.row==3)
     {
