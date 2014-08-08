@@ -13,6 +13,7 @@
  7.聊天界面
  9.消息界面问题还很大
  10.注册完成后先给放上默认的nickname
+ 11.注册我测试了，成功后。登陆进去资料还都是空的。
  */
 
 #import "RightViewController.h"
@@ -288,7 +289,7 @@
         {
             [cell setMenuImage:@"portrait-male-small" Name:NSLocalizedString(@"未登录", nil)];
         }
-        
+        [cell.headerButton addTarget:self action:@selector(selfInfo) forControlEvents:UIControlEventTouchUpInside];
     }
     else if(indexPath.row==2)
     {
@@ -302,7 +303,7 @@
         
         JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
         jsbView.badgePositionAdjustment = CGPointMake(-45.0, -17.5);
-        NSInteger count = [[IMControls defaultControls] getNewNoticesCountWithType:NotificationTypeAddfriend];
+        NSInteger count = [[IMControls defaultControls] getNewNoticesCountWithType:NotificationCountTypeAddfriend];
         jsbView.badgeText = count>0?[NSString stringWithFormat:@"%d",count]:nil;
     }
     else if(indexPath.row==3)
@@ -372,6 +373,13 @@
     [self presentViewController:nvc animated:YES completion:nil];
 }
 
+-(void)selfInfo
+{
+    PersonSettingController *psc=[[PersonSettingController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:psc];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //[tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -394,9 +402,9 @@
     }
     else if (indexPath.row==2)
     {
-        //FriendViewController *fvc = [[FriendViewController alloc] init];
-        NotificationViewController *nvc = [[NotificationViewController alloc] init];
-        nav = [[UINavigationController alloc] initWithRootViewController:nvc];
+        FriendViewController *fvc = [[FriendViewController alloc] init];
+        //NotificationViewController *nvc = [[NotificationViewController alloc] init];
+        nav = [[UINavigationController alloc] initWithRootViewController:fvc];
     }
     else if (indexPath.row==3)
     {

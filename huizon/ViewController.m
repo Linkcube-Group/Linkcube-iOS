@@ -12,6 +12,8 @@
 
 @end
 
+
+
 @implementation ViewController
 @synthesize mainController,chatController;
 

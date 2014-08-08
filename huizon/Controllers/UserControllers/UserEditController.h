@@ -10,4 +10,7 @@
 
 @interface UserEditController : UIViewController
 
+@property (nonatomic, strong) NSString * email;
+@property (nonatomic, strong) NSString * password;
+
 @end

@@ -13,16 +13,16 @@
 + (MusicItem *)musicDefaul1
 {
     MusicItem *mItem = [[MusicItem alloc] init];
-    mItem.musicName = @"Apolize";
+    mItem.musicName = @"My Humps";
     mItem.musicPath = [[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp3"];
-    mItem.author = @"Black Street";
+    mItem.author = @"Black Eyed Peas";
     return mItem;
 }
 + (MusicItem *)musicDefaul2
 {
     MusicItem *mItem1 = [[MusicItem alloc] init];
-    mItem1.musicName = @"Helle world";
-    mItem1.author = @"Baby";
+    mItem1.musicName = @"Having fun together";
+    mItem1.author = @"Raimond Lap";
     mItem1.musicPath = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
     return mItem1;
 }

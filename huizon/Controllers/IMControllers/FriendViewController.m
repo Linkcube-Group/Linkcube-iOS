@@ -13,6 +13,9 @@
 #import "RightCell.h"
 #import "NotificationCell.h"
 #import "FileManager.h"
+#import "FriendInfoViewController.h"
+#import "IMControls.h"
+#import "XMPPvCardTemp.h"
 
 @interface FriendViewController ()<UITableViewDataSource,UITableViewDelegate,ChatDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -43,7 +46,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    //进来清空通知数
+//    [[IMControls defaultControls] clearNewNoticesCountWithType:NotificationTypeAddfriend];
+    [[IMControls defaultControls] clearNewNoticesCountWithType:NotificationCountTypeAddfriend];
     self.dataArray = [[NSMutableArray alloc] init];
     self.receiveAddFriendArray = [[NSMutableArray alloc] init];
     self.tableFriends.delegate = self;
@@ -248,13 +253,14 @@
     else
     {
         XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row-self.receiveAddFriendArray.count];
-        NSString *name = [object displayName];
-        if (!name) {
-            name = [object nickname];
-        }
-        if (!name) {
-            name = [object jidStr];
-        }
+//        NSString *name = [object displayName];
+//        if (!name) {
+//            name = [object nickname];
+//        }
+//        if (!name) {
+//            name = [object jidStr];
+//        }
+        NSString * name = [theApp.xmppvCardTempModule vCardTempForJID:object.jid shouldFetch:YES].nickname;;
         NSLog(@"=================>%@ %@",object.subscription,object.ask);
         int statusNum=[object.sectionNum intValue];
         NSString *status=@"";
@@ -292,7 +298,10 @@
         }
     }
     
-    
+    UIView * lineView = [[UIView alloc] init];
+    lineView.frame = CGRectMake(20, 43.5, self.view.frame.size.width - 20, 0.5);
+    lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+    [cell.contentView addSubview:lineView];
     
     return cell;
 }
@@ -386,13 +395,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
-    ChatWithOtherViewController *tvc=[[ChatWithOtherViewController alloc]init];
+    if([object.subscription isEqualToString:@"both"])
+    {
+        ChatWithOtherViewController *tvc=[[ChatWithOtherViewController alloc]init];
+        tvc.xmppFriendJID=[XMPPJID jidWithString:[object jidStr] resource:@"iOS"];
+        [self.navigationController pushViewController:tvc animated:YES];
+    }
+    else
+    {
+        FriendInfoViewController * fvc = [[FriendInfoViewController alloc] init];
+        fvc.jid = object.jid;
+        fvc.isFriend = NO;
+        UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+        [self presentViewController:nvc animated:YES completion:nil];
+    }
     
     //using nickname for now, change later
     
     //tvc.xmppFriendJID=[XMPPJID jidWithUser:[object nickname] domain:kXMPPmyDomain resource:@"ios"];
-    tvc.xmppFriendJID=[XMPPJID jidWithString:[object jidStr] resource:@"iOS"];
-    [self.navigationController pushViewController:tvc animated:YES];
 }
 - (void)prepareForSegue:(UIStoryboardPopoverSegue *)segue sender:(id)sender
 {

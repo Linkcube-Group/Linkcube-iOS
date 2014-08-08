@@ -36,9 +36,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginAuthen:) name:kXMPPNotificationDidAuthen object:nil];
+    
     self.pickerView.maximumDate = [NSDate date];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didFinishUpload:) name:kXMPPvCardTempElement object:nil];
+    
+    self.navigationItem.leftBarButtonItem = [[Theam currentTheam] navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:self Selector:@selector(btBack_DisModal:)];
     // Do any additional setup after loading the view from its nib.
+}
+
+- (void)didLoginAuthen:(NSNotification *)noti
+{
+    showIndicator(NO);
+//    UserEditController *uvc = [[UserEditController alloc] init];
+//    [self.navigationController pushViewController:uvc animated:YES];
+    
+    NSString *nickname=[self.tfName.text trimString];
+    theApp.xmppvCardUser.nickname = nickname;
+    
+    theApp.xmppvCardUser.birthday=self.tfDate.text;
+    
+    showFullScreen(YES);
+    showIndicator(YES);
+    [theApp updateUserCardTemp:theApp.xmppvCardUser];
+    
+    
+    
+    
+    //add user nick and email
+    NSString *uname = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyJID];
+    NSString *pwd = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyPassword];
+    NSString *unameOri =[uname stringByReplacingOccurrencesOfString:@"-" withString:@"@"];
+    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:register"];
+    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
+    [iq addAttributeWithName:@"type" stringValue:@"set"];
+    [iq addAttributeWithName:@"to" stringValue:[NSString stringWithFormat:@"%@@%@",uname,kXMPPmyDomain]];
+    [iq addAttributeWithName:@"id" stringValue:@"change1"];
+    
+    
+    DDXMLNode *username=[DDXMLNode elementWithName:@"username" stringValue:uname];
+    DDXMLNode *password=[DDXMLNode elementWithName:@"password" stringValue:pwd];
+    DDXMLNode *nick=[DDXMLNode elementWithName:@"name" stringValue:nickname];
+    DDXMLNode *email=[DDXMLNode elementWithName:@"email" stringValue:unameOri];
+    
+    [query addChild:username];
+    [query addChild:password];
+    [query addChild:nick];
+    [query addChild:email];
+    [iq addChild:query];
+    [[theApp xmppStream] sendElement:iq];
 }
 
 - (void)didFinishUpload:(NSNotification *)noti
@@ -48,9 +94,14 @@
     int  state = [[noti object] intValue];
     if (state==1){
         if(StringNotNullAndEmpty(myvCard.nickname)) {
-            showCustomAlertMessage(@"保存成功");
-            [self dismissViewControllerAnimated:YES completion:nil];
+//            showCustomAlertMessage(@"保存成功");
+//            showCustomAlertMessage(NSLocalizedString(@"注册成功", nil));
+            
         }
+//        [theApp updateUserCardTemp:theApp.xmppvCardUser];
+//        [theApp.xmppvCardStorage setvCardTemp:myvCard forJID:theApp.xmppvCardUser.jid xmppStream:theApp.xmppStream];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
     else{
         showCustomAlertMessage(@"服务器错误，保存失败，请重试");
@@ -82,46 +133,22 @@
     
     NSString *nickname=[self.tfName.text trimString];
     theApp.xmppvCardUser.nickname = nickname;
- 
+    
     if (self.btnMale.selected) {
         theApp.xmppvCardUser.gender = @"男";
     }
     else{
         theApp.xmppvCardUser.gender = @"女";
     }
-    
-    theApp.xmppvCardUser.birthday=self.tfDate.text;
-    
-    showFullScreen(YES);
+    [self registerUser];
+}
+
+-(void)registerUser
+{
     showIndicator(YES);
-    [theApp updateUserCardTemp:theApp.xmppvCardUser];
-    
-
-    
-    
-    //add user nick and email
-    NSString *uname = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyJID];
-    NSString *pwd = [[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyPassword];
-    NSString *unameOri =[uname stringByReplacingOccurrencesOfString:@"-" withString:@"@"];
-    NSXMLElement *query = [NSXMLElement elementWithName:@"query" xmlns:@"jabber:iq:register"];
-    NSXMLElement *iq = [NSXMLElement elementWithName:@"iq"];
-    [iq addAttributeWithName:@"type" stringValue:@"set"];
-    [iq addAttributeWithName:@"to" stringValue:[NSString stringWithFormat:@"%@@%@",uname,kXMPPmyDomain]];
-    [iq addAttributeWithName:@"id" stringValue:@"change1"];
-    
-    
-    DDXMLNode *username=[DDXMLNode elementWithName:@"username" stringValue:uname];
-    DDXMLNode *password=[DDXMLNode elementWithName:@"password" stringValue:pwd];
-    DDXMLNode *nick=[DDXMLNode elementWithName:@"name" stringValue:nickname];
-    DDXMLNode *email=[DDXMLNode elementWithName:@"email" stringValue:unameOri];
-
-    [query addChild:username];
-    [query addChild:password];
-    [query addChild:nick];
-    [query addChild:email];
-    [iq addChild:query];
-    [[theApp xmppStream] sendElement:iq];
-
+    self.email =[self.email stringByReplacingOccurrencesOfString:@"@" withString:@"-"];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:self.password,@"pwd",self.email,@"lid", nil];
+    [theApp beginRegister:dict];
 }
 
 

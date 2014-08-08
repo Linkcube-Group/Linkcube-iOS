@@ -14,7 +14,7 @@
 #import "VoiceControls.h"
 #import "LeDiscovery.h"
 #import "TopControlView.h"
-#import "JingRoundView.h"
+//#import "JingRoundView.h"
 
 @interface PlayViewController ()<AVAudioPlayerDelegate,LeDiscoveryDelegate, LeTemperatureAlarmProtocol>
 {
@@ -37,7 +37,7 @@
 
 @property (strong,nonatomic) IBOutlet UILabel *lbName;
 @property (strong,nonatomic) IBOutlet UILabel *lbAuthor;
-@property (strong,nonatomic) IBOutlet JingRoundView *imgAlbum;
+@property (strong,nonatomic) IBOutlet UIView *imgAlbum;
 @property (strong,nonatomic) IBOutlet UIImageView *imgFloat;
 @property (strong,nonatomic) IBOutlet UILabel *lbTimeMin;
 @property (strong,nonatomic) IBOutlet UILabel *lbTimeMax;
@@ -98,11 +98,11 @@
     topView.baseController = self;
     
     [self.view addSubview:topView];
-    [self.imgAlbum initJingRound];
+//    [self.imgAlbum initJingRound];
     self.imgAlbum.center = CGPointMake(160, theApp.window.frame.size.height/2);
-    self.imgAlbum.roundImage = IMG(@"mode-music.png");
+    [self.imgAlbum.layer setContents:(id)[IMG(@"mode-music.png") CGImage]];
     
-    [self.imgAlbum.roundImageView addSubview:self.imgFloat];
+//    [self.imgAlbum.roundImageView addSubview:self.imgFloat];
     
     //    self.imgFloat.center = self.imgAlbum.center;//CGPointMake(160, theApp.window.frame.size.height/2);
     self.imgNeedler.originY = theApp.window.frame.size.height/2-182;
@@ -428,7 +428,9 @@
 - (UIImage *)musicImageInfo:(NSString *)path
 {
     UIImage *img = IMG(@"mode-music-front.png");
-    
+    if ([path isEqualToString:[[NSBundle mainBundle] pathForResource:@"1" ofType:@"mp3"]]) {
+        return img;
+    }
     NSURL *fileUrl=[NSURL fileURLWithPath:path];
     AVURLAsset *mp3Asset=[AVURLAsset URLAssetWithURL:fileUrl options:nil];
     for (NSString *format in [mp3Asset availableMetadataFormats])

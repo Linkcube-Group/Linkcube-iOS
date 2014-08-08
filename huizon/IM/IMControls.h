@@ -9,25 +9,25 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-    NotificationTypeAddfriend = 0, //收到加好友的通知
-    NotificationTypeOther          //其他
-}NotificationType;
+    NotificationCountTypeAddfriend = 0, //收到加好友的通知
+    NotificationCountTypeOther          //其他
+}NotificationCountType;
 
 @interface IMControls : NSObject
 
 +(IMControls *)defaultControls;
 
 //收到新消息
--(void)receiveNewNoticesWithNotiType:(NotificationType)type;
+-(void)receiveNewNoticesWithNotiType:(NotificationCountType)type;
 
 //获取新消息数
--(NSInteger)getNewNoticesCountWithType:(NotificationType)type;
+-(NSInteger)getNewNoticesCountWithType:(NotificationCountType)type;
 
 //新消息数减1
--(NSInteger)deleteOneNoticeCountWithType:(NotificationType)type;
+-(NSInteger)deleteOneNoticeCountWithType:(NotificationCountType)type;
 
 //清空消息数
--(void)clearNewNoticesCountWithType:(NotificationType)type;
+-(void)clearNewNoticesCountWithType:(NotificationCountType)type;
 
 
 

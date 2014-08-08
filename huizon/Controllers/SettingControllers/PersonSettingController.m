@@ -168,12 +168,13 @@
             break;
             /*
              case 5:
-             [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.mailer Other:NO];
+             [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.email Other:NO];
              break;
+            
              case 6:
              [cell initSettingCell:nameArray[indexPath.row] Content:theApp.xmppvCardUser.email Other:NO];
              break;
-             */
+            */
         default:
             break;
     }

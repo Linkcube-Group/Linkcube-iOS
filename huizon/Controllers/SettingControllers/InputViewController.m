@@ -27,16 +27,18 @@
 {
     [super viewDidLoad];
     UIImageView * bgImageView = [[UIImageView alloc] init];
-    bgImageView.frame = CGRectMake(20, 110, 280, 40);
-    bgImageView.image = [UIImage imageNamed:@"white_box.png"];
+    bgImageView.frame = CGRectMake(-1, 110, self.view.frame.size.width + 2, 40);
+    bgImageView.layer.borderWidth = 1.f;
+    bgImageView.layer.borderColor = [UIColor colorWithHexString:@"c6c6c6"].CGColor;
+//    bgImageView.image = [UIImage imageNamed:@"white_box.png"];
     [self.view addSubview:bgImageView];
     self.tfModify = [[UITextField alloc] init];
     self.tfModify.delegate = self;
     self.tfModify.placeholder = NSLocalizedString(@"请输入", nil);
-    self.tfModify.frame = CGRectMake(20, 5, 320, 30);
+    self.tfModify.frame = CGRectMake(10, 5, self.view.frame.size.width - 20, 30);
     [bgImageView addSubview:self.tfModify];
     [self.tfModify becomeFirstResponder];
-    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:self.NavTitle];
+    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:NSLocalizedString(@"编辑", nil)];
     self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_PopNav:)];
     
     self.navigationItem.rightBarButtonItem = [[Theam currentTheam] navigationBarRightButtonItemWithImage:nil Title:@"保存" Target:self Selector:@selector(saveAction:)];

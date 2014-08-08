@@ -62,7 +62,7 @@
 #if !__has_feature(objc_arc)
         self.bubbleImage = [[[UIImageView alloc] init] autorelease];
 #else
-        self.bubbleImage = [[UIImageView alloc] init];        
+        self.bubbleImage = [[UIImageView alloc] init];
 #endif
         [self addSubview:self.bubbleImage];
     }
@@ -71,7 +71,7 @@
     
     CGFloat width = self.data.view.frame.size.width;
     CGFloat height = self.data.view.frame.size.height;
-
+    
     CGFloat x = (type == BubbleTypeSomeoneElse) ? 0 : self.frame.size.width - width - self.data.insets.left - self.data.insets.right;
     CGFloat y = 0;
     
@@ -84,15 +84,15 @@
 #else
         self.avatarImage = [[UIImageView alloc] initWithImage:(self.data.avatar ? self.data.avatar : [UIImage imageNamed:@"missingAvatar.png"])];
 #endif
-        self.avatarImage.layer.cornerRadius = 25;
+        self.avatarImage.layer.cornerRadius = 20;
         self.avatarImage.layer.masksToBounds = YES;
         self.avatarImage.layer.borderColor = [UIColor colorWithWhite:0.0 alpha:0.2].CGColor;
         self.avatarImage.layer.borderWidth = 0.0;
         
-        CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? 2 : self.frame.size.width - 52;
+        CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? 12 : self.frame.size.width - 52;
         CGFloat avatarY = self.frame.size.height - 50;
         
-        self.avatarImage.frame = CGRectMake(avatarX, avatarY, 50, 50);
+        self.avatarImage.frame = CGRectMake(avatarX, avatarY + 14, 40, 40);
         [self addSubview:self.avatarImage];
         
         CGFloat delta = self.frame.size.height - (self.data.insets.top + self.data.insets.bottom + self.data.view.frame.size.height);
@@ -101,24 +101,25 @@
         if (type == BubbleTypeSomeoneElse) x += 54;
         if (type == BubbleTypeMine) x -= 54;
     }
-
+    
     [self.customView removeFromSuperview];
     self.customView = self.data.view;
     self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top, width, height);
     [self.contentView addSubview:self.customView];
-
+    
     if (type == BubbleTypeSomeoneElse)
     {
         //self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-lover.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
         self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-lover.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:25];
-
+        
     }
     else {
         //self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:25];
+        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-me.png"] stretchableImageWithLeftCapWidth:20 topCapHeight:8];
     }
-
-    self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom);
+    self.backgroundColor = [UIColor clearColor];
+    self.contentView.backgroundColor = [UIColor clearColor];
+    self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom );
 }
 
 @end

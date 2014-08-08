@@ -24,6 +24,8 @@
     NSString *_age;//年龄
     NSString *_personstate;//个性签名
     NSString *_nickName;//昵称
+    NSString *_email;//邮箱
+    
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +55,8 @@
     _photo = [[NSData alloc] initWithData:vCardTemp.photo];
     _gender = vCardTemp.gender;
     
+    _email = vCardTemp.email;
+    
     NSLog(@"%@",vCardTemp.birthday);
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
@@ -80,7 +84,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 5;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,11 +99,16 @@
             height = 40.f;
             break;
         case 2:
-            height = 160.f;
-            break;
-        case 3:
             height = 44.f;
             break;
+        case 3:
+        {
+            CGSize signatureSize = [_personstate sizeWithFont:[UIFont systemFontOfSize:15.0] constrainedToSize:CGSizeMake(190, 60) lineBreakMode:NSLineBreakByCharWrapping];
+            height = signatureSize.height<44.f?44.f:signatureSize.height;
+        }
+            break;
+        case 4:
+            height = 84.f;
         default:
             break;
     }
@@ -172,36 +181,68 @@
         [cell.contentView addSubview:ageLabel];
         //分隔线
         UIView * lineView = [[UIView alloc] init];
-        lineView.frame = CGRectMake(0, 39.5, self.view.frame.size.width, 0.5);
-        lineView.backgroundColor = [UIColor whiteColor];
+        lineView.frame = CGRectMake(20, 39, self.view.frame.size.width - 40, 1);
+        lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
         [cell.contentView addSubview:lineView];
     }
-    //个性签名
+    //邮箱
     if(indexPath.row == 2)
     {
+        UILabel * emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 8, 80, 30)];
+        emailLabel.backgroundColor = [UIColor clearColor];
+        emailLabel.textAlignment = NSTextAlignmentLeft;
+        emailLabel.font = [UIFont systemFontOfSize:15.f];
+        emailLabel.text = NSLocalizedString(@"注册邮箱", nil);
+        [cell.contentView addSubview:emailLabel];
+        
+        UILabel * emailContentLabel = [[UILabel alloc] init];
+        emailContentLabel.frame = CGRectMake(emailLabel.frame.origin.x + emailLabel.frame.size.width + 10, emailLabel.frame.origin.y, self.view.frame.size.width - emailLabel.frame.origin.x - emailLabel.frame.size.width - 10 - 40, 30);
+        emailContentLabel.backgroundColor = [UIColor clearColor];
+        emailContentLabel.textAlignment = NSTextAlignmentLeft;
+        emailContentLabel.textColor = [UIColor darkGrayColor];
+        emailContentLabel.font = [UIFont systemFontOfSize:15.f];
+        emailContentLabel.text = _email;
+        [cell.contentView addSubview:emailContentLabel];
+        
+        //分隔线
+        UIView * lineView = [[UIView alloc] init];
+        lineView.frame = CGRectMake(20, 43, self.view.frame.size.width - 40, 1);
+        lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+        [cell.contentView addSubview:lineView];
+        
+    }
+    //个性签名
+    if(indexPath.row == 3)
+    {
         UILabel * signatureLabel = [[UILabel alloc] init];
-        signatureLabel.frame = CGRectMake(20, 0, 80, 30);
+        signatureLabel.frame = CGRectMake(20, 8, 80, 30);
         signatureLabel.backgroundColor = [UIColor clearColor];
         signatureLabel.textAlignment = NSTextAlignmentLeft;
-        signatureLabel.font = [UIFont boldSystemFontOfSize:19.f];
+        signatureLabel.font = [UIFont systemFontOfSize:15.f];
         signatureLabel.text = NSLocalizedString(@"个性签名", nil);
         [cell.contentView addSubview:signatureLabel];
         
         
-        CGSize signatureSize = [_personstate sizeWithFont:[UIFont systemFontOfSize:17.0] constrainedToSize:CGSizeMake(self.view.frame.size.width - signatureLabel.frame.origin.x - signatureLabel.frame.size.width - 10, 154) lineBreakMode:NSLineBreakByCharWrapping];
+        CGSize signatureSize = [_personstate sizeWithFont:[UIFont systemFontOfSize:15.0] constrainedToSize:CGSizeMake(190, 60) lineBreakMode:NSLineBreakByCharWrapping];
         UILabel * signatureContentLabel = [[UILabel alloc] init];
-        signatureContentLabel.frame = CGRectMake(signatureLabel.frame.origin.x + signatureLabel.frame.size.width + 10, 6, signatureSize.width, signatureSize.height);
+        signatureContentLabel.frame = CGRectMake(signatureLabel.frame.origin.x + signatureLabel.frame.size.width + 10, 14, signatureSize.width, signatureSize.height);
         signatureContentLabel.backgroundColor = [UIColor clearColor];
         signatureContentLabel.textColor = [UIColor darkGrayColor];
-        signatureContentLabel.font = [UIFont systemFontOfSize:17.f];
-        signatureContentLabel.numberOfLines = 999;
+        signatureContentLabel.font = [UIFont systemFontOfSize:15.f];
+        signatureContentLabel.numberOfLines = 2;
         signatureContentLabel.text = _personstate;
         [cell.contentView addSubview:signatureContentLabel];
+        
+        //分隔线
+        UIView * lineView = [[UIView alloc] init];
+        lineView.frame = CGRectMake(20, signatureSize.height < 44?43:signatureSize.height - 1, self.view.frame.size.width - 40, 1);
+        lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
+        [cell.contentView addSubview:lineView];
     }
-    if(indexPath.row == 3)
+    if(indexPath.row == 4)
     {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(10, 0, self.view.frame.size.width - 20, 44);
+        button.frame = CGRectMake(10, 40, self.view.frame.size.width - 20, 44);
         [button setBackgroundImage:[UIImage imageNamed:@"blue_button"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"blue_button_s"] forState:UIControlStateSelected];
         if(self.isFriend)
