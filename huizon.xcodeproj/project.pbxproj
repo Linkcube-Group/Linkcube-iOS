@@ -485,6 +485,7 @@
 		2620954C198FD88D000E6E5C /* button_keyboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209548198FD88D000E6E5C /* button_keyboard.png */; };
 		2620954D198FD88D000E6E5C /* button_switch_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 26209549198FD88D000E6E5C /* button_switch_pressed.png */; };
 		2620954E198FD88D000E6E5C /* button_switch.png in Resources */ = {isa = PBXBuildFile; fileRef = 2620954A198FD88D000E6E5C /* button_switch.png */; };
+		262A4621199804B100FF6455 /* ChatViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 262A4620199804B100FF6455 /* ChatViewManager.m */; };
 		266AB17B19913A0900F36F66 /* button-circle-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266AB17819913A0900F36F66 /* button-circle-green@2x.png */; };
 		266AB17C19913A0900F36F66 /* button-circle-grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266AB17919913A0900F36F66 /* button-circle-grey@2x.png */; };
 		266AB17D19913A0900F36F66 /* button-circle-red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 266AB17A19913A0900F36F66 /* button-circle-red@2x.png */; };
@@ -1318,6 +1319,8 @@
 		26209548198FD88D000E6E5C /* button_keyboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_keyboard.png; sourceTree = "<group>"; };
 		26209549198FD88D000E6E5C /* button_switch_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch_pressed.png; sourceTree = "<group>"; };
 		2620954A198FD88D000E6E5C /* button_switch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_switch.png; sourceTree = "<group>"; };
+		262A461F199804B100FF6455 /* ChatViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewManager.h; sourceTree = "<group>"; };
+		262A4620199804B100FF6455 /* ChatViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewManager.m; sourceTree = "<group>"; };
 		266AB17819913A0900F36F66 /* button-circle-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-circle-green@2x.png"; sourceTree = "<group>"; };
 		266AB17919913A0900F36F66 /* button-circle-grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-circle-grey@2x.png"; sourceTree = "<group>"; };
 		266AB17A19913A0900F36F66 /* button-circle-red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-circle-red@2x.png"; sourceTree = "<group>"; };
@@ -1854,6 +1857,8 @@
 		072D5B7718AB66F10083626A /* IMControllers */ = {
 			isa = PBXGroup;
 			children = (
+				262A461F199804B100FF6455 /* ChatViewManager.h */,
+				262A4620199804B100FF6455 /* ChatViewManager.m */,
 				D41613BD198BB2CB005FBF01 /* ChatWithOtherViewController.h */,
 				D41613BE198BB2CB005FBF01 /* ChatWithOtherViewController.m */,
 				D4023E26198A059C0034C4CC /* FriendInfoViewController.h */,
@@ -3823,6 +3828,7 @@
 				0735550E18C412E2005B319B /* XMPPRosterMemoryStorage.m in Sources */,
 				0735553818C412E2005B319B /* XMPPIQ+XEP_0066.m in Sources */,
 				0325F115198B9F1200497770 /* AEAudioFilePlayer.m in Sources */,
+				262A4621199804B100FF6455 /* ChatViewManager.m in Sources */,
 				070996F8182B8BFB0064D7D3 /* UILabel+Extension.m in Sources */,
 				07FEF65B197B6B73003FF446 /* HeaderView.m in Sources */,
 				073554FC18C412E2005B319B /* XMPPIQ.m in Sources */,
@@ -4020,9 +4026,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-
 				PROVISIONING_PROFILE = "A6843650-6B84-47D3-AC7F-090021518033";
-				
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4057,9 +4061,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-
 				PROVISIONING_PROFILE = "A6843650-6B84-47D3-AC7F-090021518033";
-
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
