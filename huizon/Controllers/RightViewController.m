@@ -303,7 +303,7 @@
         
         JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
         jsbView.badgePositionAdjustment = CGPointMake(-45.0, -17.5);
-        NSInteger count = [[IMControls defaultControls] getNewNoticesCountWithType:NotificationCountTypeAddfriend];
+        NSInteger count = theApp.isXmppAuthenticated?[[IMControls defaultControls] getNewNoticesCountWithType:NotificationCountTypeAddfriend]:0;
         jsbView.badgeText = count>0?[NSString stringWithFormat:@"%d",count]:nil;
     }
     else if(indexPath.row==3)
