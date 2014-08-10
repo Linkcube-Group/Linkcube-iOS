@@ -117,6 +117,7 @@
             [self.dataArray addObject:object];
         }
     }
+    NSLog(@"%@",self.dataArray);
 }
 
 //删除消息
@@ -418,6 +419,7 @@
     {
         ChatWithOtherViewController *tvc=[[ChatWithOtherViewController alloc]init];
         tvc.xmppFriendJID=[XMPPJID jidWithString:[object jidStr] resource:@"iOS"];
+        tvc.xmppFriendNickname = [object nickname];
         [self.navigationController pushViewController:tvc animated:YES];
     }
     else
