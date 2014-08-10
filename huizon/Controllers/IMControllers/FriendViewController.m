@@ -493,6 +493,9 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.dataArray removeObjectAtIndex:indexPath.row];
+        [self.tableFriends reloadData];
+        
 //        SFBill *bill = [self.dataArray objectAtIndex:indexPath.row];
 //        [self deleteOrderHistory:bill.ID indexPath:indexPath];
     }
