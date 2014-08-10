@@ -129,7 +129,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return 44;
 }
 
 
@@ -302,7 +302,6 @@
     lineView.frame = CGRectMake(20, 43.5, self.view.frame.size.width - 20, 0.5);
     lineView.backgroundColor = [UIColor colorWithHexString:@"c6c6c6"];
     [cell.contentView addSubview:lineView];
-    
     return cell;
 }
 #endif
@@ -483,6 +482,20 @@
     [theApp.xmppRoster addUser:presence.to withNickname:presence.toStr groups:Nil subscribeToPresence:NO];
     [self getData];
     [self.tableFriends reloadData];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+//删除消息
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        SFBill *bill = [self.dataArray objectAtIndex:indexPath.row];
+//        [self deleteOrderHistory:bill.ID indexPath:indexPath];
+    }
 }
 
 @end
