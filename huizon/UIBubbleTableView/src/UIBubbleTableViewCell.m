@@ -110,7 +110,7 @@
     if (type == BubbleTypeSomeoneElse)
     {
         //self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-lover.png"] stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-lover.png"] stretchableImageWithLeftCapWidth:50 topCapHeight:25];
+        self.bubbleImage.image = [[UIImage imageNamed:@"dialog-box-lover.png"] stretchableImageWithLeftCapWidth:34 topCapHeight:8];
         
     }
     else {
