@@ -109,7 +109,7 @@
     {
         avatarOfOther = [UIImage imageNamed:@"portrait-female-small.png"];
     }
-//    DLog(@"头像1%@\n头像2%@",theApp.xmppvCardUser.photo,vCardTemp.photo);
+    self.navigationItem.titleView = [[Theam currentTheam] navigationTitleViewWithTitle:vCardTemp.nickname];
 }
 
 -(void)viewWillAppear:(BOOL)animated
