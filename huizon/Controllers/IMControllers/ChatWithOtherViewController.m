@@ -13,6 +13,8 @@
 #import "LeDiscovery.h"
 #import "XmppVcardTemp.h"
 #import "XMPPvCardTempModule.h"
+#import "ChatViewManager.h"
+
 /*
  聊天界面有点问题哈：1）发送按钮改成类似于iphone短信的那个发送吧（颜色为深灰色，字体大一些）；2）现在对话框是根据发出文字长度，直接拉伸的（这样小三角和圆角就变形了），应该只拉伸圆角矩形的长边或短边。文字框和头像应该平行对齐。3）会有一个白底（见上方截图）；4）在聊天界面收不到对方的消息，必须返回到上一层界面，再返回聊天界面，才能看到新消息；
  嗯，还有就是，被对话者，最上方中间没显示对方名称（如截图）。发起对话的人有显示对方名称。
@@ -25,26 +27,47 @@
 {
     //tableview
     UIBubbleTableView *bubbleTable;
-    //输入的整个view
+    
+    ///////////////////////////////////////////////////////
+    
+    //输入的整个view 上面添加游戏按钮，输入框，发送按钮
     UIView *textInputView;
-    //游戏键盘的view
-    UIView *gameView;
     //输入框
     UITextField *inputTextField;
     //申请游戏的那个按钮
     UIButton *gameButton;
-    //要改成发送按钮
+    //发送按钮
     UIButton *sendButton;
-    //发起游戏按钮
+    
+    ///////////////////////////////////////////////////////
+    
+    //发起游戏的按钮的键盘
+    UIView *applyKeyboardView;
+    //发起游戏按钮等待游戏按钮
     UIButton * askToGameButton;
-    //游戏种类的scollView
-    UIScrollView * gameKindScrollView;
+    //提示
+    UILabel *lblPrompt;
+    
+    ///////////////////////////////////////////////////////
+    
+    //拒绝接受按钮键盘
+    UIView *yesNoKeyboardView;
     //拒绝
     UIButton *declineButton;
     //接收
     UIButton *acceptButton;
-    //提示
-    UILabel *lblPrompt;
+    
+    ///////////////////////////////////////////////////////
+    
+    //游戏种类键盘
+    UIView *gameKindKeyboardView;
+    //游戏种类的scollView
+    UIScrollView * gameKindScrollView;
+    //经典七式按钮
+    UIButton * sevenButton;
+    
+    ///////////////////////////////////////////////////////
+    
     //结束游戏按钮
     UIButton *btnHangUp;
     //倒计时的数
@@ -53,19 +76,13 @@
     NSTimer *countDownTimer;
     //聊天内容数组
     NSMutableArray *bubbleData;
-    //bool isGameDisplayed;
-    //模式 0 no one displayed;1 keyboard;2 Game button;3 request interface
-    int currentMode;
-    //等待答复
-    bool isWaitingReply;
-    
-    XMPPMessageArchivingCoreDataStorage *storage;
-    NSManagedObjectContext *moc;
     //message数组
     NSArray *arrayMessage;
     
-    UIImage * avatarOfMe;
-    UIImage * avatarOfOther;
+    //模式 0 no one displayed;1 keyboard;2 Game button;3 request interface
+    
+    XMPPMessageArchivingCoreDataStorage *storage;
+    NSManagedObjectContext *moc;
     
 }
 
@@ -86,28 +103,28 @@
     
     if(theApp.xmppvCardUser.photo.length)
     {
-        avatarOfMe = [[UIImage alloc] initWithData:theApp.xmppvCardUser.photo];
+        [ChatViewManager defaultManager].avatarOfMe = [[UIImage alloc] initWithData:theApp.xmppvCardUser.photo];
     }
     else if([theApp.xmppvCardUser.gender isEqualToString:@"男"])
     {
-        avatarOfMe = [UIImage imageNamed:@"portrait-male-small.png"];
+        [ChatViewManager defaultManager].avatarOfMe = [UIImage imageNamed:@"portrait-male-small.png"];
     }
     else
     {
-        avatarOfMe = [UIImage imageNamed:@"portrait-female-small.png"];
+        [ChatViewManager defaultManager].avatarOfMe = [UIImage imageNamed:@"portrait-female-small.png"];
     }
     XMPPvCardTemp * vCardTemp = [theApp.xmppvCardTempModule vCardTempForJID:self.xmppFriendJID shouldFetch:YES];
     if(vCardTemp.photo.length)
     {
-        avatarOfOther = [[UIImage alloc] initWithData:vCardTemp.photo];
+        [ChatViewManager defaultManager].avatarOfOther = [[UIImage alloc] initWithData:vCardTemp.photo];
     }
     else if([vCardTemp.gender isEqualToString:@"男"])
     {
-        avatarOfOther = [UIImage imageNamed:@"portrait-male-small.png"];
+        [ChatViewManager defaultManager].avatarOfOther = [UIImage imageNamed:@"portrait-male-small.png"];
     }
     else
     {
-        avatarOfOther = [UIImage imageNamed:@"portrait-female-small.png"];
+        [ChatViewManager defaultManager].avatarOfOther = [UIImage imageNamed:@"portrait-female-small.png"];
     }
     self.navigationItem.titleView = [[Theam currentTheam] navigationTitleViewWithTitle:vCardTemp.nickname];
 }
@@ -129,15 +146,17 @@
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(concurrentQueue, ^{
         
+        //获取消息记录
         [self getMessageData];
         dispatch_async(dispatch_get_main_queue(), ^{
-            
+            //更新UI
             [self updateUI:arrayMessage];
         });
         
     });
 }
 
+//获得代理
 -(AppDelegate *)appDelegate
 {
     theApp.chatDelegate = self;
@@ -147,14 +166,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [ChatViewManager defaultManager];
+    [[ChatViewManager defaultManager] clearData];
+    //获取头像
     [self getAvatar];
     bubbleData = [[NSMutableArray alloc] init];
-    isWaitingReply = NO;
     storage = [XMPPMessageArchivingCoreDataStorage sharedInstance];
     moc = [storage mainThreadManagedObjectContext];
-    currentMode = 0;
+    //不弹出任何键盘
+    [ChatViewManager defaultManager].chatKeyboardType = chatKeyboardTypeNormal;
+    //输入文字
+    [ChatViewManager defaultManager].inputTextViewType = inputTextViewTypeText;
+    //不是等待游戏中
+    [ChatViewManager defaultManager].isWaitingReply = NO;
+    //不在游戏中
+    [ChatViewManager defaultManager].isGamePlaying = NO;
     
-    //列表
+    //列表tableView
     bubbleTable = [[UIBubbleTableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50) style:UITableViewStylePlain];
     //代理
     bubbleTable.bubbleDataSource = self;
@@ -166,9 +194,11 @@
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
     [self.view addSubview:bubbleTable];
     
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
     //键盘上方输入控制view
     textInputView = [[UIView alloc] init];
-    textInputView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 50, [UIScreen mainScreen].bounds.size.width, 50);
+    textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50, [UIScreen mainScreen].bounds.size.width, 50);
     textInputView.backgroundColor = [UIColor colorWithRed:204/255.f green:204/255.f blue:204/255.f alpha:1.f];
     textInputView.userInteractionEnabled = YES;
     [self.view addSubview:textInputView];
@@ -176,7 +206,6 @@
     gameButton = [UIButton buttonWithType:UIButtonTypeCustom];
     gameButton.frame = CGRectMake(5, 5, 40, 40);
     [gameButton setImage:[UIImage imageNamed:@"button-connect.png"] forState:UIControlStateNormal];
-    [gameButton setImage:[UIImage imageNamed:@"button-connect-pressed.png"] forState:UIControlStateSelected];
     [gameButton addTarget:self action:@selector(gameButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [textInputView addSubview:gameButton];
     
@@ -198,24 +227,31 @@
     sendButton.enabled = YES;
     [textInputView addSubview:sendButton];
     
-    //game的view
-    gameView = [[UIView alloc] init];
-    gameView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
-    gameView.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.f];
-    [self.view addSubview:gameView];
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //申请游戏按钮的键盘
+    applyKeyboardView  = [[UIView alloc] init];
+    //先放在屏幕的外面
+    applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+    applyKeyboardView.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.f];
+    applyKeyboardView.userInteractionEnabled = YES;
+    [self.view addSubview:applyKeyboardView];
+    
     //发起游戏按钮
     askToGameButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    askToGameButton.frame = CGRectMake((gameView.frame.size.width - 88.f)/2.f, 10, 88.f, 88.f);
+    askToGameButton.frame = CGRectMake((applyKeyboardView.frame.size.width - 88.f)/2.f, 40, 88.f, 88.f);
     [askToGameButton setBackgroundColor:[UIColor redColor]];
-    [askToGameButton setImage:[UIImage imageNamed:@"button-circle-red.png"] forState:UIControlStateNormal];
-    [askToGameButton setImage:[UIImage imageNamed:@"button-circle-grey.png"] forState:UIControlStateDisabled];
-    [askToGameButton setTitle:isWaitingReply?NSLocalizedString(@"等待答复", nil):NSLocalizedString(@"发起游戏", nil) forState:UIControlStateNormal];
+//    [askToGameButton setImage:[UIImage imageNamed:@"button-circle-red.png"] forState:UIControlStateNormal];
+//    [askToGameButton setImage:[UIImage imageNamed:@"button-circle-grey.png"] forState:UIControlStateDisabled];
+    [askToGameButton setBackgroundImage:[UIImage imageNamed:@"button-circle-red.png"] forState:UIControlStateNormal];
+    [askToGameButton setBackgroundImage:[UIImage imageNamed:@"button-circle-grey.png"] forState:UIControlStateDisabled];
+    [askToGameButton setTitle:NSLocalizedString(@"发起游戏", nil) forState:UIControlStateNormal];
+    [askToGameButton setTitle:NSLocalizedString(@"等待答复", nil) forState:UIControlStateDisabled];
     [askToGameButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [askToGameButton addTarget:self action:@selector(applyGame) forControlEvents:UIControlEventTouchUpInside];
     askToGameButton.layer.cornerRadius = 44.f;
     askToGameButton.enabled = YES;
-    askToGameButton.hidden = NO;
-    [gameView addSubview:askToGameButton];
+    [applyKeyboardView addSubview:askToGameButton];
+    
     //提示信息
     lblPrompt = [[UILabel alloc] init];
     lblPrompt.frame = CGRectMake(0, askToGameButton.frame.origin.y + askToGameButton.frame.size.height, self.view.frame.size.width, 20);
@@ -224,32 +260,52 @@
     lblPrompt.font = [UIFont systemFontOfSize:14.f];
     lblPrompt.textColor = [UIColor blackColor];
     lblPrompt.hidden = YES;
-    [gameView addSubview:lblPrompt];
+    [applyKeyboardView addSubview:lblPrompt];
+    
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
+    //拒绝还是同意的按钮键盘
+    yesNoKeyboardView  = [[UIView alloc] init];
+    //先放在屏幕的外面
+    yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+    yesNoKeyboardView.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.f];
+    yesNoKeyboardView.userInteractionEnabled = YES;
+    [self.view addSubview:yesNoKeyboardView];
+    
     //拒绝按钮
     declineButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    declineButton.frame = CGRectMake((gameView.frame.size.width - 88.f*2)/3.f, 10, 88.f, 88.f);
+    declineButton.frame = CGRectMake((yesNoKeyboardView.frame.size.width - 88.f*2)/3.f, 10, 88.f, 88.f);
     [declineButton setBackgroundColor:[UIColor redColor]];
     [declineButton setImage:[UIImage imageNamed:@"button-circle-red.png"] forState:UIControlStateNormal];
     declineButton.layer.cornerRadius = 44.f;
-    declineButton.hidden = YES;
     [declineButton setTitle:NSLocalizedString(@"拒绝", nil) forState:UIControlStateNormal];
     [declineButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [declineButton addTarget:self action:@selector(declineButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [gameView addSubview:declineButton];
+    [yesNoKeyboardView addSubview:declineButton];
     //同意按钮
     acceptButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    acceptButton.frame = CGRectMake(declineButton.frame.origin.x + declineButton.frame.size.width + (gameView.frame.size.width - 88.f*2)/3.f, declineButton.frame.origin.y, 88.f, 88.f);
+    acceptButton.frame = CGRectMake(declineButton.frame.origin.x + declineButton.frame.size.width + (yesNoKeyboardView.frame.size.width - 88.f*2)/3.f, declineButton.frame.origin.y, 88.f, 88.f);
     [acceptButton setBackgroundColor:[UIColor greenColor]];
     [acceptButton setImage:[UIImage imageNamed:@"button-circle-green.png"] forState:UIControlStateNormal];
     acceptButton.layer.cornerRadius = 44.f;
-    acceptButton.hidden = declineButton.hidden;
     [acceptButton setTitle:NSLocalizedString(@"同意", nil) forState:UIControlStateNormal];
     [acceptButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [acceptButton addTarget:self action:@selector(acceptButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [gameView addSubview:acceptButton];
+    [yesNoKeyboardView addSubview:acceptButton];
+    
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
+    //游戏种类键盘
+    gameKindKeyboardView  = [[UIView alloc] init];
+    //先放在屏幕的外面
+    gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+    gameKindKeyboardView.backgroundColor = [UIColor colorWithRed:230/255.f green:230/255.f blue:230/255.f alpha:1.f];
+    gameKindKeyboardView.userInteractionEnabled = YES;
+    [self.view addSubview:gameKindKeyboardView];
+    
     //游戏种类
     gameKindScrollView = [[UIScrollView alloc] init];
-    gameKindScrollView.frame = CGRectMake((gameView.frame.size.width - 166.f)/2.f, 10, 166.f, 166.f);
+    gameKindScrollView.frame = CGRectMake((gameKindKeyboardView.frame.size.width - 166.f)/2.f, 10, 166.f, 166.f);
     gameKindScrollView.userInteractionEnabled = YES;
     gameKindScrollView.contentSize = CGSizeMake(166.f * 2, 166.f);
     gameKindScrollView.pagingEnabled = YES;
@@ -257,31 +313,34 @@
     gameKindScrollView.backgroundColor = [UIColor clearColor];
     gameKindScrollView.showsHorizontalScrollIndicator = NO;
     gameKindScrollView.showsVerticalScrollIndicator = NO;
-    gameKindScrollView.hidden = YES;
-    [gameView addSubview:gameKindScrollView];
+    [gameKindKeyboardView addSubview:gameKindScrollView];
+    
     //摇一摇
     UIImageView * shakeImageView = [[UIImageView alloc] init];
     shakeImageView.frame = CGRectMake(0, 0, 166.f, 166.f);
-    shakeImageView.hidden = YES;
     shakeImageView.image = [UIImage imageNamed:@"mode_shake.png"];
     [gameKindScrollView addSubview:shakeImageView];
+    
     //经典7式
-    UIButton * sevenButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    sevenButton = [UIButton buttonWithType:UIButtonTypeCustom];
     sevenButton.frame = CGRectMake(166.f, 0, 166.f, 166.f);
     sevenButton.layer.cornerRadius = 83.f;
-    sevenButton.hidden = YES;
     sevenButton.layer.masksToBounds = YES;
     [sevenButton setImage:[UIImage imageNamed:@"posture_0.png"] forState:UIControlStateNormal];
     [sevenButton addTarget:self action:@selector(sevenButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [gameKindScrollView addSubview:sevenButton];
     
+    //////////////////////////////////////////////////////////////////////////////////////////
+    
     //结束游戏按钮
     btnHangUp = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnHangUp.frame = CGRectMake(gameView.frame.size.width - 60, gameView.frame.size.height - 40, 50, 30);
+    btnHangUp.frame = CGRectMake(self.view.frame.size.width - 60, 7, 50, 30);
     btnHangUp.hidden = YES;
     [btnHangUp setTitle:NSLocalizedString(@"结束游戏", nil) forState:UIControlStateNormal];
     [btnHangUp addTarget:self action:@selector(hangUpButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [gameView addSubview:btnHangUp];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnHangUp];
+    
+    //////////////////////////////////////////////////////////////////////////////////////////
     
     //几个通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
@@ -292,17 +351,6 @@
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    
-//    NSString *myString = [textField.text stringByReplacingCharactersInRange:range withString:string];
-//    DLog(@"输入字的长度%d",myString.length);
-//    if(myString.length)
-//    {
-//        sendButton.enabled = YES;
-//    }
-//    else
-//    {
-//        sendButton.enabled = NO;
-//    }
     return YES;
 }
 
@@ -324,14 +372,9 @@
 
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
-    if (currentMode>1)
-    {
-        [self hideGame];
-    }
-    currentMode=1;
+    [ChatViewManager defaultManager].chatKeyboardType = chatKeyboardTypeKeyboard;
     NSDictionary* info = [aNotification userInfo];
     CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-    DLog(@"高度:%f",kbSize.height);
     [UIView animateWithDuration:0.2f animations:^{
 
         CGRect frame = textInputView.frame;
@@ -342,77 +385,139 @@
         frame.size.height = self.view.frame.size.height - kbSize.height - 50;
         bubbleTable.frame = frame;
         [self gotoLastMessage:NO];
+        
+        applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+        yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+        gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+
 
     }];
 }
 
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    if (currentMode>1)
-    {
-        [self displayGame:currentMode];
+    switch ([ChatViewManager defaultManager].chatKeyboardType) {
+        case chatKeyboardTypeApply:
+        {
+            //申请游戏
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+        break;
+        case chatKeyboardTypeYesNo:
+        {
+            //同意还是拒绝按钮
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+        break;
+        case chatKeyboardTypeGameKind:
+        {
+            //游戏种类
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+        break;
+        default:
+        {
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50, [UIScreen mainScreen].bounds.size.width, 50);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50, self.view.frame.size.width, 50);
+            }];
+        }
+            break;
     }
-    currentMode=0;
-    NSDictionary* info = [aNotification userInfo];
-    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
+    [self gotoLastMessage:NO];
+}
+
+-(void)displayGame:(ChatKeyboardType)mode
+{
+    switch ([ChatViewManager defaultManager].chatKeyboardType) {
+        case chatKeyboardTypeApply:
+        {
+            //申请游戏
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+            break;
+        case chatKeyboardTypeYesNo:
+        {
+            //同意还是拒绝按钮
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+            break;
+        case chatKeyboardTypeGameKind:
+        {
+            //游戏种类
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+            break;
+        default:
+        {
+            //申请游戏
+            [UIView animateWithDuration:0.2 animations:^{
+                applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height - 216, self.view.frame.size.width, 216.f);
+                yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+                bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50 - 216);
+                textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50 - 216, self.view.frame.size.width, 50);
+            }];
+        }
+            break;
+    }
+    [self gotoLastMessage:NO];
+}
+
+
+-(void)hideGame
+{
+    [ChatViewManager defaultManager].chatKeyboardType = chatKeyboardTypeNormal;
     [UIView animateWithDuration:0.2f animations:^{
         
-        CGRect frame = textInputView.frame;
-        frame.origin.y += kbSize.height;
-        textInputView.frame = frame;
-        
-        frame = bubbleTable.frame;
-        frame.size.height += kbSize.height;
-        bubbleTable.frame = frame;
+        applyKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+        yesNoKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+        gameKindKeyboardView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 216.f);
+        textInputView.frame = CGRectMake(0, self.view.frame.size.height - 50, [UIScreen mainScreen].bounds.size.width, 50);
+        bubbleTable.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50);
     }];
 }
 
--(void)displayGame:(int)mode
-{
-    currentMode=mode;
-    int height=200;
-    [UIView animateWithDuration:0.2f animations:^{
-        
-        CGRect frame = textInputView.frame;
-        frame.origin.y -= height;
-        textInputView.frame = frame;
-        
-        frame = bubbleTable.frame;
-        frame.size.height -= height;
-        bubbleTable.frame = frame;
-        if (mode==2)
-        {
-            gameKindScrollView.hidden=NO;
-            acceptButton.hidden=YES;
-            declineButton.hidden=YES;
-        }
-        else if (mode==3)
-        {
-            gameKindScrollView.hidden=YES;
-            acceptButton.hidden=NO;
-            declineButton.hidden=NO;
-        }
-        gameView.hidden=NO;
-        [self gotoLastMessage:NO];
-    }];
-}
--(void)hideGame
-{
-    currentMode=0;
-    int height=200;
-    [UIView animateWithDuration:0.2f animations:^{
-        
-        CGRect frame = textInputView.frame;
-        frame.origin.y += height;
-        textInputView.frame = frame;
-        
-        frame = bubbleTable.frame;
-        frame.size.height += height;
-        bubbleTable.frame = frame;
-        gameView.hidden=YES;
-    }];
-}
 #pragma mark message
 - (void)didSendMessage:(NSNotification*)aNotification
 {
@@ -459,8 +564,9 @@
     lblPrompt.text=timeLeft;
     if (secondsCountDown==0)
     {
-        isWaitingReply=NO;
+        [ChatViewManager defaultManager].isWaitingReply = NO;
         lblPrompt.hidden=YES;
+        askToGameButton.enabled = YES;
         [countDownTimer invalidate];
     }
 }
@@ -505,14 +611,12 @@
         if(message.isOutgoing)
         {
             bb=[NSBubbleData dataWithText:messageBody date:message.timestamp type:BubbleTypeMine];
-//            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
-            bb.avatar = avatarOfMe;
+            bb.avatar = [ChatViewManager defaultManager].avatarOfMe;
         }
         else
         {
             bb=[NSBubbleData dataWithText:messageBody date:message.timestamp type:BubbleTypeSomeoneElse];
-//            bb.avatar=[UIImage imageNamed:@"portrait-female-small.png"];
-            bb.avatar = avatarOfOther;
+            bb.avatar = [ChatViewManager defaultManager].avatarOfOther;
         }
         [bubbleData addObject:bb];
     }
@@ -569,26 +673,16 @@
     NSString *messageBody=[self filterMessage:body];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeSomeoneElse];
-    bb.avatar=avatarOfOther;
+    bb.avatar=[ChatViewManager defaultManager].avatarOfOther;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
     
     if ([body isEqualToString:@"c:connectrequest"])
     {
-        if (currentMode==0)
+        if ([ChatViewManager defaultManager].chatKeyboardType == chatKeyboardTypeNormal)
         {
-            [self displayGame:3];
-        }
-        else if (currentMode==1)
-        {
-            [inputTextField resignFirstResponder];
-            [self displayGame:3];
-        }
-        else if (currentMode==2)
-        {
-            [self hideGame];
-            [self displayGame:3];
+            [self displayGame:chatKeyboardTypeYesNo];
         }
         
         //UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"游戏邀请" message:@"对方发来游戏邀请" delegate:self cancelButtonTitle:@"拒绝" otherButtonTitles:@"接受", nil];
@@ -649,12 +743,12 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=avatarOfMe;
+    bb.avatar=[ChatViewManager defaultManager].avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
     
-    isWaitingReply=NO;
+    [ChatViewManager defaultManager].isWaitingReply=NO;
     lblPrompt.hidden=YES;
     showCustomAlertMessage(@"已挂断");
     [btnHangUp setHidden:YES];
@@ -664,14 +758,14 @@
 //经典7式按钮
 -(void)sevenButtonClicked
 {
-    if (!isWaitingReply)
+    if (!([ChatViewManager defaultManager].isWaitingReply))
     {
         //[textField resignFirstResponder];
         NSString *message=@"c:connectrequest";
         NSString *messageBody=[self filterMessage:message];
         NSBubbleData *bb;
         bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-        bb.avatar=avatarOfMe;
+        bb.avatar=[ChatViewManager defaultManager].avatarOfMe;
         [bubbleData addObject:bb];
         [bubbleTable reloadData];
         [self gotoLastMessage:NO];
@@ -685,7 +779,7 @@
         [theApp.xmppStream sendElement:mes];
         secondsCountDown=30;
         lblPrompt.hidden=NO;
-        isWaitingReply=YES;
+        [ChatViewManager defaultManager].isWaitingReply=YES;
         countDownTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
     }
 }
@@ -702,7 +796,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=avatarOfMe;
+    bb.avatar=[ChatViewManager defaultManager].avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -720,7 +814,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=avatarOfMe;
+    bb.avatar=[ChatViewManager defaultManager].avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
@@ -734,58 +828,44 @@
     lblPrompt.hidden=NO;
     [btnHangUp setHidden:NO];
     theApp.currentGamingJid=self.xmppFriendJID;
-    if (currentMode==0)
-    {
-        [self displayGame:3];
-    }
-    else if (currentMode==1)
-    {
-        [inputTextField resignFirstResponder];
-        [self displayGame:3];
-    }
-    else if (currentMode==2)
-    {
-        [self hideGame];
-        [self displayGame:3];
-    }
-    gameKindScrollView.hidden=NO;
-    acceptButton.hidden=YES;
-    declineButton.hidden=YES;
+    [self displayGame:chatKeyboardTypeGameKind];
 }
 
 //申请游戏
 -(void)applyGame
 {
-    if (currentMode==0)
-    {
-        [self displayGame:2];
-    }
-    else if (currentMode==1)
-    {
-        [inputTextField resignFirstResponder];
-        [self displayGame:2];
-    }
-    else if (currentMode>=2)
-    {
-        [self hideGame];
-    }
+    askToGameButton.enabled = NO;
+    lblPrompt.hidden = NO;
+    secondsCountDown=30;
+    [ChatViewManager defaultManager].isWaitingReply=YES;
+    countDownTimer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
+    [self displayGame:chatKeyboardTypeApply];
 }
 
 //游戏按钮
 -(void)gameButtonClicked
 {
-    if (currentMode==0)
+    //正常键盘
+    if([ChatViewManager defaultManager].chatKeyboardType == chatKeyboardTypeKeyboard || [ChatViewManager defaultManager].chatKeyboardType == chatKeyboardTypeNormal)
     {
-        [self displayGame:2];
+        [gameButton setImage:[UIImage imageNamed:@"button-connect.png"] forState:UIControlStateNormal];
     }
-    else if (currentMode==1)
+    else
     {
-        [inputTextField resignFirstResponder];
-        [self displayGame:2];
+        [gameButton setImage:[UIImage imageNamed:@"button_keyboard.png"] forState:UIControlStateNormal];
     }
-    else if (currentMode>=2)
-    {
-        [self hideGame];
+    switch ([ChatViewManager defaultManager].chatKeyboardType) {
+        case chatKeyboardTypeApply:
+            [self displayGame:chatKeyboardTypeApply];
+            break;
+        case chatKeyboardTypeYesNo:
+            [self displayGame:chatKeyboardTypeYesNo];
+        case chatKeyboardTypeGameKind:
+            [self displayGame:chatKeyboardTypeGameKind];
+            break;
+        default:
+            [self displayGame:chatKeyboardTypeApply];
+            break;
     }
 }
 
@@ -803,7 +883,7 @@
     NSString *messageBody=[self filterMessage:message];
     NSBubbleData *bb;
     bb=[NSBubbleData dataWithText:messageBody date:[NSDate date] type:BubbleTypeMine];
-    bb.avatar=avatarOfMe;
+    bb.avatar=[ChatViewManager defaultManager].avatarOfMe;
     [bubbleData addObject:bb];
     [bubbleTable reloadData];
     [self gotoLastMessage:NO];
