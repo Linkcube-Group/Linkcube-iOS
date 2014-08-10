@@ -100,7 +100,7 @@
         }
 //        [theApp updateUserCardTemp:theApp.xmppvCardUser];
 //        [theApp.xmppvCardStorage setvCardTemp:myvCard forJID:theApp.xmppvCardUser.jid xmppStream:theApp.xmppStream];
-        
+        [theApp updateUserCardTemp:theApp.xmppvCardUser];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else{
