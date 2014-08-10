@@ -16,6 +16,7 @@
 #import "FriendInfoViewController.h"
 #import "IMControls.h"
 #import "XMPPvCardTemp.h"
+#import "FileManager.h"
 
 @interface FriendViewController ()<UITableViewDataSource,UITableViewDelegate,ChatDelegate>
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -109,7 +110,26 @@
     NSError *error ;
     NSArray *friends = [context executeFetchRequest:request error:&error];
     [self.dataArray removeAllObjects];
-    [self.dataArray addObjectsFromArray:friends];
+    for(XMPPUserCoreDataStorageObject *object in friends)
+    {
+        if(![object.subscription isEqualToString:@"both"])
+        {
+            [self.dataArray addObject:object];
+        }
+    }
+}
+
+//删除消息
+-(void)deleteMessageObject:(NSManagedObject *)object
+{
+    NSManagedObjectContext *context = [[[self appDelegate] xmppRosterStorage] mainThreadManagedObjectContext];
+    //XMPPUserCoreDataStorageObject
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"XMPPUserCoreDataStorageObject" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc]init];
+    [request setEntity:entity];
+    [context deleteObject:object];
+    NSError * error;
+    [context save:&error];
 }
 
 #pragma mark - Table view data source
@@ -493,12 +513,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        XMPPUserCoreDataStorageObject *object = [self.dataArray objectAtIndex:indexPath.row];
+        [self deleteMessageObject:object];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self.tableFriends reloadData];
-        
-//        SFBill *bill = [self.dataArray objectAtIndex:indexPath.row];
-//        [self deleteOrderHistory:bill.ID indexPath:indexPath];
     }
 }
+
 
 @end
