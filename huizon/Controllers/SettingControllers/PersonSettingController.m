@@ -73,7 +73,7 @@
     }
     
     //nameArray = @[@"",@"昵称",@"性别",@"出生年月",@"个性签名",@"连酷ID",@"注册邮箱"];
-    nameArray = @[@"",@"昵称",@"性别",@"出生年月",@"个性签名"];
+    nameArray = @[@"",@"昵称编辑",@"性别",@"出生年月",@"个性签名"];
     // Do any additional setup after loading the view from its nib.
 }
 
