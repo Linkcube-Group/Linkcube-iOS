@@ -433,9 +433,9 @@
 }
 - (void)didReceiveMessage:(NSNotification*)aNotification
 {
-    //[self getMessageData];
-    //[bubbleTable reloadData];
-    /*
+    [self getMessageData];
+    [bubbleTable reloadData];
+    
      dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
      dispatch_async(concurrentQueue, ^{
      
@@ -444,7 +444,7 @@
      [self updateUI:arrayMessage];
      });
      
-     });*/
+     });
 }
 
 #pragma mark - Actions
