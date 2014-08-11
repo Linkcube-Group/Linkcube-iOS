@@ -257,6 +257,38 @@
 }
 #endif
 
+-(UIBarButtonItem*)navigationBarButtonBackItem1WithTarget:(id)target Selector:(SEL)sel
+{
+    UIButton *btn=[UIButton buttonWithType:UIButtonTypeCustom];
+	[btn setImage:IMG(@"icon_back") forState:UIControlStateNormal];
+	[btn setImage:IMG(@"icon_back_default") forState:UIControlStateHighlighted];
+	[btn addTarget:target action:sel forControlEvents:UIControlEventTouchUpInside];
+	[btn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+	[btn setTitleColor:[Theam currentTheam].navigationBarItemTitleColor forState:UIControlStateNormal];
+	btn.titleLabel.font=[Theam currentTheam].navigationBarItemFont;
+	btn.frame=CGRectMake(0, 0, 60, 20);
+	if (DeviceSystemSmallerThan(7.0)) {
+        //		btn.width+=10;
+		[btn setImageEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+	}else{
+		[btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10)];
+	}
+	UILabel *lb=[[UILabel alloc] initWithFrame:CGRectMake(25, -1, 40, 22)];
+	if (!DeviceSystemSmallerThan(7.0)) {
+		lb.originX-=10;
+	}
+	lb.font=[Theam currentTheam].navigationBarItemFont;
+	lb.textColor=self.navigationBarItemTitleColor;
+	lb.text=@"返回";
+	lb.textAlignment=NSTextAlignmentLeft;
+	lb.backgroundColor=[UIColor clearColor];
+	lb.userInteractionEnabled=NO;
+    //	[btn addSubview:lb];
+	UIBarButtonItem *item=[[UIBarButtonItem alloc] initWithCustomView:btn];
+	
+	return item;
+}
+
 -(UIFont*)labelFontTitle1
 {
 	return [UIFont systemFontOfSize:15];

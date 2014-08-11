@@ -97,5 +97,7 @@
  @return 返回程序能用的返回按钮
  */
 -(UIBarButtonItem*)navigationBarButtonBackItemWithTarget:(id)target Selector:(SEL)sel;
+#warning 暂时这样写，后面完善
+-(UIBarButtonItem*)navigationBarButtonBackItem1WithTarget:(id)target Selector:(SEL)sel;
 @end
 
