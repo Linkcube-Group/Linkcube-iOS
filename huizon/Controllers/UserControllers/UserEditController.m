@@ -55,6 +55,8 @@
     theApp.xmppvCardUser.nickname = nickname;
     
     theApp.xmppvCardUser.birthday=self.tfDate.text;
+    theApp.xmppvCardUser.photo = nil;
+    theApp.xmppvCardUser.personstate = @"";
     
     showFullScreen(YES);
     showIndicator(YES);
