@@ -21,7 +21,7 @@
 
 + (CGFloat)height
 {
-    return 28.0;
+    return 28.0 + 14;
 }
 
 - (void)setDate:(NSDate *)value
