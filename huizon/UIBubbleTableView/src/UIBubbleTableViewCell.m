@@ -90,7 +90,7 @@
         self.avatarImage.layer.borderWidth = 0.0;
         
         CGFloat avatarX = (type == BubbleTypeSomeoneElse) ? 12 : self.frame.size.width - 52;
-        CGFloat avatarY = self.frame.size.height - 50;
+        CGFloat avatarY = self.frame.size.height - 50 - 14;
         
         self.avatarImage.frame = CGRectMake(avatarX, avatarY + 14, 40, 40);
         [self addSubview:self.avatarImage];
@@ -104,7 +104,7 @@
     
     [self.customView removeFromSuperview];
     self.customView = self.data.view;
-    self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top, width, height);
+    self.customView.frame = CGRectMake(x + self.data.insets.left, y + self.data.insets.top - 14, width, height);
     [self.contentView addSubview:self.customView];
     
     if (type == BubbleTypeSomeoneElse)
@@ -119,7 +119,7 @@
     }
     self.backgroundColor = [UIColor clearColor];
     self.contentView.backgroundColor = [UIColor clearColor];
-    self.bubbleImage.frame = CGRectMake(x, y, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom );
+    self.bubbleImage.frame = CGRectMake(x, y - 14, width + self.data.insets.left + self.data.insets.right, height + self.data.insets.top + self.data.insets.bottom );
 }
 
 @end
