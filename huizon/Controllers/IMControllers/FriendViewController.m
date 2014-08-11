@@ -66,6 +66,18 @@
 -(void)getAddFriendIQFromCache
 {
     self.receiveAddFriendArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
+    
+    for(XMPPPresence * presence in self.receiveAddFriendArray)
+    {
+        for(XMPPUserCoreDataStorageObject * object in self.dataArray)
+        {
+            if([object.jidStr isEqualToString:[presence fromStr]])
+            {
+                [self.dataArray removeObject:object];
+                break;
+            }
+        }
+    }
 }
 
 #pragma mark - 再存回去
