@@ -76,6 +76,21 @@
                 [self.dataArray removeObject:object];
                 break;
             }
+            else if([object.nickname isEqualToString:[presence fromStr]])
+            {
+                [self.dataArray removeObject:object];
+                break;
+            }
+            else if([object.jid.user isEqualToString:[presence fromStr]])
+            {
+                [self.dataArray removeObject:object];
+                break;
+            }
+            else if([object.jid.user isEqualToString:[presence from].user])
+            {
+                [self.dataArray removeObject:object];
+                break;
+            }
         }
     }
 }
@@ -129,6 +144,7 @@
             [self.dataArray addObject:object];
         }
     }
+    [self clearDataArray];
     NSLog(@"%@",self.dataArray);
 }
 
@@ -277,7 +293,7 @@
     {
         XMPPPresence * presence = [self.receiveAddFriendArray objectAtIndex:indexPath.row];
         cell.headerImageView.image = [UIImage imageNamed:@"portrait-female-small"];
-        cell.nameLabel.text = [NSString stringWithFormat:@"%@",[presence from]];
+        cell.nameLabel.text = [NSString stringWithFormat:@"%@@%@",[[[presence from].user componentsSeparatedByString:@"-"] firstObject],[[[presence from].user componentsSeparatedByString:@"-"] lastObject]];
         cell.notiType = NotificationTypeFrom;
         cell.jid = [presence from];
         cell.agreementButton.tag = indexPath.row;
@@ -531,6 +547,17 @@
         [self deleteMessageObject:object];
         [self.dataArray removeObjectAtIndex:indexPath.row];
         [self.tableFriends reloadData];
+    }
+}
+
+-(void)clearDataArray
+{
+    for(XMPPUserCoreDataStorageObject *object in self.dataArray)
+    {
+        if(!object.ask.length && [object.subscription isEqualToString:@"Ask"])
+        {
+            [self.dataArray removeObject:object];
+        }
     }
 }
 
