@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface UserInfo : NSObject
-
+/*
+ 2.0版本的时候把用户的数据保存到这里
+ */
 @property (nonatomic,strong) NSString * jisStr;       //ID
 @property (nonatomic,strong) NSString * nickName;     //昵称
 @property (nonatomic,strong) NSString * userName;     //名字
