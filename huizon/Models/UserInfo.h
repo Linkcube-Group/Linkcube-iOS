@@ -17,6 +17,6 @@
 @property (nonatomic,strong) NSString * gender;       //性别
 @property (nonatomic,strong) NSString * birthday;     //生日
 @property (nonatomic,strong) NSString * personState;  //个性签名
-@property (nonatomic,strong) UIImage * photo;         //头像
+@property (nonatomic,strong) UIImage  * photo;        //头像
 
 @end
