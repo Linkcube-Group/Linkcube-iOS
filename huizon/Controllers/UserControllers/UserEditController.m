@@ -47,34 +47,32 @@
 
 - (void)didLoginAuthen:(NSNotification *)noti
 {
-    showIndicator(NO);
-//    UserEditController *uvc = [[UserEditController alloc] init];
-//    [self.navigationController pushViewController:uvc animated:YES];
-    [theApp getUserCardTemp];
-     NSString *nickname=[self.tfName.text trimString];
     
-    if (theApp.xmppvCardUser!=nil) {
-       
-        theApp.xmppvCardUser.nickname = nickname;
-        
-        theApp.xmppvCardUser.birthday=self.tfDate.text;
-        theApp.xmppvCardUser.photo = nil;
-        theApp.xmppvCardUser.personstate = @"";
-        
-        if (self.btnMale.selected) {
-            theApp.xmppvCardUser.gender = @"男";
-        }
-        else{
-            theApp.xmppvCardUser.gender = @"女";
-        }
-        
-        showFullScreen(YES);
-        showIndicator(YES);
-        [theApp updateUserCardTemp:theApp.xmppvCardUser];
-    }
+    showFullScreen(YES);
+    showIndicator(YES);
     
     
+    //    UserEditController *uvc = [[UserEditController alloc] init];
+    //    [self.navigationController pushViewController:uvc animated:YES];
+    //    [theApp getUserCardTemp];
+    //
+    //
+    //    if (theApp.xmppvCardUser!=nil) {
+    //
+    //        theApp.xmppvCardUser.nickname = nickname;
+    //
+    //
+    //        theApp.xmppvCardUser.photo = nil;
+    //        theApp.xmppvCardUser.personstate = @"";
+    //
+    //
+    //
+    //
+    //       // [theApp updateUserCardTemp:theApp.xmppvCardUser];
+    //    }
     
+    
+        NSString *nickname=[self.tfName.text trimString];
     
     
     //add user nick and email
@@ -104,17 +102,17 @@
 - (void)didFinishUpload:(NSNotification *)noti
 {
     XMPPvCardTemp *myvCard=[theApp.xmppvCardTempModule myvCardTemp];
-
+    
     int  state = [[noti object] intValue];
     if (state==1){
         if(StringNotNullAndEmpty(myvCard.nickname)) {
-//            showCustomAlertMessage(@"保存成功");
-//            showCustomAlertMessage(NSLocalizedString(@"注册成功", nil));
+            //            showCustomAlertMessage(@"保存成功");
+            //            showCustomAlertMessage(NSLocalizedString(@"注册成功", nil));
             
         }
-//        [theApp updateUserCardTemp:theApp.xmppvCardUser];
-//        [theApp.xmppvCardStorage setvCardTemp:myvCard forJID:theApp.xmppvCardUser.jid xmppStream:theApp.xmppStream];
-        [theApp updateUserCardTemp:theApp.xmppvCardUser];
+        //        [theApp updateUserCardTemp:theApp.xmppvCardUser];
+        //        [theApp.xmppvCardStorage setvCardTemp:myvCard forJID:theApp.xmppvCardUser.jid xmppStream:theApp.xmppStream];
+        //        [theApp updateUserCardTemp:theApp.xmppvCardUser];
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else{
@@ -145,7 +143,19 @@
         return;
     }
     
- 
+    NSString *nickname=[self.tfName.text trimString];
+    [[NSUserDefaults standardUserDefaults] setObject:nickname forKey:KSignNickName];
+    
+    if (self.btnMale.selected) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"男" forKey:KSignSex];
+    }
+    else{
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"女" forKey:KSignSex];
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:self.tfDate.text forKey:KSignDate];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [self registerUser];
 }
 
@@ -216,6 +226,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

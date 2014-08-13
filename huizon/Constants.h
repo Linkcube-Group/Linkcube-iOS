@@ -75,4 +75,10 @@ static NSString * const kNotificationDisConnect = @"kNotificationDisConnect";
 ///停止蓝牙发送
 static NSString * const kNotificationStopBlue = @"kNotificationStopBlue";
 
+
+///准备注册的nickname
+static NSString * const KSignNickName = @"KSignNickName";
+static NSString * const KSignSex = @"KSignSex";
+static NSString * const KSignDate = @"KSignDate";
+
 #endif

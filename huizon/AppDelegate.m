@@ -48,7 +48,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-
+    
 #ifdef DEBUG_CONSOLE
     //控制台的log信息
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
@@ -58,7 +58,7 @@
     DDLogFileManagerDefault *defaultlog=[[DDLogFileManagerDefault alloc] init];
     DDFileLogger *filelog=[[DDFileLogger alloc] initWithLogFileManager:defaultlog];
     [DDLog addLogger:filelog];
-
+    
 #endif
     
 #ifdef DEBUG_REVEL
@@ -80,16 +80,16 @@
     // Override point for customization after application launch.
     PlayViewController *main =
     [[PlayViewController alloc] initWithNibName:nil
-                                                 bundle:nil];
+                                         bundle:nil];
     UINavigationController *nav_main =
     [[UINavigationController alloc]
-      initWithRootViewController:main];
+     initWithRootViewController:main];
     
     LeftViewController *left = [[LeftViewController alloc] initWithNibName:nil bundle:nil];
     RightViewController *right = [[RightViewController alloc] initWithNibName:nil bundle:nil];
     
     JASidePanelController *panel = [[JASidePanelController alloc] init];
-
+    
     panel.leftPanel = left;
     panel.rightPanel = right;
     panel.centerPanel = nav_main;
@@ -105,7 +105,7 @@
     [self setupStream];
     [self myConnect];
     
-
+    
     return YES;
 }
 
@@ -132,11 +132,11 @@
         
         [mList addObject:[Config musicDefaul1]];
         
-       
+        
         [mList addObject:[Config musicDefaul2]];
         
         [[NSUserDefaults standardUserDefaults] setObject:mList.arrayString forKey:kMusicLocalKey];
-       
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kMusicLocalSetting];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
@@ -207,7 +207,7 @@
     
     
     
-
+    
     
 }
 - (BOOL)myConnect{
@@ -319,7 +319,7 @@
     [iq addAttributeWithName:@"to" stringValue:[NSString stringWithFormat:@"%@@%@",uname,kXMPPmyDomain]];
     [iq addAttributeWithName:@"id" stringValue:@"change1"];
     
-
+    
     DDXMLNode *username=[DDXMLNode elementWithName:@"username" stringValue:uname];//不带@后缀
     DDXMLNode *password=[DDXMLNode elementWithName:@"password" stringValue:pwd];//要改的密码
     [query addChild:username];
@@ -356,10 +356,10 @@
 {
     ///登录后获取用户信息
     if ([self isXmppAuthenticated]) {
-    
+        
         self.xmppvCardUser = [self.xmppvCardTempModule myvCardTemp];
     }
-
+    
     
 }
 
@@ -380,7 +380,7 @@
     NSDictionary *assocObj = [xmppStream associatedObjectRetain];
     NSString *lid=[assocObj valueForKey:@"lid"];
     NSString *password=[assocObj valueForKey:@"pwd"];
- 
+    
     if (assocObj && lid && password)
     {
         
@@ -388,7 +388,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:lid forKey:kXMPPmyJID];
         [[NSUserDefaults standardUserDefaults] setObject:password forKey:kXMPPmyPassword];
         NSString *jid = [[NSString alloc] initWithFormat:@"%@@%@",[lid jidEscapedString], kXMPPmyDomain];
-
+        
         //[xmppStream setMyJID:jid];
         [xmppStream setMyJID:[XMPPJID jidWithString:jid]];
         NSError *error=nil;
@@ -398,19 +398,19 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:kXMPPmyPassword];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"创建帐号失败"
                                                                 message:[error localizedDescription]
-                                                               delegate:nil 
-                                                      cancelButtonTitle:@"Ok" 
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
                                                       otherButtonTitles:nil];
             [alertView show];
         }
         
         
         
-       
-
+        
+        
         //XMPPvCardTemp *test=[self.xmppvCardTempModule vCardTempForJID:[xmppStream myJID] shouldFetch:YES];
         //NSLog(@"%@",test.gender);
-        return;//上面注册密码后，会在xmppStreamDidRegister里面进行密码确认不能直接执行下面        
+        return;//上面注册密码后，会在xmppStreamDidRegister里面进行密码确认不能直接执行下面
     }
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:kXMPPmyPassword]) {
@@ -419,7 +419,7 @@
             NSLog(@"error authenticate : %@",error.description);
         }
     }
-
+    
     
     //XMPPvCardTemp *test=[self.xmppvCardTempModule vCardTempForJID:[xmppStream myJID] shouldFetch:YES];
     //NSLog(@"%@",test.gender);
@@ -460,12 +460,17 @@
         if (mail) {
             // store infomation in vcard
             XMPPvCardTemp *xmppvCardTemp=[XMPPvCardTemp vCardTemp];
-//            xmppvCardTemp.nickname=nickname;
+            //            xmppvCardTemp.nickname=nickname;
             xmppvCardTemp.email=mail;
-//            xmppvCardTemp.gender=gender;
+            NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+            xmppvCardTemp.nickname = [pref objectForKey:KSignNickName];
+            xmppvCardTemp.gender = [pref objectForKey:KSignSex];
+            xmppvCardTemp.birthday = [pref objectForKey:KSignDate];
+            xmppvCardTemp.personstate = @"连酷，连爱";
+            //            xmppvCardTemp.gender=gender;
             [self.xmppvCardTempModule updateMyvCardTemp:xmppvCardTemp];
             [xmppStream setAssociatedObjectRetain:nil];
-
+            
         }
     }
     else
@@ -533,7 +538,7 @@
 
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
 {
-     NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]]; //online/offline
+    NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]]; //online/offline
     NSLog(@"这个呵呵呵呵:%@",presenceType);
     NSLog(@"didReceivePresence:\n\n%@\n",presence.description);
     //if (presence.status) {
@@ -542,14 +547,14 @@
     //    }
     //}
     NSLog(@"曹操%@",presenceType);
-//    //收到加好友请求
-//    if([presenceType isEqualToString:@"subscribe"])
-//    {
-//        NSMutableArray * receiveArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
-//        NSLog(@"好友请求的内容%@",presence);
-//        [receiveArray addObject:presence];
-//        [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
-//    }
+    //    //收到加好友请求
+    //    if([presenceType isEqualToString:@"subscribe"])
+    //    {
+    //        NSMutableArray * receiveArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
+    //        NSLog(@"好友请求的内容%@",presence);
+    //        [receiveArray addObject:presence];
+    //        [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
+    //    }
     
     // 接到加好友请求
     if ([presenceType isEqualToString:@"subscribe"])
@@ -559,33 +564,33 @@
         //    [self.chatDelegate friendSubscription:presence];
         //}
         /*
-        NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
-        NSArray *subscribePresence=[defaults arrayForKey:@"subscribe"];
-        
-        NSMutableArray *newArray;
-        if (subscribePresence==nil)
-        {
-            newArray=[[NSMutableArray alloc] init];
-        }
-        else
-        {
-            newArray=[NSMutableArray arrayWithArray:subscribePresence];
-        }
-        //[newArray addObject:presence];
-        BOOL flagFound=NO;
-        for (NSString *from in newArray)
-        {
-            if ([from isEqualToString:presence.fromStr])
-            {
-                flagFound=YES;
-            }
-        }
-        if(!flagFound)
-            [newArray addObject:presence.fromStr];
-        NSArray *array=[NSArray arrayWithArray:newArray];
-        [defaults setObject:array forKey:@"subscribe"];
-        [defaults synchronize];
-        */
+         NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+         NSArray *subscribePresence=[defaults arrayForKey:@"subscribe"];
+         
+         NSMutableArray *newArray;
+         if (subscribePresence==nil)
+         {
+         newArray=[[NSMutableArray alloc] init];
+         }
+         else
+         {
+         newArray=[NSMutableArray arrayWithArray:subscribePresence];
+         }
+         //[newArray addObject:presence];
+         BOOL flagFound=NO;
+         for (NSString *from in newArray)
+         {
+         if ([from isEqualToString:presence.fromStr])
+         {
+         flagFound=YES;
+         }
+         }
+         if(!flagFound)
+         [newArray addObject:presence.fromStr];
+         NSArray *array=[NSArray arrayWithArray:newArray];
+         [defaults setObject:array forKey:@"subscribe"];
+         [defaults synchronize];
+         */
         
         XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",presence.from]];
         NSManagedObjectContext *context=[[theApp xmppRosterStorage] mainThreadManagedObjectContext];
@@ -605,7 +610,7 @@
     if ([presenceType isEqualToString:@"subscribed"]) {
         XMPPJID *jid = [XMPPJID jidWithString:[NSString stringWithFormat:@"%@",[presence from]]];
         [xmppRoster acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:NO];
-//        [xmppRoster addUser:jid withNickname:nil];
+        //        [xmppRoster addUser:jid withNickname:nil];
     }
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveError:(NSXMLElement *)error
@@ -618,7 +623,7 @@
     if ([iq.type isEqualToString:@"set"])
     {
         [[NSNotificationCenter defaultCenter] postNotificationName:kXMPPvCardTempElement object:@(1)];
-       
+        
         
     }
     
@@ -685,7 +690,7 @@
     if (alertView.tag == tag_subcribe_alertView && buttonIndex == 1) {
         XMPPJID *jid = [XMPPJID jidWithString:alertView.title];
         [[self xmppRoster] acceptPresenceSubscriptionRequestFrom:jid andAddToRoster:YES];
-    
+        
     }
 }
 
