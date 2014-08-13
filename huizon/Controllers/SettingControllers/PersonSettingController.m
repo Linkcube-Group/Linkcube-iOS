@@ -99,7 +99,7 @@
     [super viewWillAppear:animated];
     self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"我"];
     //self.navigationItem.rightBarButtonItem=[[Theam currentTheam] navigationBarRightButtonItemWithImage:Nil Title:@"修改密码" Target:self Selector:@selector(btnChangeTap:)];
-    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItem1WithTarget:self Selector:@selector(btBack_DisModal:)];
+    self.navigationItem.leftBarButtonItem=[[Theam currentTheam] navigationBarButtonBackItemWithTarget:self Selector:@selector(btBack_DisModal:)];
     
     
 }
