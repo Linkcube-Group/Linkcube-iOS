@@ -50,17 +50,29 @@
     showIndicator(NO);
 //    UserEditController *uvc = [[UserEditController alloc] init];
 //    [self.navigationController pushViewController:uvc animated:YES];
+    [theApp getUserCardTemp];
+     NSString *nickname=[self.tfName.text trimString];
     
-    NSString *nickname=[self.tfName.text trimString];
-    theApp.xmppvCardUser.nickname = nickname;
+    if (theApp.xmppvCardUser!=nil) {
+       
+        theApp.xmppvCardUser.nickname = nickname;
+        
+        theApp.xmppvCardUser.birthday=self.tfDate.text;
+        theApp.xmppvCardUser.photo = nil;
+        theApp.xmppvCardUser.personstate = @"";
+        
+        if (self.btnMale.selected) {
+            theApp.xmppvCardUser.gender = @"男";
+        }
+        else{
+            theApp.xmppvCardUser.gender = @"女";
+        }
+        
+        showFullScreen(YES);
+        showIndicator(YES);
+        [theApp updateUserCardTemp:theApp.xmppvCardUser];
+    }
     
-    theApp.xmppvCardUser.birthday=self.tfDate.text;
-    theApp.xmppvCardUser.photo = nil;
-    theApp.xmppvCardUser.personstate = @"";
-    
-    showFullScreen(YES);
-    showIndicator(YES);
-    [theApp updateUserCardTemp:theApp.xmppvCardUser];
     
     
     
@@ -133,15 +145,7 @@
         return;
     }
     
-    NSString *nickname=[self.tfName.text trimString];
-    theApp.xmppvCardUser.nickname = nickname;
-    
-    if (self.btnMale.selected) {
-        theApp.xmppvCardUser.gender = @"男";
-    }
-    else{
-        theApp.xmppvCardUser.gender = @"女";
-    }
+ 
     [self registerUser];
 }
 
