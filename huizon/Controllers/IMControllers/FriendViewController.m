@@ -552,13 +552,13 @@
 
 -(void)clearDataArray
 {
-    for(XMPPUserCoreDataStorageObject *object in self.dataArray)
-    {
-        if(!object.ask.length && [object.subscription isEqualToString:@"Ask"])
-        {
-            [self.dataArray removeObject:object];
-        }
-    }
+//    for(XMPPUserCoreDataStorageObject *object in self.dataArray)
+//    {
+//        if(!object.ask.length && [object.subscription isEqualToString:@"Ask"])
+//        {
+//            [self.dataArray removeObject:object];
+//        }
+//    }
 }
 
 
