@@ -26,6 +26,8 @@
 //收到加好友消息通知的缓存路径
 #define XMPP_RECEIVE_ADDFRIEND_IQ ([NSString stringWithFormat:@"%@_receive_addFriend_IQ",theApp.xmppStream.myJID])
 
+#define XMPP_RECEIVE_MESSAGE_COUNT [NSString stringWithFormat:@"%@_receive_message_count",theApp.xmppStream.myJID]
+
 //最大蓝牙数50
 static int const kMaxBlueToothNum = 50;
 

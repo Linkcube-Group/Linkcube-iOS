@@ -14,6 +14,7 @@
 #import "XmppVcardTemp.h"
 #import "XMPPvCardTempModule.h"
 #import "ChatViewManager.h"
+#import "FileManager.h"
 
 /*
  聊天界面有点问题哈：1）发送按钮改成类似于iphone短信的那个发送吧（颜色为深灰色，字体大一些）；2）现在对话框是根据发出文字长度，直接拉伸的（这样小三角和圆角就变形了），应该只拉伸圆角矩形的长边或短边。文字框和头像应该平行对齐。3）会有一个白底（见上方截图）；4）在聊天界面收不到对方的消息，必须返回到上一层界面，再返回聊天界面，才能看到新消息；
@@ -91,6 +92,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        [self clearMessageCount];
     }
     return self;
 }
@@ -143,6 +145,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    [self clearMessageCount];
     dispatch_queue_t concurrentQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(concurrentQueue, ^{
         
@@ -658,6 +661,13 @@
     
     
     
+}
+-(void)clearMessageCount
+{
+    NSMutableDictionary * dict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
+    [dict setObject:@"0" forKey:[NSString stringWithFormat:@"%@",self.xmppFriendJID]];
+    [FileManager saveObject:dict filePath:XMPP_RECEIVE_MESSAGE_COUNT];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"clearMessageCount" object:nil];
 }
 - (void)receiveMessage:(XMPPMessage *)message
 {

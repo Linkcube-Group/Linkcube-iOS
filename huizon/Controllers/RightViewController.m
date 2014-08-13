@@ -30,6 +30,7 @@
 #import "FriendInfoViewController.h"
 #import "IMControls.h"
 #import "JSBadgeView.h"
+#import "FileManager.h"
 
 #define FRIEND_LIST @[@"",@"我的",@"消息",@"情侣"]
 
@@ -40,6 +41,7 @@
 
 @property (strong,nonatomic) IBOutlet UITableView  *tbFriend;
 @property (nonatomic, strong) NSMutableArray *friendsArray;
+@property (nonatomic, strong) NSMutableDictionary * messageCountDict;
 
 @end
 
@@ -52,7 +54,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.messageCountDict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveSubscribe:) name:kXMPPNotificationDidReceivePresence object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedMessage:) name:KXMPPNotificationDidReceiveMessage object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedMessage:) name:@"clearMessageCount" object:nil];
 
     }
     return self;
@@ -83,6 +88,12 @@
     //[theApp.xmppRoster addU]
     [self.tbFriend reloadData];
     
+}
+
+-(void)receivedMessage:(NSNotification *) notification
+{
+    self.messageCountDict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
+    [self.tbFriend reloadData];
 }
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
 {
@@ -153,6 +164,7 @@
             XMPPvCardTemp * temp = [[theApp xmppvCardTempModule] vCardTempForJID:object.jid shouldFetch:YES];
             NSMutableDictionary * dict = [[NSMutableDictionary alloc] init];
             [dict setObject:object forKey:@"object"];
+            [dict setObject:@"0" forKey:@"new"];
             if(temp.photo)
                 [dict setObject:temp.photo forKey:@"photo"];
             if(temp.gender)
@@ -357,7 +369,15 @@
         
         JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
         jsbView.badgePositionAdjustment = CGPointMake(-20.0, -25.0);
-        jsbView.badgeText = nil;
+        NSString * count = [self.messageCountDict objectForKey:object.jidStr];
+        if([count isEqualToString:@"1"])
+        {
+            jsbView.badgeText = @"";
+        }
+        else
+        {
+            jsbView.badgeText = nil;
+        }
     }
     //cell.textLabel.text = [FRIEND_LIST objectAtIndex:indexPath.row];
     return cell;
