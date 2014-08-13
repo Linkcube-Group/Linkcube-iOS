@@ -290,7 +290,7 @@
 - (void)showPicker
 {
     
-    NSDate *selDate = [NSDate dateWithString:@"1998-09-23" Format:@"YYYY-MM-dd"];
+    NSDate *selDate = [NSDate dateWithString:@"1990-01-01" Format:@"YYYY-MM-dd"];
     [pickerBirth setDate:selDate animated:YES];
     
     [UIView animateWithDuration:0.3 animations:^{
