@@ -552,13 +552,19 @@
 
 -(void)clearDataArray
 {
-//    for(XMPPUserCoreDataStorageObject *object in self.dataArray)
-//    {
-//        if(!object.ask.length && [object.subscription isEqualToString:@"Ask"])
-//        {
-//            [self.dataArray removeObject:object];
-//        }
-//    }
+    NSMutableArray * mArray = [[NSMutableArray alloc] initWithArray:self.dataArray];
+    for(XMPPUserCoreDataStorageObject *object in self.dataArray)
+    {
+        for(XMPPUserCoreDataStorageObject *object1 in mArray)
+        {
+            if([object.jidStr isEqualToString:object1.jidStr])
+            {
+                [mArray removeObject:object1];
+                break;
+            }
+        }
+        self.dataArray = mArray;
+    }
 }
 
 
