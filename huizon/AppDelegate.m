@@ -513,6 +513,11 @@
 }
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
+    NSLog(@"----->%@",message);
+    //from="testi-qq.com@server1/b8d59192"
+    NSMutableDictionary * dict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
+    [dict setObject:@"1" forKey:[message fromStr]];
+    [FileManager saveObject:dict filePath:XMPP_RECEIVE_MESSAGE_COUNT];
     NSLog(@"didReceiveMessage: %@",message.description);
     if ([self.chatDelegate respondsToSelector:@selector(receiveMessage:)]) {
         [self.chatDelegate receiveMessage:message];
