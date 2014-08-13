@@ -48,9 +48,18 @@
     if ([theApp isXmppAuthenticated]) {
         [theApp getUserCardTemp];
         if (theApp.xmppvCardUser) {
-            [self.btnStatus setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:KSignNickName] forState:UIControlStateNormal];
             if(StringNotNullAndEmpty(theApp.xmppvCardUser.nickname))
+            {
                 [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
+            }
+            else
+            {
+                [self.btnStatus setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:KSignNickName] forState:UIControlStateNormal];
+                theApp.xmppvCardUser.nickname = [[NSUserDefaults standardUserDefaults] objectForKey:KSignNickName];
+                theApp.xmppvCardUser.gender = [[NSUserDefaults standardUserDefaults] objectForKey:KSignSex];
+                theApp.xmppvCardUser.birthday = [[NSUserDefaults standardUserDefaults] objectForKey:KSignDate];
+                [theApp updateUserCardTemp:theApp.xmppvCardUser];
+            }
             if(theApp.xmppvCardUser.photo.length)
             {
                 [self.btnHead setImage:[[UIImage alloc] initWithData:theApp.xmppvCardUser.photo] forState:UIControlStateNormal];
