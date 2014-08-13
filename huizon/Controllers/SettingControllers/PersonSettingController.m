@@ -54,6 +54,13 @@
     [theApp getUserCardTemp];
     if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.email))
     {
+        if(!theApp.xmppvCardUser.nickname.length)
+        {
+            theApp.xmppvCardUser.nickname = [[NSUserDefaults standardUserDefaults] objectForKey:KSignNickName];
+            theApp.xmppvCardUser.birthday = [[NSUserDefaults standardUserDefaults] objectForKey:KSignDate];
+            theApp.xmppvCardUser.gender = [[NSUserDefaults standardUserDefaults] objectForKey:KSignSex];
+            theApp.xmppvCardUser.personstate = NSLocalizedString(@"连酷，连爱", nil);
+        }
         lblMail.text=theApp.xmppvCardUser.email;
         [self.tableviewSetting reloadData];
     }
@@ -223,6 +230,8 @@
                 [block_self.tableviewSetting reloadData];
                 theApp.xmppvCardUser.nickname = str;
                 [theApp updateUserCardTemp:theApp.xmppvCardUser];
+                [[NSUserDefaults standardUserDefaults] setObject:theApp.xmppvCardUser.nickname forKey:KSignNickName];
+                [[NSUserDefaults standardUserDefaults] synchronize];
                 
             };
             [self.navigationController pushViewController:ivc animated:YES];
@@ -241,6 +250,8 @@
                     [theApp updateUserCardTemp:theApp.xmppvCardUser];
                     reload();
                 }
+                [[NSUserDefaults standardUserDefaults] setObject:theApp.xmppvCardUser.gender forKey:KSignSex];
+                [[NSUserDefaults standardUserDefaults] synchronize];
             }];
             [sheet addButtonWithTitle:@"男"];
             [sheet addButtonWithTitle:@"女"];
@@ -310,7 +321,8 @@
     
     theApp.xmppvCardUser.birthday=dateString;
     [theApp updateUserCardTemp:theApp.xmppvCardUser];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:theApp.xmppvCardUser.birthday forKey:KSignDate];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.tableviewSetting reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationNone];
 }
 
