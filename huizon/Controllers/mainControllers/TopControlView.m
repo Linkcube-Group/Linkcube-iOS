@@ -47,8 +47,10 @@
     self.btnHead.layer.masksToBounds = YES;
     if ([theApp isXmppAuthenticated]) {
         [theApp getUserCardTemp];
-        if (theApp.xmppvCardUser && StringNotNullAndEmpty(theApp.xmppvCardUser.nickname)) {
-            [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
+        if (theApp.xmppvCardUser) {
+            [self.btnStatus setTitle:[[NSUserDefaults standardUserDefaults] objectForKey:KSignNickName] forState:UIControlStateNormal];
+            if(StringNotNullAndEmpty(theApp.xmppvCardUser.nickname))
+                [self.btnStatus setTitle:theApp.xmppvCardUser.nickname forState:UIControlStateNormal];
             if(theApp.xmppvCardUser.photo.length)
             {
                 [self.btnHead setImage:[[UIImage alloc] initWithData:theApp.xmppvCardUser.photo] forState:UIControlStateNormal];
