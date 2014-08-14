@@ -37,9 +37,9 @@ static int const kPageButtonTag = 8923;
 static NSString *const kXMPPmyJID = @"kXMPPmyJID";
 static NSString *const kXMPPmyPassword = @"kXMPPmyPassword";
 
-static NSString * const kXMPPmyServer = @"112.124.22.252";//@"server1.linkcube.me";
+static NSString * const kXMPPmyServer = @"115.29.175.17";//@"112.124.22.252";//@"115.29.175.17";
 
-static NSString * const kXMPPmyDomain = @"server1";//@"server1";
+static NSString * const kXMPPmyDomain = @"lcserver";//@"server1";
 
 //static NSString * const kXMPPwmDomain = @"www.meng.co.in";
 
