@@ -93,7 +93,6 @@
 -(void)receivedMessage:(NSNotification *) notification
 {
     self.messageCountDict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
-    NSLog(@"%@",self.messageCountDict);
     [self.tbFriend reloadData];
 }
 - (void)observeValueForKeyPath:(NSString*)keyPath ofObject:(id)object change:(NSDictionary*)change context:(void*)context
@@ -372,8 +371,6 @@
         jsbView.badgePositionAdjustment = CGPointMake(-20.0, -25.0);
         //改为jid
         NSString * count = [self.messageCountDict objectForKey:object.jidStr];
-        NSLog(@"cell中的%@",object.jid);
-        NSLog(@"---------->%@",self.messageCountDict);
         if([count isEqualToString:@"1"])
         {
             jsbView.badgeText = @"";
