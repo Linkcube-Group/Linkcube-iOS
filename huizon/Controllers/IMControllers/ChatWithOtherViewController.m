@@ -885,7 +885,7 @@
     if(!inputTextField.text.length)
         return;
     bubbleTable.typingBubble = NSBubbleTypingTypeNobody;
-    [inputTextField resignFirstResponder];
+//    [inputTextField resignFirstResponder];
     
     
     
