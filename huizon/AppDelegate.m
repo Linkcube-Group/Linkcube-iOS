@@ -521,7 +521,7 @@
     }
     //设置新消息后保存到本地
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:[FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT]];
-    [dict setObject:@"1" forKey:[message from]];
+    [dict setObject:@"1" forKey:[[[message fromStr] componentsSeparatedByString:@"/"] firstObject]];
     //保存成功后发通知
     if([FileManager saveObject:dict filePath:XMPP_RECEIVE_MESSAGE_COUNT])
     {
