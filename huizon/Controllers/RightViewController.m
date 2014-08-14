@@ -369,7 +369,8 @@
         
         JSBadgeView * jsbView = [[JSBadgeView alloc] initWithParentView:cell.contentView alignment:JSBadgeViewAlignmentBottomRight];
         jsbView.badgePositionAdjustment = CGPointMake(-20.0, -25.0);
-        NSString * count = [self.messageCountDict objectForKey:object.jidStr];
+        //改为jid
+        NSString * count = [self.messageCountDict objectForKey:object.jid];
         if([count isEqualToString:@"1"])
         {
             jsbView.badgeText = @"";

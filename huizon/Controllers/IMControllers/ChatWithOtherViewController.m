@@ -665,7 +665,7 @@
 -(void)clearMessageCount
 {
     NSMutableDictionary * dict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
-    [dict setObject:@"0" forKey:[NSString stringWithFormat:@"%@",self.xmppFriendJID]];
+    [dict setObject:@"0" forKey:self.xmppFriendJID];
     [FileManager saveObject:dict filePath:XMPP_RECEIVE_MESSAGE_COUNT];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"clearMessageCount" object:nil];
 }

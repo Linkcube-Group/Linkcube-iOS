@@ -515,14 +515,19 @@
 {
     NSLog(@"----->%@",message);
     //from="testi-qq.com@server1/b8d59192"
-    NSMutableDictionary * dict = [FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT];
-    [dict setObject:@"1" forKey:[message fromStr]];
-    [FileManager saveObject:dict filePath:XMPP_RECEIVE_MESSAGE_COUNT];
     NSLog(@"didReceiveMessage: %@",message.description);
     if ([self.chatDelegate respondsToSelector:@selector(receiveMessage:)]) {
         [self.chatDelegate receiveMessage:message];
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:KXMPPNotificationDidReceiveMessage object:nil];
+    //设置新消息后保存到本地
+    NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:[FileManager loadObject:XMPP_RECEIVE_MESSAGE_COUNT]];
+    [dict setObject:@"1" forKey:[message from]];
+    //保存成功后发通知
+    if([FileManager saveObject:dict filePath:XMPP_RECEIVE_MESSAGE_COUNT])
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:KXMPPNotificationDidReceiveMessage object:nil];
+    }
+    
 }
 
 - (void)xmppRoster:(XMPPRoster *)sender didReceivePresenceSubscriptionRequest:(XMPPPresence *)presence
