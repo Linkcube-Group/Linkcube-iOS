@@ -202,7 +202,7 @@
     [xmppvCardAvatarModule addDelegate:self delegateQueue:dispatch_get_main_queue()];
     
     xmppSearchModule = [[XMPPSearchModule alloc] initWithDispatchQueue:dispatch_get_main_queue()];
-    xmppSearchModule.searchHost = @"search.server1";//kXMPPmyDomain;//kXMPPmyServer;
+    xmppSearchModule.searchHost = kXMPPmyServer;//[NSString stringWithFormat:@"5222.%@",kXMPPmyDomain];//@"search.server1";//kXMPPmyDomain;//kXMPPmyServer;
     [xmppSearchModule activate:xmppStream];
     
     
