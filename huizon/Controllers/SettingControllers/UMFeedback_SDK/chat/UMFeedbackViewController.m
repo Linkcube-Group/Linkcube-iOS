@@ -293,7 +293,7 @@ static UITapGestureRecognizer *tapRecognizer;
 }
 
 - (void)backToPrevious {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)prefersStatusBarHidden {

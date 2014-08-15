@@ -46,7 +46,7 @@ static NSString * const kXMPPmyDomain = @"lcserver";//@"server1";
 
 ///app setting
 ///应用的appid
-static NSString * const kAPPID=@"488033535";
+static NSString * const kAPPID=@"909639496";
 
 ///xmpp通知
 static NSString * const kXMPPNotificationDidAuthen = @"kXMPPNotificationDidAuthen";
@@ -66,7 +66,7 @@ static NSString * const kMusicLocalKey = @"kMusicLocalKey";
 ///setting
 static NSString * const kSettingBugLink = @"http://www.dreamore.com/projects/12606.html";
 
-static NSString * const kSettingUmeng = @"5319cc6956240b080f02958c";
+static NSString * const kSettingUmeng = @"53d91ac6fd98c5548d00ac45";
 
 ///刷新顶部状态
 static NSString * const kNotificationTop = @"kNotificationTop";

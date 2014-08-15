@@ -11,7 +11,7 @@
 #include <sys/socket.h>
 #include <net/if.h>
 #include <net/if_dl.h>
-#import <AdSupport/ASIdentifierManager.h>
+
 #import <CommonCrypto/CommonDigest.h>
 
 BOOL DeviceSystemSmallerThan(float version)
@@ -100,7 +100,7 @@ BOOL DeviceIsiPhone()
 
 + (NSString*) uniqueAdvertisingIdentifier
 {
-    NSUUID *adverSUUID = [[ASIdentifierManager sharedManager] advertisingIdentifier];
+    NSUUID *adverSUUID = @"0";////[[ASIdentifierManager sharedManager] advertisingIdentifier];
     NSString *uuidString = @"0";
     if (adverSUUID) {
         uuidString = [adverSUUID UUIDString];
