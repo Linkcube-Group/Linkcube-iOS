@@ -25,13 +25,7 @@
     self = [super init];
     if (self) {
         self.audioPlayer = nil;
-        NSError *setCategoryError = nil;
-        
-//        BOOL success = [[AVAudioSession sharedInstance]
-//                        setCategory:AVAudioSessionCategoryPlayAndRecord
-//                        error: &setCategoryError];
-//        [[AVAudioSession sharedInstance] setActive:YES error:nil];
-//        
+     
 
     }
     return self;
@@ -49,8 +43,15 @@
 
 - (void)playMusicAction
 {
-    UInt32 sessionCategory = kAudioSessionCategory_MediaPlayback;
+    UInt32 sessionCategory = kAudioSessionCategory_PlayAndRecord;
     AudioSessionSetProperty(kAudioSessionProperty_OverrideCategoryDefaultToSpeaker, sizeof(sessionCategory), &sessionCategory);
+    
+    NSError *setCategoryError = nil;
+    
+    BOOL success = [[AVAudioSession sharedInstance]
+                    setCategory:AVAudioSessionCategoryPlayAndRecord
+                    error: &setCategoryError];
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
     
     
     if (self.audioPlayer && ![self.audioPlayer isPlaying]) {

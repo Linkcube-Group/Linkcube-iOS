@@ -11,6 +11,7 @@
 //取得指定名称的图片
 #define IMG(name) [UIImage imageNamed:name]
 
+#define IMG_FILE(name) [UIImage imageWithContentsOfFile:name]
 //返回可以变形的图片
 #define IMG_ST(name,x,y) [IMG(name) stretchableImageWithLeftCapWidth:x topCapHeight:y]
 

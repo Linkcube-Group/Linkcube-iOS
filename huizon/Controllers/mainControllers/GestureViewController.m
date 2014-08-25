@@ -44,12 +44,11 @@
     [self patternCommand:cmd];
     
     if (iPhone5) {
-        [self.view.layer setContents:(id)[IMG(@"play_bg_2.png") CGImage]];
+        [self.view.layer setContents:(id)[IMG_FILE(_S(@"%@/%@", [[NSBundle mainBundle] resourcePath],@"play_bg_2.png")) CGImage]];
     }
     else{
-        [self.view.layer setContents:(id)[IMG(@"play_bg.png") CGImage]];
+        [self.view.layer setContents:(id)[IMG_FILE(_S(@"%@/%@", [[NSBundle mainBundle] resourcePath],@"play_bg.png")) CGImage]];
     }
-    
     self.btnControl.center = CGPointMake(160, theApp.window.frame.size.height/2);
     
     self.navigationController.navigationBar.hidden = YES;

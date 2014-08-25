@@ -338,11 +338,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "huizon/Controllers/PlayerControllers/PlayViewController.m"
-            timestampString = "428855658.221056"
+            timestampString = "430644871.482233"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-rightAction:"
             landmarkType = "5">
          </BreakpointContent>

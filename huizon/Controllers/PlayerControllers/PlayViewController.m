@@ -110,7 +110,7 @@
     playMusicType = PlayTypeCircle;
     isPlay = NO;
     playIndex = 0;
-    [self.view.layer setContents:(id)[IMG(@"play_bg.png") CGImage]];
+    [self.view.layer setContents:(id)[IMG_FILE(_S(@"%@/%@", [[NSBundle mainBundle] resourcePath],@"play_bg.png")) CGImage]];
     
     [self.slider setMinimumTrackTintColor:[UIColor whiteColor]];
     [self.slider setMaximumTrackTintColor:[UIColor colorWithWhite:1.0 alpha:0.8]];
@@ -181,8 +181,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAllAction) name:kNotificationStopBlue object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopRotate) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRotate) name:UIApplicationDidBecomeActiveNotification object:nil];
     // Do any additional setup after loading the view from its nib.
     
 }
@@ -565,20 +563,7 @@ static  int angle = 10;
     
 }
 
-- (void)stopRotate
-{
-    //    [self startAlbumAnimation:NO];
-}
 
-- (void)startRotate
-{
-    //    [self.imgAlbum initRound];
-    //    if (isPlay) {
-    //
-    //        [self.imgAlbum startRotation:YES];
-    //    }
-    
-}
 
 #pragma mark -
 #pragma mark NeedleAnimation
