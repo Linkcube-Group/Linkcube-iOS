@@ -4003,8 +4003,8 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4021,7 +4021,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "9E311D64-652F-4A93-876F-B9A8909317A1";
+				PROVISIONING_PROFILE = "74b2ecd5-9806-4494-ac8e-026f9862b311";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
@@ -4037,9 +4037,9 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4056,7 +4056,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "9E311D64-652F-4A93-876F-B9A8909317A1";
+				PROVISIONING_PROFILE = "74b2ecd5-9806-4494-ac8e-026f9862b311";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
