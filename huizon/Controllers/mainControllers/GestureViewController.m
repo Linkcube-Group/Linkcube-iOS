@@ -14,7 +14,7 @@
 @interface GestureViewController ()
 {
     int currentState;
-
+    
     TopControlView  *topView;
 }
 
@@ -39,10 +39,6 @@
     [super viewDidLoad];
     
     
-    currentState = 1;
-    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState-1];
-    [self patternCommand:cmd];
-    
     if (iPhone5) {
         [self.view.layer setContents:(id)[IMG_FILE(_S(@"%@/%@", [[NSBundle mainBundle] resourcePath],@"play_bg_2.png")) CGImage]];
     }
@@ -57,9 +53,9 @@
     topView.baseController = self;
     [self.view addSubview:topView];
     
-
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAllAction) name:kNotificationStopBlue object:nil];
@@ -70,6 +66,15 @@
 {
     [super viewDidAppear:animated];
     [self refreshTop];
+   
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(startFirst) userInfo:nil repeats:NO];
+}
+
+- (void)startFirst
+{
+    currentState = 0;
+    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState];
+    [self patternCommand:cmd];
 }
 
 - (void)refreshTop
@@ -96,20 +101,39 @@
 
 - (IBAction)postureAction:(id)sender
 {
-
-    
-    currentState++;
-    if (currentState>7) {
-        currentState = 1;
-    
+    UIButton *btn = (UIButton *)sender;
+    int tag = btn.tag - 1000;
+    if (tag==7) {
+        showCustomAlertMessage(@"多多使用，未来更多震动模式哦！");
+        return;
     }
-    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState-1];
+    
+    for (int i=0; i<7; i++) {
+        UIButton *btn = (UIButton *)[self.view viewWithTag:i+1000];
+        if (btn!=nil){
+            if(i!=tag) {
+                btn.selected = NO;
+            }
+            else{
+                btn.selected = YES;
+            }
+        }
+    }
+    
+    currentState = tag;
+    if (currentState>6) {
+        currentState = 6;
+    }
+    if (currentState<1) {
+        currentState = 0;
+    }
+    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState];
     [self patternCommand:cmd];
     
     
     NSString *imgName = _S(@"posture_%d.png",currentState);
     [self.btnControl setImage:IMG(imgName) forState:UIControlStateNormal];
-
+    
 }
 
 - (void)stopAllAction
