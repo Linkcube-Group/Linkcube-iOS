@@ -38,7 +38,7 @@
 @property (strong,nonatomic) HeaderView     *headerView;
 @end
 
-#define MENU_LIST @[@"",@"蓝牙连接",@"控制",@"音乐控制",@"摇摇控制",@"声音控制",@"经典七式",@"其它",@"设置"]
+#define MENU_LIST @[@"",@"蓝牙连接",@"控制",@"音乐控制",@"摇摇控制",@"声音控制",@"经典模式",@"其它",@"设置"]
 
 
 

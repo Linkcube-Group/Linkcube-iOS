@@ -14,7 +14,7 @@
 @interface GestureViewController ()
 {
     int currentState;
-
+    
     TopControlView  *topView;
 }
 
@@ -39,8 +39,8 @@
     [super viewDidLoad];
     
     
-    currentState = 1;
-    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState-1];
+    currentState = 0;
+    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState];
     [self patternCommand:cmd];
     
     if (iPhone5) {
@@ -57,9 +57,9 @@
     topView.baseController = self;
     [self.view addSubview:topView];
     
-
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:kNotificationTop object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshTop) name:CBConnectPeripheralOptionNotifyOnDisconnectionKey object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopAllAction) name:kNotificationStopBlue object:nil];
@@ -96,20 +96,39 @@
 
 - (IBAction)postureAction:(id)sender
 {
-
-    
-    currentState++;
-    if (currentState>7) {
-        currentState = 1;
-    
+    UIButton *btn = (UIButton *)sender;
+    int tag = btn.tag - 1000;
+    if (tag==8) {
+        showCustomAlertMessage(@"多多使用，未来更多震动模式哦！");
+        return;
     }
-    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState-1];
+    
+    for (int i=0; i<7; i++) {
+        UIButton *btn = (UIButton *)[self.view viewWithTag:i];
+        if (btn){
+            if(i!=tag) {
+                btn.selected = NO;
+            }
+            else{
+                btn.selected = YES;
+            }
+        }
+    }
+    
+    currentState = tag;
+    if (currentState>6) {
+        currentState = 6;
+    }
+    if (currentState<1) {
+        currentState = 0;
+    }
+    NSString *cmd = [kBluetoothPostures objectAtIndex:currentState];
     [self patternCommand:cmd];
     
     
     NSString *imgName = _S(@"posture_%d.png",currentState);
     [self.btnControl setImage:IMG(imgName) forState:UIControlStateNormal];
-
+    
 }
 
 - (void)stopAllAction
