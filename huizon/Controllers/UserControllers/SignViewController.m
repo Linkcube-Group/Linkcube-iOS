@@ -10,6 +10,7 @@
 #import "Reachability.h"
 #import "ProtocolViewController.h"
 #import "UserEditController.h"
+#import "ProtocolViewController.h"
 @interface SignViewController ()<UITextFieldDelegate>
 {
     
@@ -145,6 +146,13 @@
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (IBAction)helpAction:(id)sender
+{
+    ProtocolViewController *pvc = [[ProtocolViewController alloc] init];
+    pvc.url = @"http://www.linkcube.me/license.html";
+    [self.navigationController pushViewController:pvc animated:YES];
 }
 
 - (void)dealloc

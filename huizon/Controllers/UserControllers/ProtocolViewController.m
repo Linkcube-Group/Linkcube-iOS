@@ -27,9 +27,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]];
     [self.webView loadRequest:request];
     
+    self.navigationItem.titleView=[[Theam currentTheam] navigationTitleViewWithTitle:@"用户协议"];
+    
+    self.navigationItem.leftBarButtonItem = [[Theam currentTheam] navigationBarLeftButtonItemWithImage:IMG(@"close_btn.png") Title:nil Target:self Selector:@selector(btBack_PopNav:)];
 }
 
 - (void)didReceiveMemoryWarning
