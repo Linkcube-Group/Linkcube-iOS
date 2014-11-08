@@ -4028,8 +4028,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4046,7 +4046,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "88C68DA1-4DD8-4A57-8DCC-80E7716F70C7";
+				PROVISIONING_PROFILE = "9E311D64-652F-4A93-876F-B9A8909317A1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
@@ -4059,9 +4059,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: eric yang (WF3SP22EQL)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: eric yang (WF3SP22EQL)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4078,7 +4078,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "88C68DA1-4DD8-4A57-8DCC-80E7716F70C7";
+				PROVISIONING_PROFILE = "9E311D64-652F-4A93-876F-B9A8909317A1";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;

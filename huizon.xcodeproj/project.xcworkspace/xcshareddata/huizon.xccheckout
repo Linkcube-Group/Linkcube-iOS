@@ -10,29 +10,29 @@
 	<string>huizon</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>08269567-96A7-417B-8ABD-CE47680F117E</key>
+		<key>3EE774D55F4E840A62158A318A2ED4071CABCC64</key>
 		<string>https://github.com/Linkcube-Group/ios-client.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>huizon.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>08269567-96A7-417B-8ABD-CE47680F117E</key>
+		<key>3EE774D55F4E840A62158A318A2ED4071CABCC64</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/Linkcube-Group/ios-client.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>08269567-96A7-417B-8ABD-CE47680F117E</string>
+	<string>3EE774D55F4E840A62158A318A2ED4071CABCC64</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>08269567-96A7-417B-8ABD-CE47680F117E</string>
+			<string>3EE774D55F4E840A62158A318A2ED4071CABCC64</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ios-client</string>
 		</dict>

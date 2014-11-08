@@ -100,7 +100,7 @@
         if (!uuid)
             continue;
         
-        [centralManager retrievePeripherals:[NSArray arrayWithObject:(__bridge id)uuid]];
+        [centralManager retrievePeripheralsWithIdentifiers:[NSArray arrayWithObject:(__bridge id)uuid]];
         CFRelease(uuid);
     }
 
@@ -190,7 +190,7 @@
         if (!TARGET_IPHONE_SIMULATOR) {
             [foundPeripherals removeAllObjects];
             [discoveryDelegate discoveryDidRefresh];
-#warning 这里可能是iphone4s
+//#warning 这里可能是iphone4s
             [centralManager scanForPeripheralsWithServices:nil options:@{CBCentralManagerScanOptionAllowDuplicatesKey:@(YES)}];
         }
         

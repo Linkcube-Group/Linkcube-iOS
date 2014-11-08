@@ -257,7 +257,7 @@
         }
         BOOL isConnect = NO;
         if ([peripheral respondsToSelector:@selector(isConnected)]) {
-            isConnect = [peripheral isConnected];
+            isConnect = [peripheral state]==CBPeripheralStateConnected;
         }
         else{
             isConnect = [peripheral state]==CBPeripheralStateConnected;
