@@ -29,7 +29,7 @@
 		0325F127198B9F2800497770 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0325F126198B9F2800497770 /* AudioToolbox.framework */; };
 		032E383C192EE99C00363B90 /* MusicItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E383B192EE99C00363B90 /* MusicItem.m */; };
 		032E383E192EEA0600363B90 /* Music.json in Resources */ = {isa = PBXBuildFile; fileRef = 032E383D192EEA0600363B90 /* Music.json */; };
-		032E3851192EF58D00363B90 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3841192EF58D00363B90 /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		032E3851192EF58D00363B90 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3841192EF58D00363B90 /* AsyncSocket.m */; };
 		032E3852192EF58D00363B90 /* FtpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3843192EF58D00363B90 /* FtpConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E3853192EF58D00363B90 /* FtpDataConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3845192EF58D00363B90 /* FtpDataConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		032E3854192EF58D00363B90 /* FtpServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 032E3848192EF58D00363B90 /* FtpServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };

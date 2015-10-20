@@ -67,8 +67,12 @@
 -(void)startMusic:(NSURL *)audioURL
 {
     //
+    NSError *error=nil;
+//    NSData *songFile = [[NSData alloc] initWithContentsOfURL:audioURL options:NSDataReadingMappedIfSafe error:&error];
+//    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:songFile error:&error];
+//    
    
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:nil];
+        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioURL error:&error];
         self.audioPlayer.delegate = self;
         self.audioPlayer.meteringEnabled = YES;
         self.audioPlayer.numberOfLoops = 0;

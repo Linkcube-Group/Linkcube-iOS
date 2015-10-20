@@ -45,10 +45,7 @@
     }
     else{
         self.musicArray = [[MusicList alloc] init];
-        [self.musicArray addObject:[Config musicDefaul1]];
-        [self.musicArray addObject:[Config musicDefaul2]];
-        [self.musicArray addObject:[Config musicDefaul3]];
-        [self.musicArray addObject:[Config musicDefaul4]];
+
         
         NSString* fullPathToFile = [NSHomeDirectory() stringByAppendingPathComponent:@"/Documents"];
         
@@ -148,7 +145,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row<2){
+    if (indexPath.row<4){
         return NO;
     }
     return YES;
@@ -211,8 +208,7 @@
 {
     NSMutableDictionary *albumDict = [[NSMutableDictionary alloc] init];
     
-    NSArray *docFolders = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES );
-	NSString *baseDir =  [docFolders lastObject];
+    NSString *baseDir =  HomeAudioPath;// [docFolders lastObject];
     
     NSString *songName = [path substringFromIndex:[baseDir length]+1];
     if ([songName length]>4) {

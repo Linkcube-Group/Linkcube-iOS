@@ -436,8 +436,13 @@
         for (AVMetadataItem *metadataItem in [mp3Asset metadataForFormat:format]) {
             NSLog(@"commonKey:%@",metadataItem.commonKey);
             if ([metadataItem.commonKey isEqualToString:@"artwork"]) {
-                img =[UIImage imageWithData:[(NSDictionary*)metadataItem.value objectForKey:@"data"]];
-                
+                if([metadataItem.value isKindOfClass:[NSData class]])  {
+                    img = [UIImage imageWithData:(NSData *)metadataItem.value];
+                }
+                else if ([metadataItem.value isKindOfClass:[NSDictionary class]]){
+                    img =[UIImage imageWithData:[(NSDictionary*)metadataItem.value objectForKey:@"data"]];
+                }
+              
                 img = [UIImage scaleToSize:img size:CGSizeMake(240, 240)];
                 img = [img roundedRectWith:120];
             }

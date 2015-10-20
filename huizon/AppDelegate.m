@@ -126,6 +126,13 @@
 
 - (void)loadMusicInfo
 {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:HomeAudioPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:HomeAudioPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    if (![[NSFileManager defaultManager] fileExistsAtPath:HomeMyPath]) {
+        [[NSFileManager defaultManager] createDirectoryAtPath:HomeMyPath withIntermediateDirectories:YES attributes:nil error:nil];
+    }
+    
     BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:kMusicLocalSetting1];
     if (!flag) {
         MusicList *mList = nil;
@@ -138,9 +145,17 @@
             [mList addObject:[Config musicDefaul1]];
             [mList addObject:[Config musicDefaul2]];
         }
-
-        [mList addObject:[Config musicDefaul3]];
-        [mList addObject:[Config musicDefaul4]];
+        [mList insertObject:[Config musicDefaul3] atIndex:2];
+        [mList insertObject:[Config musicDefaul4] atIndex:3];
+       
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        for (int i=0; i<4; i++) {
+            if (![fileManager fileExistsAtPath:_S(@"%@/%d.mp3",HomeMyPath,i+1)]) {
+                [fileManager copyItemAtPath:[[NSBundle mainBundle] pathForResource:_S(@"%d",i+1) ofType:@"mp3"] toPath:_S(@"%@/%d.mp3",HomeMyPath,i+1) error:nil];
+            }
+        }
+        
+        
         
         [[NSUserDefaults standardUserDefaults] setObject:mList.arrayString forKey:kMusicLocalKey];
         

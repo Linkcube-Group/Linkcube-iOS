@@ -21,6 +21,9 @@
 
 #define iPhone5 ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
 
+#define HomeAudioPath [NSHomeDirectory() stringByAppendingPathComponent:@"/Documents/mp3/"]
+#define HomeMyPath [NSHomeDirectory() stringByAppendingPathComponent:@"/Documents/my/"]
+
 #define theApp ((AppDelegate *)[[UIApplication sharedApplication] delegate])
 
 //收到加好友消息通知的缓存路径
