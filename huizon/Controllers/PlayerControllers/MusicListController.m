@@ -47,6 +47,8 @@
         self.musicArray = [[MusicList alloc] init];
         [self.musicArray addObject:[Config musicDefaul1]];
         [self.musicArray addObject:[Config musicDefaul2]];
+        [self.musicArray addObject:[Config musicDefaul3]];
+        [self.musicArray addObject:[Config musicDefaul4]];
         
         NSString* fullPathToFile = [NSHomeDirectory() stringByAppendingPathComponent:@"/Documents"];
         

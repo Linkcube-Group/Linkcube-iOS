@@ -67,7 +67,7 @@
     
     [MobClick startWithAppkey:kSettingUmeng];
     
-    self.currentGamingJid = NO;
+    self.currentGamingJid = nil;
     self.blueConnType = 0;
     
     
@@ -126,18 +126,25 @@
 
 - (void)loadMusicInfo
 {
-    BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:kMusicLocalSetting];
+    BOOL flag = [[NSUserDefaults standardUserDefaults] boolForKey:kMusicLocalSetting1];
     if (!flag) {
-        MusicList *mList = [[MusicList alloc] init];
-        
-        [mList addObject:[Config musicDefaul1]];
-        
-        
-        [mList addObject:[Config musicDefaul2]];
+        MusicList *mList = nil;
+        NSArray *ary = [[NSUserDefaults standardUserDefaults] objectForKey:kMusicLocalKey];
+        if (ary) {
+            mList = [[MusicList alloc] initWithArray:ary];
+        }
+        else{
+            mList = [[MusicList alloc] init];
+            [mList addObject:[Config musicDefaul1]];
+            [mList addObject:[Config musicDefaul2]];
+        }
+
+        [mList addObject:[Config musicDefaul3]];
+        [mList addObject:[Config musicDefaul4]];
         
         [[NSUserDefaults standardUserDefaults] setObject:mList.arrayString forKey:kMusicLocalKey];
         
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kMusicLocalSetting];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kMusicLocalSetting1];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
@@ -535,11 +542,11 @@
 {
     NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]];
     //收到加好友请求
-    NSLog(@"这个哈哈哈哈:%@",presenceType);
+   
     if([presenceType isEqualToString:@"subscribe"])
     {
         NSMutableArray * receiveArray = [FileManager loadArray:XMPP_RECEIVE_ADDFRIEND_IQ];
-        NSLog(@"好友请求的内容%@",presence);
+   
         [receiveArray addObject:presence];
         [FileManager saveObject:receiveArray filePath:XMPP_RECEIVE_ADDFRIEND_IQ];
         [[IMControls defaultControls] receiveNewNoticesWithNotiType:NotificationCountTypeAddfriend];
@@ -550,14 +557,7 @@
 - (void)xmppStream:(XMPPStream *)sender didReceivePresence:(XMPPPresence *)presence
 {
     NSString *presenceType = [NSString stringWithFormat:@"%@", [presence type]]; //online/offline
-    NSLog(@"这个呵呵呵呵:%@",presenceType);
-    NSLog(@"didReceivePresence:\n\n%@\n",presence.description);
-    //if (presence.status) {
-    //    if ([self.chatDelegate respondsToSelector:@selector(friendStatusChangePresence:)]) {
-    //        [self.chatDelegate friendStatusChangePresence:presence];
-    //    }
-    //}
-    NSLog(@"曹操%@",presenceType);
+  
     //    //收到加好友请求
     //    if([presenceType isEqualToString:@"subscribe"])
     //    {

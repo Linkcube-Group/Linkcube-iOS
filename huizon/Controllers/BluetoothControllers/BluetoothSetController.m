@@ -120,7 +120,7 @@
 /** Peripheral connected or disconnected */
 - (void) alarmServiceDidChangeStatus:(LeTemperatureAlarmService*)service
 {
-    if ( [[service peripheral] isConnected] ) {
+    if ( [[service peripheral] state]==CBPeripheralStateConnected ) {
         NSLog(@"Service (%@) connected", service.peripheral.name);
         if (![connectedServices containsObject:service]) {
             [connectedServices addObject:service];
@@ -177,7 +177,7 @@
     
     BOOL isConnect = NO;
     if ([peripheral respondsToSelector:@selector(isConnected)]) {
-        isConnect = [peripheral isConnected];
+        isConnect = ([peripheral state]==CBPeripheralStateConnected?YES:NO);
     }
     else{
         isConnect = [peripheral state]==CBPeripheralStateConnected;
@@ -223,7 +223,7 @@
     
     BOOL isConnect = NO;
     if ([peripheral respondsToSelector:@selector(isConnected)]) {
-        isConnect = [peripheral isConnected];
+        isConnect = ([peripheral state]==CBPeripheralStateConnected?YES:NO);
     }
     else{
         isConnect = [peripheral state]==CBPeripheralStateConnected;

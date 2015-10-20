@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     NSString *localIPAddress = [NetworkController localWifiIPAddress];
-	self.lbAddress.text = _S(@"ftp://%@:%d/",localIPAddress,FTP_PORT);
+	self.lbAddress.text = _S(@"手机和电脑同时连接WIFI情况下，  请在电脑文件夹地址输入\nftp://%@:%d/，\n将歌曲文件拖入本文件夹即可",localIPAddress,FTP_PORT);
 	
 
 	NSArray *docFolders = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES );
@@ -81,6 +81,8 @@
     MusicList *musicArray = [[MusicList alloc] init];
     [musicArray addObject:[Config musicDefaul1]];
     [musicArray addObject:[Config musicDefaul2]];
+    [musicArray addObject:[Config musicDefaul3]];
+    [musicArray addObject:[Config musicDefaul4]];
     
     NSString* fullPathToFile = [NSHomeDirectory() stringByAppendingPathComponent:@"/Documents"];
     

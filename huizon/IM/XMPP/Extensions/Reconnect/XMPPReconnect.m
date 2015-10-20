@@ -29,10 +29,10 @@ enum XMPPReconnectConfig
 	kAutoReconnect     = 1 << 0,  // If set, automatically attempts to reconnect after a disconnection
 };
 
-#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5
-// SCNetworkConnectionFlags was renamed to SCNetworkReachabilityFlags in 10.6
-typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
-#endif
+//#if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_5
+//// SCNetworkConnectionFlags was renamed to SCNetworkReachabilityFlags in 10.6
+//typedef SCNetworkConnectionFlags SCNetworkReachabilityFlags;
+//#endif
 
 @interface XMPPReconnect (PrivateAPI)
 

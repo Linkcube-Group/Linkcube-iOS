@@ -60,7 +60,7 @@ static NSString * const kXMPPNotificationDidAskFriend=@"kXMPPNotificationDidAskF
 
 //其他通知
 ///音乐参数
-static NSString * const kMusicLocalSetting = @"kMusicLocalSetting";
+static NSString * const kMusicLocalSetting1 = @"kMusicLocalSetting1";
 static NSString * const kMusicLocalKey = @"kMusicLocalKey";
 
 ///setting

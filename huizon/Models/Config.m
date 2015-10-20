@@ -26,4 +26,21 @@
     mItem1.musicPath = [[NSBundle mainBundle] pathForResource:@"2" ofType:@"mp3"];
     return mItem1;
 }
+
++ (MusicItem *)musicDefaul3
+{
+    MusicItem *mItem1 = [[MusicItem alloc] init];
+    mItem1.musicName = @"Something";
+    mItem1.author = @"Girl's Day";
+    mItem1.musicPath = [[NSBundle mainBundle] pathForResource:@"3" ofType:@"mp3"];
+    return mItem1;
+}
++ (MusicItem *)musicDefaul4
+{
+    MusicItem *mItem1 = [[MusicItem alloc] init];
+    mItem1.musicName = @"Poker Face";
+    mItem1.author = @"Lady GaGa";
+    mItem1.musicPath = [[NSBundle mainBundle] pathForResource:@"4" ofType:@"mp3"];
+    return mItem1;
+}
 @end

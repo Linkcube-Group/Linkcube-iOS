@@ -36,7 +36,7 @@
     
     self.navigationController.navigationBar.hidden = YES;
 
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleVersionKey];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     self.lbVersion.text = _S(@"Ver %@",version);
     self.navigationItem.hidesBackButton = YES;
     // Do any additional setup after loading the view from its nib.

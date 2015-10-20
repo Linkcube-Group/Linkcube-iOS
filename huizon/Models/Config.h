@@ -18,4 +18,6 @@ typedef enum {
 @interface Config : NSObject
 + (MusicItem *)musicDefaul1;
 + (MusicItem *)musicDefaul2;
++ (MusicItem *)musicDefaul3;
++ (MusicItem *)musicDefaul4;
 @end

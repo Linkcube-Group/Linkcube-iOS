@@ -187,7 +187,7 @@
 	return exportSession.error;
 }
 
-- (AVAssetExportSessionStatus)status {
+- (int)status {
 	if (movieFileErr) {
 		return AVAssetExportSessionStatusFailed;
 	}
