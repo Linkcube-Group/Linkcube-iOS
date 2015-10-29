@@ -56,8 +56,8 @@
 		0394ECBF194FDC2800B16F52 /* about_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0394ECBD194FDC2800B16F52 /* about_bg@2x.png */; };
 		0394ECC1194FDC2E00B16F52 /* mode-music-front@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0394ECC0194FDC2E00B16F52 /* mode-music-front@2x.png */; };
 		0394ECC3194FDDCF00B16F52 /* close_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0394ECC2194FDDCF00B16F52 /* close_btn@2x.png */; };
-		03BC6CE91BD6531600541C30 /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03BC6CE71BD6531600541C30 /* 3.mp3 */; settings = {ASSET_TAGS = (); }; };
-		03BC6CEA1BD6531600541C30 /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03BC6CE81BD6531600541C30 /* 4.mp3 */; settings = {ASSET_TAGS = (); }; };
+		03BC6CE91BD6531600541C30 /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03BC6CE71BD6531600541C30 /* 3.mp3 */; };
+		03BC6CEA1BD6531600541C30 /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 03BC6CE81BD6531600541C30 /* 4.mp3 */; };
 		0701AB6F194D423C00C0DA9F /* navigation_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0701AB6E194D423C00C0DA9F /* navigation_bg@2x.png */; };
 		0701AB72194D4A8900C0DA9F /* mode_control_state@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0701AB70194D4A8900C0DA9F /* mode_control_state@2x.png */; };
 		0701AB73194D4A8900C0DA9F /* mode_posture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0701AB71194D4A8900C0DA9F /* mode_posture@2x.png */; };
@@ -4036,8 +4036,8 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
@@ -4055,7 +4055,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "ee51e5c3-4cc7-4654-9ec8-560438f79baa";
+				PROVISIONING_PROFILE = "0d737a22-11d3-4309-8744-459db080c892";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
@@ -4068,9 +4068,9 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: MAOSHENG YANG (6WU5UQCBXN)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Zhenjia Wang (5V7B72YD84)";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "huizon/huizon-Prefix.pch";
@@ -4088,7 +4088,7 @@
 					"$(PROJECT_DIR)/huizon/UMengAnalytics",
 				);
 				PRODUCT_NAME = Sample;
-				PROVISIONING_PROFILE = "ee51e5c3-4cc7-4654-9ec8-560438f79baa";
+				PROVISIONING_PROFILE = "0d737a22-11d3-4309-8744-459db080c892";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
